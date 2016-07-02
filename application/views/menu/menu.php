@@ -25,7 +25,6 @@
 					<div class="clearfix"></div>
 				</div>
 				<div class="panel-body no-padding" style="margin: 20px; font-size: 16px" >
-					
 				</div>
 			</div>
 		</div>

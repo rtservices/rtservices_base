@@ -27,8 +27,6 @@
 		</div>
 	</div>
 
-	<!-- <?php echo substr(date('Ymd') - (19580422), 0,2); ?> -->
-
 	<div class="row">
 		<div class="col-md-12">
 			<div class="panel rounded shadow no-overflow">
@@ -100,6 +98,11 @@
 							<h4 style="text-align: center;">Modificar contraseña</h4>
 							<form id="formClave">
 								<input type="hidden" id="idusuarioC" name="idusuarioC">
+								<div class="row">
+									<div class="col-md-12">
+										<center>Por seguridad <strong>Ninguna clave</strong> se muestra, si el usuario la ha olvidado, puede cambiarla manualmente ingresando en la opcion 'Olvidaste tu contraseña?' en el apartado login.</center>
+									</div>
+								</div>
 								<div class="row">
 									<div class="col-md-6 form-group">
 										<label class="control-label">Nueva contraseña</label>

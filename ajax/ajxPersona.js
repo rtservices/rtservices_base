@@ -243,12 +243,19 @@ function administrarCuenta(id,tipo)
 		data: {id: id, tipo: tipo},
 		success:function(res)
 		{
-			// $('[id = "idusuarioU"]').val(res.IdLogin);
-			// $('[id = "idusuarioC"]').val(res.IdLogin);
-			// $('[id = "usuario"]').val(res.Usuario);
-			// $('#modalCuenta').modal('show');
-			alert(res);
-			NProgress.done();
+			if (res == "no")
+			{
+				sweetAlert("Oops...", "Ocurrio un error generando la cuenta de usuario.", "error");
+				NProgress.done();
+			}
+			else
+			{
+				$('[id = "idusuarioU"]').val(res.IdLogin);
+				$('[id = "idusuarioC"]').val(res.IdLogin);
+				$('[id = "usuario"]').val(res.Usuario);
+				$('#modalCuenta').modal('show');
+				NProgress.done();
+			}
 		}
 	});	
 }

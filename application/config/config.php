@@ -1,6 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-$config['base_url'] = 'http://localhost:91/rtservicesapp/';
+$config['base_url'] = $_SERVER['SCRIPT_NAME'];
 
 $config['index_page'] = 'index.php';
 
@@ -14,7 +14,7 @@ $config['charset'] = 'UTF-8';
 
 $config['enable_hooks'] = FALSE;
 
-$config['subclass_prefix'] = 'MY_';
+$config['subclass_prefix'] = 'RTS_';
 
 $config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-';
 

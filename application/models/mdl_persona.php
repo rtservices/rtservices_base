@@ -172,6 +172,21 @@ class Mdl_persona extends CI_Model {
 		return $res;
 	}
 
+	// Listar persona asociada a la tabla personarol
+
+	public function listarPersona_Rol($id, $tipo)
+	{
+		$this->db->select('RtsPersona_deb.*,RtsEps.NombreEps, RtsEps.Telefono as TelefonoEps, IdPersonaRol, IdRol');
+		$this->db->from($this->tabla);
+		$this->db->join('RtsEps', 'RtsPersona_deb.IdEps = RtsEps.IdEps', 'INNER');
+		$this->db->join('RtsPersonaRol_det', 'RtsPersona_deb.IdPersona = RtsPersonaRol_det.IdPersona_deb', 'INNER');
+		$this->db->where('IdPersona', $id);
+		$this->db->where('IdRol', $tipo);
+		$res = $this->db->get()->result();
+
+		return $res;
+	}
+
 	//Carga el id de la persona por medio del id de personarol
 
 	public function listarIdJugador($id)
@@ -255,6 +270,25 @@ class Mdl_persona extends CI_Model {
 		return $res;
 	}
 
+	// Registro de cuentas
+
+	public function registrarCuenta($data)
+	{
+		$res = $this->db->insert('RtsLogin_deb', $data);
+
+		return $res;
+	}
+
+	// Actualizacion de cuentas
+
+	public function actualizarCuenta($data, $id)
+	{
+		$this->db->where('IdLogin', $id);
+		$res = $this->db->update('RtsLogin_deb', $data);
+
+		return $res;
+	}
+
 	// Luego de tener todo listo, insertamos nuestras cuentas
 
 	public function registrarCuentaA($data)
@@ -288,9 +322,9 @@ class Mdl_persona extends CI_Model {
 	public function getVerificarCuentas($id, $tipo)
 	{
 		$this->db->select('IdLogin');
-		$this->db->from('RtsPersona_deb');
-		$this->db->join('RtsPersonaRol_det', 'RtsPersona_deb.IdPersona = RtsPersonaRol_det.IdPersona_deb', 'INNER');
-		$this->db->join('RtsLogin_deb', 'RtsPersonaRol_det.IdPersonaRol = RtsLogin_deb.IdPersonaRol_det', 'INNER');
+		$this->db->from('rtslogin_deb');
+		$this->db->join('RtsPersonaRol_det', 'rtslogin_deb.IdPersonaRol_det = RtsPersonaRol_det.IdPersonaRol', 'INNER');
+		$this->db->join('RtsPersona_deb', 'RtsPersonaRol_det.IdPersona_deb = RtsPersona_deb.IdPersona', 'INNER');
 		$this->db->where('RtsPersona_deb.IdPersona', $id);
 		$this->db->where('RtsPersonaRol_det.IdRol', $tipo);
 		$res = $this->db->get()->result();

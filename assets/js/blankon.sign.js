@@ -71,24 +71,6 @@ var BlankonSign = function () {
         },
 
         // =========================================================================
-        // SOUNDS
-        // =========================================================================
-        signSound: function () {
-            if($('.page-sound').length){
-                ion.sound({
-                    sounds: [
-                    {name: "light_bulb_breaking", volume: 0.6},
-                    {name: "tap", volume: 0.6},
-                    {name: "button_tiny", volume: 0.6},
-                    {name: "cd_tray", volume: 0.6}
-                    ],
-                    path: BlankonSign.signBaseURL()+'/assets/ionsound/sounds/',
-                    preload: true
-                });
-            }
-        },
-
-        // =========================================================================
         // FORM VALIDATION
         // =========================================================================
         signValidation: function () {

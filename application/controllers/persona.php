@@ -538,23 +538,110 @@ class Persona extends CI_Controller {
 			}
 			else
 			{
-				$data = $this->mdl_persona->getVerificarCuentas($id, $tipo);
-				echo print_r($data);
-				// if ($data == 0)
-				// {
-				// 	$dataCI = array(
-				// 		'Usuario' => str_replace(' ', '', $this->input->post('nombre')),
-				// 		'Clave' => password_hash(substr(mb_strtolower($this->input->post('nombre')), 0,3).''.$this->input->post('documento'), PASSWORD_DEFAULT),
-				// 		'Estado' => 1,
-				// 		'IdPersonaRol_det' => $this->mdl_persona->getValidarIdPersonaRol($id, $tipo)->IdPersonaRol
-				// 		);
-				// 	$datares = $this->mdl_persona->
-				// }
-				// else
-				// {
-				// 	$data
-				// }
-				
+				$val1 = $this->mdl_persona->getVerificarCuentas($id, $tipo);
+				$val2 = $this->mdl_persona->getVerificarCuentas($id, ($tipo == 1) ? 2 : 1);
+
+				if (!$val1 && !$val2)
+				{
+					$dataPersona = $this->mdl_persona->listarPersona($id);
+					foreach ($dataPersona->result() as $oPersona)
+					{
+						//Se prepara un nuevo nombre para el usuario
+						$nombreUsuario = strtolower((count(explode(' ', $oPersona->Nombre)) > 1) ? explode(' ', $oPersona->Nombre)[0] . substr(explode(' ', $oPersona->Nombre)[1], 0, 1) : explode(' ', $oPersona->Nombre));
+						$nombreUsuario .= strtolower(substr(explode(' ', $oPersona->Apellidos)[0], 0, 1) . substr(explode(' ', $oPersona->Apellidos)[1], 0, 1) . substr($oPersona->FechaNacimiento, 0,4));
+						$passwordUsuario = $oPersona->Documento . substr(strtolower($oPersona->Nombre), 0,3);
+
+						foreach($this->mdl_persona->listarPersona_Rol($id, $tipo) as $oPersonaRol)
+						{
+							$dataLogin = array(
+								'Usuario' => ucwords($nombreUsuario),
+								'Clave' => password_hash($passwordUsuario, PASSWORD_DEFAULT),
+								'Estado' => 1,
+								'IdPersonaRol_det' => $oPersonaRol->IdPersonaRol
+								);
+
+							if ($this->mdl_persona->registrarCuenta($dataLogin))
+							{
+								echo json_encode($this->mdl_persona->listarCuenta($id,$tipo));
+							}
+							else
+							{
+								echo 'no';
+							}
+
+							break;
+						}
+
+						break;
+					}
+				}
+				else if ($val1)
+				{
+					foreach ($val1 as $oLogin)
+					{
+
+						foreach($this->mdl_persona->listarPersona_Rol($id, $tipo) as $oPersonaRol)
+						{
+							//Se prepara un nuevo nombre para el usuario
+							$nombreUsuario = strtolower((count(explode(' ', $oPersonaRol->Nombre)) > 1) ? explode(' ', $oPersonaRol->Nombre)[0] . substr(explode(' ', $oPersonaRol->Nombre)[1], 0, 1) : explode(' ', $oPersonaRol->Nombre));
+							$nombreUsuario .= strtolower(substr(explode(' ', $oPersonaRol->Apellidos)[0], 0, 1) . substr(explode(' ', $oPersonaRol->Apellidos)[1], 0, 1) . substr($oPersonaRol->FechaNacimiento, 0,4));
+							$passwordUsuario = $oPersonaRol->Documento . substr(strtolower($oPersonaRol->Nombre), 0,3);
+
+							$dataALogin = array(
+								'Usuario' => ucwords($nombreUsuario) . ($tipo == 2) ? '-' : _,
+								'Clave' => password_hash($passwordUsuario, PASSWORD_DEFAULT),
+								'Estado' => 1,
+								);
+
+							if ($this->mdl_persona->actualizarCuenta($dataALogin, $oLogin->IdLogin))
+							{
+								echo json_encode($this->mdl_persona->listarCuenta($id,$tipo));
+							}
+							else
+							{
+								echo 'no';
+							}
+
+							break;
+						}
+
+					}
+
+					echo print_r($val1);
+
+				}
+				else
+				{
+					foreach ($val2 as $oLogin)
+					{
+						foreach($this->mdl_persona->listarPersona_Rol($id, $tipo) as $oPersonaRol)
+						{
+							//Se prepara un nuevo nombre para el usuario
+							$nombreUsuario = strtolower((count(explode(' ', $oPersonaRol->Nombre)) > 1) ? explode(' ', $oPersonaRol->Nombre)[0] . substr(explode(' ', $oPersonaRol->Nombre)[1], 0, 1) : explode(' ', $oPersonaRol->Nombre));
+							$nombreUsuario .= strtolower(substr(explode(' ', $oPersonaRol->Apellidos)[0], 0, 1) . substr(explode(' ', $oPersonaRol->Apellidos)[1], 0, 1) . substr($oPersonaRol->FechaNacimiento, 0,4));
+							$passwordUsuario = $oPersonaRol->Documento . substr(strtolower($oPersonaRol->Nombre), 0,3);
+
+							$dataALogin = array(
+								'Usuario' => ucwords($nombreUsuario) . ($tipo == 1) ? '_' : '-',
+								'Clave' => password_hash($passwordUsuario, PASSWORD_DEFAULT),
+								'Estado' => 1,
+								);
+
+							if ($this->mdl_persona->actualizarCuenta($dataALogin, $oLogin->IdLogin))
+							{
+								echo json_encode($this->mdl_persona->listarCuenta($id,$tipo));
+							}
+							else
+							{
+								echo 'no';
+							}
+
+							break;
+						}
+					}
+
+				}
+
 			}
 		}
 		else
