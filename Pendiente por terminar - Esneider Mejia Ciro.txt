@@ -1,3 +1,5 @@
 Gestion de cuentas
 validaciones en personal, cuenta, clases
 Terminar el crud clases
+
+carlos chupon

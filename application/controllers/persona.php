@@ -622,7 +622,7 @@ class Persona extends CI_Controller {
 							$passwordUsuario = $oPersonaRol->Documento . substr(strtolower($oPersonaRol->Nombre), 0,3);
 
 							$dataALogin = array(
-								'Usuario' => ucwords($nombreUsuario) . ($tipo == 1) ? '_' : '-',
+								'Usuario' => ucwords($nombreUsuario) . (($tipo == 1) ? '_' : '-'),
 								'Clave' => password_hash($passwordUsuario, PASSWORD_DEFAULT),
 								'Estado' => 1,
 								);
