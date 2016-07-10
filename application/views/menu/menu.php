@@ -17,7 +17,7 @@
 			<div class="panel rounded shadow no-overflow">
 				<div class="panel-heading">
 					<div class="pull-left">
-						<h3 class="panel-title">Personas inscritas en el sistema</h3>
+						<h3 class="panel-title">Personas inscritas en el sistema    </h3>
 					</div>
 					<div class="pull-right">
 						<button class="btn btn-sm" data-container="body" data-action="collapse" data-toggle="tooltip" data-placement="top" data-title="Collapse" data-original-title="" title=""><i class="fa fa-angle-up"></i></button>

@@ -1,6 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-$config['base_url'] = $_SERVER['SCRIPT_NAME'];
+$config['base_url'] = "Http://" . $_SERVER ['HTTP_HOST'] . $_SERVER ['SCRIPT_NAME'];
 
 $config['index_page'] = 'index.php';
 

@@ -34,7 +34,7 @@ class Torneo extends CI_Controller {
 					$color = 'color: #F13A3A; background-color: #2A2A2A';
 					$estilo = 'danger';
 					$estado = 'Activo';
-					$edit = '<a class="btn btn-primary btn-expand" style="color: white; background-color: #2A2A2A; color: #81B71A;" href="javascript:void()" title="Editar el torneo '.$torneo->NombreTorneo.'" onclick="listarPersona('.$torneo->IdTorneo.')"><i class="fa fa-pencil"></i></a>';	
+					$edit = '<a class="btn btn-primary btn-expand" style="color: white; background-color: #2A2A2A; color: #81B71A;" href="javascript:void()" title="Editar el torneo '.$torneo->NombreTorneo.'" onclick="editarTorneo('.$torneo->IdTorneo.')"><i class="fa fa-pencil"></i></a>';	
 					$estadoE1 = 'onclick="listarEtapa('.$torneo->IdTorneo.',1);"';
 					$estadoE2 = 'onclick="listarEtapa('.$torneo->IdTorneo.',2);"';
 					$estadoE3 = 'onclick="listarEtapa('.$torneo->IdTorneo.',3);"';
@@ -151,11 +151,10 @@ class Torneo extends CI_Controller {
 		{
 			$id = $this->input->post('id');
 			$estado;
-			foreach ($this->mdl_torneo->listarTorneo($id) as $torneo) {
+			foreach ($this->mdl_torneo->listarTorneo($id)->result() as $torneo) {
 				if ($torneo->Estado == 1) { $estado = 0; } else { $estado = 1; }
 				break;
 			}
-
 			$data = array('Estado' => $estado);
 			if ($this->mdl_torneo->actualizarTorneo($id,$data))
 			{
@@ -180,6 +179,74 @@ class Torneo extends CI_Controller {
 			echo json_encode($data);
 		}
 		else
+		{
+			redirect('error404');
+		}
+	}
+
+	public function crearTorneo()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$data = array(
+				'Estado'=>1,
+			     'NombreTorneo'=>$this->input->post('torneo'),
+			    'FechaInicio'=>$this->input->post('fechainicioR'),
+                'FechaFinal'=>$this->input->post('fechafinalR'));
+			$torn = $this->mdl_torneo->registrarTorneo($data);
+			if ($torn)
+			{
+               $this->mdl_torneo->registrarEtapa(array('NombreEtapa'=>'Etapa1','FechaInicio'=>'','FechaFin'=>'','Estado'=>0,'IdTorneo'=>$torn));
+               $this->mdl_torneo->registrarEtapa(array('NombreEtapa'=>'Etapa2','FechaInicio'=>'','FechaFin'=>'','Estado'=>0,'IdTorneo'=>$torn));
+               $this->mdl_torneo->registrarEtapa(array('NombreEtapa'=>'Etapa3','FechaInicio'=>'','FechaFin'=>'','Estado'=>0,'IdTorneo'=>$torn));
+               $this->mdl_torneo->registrarEtapa(array('NombreEtapa'=>'Etapa4','FechaInicio'=>'','FechaFin'=>'','Estado'=>0,'IdTorneo'=>$torn));
+               $this->mdl_torneo->registrarEtapa(array('NombreEtapa'=>'Etapa5','FechaInicio'=>'','FechaFin'=>'','Estado'=>0,'IdTorneo'=>$torn));
+               $this->mdl_torneo->registrarEtapa(array('NombreEtapa'=>'Etapa6','FechaInicio'=>'','FechaFin'=>'','Estado'=>0,'IdTorneo'=>$torn));
+
+				echo "ok";
+			} 
+			else
+			{
+				echo "error";
+			}
+		} 
+		else 
+		{
+			redirect('error404');
+		}
+	}
+
+	
+	public function listarTorneo($id)
+	{
+		if ($this->input->is_ajax_request()) 
+		{
+			$data = $this->mdl_torneo->listarTorneo($id);
+			echo json_encode($data->row());
+		} 
+		else
+		{
+			redirect('error404');
+		}
+	}
+
+	public function guardarTorneo()
+	{
+		if ($this->input->is_ajax_request()) 
+		{
+			$id = $this->input->post('idtorneoE');
+			$data = array('FechaInicio' =>$this->input->post('fechainicioE'),
+				'FechaFinal' =>$this->input->post('fechafinalE'),
+				'NombreTorneo' =>$this->input->post('torneoE')
+				);
+			if($this->mdl_torneo->actualizarTorneo($id,$data))
+			{
+				echo "ok";
+			} else
+			{
+				echo "error";
+			}
+		} else
 		{
 			redirect('error404');
 		}

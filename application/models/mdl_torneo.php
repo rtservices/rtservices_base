@@ -23,7 +23,7 @@ class Mdl_torneo extends CI_Model {
 		$this->db->select('*');
 		$this->db->from($this->tabla);
 		$this->db->where('IdTorneo', $id);
-		$res = $this->db->get()->result();
+		$res = $this->db->get();
 
 		return $res;
 	}
@@ -32,7 +32,6 @@ class Mdl_torneo extends CI_Model {
 	{
 		$this->db->where('IdTorneo', $id);
 		$res = $this->db->update($this->tabla, $data);
-
 		return $res;
 	}
 
@@ -144,6 +143,18 @@ class Mdl_torneo extends CI_Model {
 		$res = $this->db->update('RtsEtapaJugador_det', $data);
 
 		return $res;
+	}
+
+	public function registrarTorneo($data)
+	{
+		$this->db->insert($this->tabla, $data);
+		return $this->db->insert_id();
+	}
+
+	public function registrarEtapa($data)
+	{
+		$this->db->insert('RtsEtapa_deb',$data);
+
 	}
 
 }
