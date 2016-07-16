@@ -233,10 +233,30 @@ class Persona extends CI_Controller {
 						$estadoA = 'disabled';
 						$estadoI = 'disabled';
 						$estadoJ = 'onclick="variarJugador('.$persona->IdPersona.');"';
+
+						foreach ($this->mdl_persona->listarRol($persona->IdPersona,3) as $rol) 
+						{
+							if ($rol->IdRol == 3 && $rol->Estado == 1)
+							{
+								$colorJ = '#81B71A';
+								$tituloJ = 'Desactivar rol jugador a '.$persona->Nombre.' '.$persona->Apellidos.'';
+							}
+							else if ($rol->IdRol == 3 && $rol->Estado == 0)
+							{
+								$colorJ = '#FFFFFF';
+								$tituloJ = 'Activar rol jugador a '.$persona->Nombre.' '.$persona->Apellidos.'';
+								$responsable = '<a class="btn btn-danger btn-expand" disabled style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Debes tener asociado a '.$persona->Nombre.' '.$persona->Apellidos.' como un jugador para poder gestionar sus responsables." ><i class="fa fa-users"></i></a>';
+							}
+							else
+							{
+								$colorJ = null;
+								$tituloJ = null;
+							}
+						}
 					}
 				}
 
-				if ($persona->Estado != 1)
+				if ($persona->Estado == 0)
 				{
 					$estadoA = ' disabled ';
 					$estadoI = ' disabled ';

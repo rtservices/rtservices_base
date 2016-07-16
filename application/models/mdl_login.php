@@ -13,9 +13,9 @@ class Mdl_login extends CI_Model {
 	{
 		$this->db->select('*');
 		$this->db->from('RtsLogin_deb');
-		$this->db->join('RtsPersonaRol_det','RtsLogin_deb.IdPersonaRol_det = RtsPersonaRol_det.IdPersonaRol','INNER');
+		$this->db->join('RtsPersona_deb','RtsLogin_deb.IdPersona = RtsPersona_deb.IdPersona','INNER');
+		$this->db->join('RtsPersonaRol_det','RtsPersona_deb.IdPersona = RtsPersonaRol_det.IdPersona_deb','INNER');
 		$this->db->join('RtsRol','RtsPersonaRol_det.IdRol = RtsRol.IdRol','INNER');
-		$this->db->join('RtsPersona_deb','RtsPersonaRol_det.IdPersona_deb = RtsPersona_deb.IdPersona','INNER');
 		$this->db->where('RtsLogin_deb.Usuario',$data['usuario']);
 		$this->db->where('RtsLogin_deb.Estado','1');
 		$this->db->where('RtsPersonaRol_det.Estado','1');
