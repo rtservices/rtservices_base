@@ -115,7 +115,7 @@ class Mdl_torneo extends CI_Model {
 
 	public function cargarComboJugador()
 	{
-		$this->db->select('RtsPersona_deb.*');
+		$this->db->select('RtsPersonaRol_det.IdPersonaRol, RtsPersona_deb.*');
 		$this->db->from('RtsPersonaRol_det');
 		$this->db->join('RtsPersona_deb', 'RtsPersonaRol_det.IdPersona_deb = RtsPersona_deb.IdPersona', 'INNER');
 		$this->db->where('RtsPersona_deb.Estado', 1);
