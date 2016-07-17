@@ -106,7 +106,7 @@ function variarEstadoTorneo(id)
 		confirmButtonColor: "#DD6B55",
 		confirmButtonText: "Si, cámbialo!",
 		closeOnConfirm: false
-	}, function() {
+	}).then(function() {
 		NProgress.start();
 		$.ajax({
 			url: "torneo/variarEstadoTorneo",

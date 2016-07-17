@@ -41,13 +41,13 @@
             </div>
             <div class="sign-body">
                 <div class="form-group">
-                    <div class="input-group input-group-lg rounded no-overflow">
+                    <div class="input-group input-group-lg rounded no-overflow" style="z-index: 1200;">
                         <input type="text" class="form-control input-sm" placeholder="Nombre de usuario" minlength="4" id="usuario" name="usuario">
                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="input-group input-group-lg rounded no-overflow">
+                    <div class="input-group input-group-lg rounded no-overflow" style="z-index: 1200;">
                         <input type="password" class="form-control input-sm" placeholder="Contraseña" minlength="4" id="pass" name="pass">
                         <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                     </div>

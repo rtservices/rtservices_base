@@ -33,21 +33,20 @@ function listarPersona(id)
 		data: {id: id},
 		success:function(res)
 		{
+			$('[id = "idpersona"]').val(res.IdPersona);
+			$('[id = "documentoM"]').val(res.Documento);
+			$('[id = "generoM"]').val(res.Genero);
+			$('[id = "nombreM"]').val(res.Nombre);
+			$('[id = "apellidosM"]').val(res.Apellidos);
+			$('[id = "correoM"]').val(res.Correo);
+			$('[id = "direccionM"]').val(res.DireccionResidencia);
+			$('[id = "telefonoM"]').val(res.Telefono);
+			$('[id = "celularM"]').val(res.Celular);
+			$('[id = "fnacimientoM"]').val(res.FechaNacimiento);
+			$('[id = "epsM"]').val(res.IdEps);
 			$('#modalEditar').modal('show');
-			setTimeout(function(){
 
-				$('[id = "documentoM"]').val(res.Documento);
-				$('[id = "generoM"]').val(res.Genero);
-				$('[id = "nombreM"]').val(res.Nombre);
-				$('[id = "apellidosM"]').val(res.Apellidos);
-				$('[id = "correoM"]').val(res.Correo);
-				$('[id = "direccionM"]').val(res.DireccionResidencia);
-				$('[id = "telefonoM"]').val(res.Telefono);
-				$('[id = "celularM"]').val(res.Celular);
-				$('[id = "fnacimientoM"]').val(res.FechaNacimiento);
-				$('[id = "epsM"]').val(res.IdEps);
-				NProgress.done();
-			}, 500);
+			NProgress.done();
 		}
 	});	
 }
@@ -206,8 +205,7 @@ function variarEstadoPersona(id)
 		showCancelButton: true,
 		confirmButtonColor: "#DD6B55",
 		confirmButtonText: "Si, cámbialo!",
-		closeOnConfirm: false
-	}, function() {
+	}).then(function() {
 		NProgress.start();
 		$.ajax({
 			url: "persona/variarEstadoPersona",
@@ -228,7 +226,7 @@ function variarEstadoPersona(id)
 				}
 			}
 		});
-	});
+	})
 }
 
 function administrarCuenta(id,tipo)
@@ -358,7 +356,7 @@ $('#editar').submit(function(event) {
 			success:function(res)
 			{
 				actualizar();
-				$('#modalRegistro').modal('hide');
+				$('#modalEditar').modal('hide');
 				if (res == 'ok') 
 				{
 					NProgress.done();

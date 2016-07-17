@@ -92,10 +92,10 @@ var BlankonSign = function () {
                             },
                             messages: {
                                 usuario: {
-                                    required: "Complete este campo."
+                                    required: "Ingrese un Usuario."
                                 },
                                 pass: {
-                                    required: "Ingrese un password."
+                                    required: "Ingrese una Contraseña."
                                 }
                             },
                             highlight:function(element) {

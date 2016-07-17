@@ -141,6 +141,11 @@ class Persona extends CI_Controller {
 					$estadoJ = ' disabled ';
 				}
 
+				if ($persona->IdPersona == 1 && $this->session->userdata('ssRol') != 'Administrador')
+				{
+					$edit = '<a class="btn btn-primary btn-expand" style="color: white; background-color: #2A2A2A;" title="No puedes modificar la información de '.$persona->Nombre.' por ser el usuario principal." disabled="true"><i class="fa fa-pencil"></i></a>';
+				}
+
 				if ($persona->IdPersona == 1) 
 				{
 					$eliminar = '<a class="btn btn-danger btn-expand" disabled style="color: #F13A3A; background-color: #2A2A2A" href="javascript:void()" title="Este Administrador no se puede inhabilitar." ><i class="fa fa-exchange"></i></a>';					
@@ -154,6 +159,39 @@ class Persona extends CI_Controller {
 					$tituloA = 'No se le puede desactivar rol administrador a '.$persona->Nombre.' '.$persona->Apellidos.'.';
 					$tituloI = 'No se le puede desactivar rol instructor a '.$persona->Nombre.' '.$persona->Apellidos.'.';
 					$tituloJ = 'No se le puede desactivar rol jugador a '.$persona->Nombre.' '.$persona->Apellidos.'';
+				}
+				else if ($persona->IdPersona == $this->session->userdata('usuario_id')) 
+				{
+					$eliminar = '<a class="btn btn-danger btn-expand" disabled style="color: #F13A3A; background-color: #2A2A2A" href="javascript:void()" title="Este Administrador no se puede inhabilitar." ><i class="fa fa-exchange"></i></a>';					
+					$responsable = '<a class="btn btn-danger btn-expand" disabled style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Ni administradores ni instructores pueden tener responsables." ><i class="fa fa-users"></i></a>';
+					$estadoA = 'disabled';
+					$estadoI = 'disabled';
+					$colorA = '#81B71A';
+					$colorI = '#81B71A';
+					$tituloA = 'No puedes gestionar tus propios permisos como administrador.';
+					$tituloI = 'No puedes gestionar tus propios permisos como instructor.';
+
+					foreach ($this->mdl_persona->listarRol($persona->IdPersona,3) as $rol) 
+					{
+						if ($rol->IdRol == 3 && $rol->Estado == 1)
+						{
+							$colorJ = '#81B71A';
+							$tituloJ = 'Desactivar rol jugador a '.$persona->Nombre.' '.$persona->Apellidos.'';
+						}
+						else if ($rol->IdRol == 3 && $rol->Estado == 0)
+						{
+							$colorJ = '#FFFFFF';
+							$tituloJ = 'Activar rol jugador a '.$persona->Nombre.' '.$persona->Apellidos.'';
+						}
+						else
+						{
+							$colorJ = null;
+							$tituloJ = null;
+						}
+					}
+
+					$estadoJ = 'onclick="variarJugador('.$persona->IdPersona.');"';
+
 				}
 				else
 				{					
@@ -400,7 +438,28 @@ class Persona extends CI_Controller {
 	{
 		if ($this->input->is_ajax_request())
 		{
-			
+			$id = $this->input->post('idpersona');
+			$data = array(
+				'Documento' => $this->input->post('documentoM'),
+				'Genero' => $this->input->post('generoM'),
+				'Nombre' => $this->input->post('nombreM'),
+				'Apellidos' => $this->input->post('apellidosM'),
+				'Correo' => $this->input->post('correoM'),
+				'DireccionResidencia' => $this->input->post('direccionM'),
+				'Telefono' => $this->input->post('telefonoM'),
+				'Celular' => $this->input->post('celularM'),
+				'IdEps' => $this->input->post('epsM'),
+				'FechaNacimiento' => $this->input->post('fnacimientoM')
+				);
+
+			if ($this->mdl_persona->actualizarPersona($id, $data))
+			{
+				echo "ok";
+			}
+			else
+			{
+				echo "no";
+			}
 		}
 		else
 		{
