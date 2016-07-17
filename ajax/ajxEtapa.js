@@ -27,6 +27,32 @@ $(document).ready(function() {
 
 	});
 
+	$('#gJugadorEtapa').submit(function(event) {
+		event.preventDefault();
+
+		$.ajax({
+			url: 'gesetapa/modificaretapa',
+			type: 'POST',
+			data: $('#gJugadorEtapa').serialize(),
+			success:function(res)
+			{
+				if (res == 'raices')
+				{
+					sweetAlert("Oops...", "Al parecer ya tienes asociados jugadores a este torneo con la configuración anterior.", "error");
+				} 
+				else if (res == 'ok')
+				{
+					sweetAlert("Completado!", "Se ha cambiado el modificado la información de esta etapa.", "success");
+				} 
+				else
+				{
+					sweetAlert("Oops...", "No se ha cambiado el modificado la información de esta etapa.", "error");
+				}
+			}
+		});
+
+	});
+
 });
 
 $(window).load(function() {
