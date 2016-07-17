@@ -25,7 +25,7 @@
     <link href="assets/css/sign.css" rel="stylesheet">
     <link href="assets/groupmaster/jquery.group.min.css" rel="stylesheet">
     <link href="assets/css/custom.css" rel="stylesheet">
-    <link href="assets/swal/sweetalert.css" rel="stylesheet">
+    <link href="assets/swal/sweetalert2.min.css" rel="stylesheet">
     <link href="assets/css/dropzone.css"rel="stylesheet">
     <link href="assets/css/jquery.gritter.css"rel="stylesheet">
     <link href="assets/css/bootstrap-tour.min.css"rel="stylesheet">

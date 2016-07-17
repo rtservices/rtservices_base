@@ -113,15 +113,6 @@
                     $('#back-top').removeClass('show animated pulse');
                 }
             });
-            // scroll body to 0px on click
-            $('#back-top').click(function () {
-                // Add sound
-                ion.sound.play("cd_tray");
-                $('body,html').animate({
-                    scrollTop: 0
-                }, 800);
-                return false;
-            });
         },
 
         // =========================================================================
@@ -134,11 +125,6 @@
                 nextElement = $(this).nextAll(),
                 arrowIcon = $(this).find('.arrow'),
                 plusIcon = $(this).find('.plus');
-
-                // Add effect sound button click
-                if($('.page-sound').length){
-                    ion.sound.play("button_click_on");
-                }
 
                 if(parentElement.parent('ul').find('ul:visible')){
                     parentElement.parent('ul').find('ul:visible').slideUp('fast');
@@ -247,11 +233,6 @@
             // When the minimize trigger is clicked
             $('.navbar-minimize a').on('click',function(){
 
-                // Add effect sound button click
-                if($('.page-sound').length){
-                    ion.sound.play("button_click");
-                }
-
                 // Check class sidebar right show
                 if($('.page-sidebar-right-show').length){
                     $('body').removeClass('page-sidebar-right-show');
@@ -287,10 +268,6 @@
             });
 
             $('.navbar-setting a').on('click',function(){
-                // Add effect sound button click
-                if($('.page-sound').length){
-                    ion.sound.play("button_click");
-                }
                 if($('.page-sidebar-minimize.page-sidebar-right-show').length){
                     $('body').toggleClass('page-sidebar-minimize page-sidebar-right-show');
                 }
@@ -303,10 +280,6 @@
 
             // This action available on mobile view
             $('.navbar-minimize-mobile.left').on('click',function(){
-                // Add effect sound button click
-                if($('.page-sound').length){
-                    ion.sound.play("button_click");
-                }
                 if($('body.page-sidebar-right-show').length){
                     $('body').removeClass('page-sidebar-right-show');
                     $('body').removeClass('page-sidebar-minimize');
@@ -314,10 +287,6 @@
                 $('body').toggleClass('page-sidebar-left-show');
             });
             $('.navbar-minimize-mobile.right').on('click',function(){
-                // Add effect sound button click
-                if($('.page-sound').length){
-                    ion.sound.play("button_click");
-                }
                 if($('body.page-sidebar-left-show').length){
                     $('body').removeClass('page-sidebar-left-show');
                     $('body').removeClass('page-sidebar-minimize');
@@ -411,10 +380,6 @@
                 state = !state;
                 if (state) {
                     // Trigger for fullscreen
-                    // Add effect sound bell ring
-                    if($('.page-sound').length){
-                        ion.sound.play("bell_ring");
-                    }
                     $(this).toggleClass('fg-theme');
                     $(this).attr('data-original-title','Exit Fullscreen');
                     var docElement, request;
@@ -425,10 +390,6 @@
                     }
                 } else {
                     // Trigger for exit fullscreen
-                    // Add effect sound bell ring
-                    if($('.page-sound').length){
-                        ion.sound.play("bell_ring");
-                    }
                     $(this).removeClass('fg-theme');
                     $(this).attr('data-original-title','Fullscreen')
                     var docElement, request;
@@ -570,8 +531,6 @@
         // =========================================================================
         handleBoxModal: function () {
             $('#setting').on('click', function(){
-                // Add sound
-                ion.sound.play('camera_flashing');
                 bootbox.dialog({
                     message: 'I am a custom dialog setting',
                     title: 'Custom setting',
@@ -603,8 +562,6 @@
             });
 
             $('#lock-screen').on('click', function(){
-                // Add sound
-                ion.sound.play('camera_flashing');
                 bootbox.dialog({
                     message: 'Locker with notification display, Receive your notifications directly on your lock screen',
                     title: 'Lock Screen',
@@ -626,8 +583,6 @@
             });
 
             $('#logout').on('click', function(){
-                // Add sound
-                ion.sound.play('camera_flashing');
                 bootbox.dialog({
                     message: '¿Estas seguro que deseas salir del sistema?',
                     title: 'Cerrar sesión',

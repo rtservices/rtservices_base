@@ -8,10 +8,8 @@ var BlankonSign = function () {
         init: function () {
             BlankonSign.signBaseURL();
             BlankonSign.signIE();
-            BlankonSign.signSound();
             BlankonSign.signValidation();
             BlankonSign.signSettingHeight();
-            BlankonSign.signInputSound();
         },
 
         // =========================================================================
@@ -83,11 +81,6 @@ var BlankonSign = function () {
                                 // Add effect animation css
                                 $('#sign-wrapper').addClass('animated shake');
                                 setTimeout(function(){$('#sign-wrapper').removeClass('animated shake')}, 1500);
-
-                                // Add effect sound
-                                if($('.page-sound').length){
-                                    ion.sound.play("light_bulb_breaking");
-                                }
                             },
                             rules:{
                                 usuario: {
@@ -120,20 +113,7 @@ var BlankonSign = function () {
         // =========================================================================
         signSettingHeight: function () {
             $('#sign-wrapper').css('min-height',$(window).outerHeight());
-        },
-
-        // =========================================================================
-        // INPUT SOUNDS
-        // =========================================================================
-        signInputSound: function () {
-            // Add sounds
-            if($('.page-sound').length){
-                $('input[type=checkbox]').on('click', function(){
-                    ion.sound.play("button_tiny");
-                });
-            }
         }
-
     };
 
 }();
