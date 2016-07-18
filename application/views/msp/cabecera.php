@@ -183,7 +183,7 @@
             <div id="tour-10" class="sidebar-footer hidden-xs hidden-sm hidden-md">
                 <a class="pull-left" data-toggle="tooltip" data-placement="top"><i class="fa fa-circle-o"></i></a>
                 <a id="fullscreen" class="pull-left" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-title="Fullscreen" data-original-title="" title=""><i class="fa fa-desktop"></i></a>
-                <a id="home" data-url="home" class="pull-left" href="menu" data-toggle="tooltip" data-placement="top" data-title="Logout" data-original-title="" title=""><i class="fa fa-home"></i></a>
+                <a id="home" data-url="home" class="pull-left" href="menu" data-toggle="tooltip" data-placement="top" data-title="Inicio" data-original-title="" title=""><i class="fa fa-home"></i></a>
                 <a class="pull-left" data-toggle="tooltip" data-placement="top"><i class="fa fa-circle-o"></i></a>
             </div>
 
