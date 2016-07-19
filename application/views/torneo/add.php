@@ -37,8 +37,7 @@
 			}
 		});
 	}
-
-	if($('#editarT').length){
+       if($('#editarT').length){
 
 		$('#editarT').validate({
 			rules:{
@@ -56,7 +55,6 @@
 				},
 
 			},
-
 			highlight:function(element) {
 				$(element).parents('.form-group').addClass('has-error has-feedback');
 			},
@@ -65,8 +63,6 @@
 			}
 		});
 	}
-
-
 </script>
 </body>
 </html>

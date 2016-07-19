@@ -157,6 +157,13 @@ class Mdl_torneo extends CI_Model {
 
 	}
 
+	//Funcion para agregar un jugador a una etapa
+	public function inscribirPlanJugadorTorneo($data)
+	{
+		$res = $this->db->insert('RtsEtapaJugador_det', $data);
+		return $res;
+	}
+
 }
 
 /* End of file mdl_torneo.php */

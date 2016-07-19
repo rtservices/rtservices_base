@@ -89,7 +89,7 @@
 				</div>
 				<div class="panel-body no-padding" style="margin: 20px; font-size: 15px">
 					<form id="gJugadorEtapa" name="gJugadorEtapa">
-						<input type="hidden" id="idetapa" name="idetapa" value="<?= $idetapa ?>">
+						<input type="hidden" id="idetapaS" name="idetapaS" value="<?= $idetapa ?>">
 						<div class="row">
 							<div class="col-md-2"></div>
 							<div class="col-md-8">
