@@ -2,7 +2,7 @@
 
 $autoload['packages'] = array();
 
-$autoload['libraries'] = array('session');
+$autoload['libraries'] = array('database','session');
 
 $autoload['helper'] = array('url');
 
