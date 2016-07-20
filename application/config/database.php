@@ -5,7 +5,7 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'https://rtservices-nman.rhcloud.com/phpmyadmin/',
+	'hostname' => '127.11.156.2:3306',
 	'username' => 'root',
 	'password' => 'neider',
 	'database' => 'rtservices',
