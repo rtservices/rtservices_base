@@ -102,8 +102,8 @@ class Mdl_persona extends CI_Model {
 	{
 		$this->db->select('*');
 		$this->db->from('RtsLogin_deb');
-		$this->db->join('RtsPersonaRol_det', 'RtsLogin_deb.IdPersonaRol_det = RtsPersonaRol_det.IdPersonaRol', 'INNER');
-		$this->db->join('RtsPersona_deb', 'RtsPersonaRol_det.IdPersona_deb = RtsPersona_deb.IdPersona', 'INNER');
+		$this->db->join('RtsPersona_deb','RtsLogin_deb.IdPersona = RtsPersona_deb.IdPersona','INNER');
+		$this->db->join('RtsPersonaRol_det','RtsPersona_deb.IdPersona = RtsPersonaRol_det.IdPersona_deb','INNER');
 		$this->db->where('RtsPersona_deb.IdPersona', $id);
 		$this->db->where('RtsPersonaRol_det.IdRol', $tipo);
 		$res = $this->db->get()->row();
@@ -174,14 +174,13 @@ class Mdl_persona extends CI_Model {
 
 	// Listar persona asociada a la tabla personarol
 
-	public function listarPersona_Rol($id, $tipo)
+	public function listarPersona_Rol($id)
 	{
 		$this->db->select('RtsPersona_deb.*,RtsEps.NombreEps, RtsEps.Telefono as TelefonoEps, IdPersonaRol, IdRol');
 		$this->db->from($this->tabla);
 		$this->db->join('RtsEps', 'RtsPersona_deb.IdEps = RtsEps.IdEps', 'INNER');
 		$this->db->join('RtsPersonaRol_det', 'RtsPersona_deb.IdPersona = RtsPersonaRol_det.IdPersona_deb', 'INNER');
 		$this->db->where('IdPersona', $id);
-		$this->db->where('IdRol', $tipo);
 		$res = $this->db->get()->result();
 
 		return $res;
@@ -323,8 +322,8 @@ class Mdl_persona extends CI_Model {
 	{
 		$this->db->select('IdLogin');
 		$this->db->from('rtslogin_deb');
-		$this->db->join('RtsPersonaRol_det', 'rtslogin_deb.IdPersonaRol_det = RtsPersonaRol_det.IdPersonaRol', 'INNER');
-		$this->db->join('RtsPersona_deb', 'RtsPersonaRol_det.IdPersona_deb = RtsPersona_deb.IdPersona', 'INNER');
+		$this->db->join('RtsPersona_deb', 'rtslogin_deb.IdPersona_deb = RtsPersona_deb.IdPersona', 'INNER');
+		$this->db->join('RtsPersonaRol_det', 'RtsPersona_deb.IdPersona = RtsPersonaRol_det.IdPersona_deb', 'INNER');
 		$this->db->where('RtsPersona_deb.IdPersona', $id);
 		$this->db->where('RtsPersonaRol_det.IdRol', $tipo);
 		$res = $this->db->get()->result();
