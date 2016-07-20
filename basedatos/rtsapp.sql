@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-07-2016 a las 00:07:21
+-- Tiempo de generación: 20-07-2016 a las 14:20:10
 -- Versión del servidor: 5.6.26
 -- Versión de PHP: 5.6.12
 
@@ -151,9 +151,9 @@ CREATE TABLE IF NOT EXISTS `rtsetapajugador_det` (
 --
 
 INSERT INTO `rtsetapajugador_det` (`IdEtapaJugador`, `Estado`, `IdEtapa_deb`, `IdPersonaRol_det`, `IdCategoria`) VALUES
-(1, 0, 1, 3, 2),
-(2, 1, 1, 6, 2),
-(3, 1, 1, 9, 2);
+(1, 1, 1, 3, 2),
+(2, 0, 1, 6, 2),
+(3, 0, 1, 9, 2);
 
 -- --------------------------------------------------------
 
@@ -217,19 +217,19 @@ CREATE TABLE IF NOT EXISTS `rtslogin_deb` (
   `IdLogin` int(11) NOT NULL,
   `Usuario` varchar(50) COLLATE utf8_bin NOT NULL,
   `Clave` varchar(255) COLLATE utf8_bin NOT NULL,
-  `Tipo` varchar(100) COLLATE utf8_bin NOT NULL,
   `Estado` tinyint(2) NOT NULL,
   `IdPersonaRol` varchar(10) COLLATE utf8_bin DEFAULT NULL,
   `IdPersona` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Volcado de datos para la tabla `rtslogin_deb`
 --
 
-INSERT INTO `rtslogin_deb` (`IdLogin`, `Usuario`, `Clave`, `Tipo`, `Estado`, `IdPersonaRol`, `IdPersona`) VALUES
-(1, 'root', '$2y$10$LvZba6KHPenAJP03d9/b2OE/k55pnYvOSx4.jJt3PYFQNuTKAV62W', 'administrador', 1, '1,2,3', 1),
-(2, 'carlos', '$2y$10$LvZba6KHPenAJP03d9/b2OE/k55pnYvOSx4.jJt3PYFQNuTKAV62W', 'instructor', 1, '4,5,6', 2);
+INSERT INTO `rtslogin_deb` (`IdLogin`, `Usuario`, `Clave`, `Estado`, `IdPersonaRol`, `IdPersona`) VALUES
+(1, 'root', '$2y$10$LvZba6KHPenAJP03d9/b2OE/k55pnYvOSx4.jJt3PYFQNuTKAV62W', 1, '1,2,3', 1),
+(2, 'carlos', '$2y$10$LvZba6KHPenAJP03d9/b2OE/k55pnYvOSx4.jJt3PYFQNuTKAV62W', 1, '4,5,6', 2),
+(3, 'Yeisonadg1995', '$2y$10$uP3dtuCQVmwJ6uRgMW4GFe8AP1FjyPFs7jGRw0IGZvceXCShR3BW6', 1, '10,11,12', 4);
 
 -- --------------------------------------------------------
 
@@ -311,12 +311,12 @@ INSERT INTO `rtspersonarol_det` (`IdPersonaRol`, `Estado`, `IdPersona_deb`, `IdR
 (2, 1, 1, 2),
 (3, 1, 1, 3),
 (4, 0, 2, 1),
-(5, 0, 2, 2),
+(5, 1, 2, 2),
 (6, 0, 2, 3),
 (7, 0, 3, 1),
 (8, 0, 3, 2),
-(9, 0, 3, 3),
-(10, 0, 4, 1),
+(9, 1, 3, 3),
+(10, 1, 4, 1),
 (11, 1, 4, 2),
 (12, 1, 4, 3),
 (13, 0, 5, 1),
@@ -333,7 +333,7 @@ INSERT INTO `rtspersonarol_det` (`IdPersonaRol`, `Estado`, `IdPersona_deb`, `IdR
 (24, 1, 8, 3),
 (25, 0, 9, 1),
 (26, 1, 9, 2),
-(27, 1, 9, 3),
+(27, 0, 9, 3),
 (28, 0, 10, 1),
 (29, 0, 10, 2),
 (30, 0, 10, 3),
@@ -371,7 +371,7 @@ CREATE TABLE IF NOT EXISTS `rtspersona_deb` (
 --
 
 INSERT INTO `rtspersona_deb` (`IdPersona`, `Documento`, `Nombre`, `Apellidos`, `Genero`, `Correo`, `DireccionResidencia`, `Telefono`, `Celular`, `FechaNacimiento`, `FechaIngreso`, `Estado`, `IdEps`) VALUES
-(1, 1036956105, 'Esneider ', 'Mejia Ciro ', 'H', 'esneider.m12@gmail.com', 'Calle 88B #67-53', 6064973, '3218074451', '1996-04-02', '2016-02-08', 1, 1),
+(1, 1000000000, 'Robledo', 'Tenis Club', 'H', 'esneider.m12@gmail.com', 'Calle 88B #67-53', 6064973, '3218074451', '1996-04-02', '2016-02-08', 1, 1),
 (2, 1035433509, 'Carlos Alberto', 'Acevedo Vallejo', 'M', 'carlos.acevedo152011@gmail.com', 'Calle 89A #74-27 ', 4414017, '3217090693', '1995-06-06', '2015-10-14', 1, 2),
 (3, 1254444874, 'Santiago ', 'Velasquez Montoya ', 'M', 'velasquezsantiago1003@gmail.com', ' Carrera 25 #21-45', 2144455, '3125441122', '1997-10-31', '2016-02-08', 1, 1),
 (4, 1036543123, 'Yeison Alexander', 'Diaz Gallo   ', 'H', 'yeison1325@gmail.com ', ' Calle 91# 69-17', 4416364, '3125669888', '1995-12-06', '2016-02-08', 1, 2),
@@ -692,7 +692,7 @@ ALTER TABLE `rtsjugadorcuadro_det`
 -- AUTO_INCREMENT de la tabla `rtslogin_deb`
 --
 ALTER TABLE `rtslogin_deb`
-  MODIFY `IdLogin` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `IdLogin` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `rtsmaterial`
 --
