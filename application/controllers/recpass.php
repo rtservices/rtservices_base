@@ -5,7 +5,6 @@ class Recpass extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('mdl_login');
 	}
 
 	//token = Token generado por el sistema para el usuario.
@@ -47,35 +46,22 @@ class Recpass extends CI_Controller {
 		{
 			$correo = $this->input->post('correoRec');
 
-			if (empty($this->mdl_login->verificarResset($correo)))
+			if (!$this->mdl_login->verificarResset($correo))
 			{
-				if ($this->mdl_login->prepararMail($correo))
+				$prepareMail = $this->mdl_login->prepararMail($correo);
+				if ($prepareMail)
 				{
-					foreach ($this->mdl_login->prepararMail($correo) as $valRec)
+					foreach ($prepareMail as $valRec)
 					{
 						$idLogin = $valRec->IdLogin;
 						$an = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ.";
 						$su = strlen($an) - 1;
 						$tokengen = '';
 
-						for ($i=0; $i < 120; $i++)
+						for ($i = 0; $i < 120; $i++)
 						{ 
 							$tokengen .= substr($an, rand(0, $su), 1);
 						}
-
-						$config = array(
-							'protocol' => 'smtp', 
-							'smtp_host' => 'ssl://smtp.googlemail.com', 
-							'smtp_port' => 465, 
-							'smtp_user' => 'rackettenisservices@gmail.com', 
-							'smtp_pass' => 'neiderman',
-							'mailtype'  => 'html', 
-							'charset'   => 'utf-8'
-							);
-
-						$this->load->library('email', $config);
-						$this->email->set_newline("\r\n");
-
 
 						$mensaje = "<html>
 						<head>
@@ -88,12 +74,12 @@ class Recpass extends CI_Controller {
 								<div class='col-md-2 col-sm-2 col-xs-2'><br></div>
 								<div class='col-md-8 col-sm-8 col-xs-8'>
 									<div style='padding: 20px; border-radius: 27px 27px 27px 27px;	-moz-border-radius: 27px 27px 27px 27px; -webkit-border-radius: 27px 27px 27px 27px; border: 18px ridge rgba(150,150,150,0.8); background: rgba(255,255,255,0.7);'>
-										<center><img src='https://scontent-atl3-1.xx.fbcdn.net/v/t34.0-12/13020609_1209647629069399_1444718751_n.png?oh=000cb39e65a9dadb594e59fcd38c6897&oe=572518B8'></center>
+										<center><img src='http://rtservicesv-nman.rhcloud.com/assets/img/logo-vertical.png'></center>
 										<br>
 										<center><h2 style='font-size: 25pt;'>Recuperación de contraseña - RTSERVICES</h2></center>
 										<center><p style='font-size: 18pt;'>Recientemente has solicitado un cambio de contraseña, por lo cual te enviamos este correo para que puedas validar y recuperar tu cuenta.</p></center>
 										<br>
-										<center><a href='http://localhost:91/rtservicesapp/recpass?idpl=".$idLogin."&token=".$tokengen."' target='_blank'><button class='btn btn-success'>Ir a arreglar mi cuenta.</button></a></center>
+										<center><a href='http://rtservicesv-nman.rhcloud.com/recpass?idpl=".$idLogin."&token=".$tokengen."' target='_blank'><button class='btn btn-success'>Ir a arreglar mi cuenta.</button></a></center>
 									</div>
 								</div>
 								<div class='col-md-2 col-sm-2 col-xs-2'><br></div>
@@ -126,7 +112,7 @@ class Recpass extends CI_Controller {
 						}
 						else
 						{
-							var_dump($this->email->print_debugger());
+							echo $this->email->print_debugger();
 						}
 
 						break;					
@@ -158,7 +144,7 @@ class Recpass extends CI_Controller {
 
 			if ($pass_original === $pass_rep)
 			{
-				$data = array('Clave' => password_hash($pass_rep , PASSWORD_DEFAULT));
+				$data = array('Clave' => md5($pass_rep));
 
 				if ($this->mdl_login->setPass($idlog_set, $data))
 				{

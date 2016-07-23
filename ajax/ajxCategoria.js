@@ -113,6 +113,7 @@ $('#editar').submit(function(event) {
 			data: $('#editar').serialize(),
 			success:function(res){
 				actualizar();
+				$('#editarC').modal('hide');
 				if (res=='ok') 
 				{
 					NProgress.done();

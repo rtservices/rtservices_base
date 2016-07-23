@@ -1,8 +1,8 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-$config['base_url'] = "Http://" . $_SERVER ['HTTP_HOST'] . $_SERVER ['SCRIPT_NAME'];
+$config['base_url'] = "http://rtservicesv-nman.rhcloud.com/";
 
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 $config['uri_protocol']	= 'AUTO';
 

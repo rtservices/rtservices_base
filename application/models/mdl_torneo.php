@@ -2,7 +2,7 @@
 
 class Mdl_torneo extends CI_Model {
 
-	public $tabla = 'RtsTorneo';
+	public $tabla = 'rtstorneo';
 
 	public function __construct()
 	{
@@ -38,7 +38,7 @@ class Mdl_torneo extends CI_Model {
 	public function listarEtapa($id,$etapa)
 	{
 		$this->db->select('*');
-		$this->db->from('RtsEtapa_deb');
+		$this->db->from('rtsetapa_deb');
 		$this->db->where('IdTorneo', $id);
 		$this->db->like('NombreEtapa', $etapa, 'both');
 		$res = $this->db->get()->row();
@@ -48,13 +48,13 @@ class Mdl_torneo extends CI_Model {
 
 	public function listarInscritosEtapa($id)
 	{
-		$this->db->select('RtsPersona_deb.Documento, RtsPersona_deb.Nombre, RtsPersona_deb.Apellidos, RtsCategoria.NombreCategoria, RtsEtapaJugador_det.IdEtapaJugador');
-		$this->db->from('RtsEtapaJugador_det');
-		$this->db->join('RtsPersonaRol_det', 'RtsEtapaJugador_det.IdPersonaRol_det = RtsPersonaRol_det.IdPersonaRol', 'JOIN');
-		$this->db->join('RtsPersona_deb', 'RtsPersonaRol_det.IdPersonaRol = RtsPersona_deb.IdPersona', 'JOIN');
-		$this->db->join('RtsCategoria', 'RtsEtapaJugador_det.IdCategoria = RtsCategoria.IdCategoria', 'JOIN');
-		$this->db->join('RtsEtapa_deb', 'RtsEtapaJugador_det.IdEtapa_deb = RtsEtapa_deb.IdEtapa', 'JOIN');
-		$this->db->where('RtsEtapa_deb.IdEtapa', $id);
+		$this->db->select('rtspersona_deb.Documento, rtspersona_deb.Nombre, rtspersona_deb.Apellidos, rtscategoria.NombreCategoria, rtsetapajugador_det.IdEtapaJugador');
+		$this->db->from('rtsetapajugador_det');
+		$this->db->join('rtspersonarol_det', 'rtsetapajugador_det.IdPersonaRol_det = rtspersonarol_det.IdPersonaRol', 'JOIN');
+		$this->db->join('rtspersona_deb', 'rtspersonarol_det.IdPersonaRol = rtspersona_deb.IdPersona', 'JOIN');
+		$this->db->join('rtscategoria', 'rtsetapajugador_det.IdCategoria = rtscategoria.IdCategoria', 'JOIN');
+		$this->db->join('rtsetapa_deb', 'rtsetapajugador_det.IdEtapa_deb = rtsetapa_deb.IdEtapa', 'JOIN');
+		$this->db->where('rtsetapa_deb.IdEtapa', $id);
 		$res = $this->db->get()->result();
 
 		return $res;
@@ -63,7 +63,7 @@ class Mdl_torneo extends CI_Model {
 	public function eliminarInscripcionJugador($id)
 	{
 		$this->db->where('IdEtapaJugador', $id);
-		$res = $this->db->delete('RtsEtapaJugador_det');
+		$res = $this->db->delete('rtsetapajugador_det');
 
 		return $res;
 	}
@@ -72,13 +72,13 @@ class Mdl_torneo extends CI_Model {
 
 	public function cargarTablaEtapa($id)
 	{
-		$this->db->select('RtsEtapaJugador_det.*, RtsPersona_deb.Documento, RtsPersona_deb.Genero, RtsPersona_deb.Nombre as NombreP, RtsPersona_deb.Apellidos as ApellidosP, RtsCategoria.NombreCategoria');
-		$this->db->from('RtsEtapaJugador_det');
-		$this->db->join('RtsCategoria', 'RtsEtapaJugador_det.IdCategoria = RtsCategoria.IdCategoria', 'INNER');
-		$this->db->join('RtsPersonaRol_det', 'RtsEtapaJugador_det.IdPersonaRol_det = RtsPersonaRol_det.IdPersonaRol', 'INNER');
-		$this->db->join('RtsPersona_deb', 'RtsPersonaRol_det.IdPersona_deb = RtsPersona_deb.IdPersona', 'INNER');
-		$this->db->join('RtsEtapa_deb', 'RtsEtapaJugador_det.IdEtapa_deb = RtsEtapa_deb.IdEtapa', 'INNER');
-		$this->db->where('RtsEtapa_deb.IdEtapa', $id);
+		$this->db->select('rtsetapajugador_det.*, rtspersona_deb.Documento, rtspersona_deb.Genero, rtspersona_deb.Nombre as NombreP, rtspersona_deb.Apellidos as ApellidosP, rtscategoria.NombreCategoria');
+		$this->db->from('rtsetapajugador_det');
+		$this->db->join('rtscategoria', 'rtsetapajugador_det.IdCategoria = rtscategoria.IdCategoria', 'INNER');
+		$this->db->join('rtspersonarol_det', 'rtsetapajugador_det.IdPersonaRol_det = rtspersonarol_det.IdPersonaRol', 'INNER');
+		$this->db->join('rtspersona_deb', 'rtspersonarol_det.IdPersona_deb = rtspersona_deb.IdPersona', 'INNER');
+		$this->db->join('rtsetapa_deb', 'rtsetapajugador_det.IdEtapa_deb = rtsetapa_deb.IdEtapa', 'INNER');
+		$this->db->where('rtsetapa_deb.IdEtapa', $id);
 
 		$res = $this->db->get()->result();
 		return $res;
@@ -87,7 +87,7 @@ class Mdl_torneo extends CI_Model {
 	public function validarEtapa($id)
 	{
 		$this->db->select('*');
-		$this->db->from('RtsEtapa_deb');
+		$this->db->from('rtsetapa_deb');
 		$this->db->where('IdEtapa', $id);
 
 		$res = $this->db->get()->result();
@@ -97,7 +97,7 @@ class Mdl_torneo extends CI_Model {
 	public function actualizarEtapa($id, $data)
 	{
 		$this->db->select('*');
-		$this->db->from('RtsEtapaJugador_det');
+		$this->db->from('rtsetapajugador_det');
 		$this->db->where('IdEtapa_deb', $id);
 		$dato = $this->db->get();
 		if ($dato->num_rows() > 0)
@@ -107,7 +107,7 @@ class Mdl_torneo extends CI_Model {
 		else
 		{
 			$this->db->where('IdEtapa', $id);
-			$res = $this->db->update('RtsEtapa_deb', $data);
+			$res = $this->db->update('rtsetapa_deb', $data);
 		}
 
 		return $res;
@@ -115,12 +115,12 @@ class Mdl_torneo extends CI_Model {
 
 	public function cargarComboJugador()
 	{
-		$this->db->select('RtsPersonaRol_det.IdPersonaRol, RtsPersona_deb.*');
-		$this->db->from('RtsPersonaRol_det');
-		$this->db->join('RtsPersona_deb', 'RtsPersonaRol_det.IdPersona_deb = RtsPersona_deb.IdPersona', 'INNER');
-		$this->db->where('RtsPersona_deb.Estado', 1);
-		$this->db->where('RtsPersonaRol_det.Estado', 1);
-		$this->db->where('RtsPersonaRol_det.IdRol', 3);
+		$this->db->select('rtspersonarol_det.IdPersonaRol, rtspersona_deb.*');
+		$this->db->from('rtspersonarol_det');
+		$this->db->join('rtspersona_deb', 'rtspersonarol_det.IdPersona_deb = rtspersona_deb.IdPersona', 'INNER');
+		$this->db->where('rtspersona_deb.Estado', 1);
+		$this->db->where('rtspersonarol_det.Estado', 1);
+		$this->db->where('rtspersonarol_det.IdRol', 3);
 
 		$res = $this->db->get()->result();
 		return $res;
@@ -129,7 +129,7 @@ class Mdl_torneo extends CI_Model {
 	public function inscripcionJugador_id($id)
 	{
 		$this->db->select('*');
-		$this->db->from('RtsEtapaJugador_det');
+		$this->db->from('rtsetapajugador_det');
 		$this->db->where('IdEtapaJugador', $id);
 
 		$res = $this->db->get()->result();
@@ -140,7 +140,7 @@ class Mdl_torneo extends CI_Model {
 	public function actualizarInscripcion($id,$data)
 	{
 		$this->db->where('IdEtapaJugador', $id);
-		$res = $this->db->update('RtsEtapaJugador_det', $data);
+		$res = $this->db->update('rtsetapajugador_det', $data);
 
 		return $res;
 	}
@@ -153,14 +153,14 @@ class Mdl_torneo extends CI_Model {
 
 	public function registrarEtapa($data)
 	{
-		$this->db->insert('RtsEtapa_deb',$data);
+		$this->db->insert('rtsetapa_deb',$data);
 
 	}
 
 	//Funcion para agregar un jugador a una etapa
 	public function inscribirPlanJugadorTorneo($data)
 	{
-		$res = $this->db->insert('RtsEtapaJugador_det', $data);
+		$res = $this->db->insert('rtsetapajugador_det', $data);
 		return $res;
 	}
 

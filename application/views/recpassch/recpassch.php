@@ -24,6 +24,7 @@
     <link href="assets/css/sign.css" rel="stylesheet">
     <link href="assets/css/custom.css" rel="stylesheet">
     <link href="assets/swal/sweetalert2.min.css" rel="stylesheet">
+    <link href="assets/nprogress/nprogress.css" rel="stylesheet">
 </head>
 <body>
     <div id="sign-wrapper">
@@ -31,7 +32,7 @@
             <img src="assets/img/logo-vertical.png" alt="brand logo"/>
         </div>
         <form class="form-horizontal rounded shadow" name="formsetpass" id="formsetpass">
-        <input type="hidden" name="idlog" id="idlog" value="<?= $idperlog ?>">
+            <input type="hidden" name="idlog" id="idlog" value="<?= $idperlog ?>">
             <div class="sign-header">
                 <div class="form-group">
                     <div class="sign-text">
@@ -67,6 +68,7 @@
     <script src="assets/js/jquery.validate.min.js"></script>
     <script src="assets/js/blankon.sign.js"></script>
     <script src="assets/swal/sweetalert2.min.js"></script>
+    <script src="assets/nprogress/nprogress.js"></script>
     <script src="ajax/ajxLogin.js"></script>
 
 </body>

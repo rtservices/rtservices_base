@@ -22,6 +22,32 @@ function nuevaPersona()
 	NProgress.done();
 }
 
+function listarPlanclase(id)
+{
+	NProgress.start();
+	$('#listoPC').hide();
+	$('#loadingPC').show();
+	$('#modalPlanclase').modal('show');
+
+	$.ajax({
+		url: 'persona/listarPlanclase',
+		type: 'POST',
+		dataType: 'JSON',
+		data: {id: id},
+		success:function(res)
+		{
+			$('[id = "idpersona"]').val(res.IdPersona);
+			$('[id = "idpersonarol"]').val(res.IdPersonaRol);
+			$('[id = "nombrejugador"]').val(res.Nombre + ' ' + res.Apellidos);
+			$('#loadingPC').hide();
+			setTimeout(function() {
+				$('#listoPC').show();
+				NProgress.done();
+			}, 2000);
+		}
+	});
+}
+
 function listarPersona(id)
 {
 	NProgress.start();

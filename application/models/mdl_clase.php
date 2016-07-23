@@ -1,9 +1,9 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') Or exit('No direct script access allowed');
 
 class Mdl_clase extends CI_Model {
 
-	public $tabla = 'RtsClase_deb';
+	public $tabla = 'rtsclase_deb';
 
 	public function __construct()
 	{
@@ -45,12 +45,12 @@ class Mdl_clase extends CI_Model {
 
 	public function listarInstructores()
 	{
-		$this->db->select('Documento, Nombre, Apellidos, IdPersonaRol');
-		$this->db->from('RtsPersonaRol_det');
-		$this->db->join('RtsPersona_deb', 'RtsPersonaRol_det.IdPersona_deb = RtsPersona_deb.IdPersona', 'INNER');
-		$this->db->where('RtsPersona_deb.Estado', 1);
-		$this->db->where('RtsPersonaRol_det.Estado', 1);
-		$this->db->where('RtsPersonaRol_det.IdRol', 2);
+		$this->db->select('Documento, Nombre, Apellidos, IdPersonarol');
+		$this->db->from('rtspersonarol_det');
+		$this->db->join('rtspersona_deb', 'rtspersonarol_det.IdPersona_deb = rtspersona_deb.IdPersona', 'INNER');
+		$this->db->where('rtspersona_deb.Estado', 1);
+		$this->db->where('rtspersonarol_det.Estado', 1);
+		$this->db->where('rtspersonarol_det.IdRol', 2);
 		$res = $this->db->get()->result();
 
 		return $res;
@@ -58,12 +58,12 @@ class Mdl_clase extends CI_Model {
 
 	public function listarJugadores()
 	{
-		$this->db->select('Documento, Nombre, Apellidos, IdPersonaRol');
-		$this->db->from('RtsPersonaRol_det');
-		$this->db->join('RtsPersona_deb', 'RtsPersonaRol_det.IdPersona_deb = RtsPersona_deb.IdPersona', 'INNER');
-		$this->db->where('RtsPersona_deb.Estado', 1);
-		$this->db->where('RtsPersonaRol_det.Estado', 1);
-		$this->db->where('RtsPersonaRol_det.IdRol', 3);
+		$this->db->select('Documento, Nombre, Apellidos, IdPersonarol');
+		$this->db->from('rtspersonarol_det');
+		$this->db->join('rtspersona_deb', 'rtspersonarol_det.IdPersona_deb = rtspersona_deb.IdPersona', 'INNER');
+		$this->db->where('rtspersona_deb.Estado', 1);
+		$this->db->where('rtspersonarol_det.Estado', 1);
+		$this->db->where('rtspersonarol_det.IdRol', 3);
 		$res = $this->db->get()->result();
 
 		return $res;
@@ -71,12 +71,12 @@ class Mdl_clase extends CI_Model {
 
 	public function cargarJugadoresClase($id)
 	{
-		$this->db->select('RtsClaseJugador_det.*, ');
-		$this->db->from('RtsClaseJugador_det');
-		$this->db->join('RtsPlanClase_deb', 'RtsClaseJugador_det.IdPlanClase_deb = RtsPlanClase_deb.IdPlanClase', 'INNER');
-		$this->db->join('RtsPersonaRol_det', 'RtsPlanClase_deb.IdPersonaRol_det = RtsPersonaRol_det.IdPersonaRol', 'INNER');
-		$this->db->join('RtsPersona_deb', 'RtsPersonaRol_det.IdPersona_deb = RtsPersona_deb.IdPersona', 'INNER');
-		$this->db->where('RtsClaseJugador_det.IdClase_deb', $id);
+		$this->db->select('rtsclasejugador_det.*, ');
+		$this->db->from('rtsclasejugador_det');
+		$this->db->join('rtsplanclase_deb', 'rtsclasejugador_det.IdPlanClase_deb = rtsplanclase_deb.IdPlanClase', 'INNEr');
+		$this->db->join('rtspersonarol_det', 'rtsplanclase_deb.IdPersonarol_det = rtspersonarol_det.IdPersonarol', 'INNEr');
+		$this->db->join('rtspersona_deb', 'rtspersonarol_det.IdPersona_deb = rtspersona_deb.IdPersona', 'INNEr');
+		$this->db->where('rtsclasejugador_det.IdClase_deb', $id);
 		$res = $this->db->get()->result();
 
 		return $res;
@@ -84,11 +84,11 @@ class Mdl_clase extends CI_Model {
 
 	public function cargarClase_id($id)
 	{
-		$this->db->select('RtsClase_deb.*');
+		$this->db->select('rtsclase_deb.*');
 		$this->db->from($this->tabla);
-		$this->db->join('RtsPersonaRol_det', 'RtsClase_deb.IdPersonaRol_det = RtsPersonaRol_det.IdPersonaRol', 'INNER');
-		$this->db->join('RtsPersona_deb', 'RtsPersonaRol_det.IdPersona_deb = RtsPersona_deb.IdPersona', 'INNER');
-		$this->db->where('RtsClase_deb.IdClase', $id);
+		$this->db->join('rtspersonarol_det', 'rtsclase_deb.IdPersonarol_det = rtspersonarol_det.IdPersonarol', 'INNEr');
+		$this->db->join('rtspersona_deb', 'rtspersonarol_det.IdPersona_deb = rtspersona_deb.IdPersona', 'INNEr');
+		$this->db->where('rtsclase_deb.IdClase', $id);
 		$res = $this->db->get()->result();
 
 		return $res;
@@ -96,11 +96,11 @@ class Mdl_clase extends CI_Model {
 
 	public function selJugadorPlan()
 	{
-		$this->db->select('RtsPlanClase_deb.*, RtsPersonaRol_det.*, RtsPersona_deb.Documento, RtsPersona_deb.Nombre, RtsPersona_deb.Apellidos');
-		$this->db->from('RtsPlanClase_deb');
-		$this->db->join('RtsPersonaRol_det', 'RtsPlanClase_deb.IdPersonaRol_det = RtsPersonaRol_det.IdPersonaRol', 'INNER');
-		$this->db->join('RtsPersona_deb', 'RtsPersonaRol_det.IdPersona_deb = RtsPersona_deb.IdPersona', 'INNER');
-		$this->db->where('RtsPlanClase_deb.Estado', 1);
+		$this->db->select('rtsplanclase_deb.*, rtspersonarol_det.*, rtspersona_deb.Documento, rtspersona_deb.Nombre, rtspersona_deb.Apellidos');
+		$this->db->from('rtsplanclase_deb');
+		$this->db->join('rtspersonarol_det', 'rtsplanclase_deb.IdPersonarol_det = rtspersonarol_det.IdPersonarol', 'INNEr');
+		$this->db->join('rtspersona_deb', 'rtspersonarol_det.IdPersona_deb = rtspersona_deb.IdPersona', 'INNEr');
+		$this->db->where('rtsplanclase_deb.Estado', 1);
 		$res = $this->db->get()->result();
 
 		return $res;
@@ -108,12 +108,12 @@ class Mdl_clase extends CI_Model {
 
 	public function cargarTablaJugadorClase($idClase)
 	{
-		$this->db->select('RtsClaseJugador_det.*, RtsPlanClase_deb.*, RtsPersonaRol_det.*, RtsPersona_deb.Documento, RtsPersona_deb.Nombre, RtsPersona_deb.Apellidos');
-		$this->db->from('RtsPlanClase_deb');
-		$this->db->join('RtsPersonaRol_det', 'RtsPlanClase_deb.IdPersonaRol_det = RtsPersonaRol_det.IdPersonaRol', 'INNER');
-		$this->db->join('RtsPersona_deb', 'RtsPersonaRol_det.IdPersona_deb = RtsPersona_deb.IdPersona', 'INNER');
-		$this->db->join('RtsClaseJugador_det', 'RtsPlanClase_deb.IdPlanClase = RtsClaseJugador_det.IdPlanClase_deb', 'INNER');
-		$this->db->where('RtsClaseJugador_det.IdClase_deb', $idClase);
+		$this->db->select('rtsclasejugador_det.*, rtsplanclase_deb.*, rtspersonarol_det.*, rtspersona_deb.Documento, rtspersona_deb.Nombre, rtspersona_deb.Apellidos');
+		$this->db->from('rtsplanclase_deb');
+		$this->db->join('rtspersonarol_det', 'rtsplanclase_deb.IdPersonarol_det = rtspersonarol_det.IdPersonarol', 'INNEr');
+		$this->db->join('rtspersona_deb', 'rtspersonarol_det.IdPersona_deb = rtspersona_deb.IdPersona', 'INNEr');
+		$this->db->join('rtsclasejugador_det', 'rtsplanclase_deb.IdPlanClase = rtsclasejugador_det.IdPlanClase_deb', 'INNEr');
+		$this->db->where('rtsclasejugador_det.IdClase_deb', $idClase);
 		$res = $this->db->get()->result();
 
 		return $res;
@@ -121,11 +121,11 @@ class Mdl_clase extends CI_Model {
 
 	public function jugadoresInscritos($id)
 	{
-		$this->db->select('RtsPlanClase_deb.IdPlanClase');
-		$this->db->from('RtsPlanClase_deb');
-		$this->db->join('RtsClaseJugador_det', 'RtsPlanClase_deb.IdPlanClase = RtsClaseJugador_det.IdPlanClase_deb', 'INNER');
-		$this->db->where('RtsClaseJugador_det.IdClase_deb', $id);
-		$this->db->where('RtsPlanClase_deb.Estado', 1);
+		$this->db->select('rtsplanclase_deb.IdPlanClase');
+		$this->db->from('rtsplanclase_deb');
+		$this->db->join('rtsclasejugador_det', 'rtsplanclase_deb.IdPlanClase = rtsclasejugador_det.IdPlanClase_deb', 'INNEr');
+		$this->db->where('rtsclasejugador_det.IdClase_deb', $id);
+		$this->db->where('rtsplanclase_deb.Estado', 1);
 		$res = $this->db->get()->result();
 
 		return $res;
@@ -133,14 +133,14 @@ class Mdl_clase extends CI_Model {
 
 	public function inscribirPlanJugadorClase($data)
 	{
-		$res = $this->db->insert('RtsClaseJugador_det', $data);
+		$res = $this->db->insert('rtsclasejugador_det', $data);
 		return $res;
 	}
 
 	public function eliminarInscripcionClase($id)
 	{
 		$this->db->where('IdClasejugador', $id);
-		$res = $this->db->delete('RtsClaseJugador_det');
+		$res = $this->db->delete('rtsclasejugador_det');
 
 		return $res;
 	}

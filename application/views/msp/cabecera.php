@@ -10,8 +10,8 @@
     <link href="assets/img/icon/apple-touch-icon-57x57-precomposed.png" rel="apple-touch-icon-precomposed">
     <link href="assets/img/icon/apple-touch-icon.png" rel="shortcut icon">
 
-    <link href="assets/css/css.css"rel="stylesheet">
-    <link href="assets/css/cssotro.css"rel="stylesheet">
+    <link href="assets/css/css.css" rel="stylesheet">
+    <link href="assets/css/cssotro.css" rel="stylesheet">
 
     <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -26,9 +26,9 @@
     <link href="assets/groupmaster/jquery.group.min.css" rel="stylesheet">
     <link href="assets/css/custom.css" rel="stylesheet">
     <link href="assets/swal/sweetalert2.min.css" rel="stylesheet">
-    <link href="assets/css/dropzone.css"rel="stylesheet">
-    <link href="assets/css/jquery.gritter.css"rel="stylesheet">
-    <link href="assets/css/bootstrap-tour.min.css"rel="stylesheet">
+    <link href="assets/css/dropzone.css" rel="stylesheet">
+    <link href="assets/css/jquery.gritter.css" rel="stylesheet">
+    <link href="assets/css/bootstrap-tour.min.css" rel="stylesheet">
     <link href="assets/css/jasny-bootstrap-fileinput.min.css" rel="stylesheet">
     <link href="assets/css/chosen.min.css" rel="stylesheet">
     <link href="assets/bootstrap-datepicker/css/datepicker.css" rel="stylesheet">
@@ -65,7 +65,7 @@
     </style>
 
 </head>
-<body class="page-session page-sound page-header-fixed page-sidebar-fixed demo-dashboard-session"style="padding-right: 17px;">
+<body class="page-session page-sound page-header-fixed page-sidebar-fixed demo-dashboard-session" style="padding-right: 17px;">
     <?php foreach ($this->mdl_login->cargarUsuario() as $val) { ?>
     <?php $this->session->set_userdata('ssRol', $val->NombreRol); ?>
     <section id="wrapper">
@@ -75,7 +75,7 @@
                     <i class="fa fa-bars"></i>
                 </div>
                 <div class="navbar-header">
-                    <a id="tour-1"class="navbar-brand tour-tour-element tour-tour-0-element" href="#">
+                    <a id="tour-1" class="navbar-brand tour-tour-element tour-tour-0-element" href="#">
                         <img class="logo" src="assets/img/logo-white.png" alt="brand logo">
                     </a>
                 </div>
@@ -89,8 +89,8 @@
             <div class="header-right">
                 <div class="navbar navbar-toolbar">
                     <ul class="nav navbar-nav navbar-right" style="margin-right: 30px">
-                        <li id="tour-6"class="dropdown navbar-profile">
-                            <a href="#"class="dropdown-toggle"data-toggle="dropdown">
+                        <li id="tour-6" class="dropdown navbar-profile">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <span class="meta">
                                     <span class="avatar">
                                         <img src="assets/img/<?= $val->NombreRol ?>.jpg" class="img-circle" alt="Perfil">
@@ -111,12 +111,11 @@
             </div>
         </header>
 
-        <aside id="sidebar-left"class="sidebar-circle">
-            <div id="tour-8"class="sidebar-content">
+        <aside id="sidebar-left" class="sidebar-circle">
+            <div id="tour-8" class="sidebar-content">
                 <div class="media">
                     <a class="pull-left has-notif avatar" href="perfil">
                         <img src="assets/img/<?= $val->NombreRol ?>.jpg" alt="Perfil">
-                        <i class="online"></i>
                     </a>
                     <div class="media-body">
                         <h4 class="media-heading">Hola, <span><?= $val->Nombre ?></span></h4>
@@ -124,7 +123,7 @@
                     </div>
                 </div>
             </div>
-            <ul id="tour-9"class="sidebar-menu"tabindex="0"style="height: 447px; overflow: hidden; outline: none;">
+            <ul id="tour-9" class="sidebar-menu" tabindex="0" style="height: 447px; overflow: hidden; outline: none;">
                 <li class="submenu">
                     <a href="menu">
                         <span class="icon"><i class="fa fa-home"></i></span>
@@ -182,8 +181,8 @@
             </ul>
             <div id="tour-10" class="sidebar-footer hidden-xs hidden-sm hidden-md">
                 <a class="pull-left" data-toggle="tooltip" data-placement="top"><i class="fa fa-circle-o"></i></a>
-                <a id="fullscreen" class="pull-left" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-title="Fullscreen" data-original-title="" title=""><i class="fa fa-desktop"></i></a>
-                <a id="home" data-url="home" class="pull-left" href="menu" data-toggle="tooltip" data-placement="top" data-title="Inicio" data-original-title="" title=""><i class="fa fa-home"></i></a>
+                <a id="fullscreen" class="pull-left" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-title="Pantalla Completa" data-original-title="" title=""><i class="fa fa-desktop"></i></a>
+                <a id="home" data-url="home" class="pull-left" href="menu" data-toggle="tooltip" data-placement="top" data-title="Pagina de Inicio" data-original-title="" title=""><i class="fa fa-home"></i></a>
                 <a class="pull-left" data-toggle="tooltip" data-placement="top"><i class="fa fa-circle-o"></i></a>
             </div>
 
