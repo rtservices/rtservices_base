@@ -79,7 +79,7 @@ class Persona extends CI_Controller {
 						}
 						else if (in_array(3, $arrol) == true) 
 						{
-							$responsable = '<a class="btn btn-success btn-expand" style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Gestionar responsable # 1 de '.$persona->Nombre.' '.$persona->Apellidos.'." onclick="listarResponsables('.$persona->IdPersona.');"><i class="fa fa-users"></i></a>';
+							$responsable = '<a class="btn btn-success btn-expand" style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Gestionar responsable de '.$persona->Nombre.' '.$persona->Apellidos.'." onclick="listarResponsables('.$persona->IdPersona.');"><i class="fa fa-users"></i></a>';
 							$planclase = '<a class="btn btn-info btn-expand" style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Gestionar plan clase de '.$persona->Nombre.' '.$persona->Apellidos.'." onclick="listarPlanclase('.$persona->IdPersona.');"><i class="fa fa-credit-card"></i></a>';
 							$cuenta = '<a class="btn btn-inverse btn-expand" disabled title="Debes tener activo un rol Administrador o Instructor a  '.$persona->Nombre.' '.$persona->Apellidos.' para poder gestionar su cuenta."><i class="fa fa-key" style="color: #01B1E1"></i></a>';
 						}
@@ -446,6 +446,54 @@ class Persona extends CI_Controller {
 			$id = $this->input->post('id');
 			$data = $this->mdl_persona->listarJugador_planclase($id);
 			echo json_encode($data);
+		}
+		else
+		{
+			redirect('error404');
+		}
+	}
+
+	public function tablaPlanClase($id)
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$data = array();
+			foreach ($this->mdl_persona->tablaJugador_planclase($id) as $planclase)
+			{
+				if ($planclase->Estado == 1) 
+				{
+					$accion = 'Inhabilitar Plan de Clases';
+					$color = ' color: #F13A3A; background-color: #2A2A2A;';
+					$clase = 'danger';
+					$estado = 'Activo';
+				}
+				else
+				{
+					$accion = 'Habilitar Plan de Clases';
+					$color = 'color:#81B71A; background-color: #2A2A2A;';
+					$clase = 'success';
+					$estado = 'Inactivo';
+				}
+
+				$row = array();
+				$row[] = $estado;
+				$row[] = $planclase->FechaInicio;
+				$row[] = $planclase->DiasRestantes;
+
+
+				$row[] = '
+				<center>
+					<a class="btn btn-'.$clase.' btn-lg btn-expand" style="'.$color.'" href="javascript:void()" title="'.$accion.'" onclick="variarPlanClase('.$planclase->IdPlanClase.')"><i class="fa fa-exchange"></i></a>
+				</center>';
+
+				$data[] = $row;
+			}
+			
+			$output = array(
+				"data" => $data
+				);
+
+			echo json_encode($output);
 		}
 		else
 		{

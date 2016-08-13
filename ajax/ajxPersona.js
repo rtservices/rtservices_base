@@ -25,32 +25,38 @@ function nuevaPersona()
 function listarPlanclase(id)
 {
 	NProgress.start();
+	$('#modalPlanclase').modal('show');
 	$('#listoPC').hide();
 	$('#loadingPC').show();
-	$('#modalPlanclase').modal('show');
 
-	$.ajax({
-		url: 'persona/listarPlanclase',
-		type: 'POST',
-		dataType: 'JSON',
-		data: {id: id},
-		success:function(res)
-		{
-			$('[id = "idpersona"]').val(res.IdPersona);
-			$('[id = "idpersonarol"]').val(res.IdPersonaRol);
-			$('[id = "nombrejugador"]').val(res.Nombre + ' ' + res.Apellidos);
-			$('#loadingPC').hide();
-			setTimeout(function() {
+	setTimeout(function() {
+		$.ajax({
+			url: 'persona/listarPlanclase',
+			type: 'POST',
+			dataType: 'JSON',
+			data: {id: id},
+			success:function(res)
+			{
+				$('[id = "idpersona"]').val(res.IdPersona);
+				$('[id = "idpersonarol"]').val(res.IdPersonaRol);
+				$('[name = "nombrejugador"]').text(' - ' + res.Nombre + ' ' + res.Apellidos);
+				$('[id = "infojugador"]').val(res.Documento + ' - ' + res.Nombre + ' ' + res.Apellidos);
+				$('#loadingPC').hide();
 				$('#listoPC').show();
+				$('#tablaPlanClase').DataTable({ "ajax": "persona/tablaPlanClase/" + res.IdPersonaRol, destroy: true });
 				NProgress.done();
-			}, 2000);
-		}
-	});
+			}
+		});
+	}, 2000);
 }
 
 function listarPersona(id)
 {
 	NProgress.start();
+	$('#modalEditar').modal('show');
+	$('#loadingEP').show();
+	$('#listoEP').hide();
+
 	$('#editar')[0].reset();
 	$.ajax({
 		url: 'persona/listarPersona',
@@ -70,8 +76,12 @@ function listarPersona(id)
 			$('[id = "celularM"]').val(res.Celular);
 			$('[id = "fnacimientoM"]').val(res.FechaNacimiento);
 			$('[id = "epsM"]').val(res.IdEps);
-			$('#modalEditar').modal('show');
 
+			setTimeout(function() {
+				$('#loadingEP').hide();
+				$('#listoEP').show();
+			}, 2000);
+			
 			NProgress.done();
 		}
 	});	
@@ -80,6 +90,10 @@ function listarPersona(id)
 function listarInformacion(id)
 {
 	NProgress.start();
+	$('#modalInformacion').modal('show');
+	$('#loadingIJ').show();
+	$('#listoIJ').hide();
+
 	$.ajax({
 		url: 'persona/listarPersona',
 		type: 'POST',
@@ -113,8 +127,12 @@ function listarInformacion(id)
 			$('[id = "telefonoI"]').text(res.Telefono);
 			$('[id = "epsI"]').text(res.NombreEps + ' - Telefono: ' + res.TelefonoEps);
 			$('[id = "fechaI"]').text(res.FechaIngreso);
+
+			setTimeout(function() {
+				$('#loadingIJ').hide();
+				$('#listoIJ').show();
+			}, 2000);
 			
-			$('#modalInformacion').modal('show');
 			NProgress.done();
 		}
 	});	

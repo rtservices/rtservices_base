@@ -346,10 +346,9 @@ class Mdl_persona extends CI_Model {
 	// Retorna información referente a los jugadores en los planes de clase
 	public function listarJugador_planclase($id)
 	{
-		$this->db->select("IdPersona, IdPersonaRol, Nombre, Apellidos");
+		$this->db->select("Documento, IdPersona, IdPersonaRol, Nombre, Apellidos");
 		$this->db->from('rtspersona_deb');
 		$this->db->join('rtspersonarol_det', 'rtspersona_deb.IdPersona = rtspersonarol_det.IdPersona_deb', 'INNER');
-		$this->db->join('rtsplanclase_deb', 'rtspersonarol_det.IdPersonaRol = rtsplanclase_deb.IdPersonaRol_det', 'INNER');
 		$this->db->where('IdRol', 3);
 		$this->db->where('IdPersona', $id);
 		$res = $this->db->get()->row();
@@ -357,7 +356,15 @@ class Mdl_persona extends CI_Model {
 		return $res;
 	}
 
+	public function tablaJugador_planclase($id)
+	{
+		$this->db->select('IdPlanClase, FechaInicio, DiasRestantes, Estado');
+		$this->db->from('rtsplanclase_deb');
+		$this->db->where('IdPersonaRol_det', $id);
+		$res = $this->db->get()->result();
 
+		return $res;
+	}
 
 }
 

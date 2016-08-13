@@ -233,61 +233,61 @@
 						<center><small>Campos con <span style="color: red;">*</span> son requeridos.</small></center>
 					</div>
 					<div class="modal-body">
-						<div class="row">
-							<div class="col-md-1"></div>
-							<div class="col-md-10">
-								<div class="row">
-									<div class="col-md-6 form-group">
-										<label class="control-label">Numero de documento <span style="color: red;">*</span></label>
-										<input class="form-control" id="documentoM" name="documentoM" type="text">
+						<div style="width: 300px; height: 300px;" class="precarga" id="loadingEP"></div>
+						<div id="listoEP">
+							<div class="row">
+								<div class="col-md-1"></div>
+								<div class="col-md-10">
+									<div class="row">
+										<div class="col-md-6 form-group">
+											<label class="control-label">Numero de documento <span style="color: red;">*</span></label>
+											<input class="form-control" id="documentoM" name="documentoM" type="text">
+										</div>
+										<div class="col-md-6 form-group">
+											<label class="control-label">Genero <span style="color: red;">*</span></label>
+											<select class="form-control" id="generoM" name="generoM">
+												<option value="" selected disabled>Seleccione su genero</option>
+												<option value="H">Hombre</option>
+												<option value="M">Mujer</option>
+											</select>
+										</div>
 									</div>
-									<div class="col-md-6 form-group">
-										<label class="control-label">Genero <span style="color: red;">*</span></label>
-										<select class="form-control" id="generoM" name="generoM">
-											<option value="" selected disabled>Seleccione su genero</option>
-											<option value="H">Hombre</option>
-											<option value="M">Mujer</option>
-										</select>
+									<div class="row">
+										<div class="col-md-6 form-group">
+											<label class="control-label">Nombre(s) <span style="color: red;">*</span></label>
+											<input class="form-control" id="nombreM" name="nombreM" type="text">
+										</div>
+										<div class="col-md-6 form-group">
+											<label class="control-label">Apellidos <span style="color: red;">*</span></label>
+											<input class="form-control" id="apellidosM" name="apellidosM" type="text">
+										</div>
 									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-6 form-group">
-										<label class="control-label">Nombre(s) <span style="color: red;">*</span></label>
-										<input class="form-control" id="nombreM" name="nombreM" type="text">
+									<div class="row">
+										<div class="col-md-6 form-group">
+											<label class="control-label">Correo electrónico <span style="color: red;">*</span></label>
+											<input class="form-control" id="correoM" name="correoM" type="text">
+										</div>
+										<div class="col-md-6 form-group">
+											<label class="control-label">Dirección de residencia <span style="color: red;">*</span></label>
+											<input class="form-control" id="direccionM" name="direccionM" type="text">
+										</div>
 									</div>
-									<div class="col-md-6 form-group">
-										<label class="control-label">Apellidos <span style="color: red;">*</span></label>
-										<input class="form-control" id="apellidosM" name="apellidosM" type="text">
+									<div class="row">
+										<div class="col-md-6 form-group">
+											<label class="control-label">Teléfono fijo <span style="color: red;">*</span></label>
+											<input class="form-control" id="telefonoM" name="telefonoM" type="text">
+										</div>
+										<div class="col-md-6 form-group">
+											<label class="control-label">Teléfono celular</label>
+											<input class="form-control" id="celularM" name="celularM" type="text">
+										</div>
 									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-6 form-group">
-										<label class="control-label">Correo electrónico <span style="color: red;">*</span></label>
-										<input class="form-control" id="correoM" name="correoM" type="text">
-									</div>
-									<div class="col-md-6 form-group">
-										<label class="control-label">Dirección de residencia <span style="color: red;">*</span></label>
-										<input class="form-control" id="direccionM" name="direccionM" type="text">
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-6 form-group">
-										<label class="control-label">Teléfono fijo <span style="color: red;">*</span></label>
-										<input class="form-control" id="telefonoM" name="telefonoM" type="text">
-									</div>
-									<div class="col-md-6 form-group">
-										<label class="control-label">Teléfono celular</label>
-										<input class="form-control" id="celularM" name="celularM" type="text">
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-6 form-group">
-										<label class="control-label">Eps <span style="color: red;">*</span></label>
-										<select class="form-control" id="epsM" name="epsM">
-											<option value="" disabled>Seleccione una eps</option>
-											<?php foreach ($this->mdl_persona->listarEps() as $eps) { ?>
-												<option value="<?= $eps->IdEps ?>"><?= $eps->NombreEps ?></option>';
-												<?php }?>
+									<div class="row">
+										<div class="col-md-6 form-group">
+											<label class="control-label">Eps <span style="color: red;">*</span></label>
+											<select class="form-control" id="epsM" name="epsM">
+												<option value="" disabled>Seleccione una eps</option>
+												<?php foreach ($this->mdl_persona->listarEps() as $eps) { ?> <option value="<?= $eps->IdEps ?>"><?= $eps->NombreEps ?></option>'; <?php }?>
 											</select>
 										</div>
 										<div class="col-md-6 form-group">
@@ -299,25 +299,30 @@
 								<div class="col-md-1"></div>
 							</div>
 						</div>
-						<div class="modal-footer">
+					</div>
+					<div class="modal-footer">
+						<div id="btnsEditar">
 							<center>
 								<button type="reset" class="btn btn-danger btn-expand" style="background-color: #2A2A2A;"data-dismiss="modal">Cancelar</button>
 								<button type="submit" class="btn btn-info btn-expand" style="background-color: #2A2A2A;">Modificar persona</button>
 							</center>
 						</div>
-					</form>
-				</div>
+					</div>
+				</form>
 			</div>
 		</div>
+	</div>
 
-		<div class="modal fade bs-example-modal-lg" id="modalInformacion" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="myModalLabel"><center>Información de <span id="nombreCI"></span></center></h4>
-					</div>
-					<div class="modal-body">
+	<div class="modal fade bs-example-modal-lg" id="modalInformacion" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel"><center>Información de <span id="nombreCI"></span></center></h4>
+				</div>
+				<div class="modal-body">
+					<div style="width: 300px; height: 300px;" class="precarga" id="loadingIJ"></div>
+					<div id="listoIJ">
 						<div class="row">
 							<div class="col-md-1"></div>
 							<div class="col-md-10">
@@ -403,249 +408,241 @@
 							<div class="col-md-1"></div>
 						</div>
 					</div>
+				</div>
+				<div class="modal-footer">
+					<center>
+						<button type="button" class="btn btn-info btn-expand" style="background-color: #2A2A2A;"data-dismiss="modal">Cerrar</button>
+					</center>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade bs-example-modal-lg" id="modalPlanclase" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel"><center>Gestión de planes de clase<span name="nombrejugador"></span></center></h4>
+				</div>
+				<div class="modal-body">
+					<div style="width: 300px; height: 300px;" class="precarga" id="loadingPC"></div>
+					<div id="listoPC">
+						<div class="row">
+							<div class="col-md-1"></div>
+							<div class="col-md-10">
+								<div class="row">
+									<h4 style="text-align: center;">Información de planes de clase del jugador</h4>
+									<input type="hidden" id="idpersona" name="idpersona">
+									<input type="hidden" id="idpersonarol" name="idpersonarol">
+									<div class="row">
+										<div class="col-md-12 form-group">
+											<center><label class="control-label">Dni - Nombre completo</label></center>
+											<input class="form-control" readonly id="infojugador" name="infojugador" type="text" style="text-align: center;">
+										</div>
+										<div id="divNot"></div>
+									</div>
+								</div>
+								<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+									<div class="panel panel-default">
+										<div class="panel-heading" role="tab" id="headingOne">
+											<h4 class="panel-title">
+												<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+													Nuevo responsable
+												</a>
+											</h4>
+										</div>
+										<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+											<div class="panel-body">
+												<form id="formResponsable" name="formResponsable">
+													<input type="hidden" id="idjugadorR" name="idjugadorR">
+													<div class="row">
+														<div class="col-md-12 form-group">
+															<div class="col-md-6 form-group">
+
+																<select data-placeholder="Seleccione una cantidad de meses" name="idmeses"  id="idmeses" class="chosen-select mb-15" tabindex="-1" style="display: none;">
+																	<option value="1">1 Meses</option>
+																	<option value="2">2 Meses</option>
+																	<option value="3">3 Meses</option>
+																	<option value="4">4 Meses</option>
+																	<option value="5">5 Meses</option>
+																	<option value="6">6 Meses</option>
+																	<option value="7">7 Meses</option>
+																	<option value="8">8 Meses</option>
+																	<option value="9">9 Meses</option>
+																	<option value="10">10 Meses</option>
+																	<option value="11">11 Meses</option>
+																	<option value="12">12 Meses</option>
+																</select>
+															</div>
+														</div>
+														<div class="row">
+															<div class="form-group" style="margin-top: 10px;">
+																<center>
+																	<button type="submit" class="btn btn-warning btn-expand" style="background-color: #2A2A2A;">Asignar responsable a <span id="nombre"></span></button>
+																</center>
+															</div>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+										<div class="panel panel-default">
+											<div class="panel-heading" role="tab" id="headingTwo">
+												<h4 class="panel-title">
+													<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+														Historial de planes de clase<span name="nombrejugador"></span>
+													</a>
+												</h4>
+											</div>
+											<div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+												<div class="panel-body">
+													<div class="row">
+														<table id="tablaPlanClase" class="table table-hover">
+															<thead>
+																<tr>
+																	<th>-</th>
+																	<th style="color: red;">Fecha de Inicio</th>
+																	<th>Dias Restantes</th>
+																	<th style="text-align: center;">Acciones</th>
+																</tr>
+															</thead>
+															<tbody>
+
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-1"></div>
+						</div>
+					</div>
 					<div class="modal-footer">
 						<center>
-							<button type="button" class="btn btn-info btn-expand" style="background-color: #2A2A2A;"data-dismiss="modal">Cerrar</button>
+							<button type="reset" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
 						</center>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 
-		<div class="modal fade bs-example-modal-lg" id="modalPlanclase" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="myModalLabel"><center>Gestión de planes de clase - <span id="nombrejugador"></span></center></h4>
-					</div>
-					<div class="modal-body">
-						<div style="width: 140px; height: 120px" class="precarga" id="loadingPC">
-							<img src="assets/img/ajax-loader.gif">
-						</div>
-						<div id="listoPC">
+	<div class="modal fade bs-example-modal-lg" id="modalResponsable" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel"><center>Gestion de responsables - <span id="nombrejugador"></span></center></h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-1"></div>
+						<div class="col-md-10">
 							<div class="row">
-								<div class="col-md-1"></div>
-								<div class="col-md-10">
-									<div class="row">
-										<h4 style="text-align: center;">Información de planes de clase del jugador</h4>
-										<input type="hidden" id="idpersona" name="idpersona">
-										<input type="hidden" id="idpersonarol" name="idpersonarol">
-										<div class="row">
-											<div class="col-md-12 form-group">
-												<center><label class="control-label">Dni - Nombre completo</label></center>
-												<input class="form-control" readonly id="infojugador" name="infojugador" type="text" style="text-align: center;">
-											</div>
-											<div id="divNot"></div>
-										</div>
+								<h4 style="text-align: center;">Información de jugador</h4>
+								<input type="hidden" id="idusuarioU" name="idusuarioU">
+								<div class="row">
+									<div class="col-md-12 form-group">
+										<center><label class="control-label">Dni - Nombre completo</label></center>
+										<input class="form-control" readonly id="infojugador" name="infojugador" type="text" style="text-align: center;">
 									</div>
-									<div class="divider"></div>
-									<div class="row">
-										<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-											<div class="panel panel-default">
-												<div class="panel-heading" role="tab" id="headingOne">
-													<h4 class="panel-title">
-														<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-															Nuevo responsable
-														</a>
-													</h4>
-												</div>
-												<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-													<div class="panel-body">
-														<form id="formResponsable" name="formResponsable">
-															<input type="hidden" id="idjugadorR" name="idjugadorR">
-															<div class="row">
-																<div class="col-md-6 form-group">
-																	<select data-placeholder="Seleccione una jugador" name="slResponsable"  id="slResponsable" class="chosen-select mb-15" tabindex="-1" style="display: none;">
-																		<?php foreach ($this->mdl_persona->listarResponsableCombo() as $jugador) { ?>
-																			<option value="<?= $jugador->IdPersona ?>">Dni <?= $jugador->Documento.' - '.$jugador->Nombre.' '.$jugador->Apellidos ?></option>
-																			<?php } ?>
-																		</select>
-																	</div>
-																	<div class="col-md-6 form-group">
-																		<select data-placeholder="Seleccione un parentesco" name="slRRol"  id="slRRol" class="chosen-select mb-15" tabindex="-1" style="display: none;">
-																			<option value="Padre">Padre</option>
-																			<option value="Madre">Madre</option>
-																			<option value="Hermano">Hermano</option>
-																			<option value="Hermana">Hermana</option>
-																			<option value="Tio">Tio</option>
-																			<option value="Tia">Tia</option>
-																			<option value="Abuelo">Abuelo</option>
-																			<option value="Abuela">Abuela</option>
-																			<option value="Primo">Primo</option>
-																			<option value="Prima">Prima</option>
-																			<option value="Otro">Otro</option>
-																		</select>
-																	</div>
-																</div>
-																<div class="row">
-																	<div class="form-group" style="margin-top: 10px;">
-																		<center>
-																			<button type="submit" class="btn btn-warning btn-expand" style="background-color: #2A2A2A;">Asignar responsable a <span id="nombre"></span></button>
-																		</center>
-																	</div>
-																</div>
-															</form>
-														</div>
-													</div>
-												</div>
-												<div class="panel panel-default">
-													<div class="panel-heading" role="tab" id="headingTwo">
-														<h4 class="panel-title">
-															<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-																Consultar responsales de <span id="NombreJug"></span>
-															</a>
-														</h4>
-													</div>
-													<div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
-														<div class="panel-body">
-															<div class="row">
-																<table id="tablaResponsable" class="table table-hover">
-																	<thead>
-																		<tr>
-																			<th>-</th>
-																			<th style="color: red;">Documento</th>
-																			<th>Nombre completo</th>
-																			<th>Contacto</th>
-																			<th style="text-align: center;">Acciones</th>
-																		</tr>
-																	</thead>
-																	<tbody>
-
-																	</tbody>
-																</table>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-md-1"></div>
+									<div id="divNot"></div>
 								</div>
 							</div>
-							<div class="modal-footer">
-								<center>
-									<button type="reset" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-								</center>
+							<div class="divider"></div>
+							<div class="row">
+								<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+									<div class="panel panel-default">
+										<div class="panel-heading" role="tab" id="headingOne">
+											<h4 class="panel-title">
+												<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+													Nuevo responsable
+												</a>
+											</h4>
+										</div>
+										<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+											<div class="panel-body">
+												<form id="formResponsable" name="formResponsable">
+													<input type="hidden" id="idjugadorR" name="idjugadorR">
+													<div class="row">
+														<div class="col-md-6 form-group">
+															<select data-placeholder="Seleccione una jugador" name="slResponsable"  id="slResponsable" class="chosen-select mb-15" tabindex="-1" style="display: none;">
+																<?php foreach ($this->mdl_persona->listarResponsableCombo() as $jugador) { ?>
+																	<option value="<?= $jugador->IdPersona ?>">Dni <?= $jugador->Documento.' - '.$jugador->Nombre.' '.$jugador->Apellidos ?></option>
+																	<?php } ?>
+																</select>
+															</div>
+															<div class="col-md-6 form-group">
+																<select data-placeholder="Seleccione un parentesco" name="slRRol"  id="slRRol" class="chosen-select mb-15" tabindex="-1" style="display: none;">
+																	<option value="Padre">Padre</option>
+																	<option value="Madre">Madre</option>
+																	<option value="Hermano">Hermano</option>
+																	<option value="Hermana">Hermana</option>
+																	<option value="Tio">Tio</option>
+																	<option value="Tia">Tia</option>
+																	<option value="Abuelo">Abuelo</option>
+																	<option value="Abuela">Abuela</option>
+																	<option value="Primo">Primo</option>
+																	<option value="Prima">Prima</option>
+																	<option value="Otro">Otro</option>
+																</select>
+															</div>
+														</div>
+														<div class="row">
+															<div class="form-group" style="margin-top: 10px;">
+																<center>
+																	<button type="submit" class="btn btn-warning btn-expand" style="background-color: #2A2A2A;">Asignar responsable a <span id="nombre"></span></button>
+																</center>
+															</div>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+										<div class="panel panel-default">
+											<div class="panel-heading" role="tab" id="headingTwo">
+												<h4 class="panel-title">
+													<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+														Consultar responsales de <span id="NombreJug"></span>
+													</a>
+												</h4>
+											</div>
+											<div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+												<div class="panel-body">
+													<div class="row">
+														<table id="tablaResponsable" class="table table-hover">
+															<thead>
+																<tr>
+																	<th>-</th>
+																	<th style="color: red;">Documento</th>
+																	<th>Nombre completo</th>
+																	<th>Contacto</th>
+																	<th style="text-align: center;">Acciones</th>
+																</tr>
+															</thead>
+															<tbody>
+
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
+							<div class="col-md-1"></div>
 						</div>
+					</div>
+					<div class="modal-footer">
+						<center>
+							<button type="reset" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+						</center>
 					</div>
 				</div>
 			</div>
-
-			<div class="modal fade bs-example-modal-lg" id="modalResponsable" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-				<div class="modal-dialog modal-lg">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title" id="myModalLabel"><center>Gestion de responsables - <span id="nombrejugador"></span></center></h4>
-						</div>
-						<div class="modal-body">
-							<div class="row">
-								<div class="col-md-1"></div>
-								<div class="col-md-10">
-									<div class="row">
-										<h4 style="text-align: center;">Información de jugador</h4>
-										<input type="hidden" id="idusuarioU" name="idusuarioU">
-										<div class="row">
-											<div class="col-md-12 form-group">
-												<center><label class="control-label">Dni - Nombre completo</label></center>
-												<input class="form-control" readonly id="infojugador" name="infojugador" type="text" style="text-align: center;">
-											</div>
-											<div id="divNot"></div>
-										</div>
-									</div>
-									<div class="divider"></div>
-									<div class="row">
-										<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-											<div class="panel panel-default">
-												<div class="panel-heading" role="tab" id="headingOne">
-													<h4 class="panel-title">
-														<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-															Nuevo responsable
-														</a>
-													</h4>
-												</div>
-												<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-													<div class="panel-body">
-														<form id="formResponsable" name="formResponsable">
-															<input type="hidden" id="idjugadorR" name="idjugadorR">
-															<div class="row">
-																<div class="col-md-6 form-group">
-																	<select data-placeholder="Seleccione una jugador" name="slResponsable"  id="slResponsable" class="chosen-select mb-15" tabindex="-1" style="display: none;">
-																		<?php foreach ($this->mdl_persona->listarResponsableCombo() as $jugador) { ?>
-																			<option value="<?= $jugador->IdPersona ?>">Dni <?= $jugador->Documento.' - '.$jugador->Nombre.' '.$jugador->Apellidos ?></option>
-																			<?php } ?>
-																		</select>
-																	</div>
-																	<div class="col-md-6 form-group">
-																		<select data-placeholder="Seleccione un parentesco" name="slRRol"  id="slRRol" class="chosen-select mb-15" tabindex="-1" style="display: none;">
-																			<option value="Padre">Padre</option>
-																			<option value="Madre">Madre</option>
-																			<option value="Hermano">Hermano</option>
-																			<option value="Hermana">Hermana</option>
-																			<option value="Tio">Tio</option>
-																			<option value="Tia">Tia</option>
-																			<option value="Abuelo">Abuelo</option>
-																			<option value="Abuela">Abuela</option>
-																			<option value="Primo">Primo</option>
-																			<option value="Prima">Prima</option>
-																			<option value="Otro">Otro</option>
-																		</select>
-																	</div>
-																</div>
-																<div class="row">
-																	<div class="form-group" style="margin-top: 10px;">
-																		<center>
-																			<button type="submit" class="btn btn-warning btn-expand" style="background-color: #2A2A2A;">Asignar responsable a <span id="nombre"></span></button>
-																		</center>
-																	</div>
-																</div>
-															</form>
-														</div>
-													</div>
-												</div>
-												<div class="panel panel-default">
-													<div class="panel-heading" role="tab" id="headingTwo">
-														<h4 class="panel-title">
-															<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-																Consultar responsales de <span id="NombreJug"></span>
-															</a>
-														</h4>
-													</div>
-													<div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
-														<div class="panel-body">
-															<div class="row">
-																<table id="tablaResponsable" class="table table-hover">
-																	<thead>
-																		<tr>
-																			<th>-</th>
-																			<th style="color: red;">Documento</th>
-																			<th>Nombre completo</th>
-																			<th>Contacto</th>
-																			<th style="text-align: center;">Acciones</th>
-																		</tr>
-																	</thead>
-																	<tbody>
-
-																	</tbody>
-																</table>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-md-1"></div>
-								</div>
-							</div>
-							<div class="modal-footer">
-								<center>
-									<button type="reset" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-								</center>
-							</div>
-						</div>
-					</div>
-				</div>
+		</div>
