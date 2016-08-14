@@ -34,6 +34,11 @@ function listarPartidos(id)
 		dataType: 'JSON',
 		data: {id: id},
     	success:function(res){
+    		$('[id = "fecha"]').text(res.Horario);
+    		$('[id = "lugar"]').text(res.Lugar);
+    		$('[id = "etapa"]').text(res.NombreEtapa);
+    		$('[id = "cuadro"]').text(res.NombreCuadro);
+    		$('[id = "categoria"]').text(res.NombreCategoria);
     		$('[id = "jugador1"]').text(res.jugadoruno + ' ' + res.apeuno);
     		$('[id = "jugador2"]').text(res.jugadordos + ' ' + res.apedos);
     		$('[id = "idset1jug1"]').text(res.Set1Jug1);

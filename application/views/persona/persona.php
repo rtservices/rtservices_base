@@ -71,61 +71,57 @@
 				<h4 class="modal-title" id="myModalLabel"><center>Gestion de cuenta</center></h4>
 			</div>
 			<div class="modal-body">
-				<div style="width: 300px; height: 300px;" class="precarga" id="loadingCU"></div>
-				<div id="listoCU">
-					<div class="row">
-						<div class="col-md-1"></div>
-						<div class="col-md-10">
-							<div class="row">
-								<h4 style="text-align: center;">Modificar nombre de usuario</h4>
-								<form id="formUsuario">
-									<input type="hidden" id="idusuarioU" name="idusuarioU">
-									<div class="row">
-										<div class="col-md-12 form-group">
-											<label class="control-label">Nombre de usuario</label>
-											<input class="form-control" id="usuario" name="usuario" type="text" style="center">
-										</div>
+				<div class="row">
+					<div class="col-md-1"></div>
+					<div class="col-md-10">
+						<div class="row">
+							<h4 style="text-align: center;">Modificar nombre de usuario</h4>
+							<form id="formUsuario">
+								<input type="hidden" id="idusuarioU" name="idusuarioU">
+								<div class="row">
+									<div class="col-md-12 form-group">
+										<label class="control-label">Nombre de usuario</label>
+										<input class="form-control" id="usuario" name="usuario" type="text" style="center">
 									</div>
-									<div class="row">
-										<div class="form-group" style="margin-top: 10px;">
-											<center>
-												<button type="submit" class="btn btn-info btn-expand" style="background-color: #2A2A2A;">Modificar nombre de usuario</button>
-											</center>
-										</div>
+								</div>
+								<div class="row">
+									<div class="form-group" style="margin-top: 10px;">
+										<center>
+											<button type="submit" class="btn btn-info btn-expand" style="background-color: #2A2A2A;">Modificar nombre de usuario</button>
+										</center>
 									</div>
-								</form>
-							</div>
-							<div class="divider"></div>
-							<div class="row">
-								<h4 style="text-align: center;">Modificar contraseña</h4>
-								<form id="formClave">
-									<input type="hidden" id="idusuarioC" name="idusuarioC">
-									<div class="row">
-										<div class="col-md-12">
-											<center>Por seguridad <strong>Ninguna clave</strong> se muestra, si el usuario la ha olvidado, puede cambiarla manualmente ingresando en la opcion 'Olvidaste tu contraseña?' en el apartado login.</center>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-6 form-group">
-											<label class="control-label">Nueva contraseña</label>
-											<input class="form-control" id="clave" name="clave" type="password" style="center">
-										</div>
-										<div class="col-md-6 form-group">
-											<label class="control-label">Confirma nueva contraseña</label>
-											<input class="form-control" id="repiteclave" name="repiteclave" type="password" style="center">
-										</div>
-									</div>
-									<div class="row">
-										<div class="form-group" style="margin-top: 10px;">
-											<center>
-												<button type="submit" class="btn btn-warning btn-expand" style="background-color: #2A2A2A;">Modificar contraseña</button>
-											</center>
-										</div>
-									</div>
-								</form>
-							</div>
+								</div>
+							</form>
 						</div>
-						<div class="col-md-1"></div>
+						<div class="divider"></div>
+						<div class="row">
+							<h4 style="text-align: center;">Modificar contraseña</h4>
+							<form id="formClave">
+								<input type="hidden" id="idusuarioC" name="idusuarioC">
+								<div class="row">
+									<div class="col-md-12">
+										<center>Por seguridad <strong>Ninguna clave</strong> se muestra, si el usuario la ha olvidado, puede cambiarla manualmente ingresando en la opcion 'Olvidaste tu contraseña?' en el apartado login.</center>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 form-group">
+										<label class="control-label">Nueva contraseña</label>
+										<input class="form-control" id="clave" name="clave" type="password" style="center">
+									</div>
+									<div class="col-md-6 form-group">
+										<label class="control-label">Confirma nueva contraseña</label>
+										<input class="form-control" id="repiteclave" name="repiteclave" type="password" style="center">
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group" style="margin-top: 10px;">
+										<center>
+											<button type="submit" class="btn btn-warning btn-expand" style="background-color: #2A2A2A;">Modificar contraseña</button>
+										</center>
+									</div>
+								</div>
+							</form>
+						</div>
 					</div>
 					<div class="col-md-1"></div>
 				</div>

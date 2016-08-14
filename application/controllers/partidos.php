@@ -6,6 +6,7 @@ class Partidos extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('mdl_partidos');
+		$this->idPartidoActual_principal = ($this->input->get('partidos')) ? $this->input->get('partidos') : null;
 	}
 
 	public function index()
@@ -14,11 +15,37 @@ class Partidos extends CI_Controller {
 		{
 			redirect('login');
 		}
-		$data['titulo'] = 'Gestión de partidos';
-		$this->load->view('msp/cabecera', $data);
-		$this->load->view('partidos/partidos');
-		$this->load->view('msp/footer');
-		$this->load->view('partidos/add');
+		if (is_null($this->idPartidoActual_principal)) {
+			$data['cpersona'] = $this->mdl_login->cargarUsuario();
+			$data['titulo'] = 'Gestión de partidos';
+			$this->load->view('msp/cabecera', $data);
+			$this->load->view('partidos/partidos');
+			$this->load->view('msp/footer');
+			$this->load->view('partidos/add');
+		}
+		else
+		{
+			$data['IdPartidotennis'] = $this->idPartidoActual_principal;
+			$data['cpersona'] = $this->mdl_login->cargarUsuario();
+			foreach ($this->mdl_partidos->listarPartidos($this->idPartidoActual_principal) as $infopartido) 
+			{
+				// $data['titulo'] = 'Gestión de Partido - '; 
+				// $data['nombreClase'] = $infopartido->NombreClase . ' - ' . $infopartido->Dia; 
+				// $data['IdPartidotennis'] = $infopartido->IdPartidotennis;
+				// $data['nClase'] = $infopartido->;
+				// $data['eClase'] = $infopartido->Estado;
+				// $data['hInicio'] = $infopartido->HoraInicio;
+				// $data['hFin'] = $infopartido->HoraFinal;
+				// $data['cDia'] = $infopartido->Dia;
+				// $data['cInstructor'] = $infopartido->IdPersonaRol_det;
+				// break;
+			}
+			$this->load->view('msp/cabecera', $data);
+			$this->load->view('partidos/gesPartidos', $data);
+			$this->load->view('msp/footer');
+		}
+
+		
 	}
 
 	public function cargarTabla()
@@ -37,14 +64,13 @@ class Partidos extends CI_Controller {
 				$row[] = $parti->jugadoruno.' vs '.$parti->jugadordos.' '.$parti->apedos;
 				$row[] = '
 				<center>
-                <a class="btn btn-lg btn-primary btn-expand" style="background-color: #2A2A2A;"" title="resultados de los partidos" href="javascript:void()" onclick="listarPartidos('.$parti->IdPartidotennis.');"><i class="fa fa-eye"></i></a>
-                  <a class="btn btn-lg btn-primary btn-expand" style="background-color: #2A2A2A;"" title="resultados de los partidos" href="javascript:void()" onclick="cargarPartidos('.$parti->IdPartidotennis.');"><i class="fa fa-pencil"></i></a>
-
-                 <a class="btn btn-lg btn-danger btn-expand" style="background-color: #2A2A2A;"" title="eliminar partidos" href="javascript:void()" onclick="eliminarPartido('.$parti->IdPartidotennis.');"><i class="fa fa-archive"></i></a>
+					<a class="btn btn-lg btn-primary btn-expand" style="background-color: #2A2A2A;"" title="resultados de los partidos" href="javascript:void()" onclick="listarPartidos('.$parti->IdPartidotennis.');"><i class="fa fa-eye"></i></a>
+					<a class="btn btn-lg primary btn-expand" style="color:white; background-color: #2A2A2A;" href="partidos?partidos='.$parti->IdPartidotennis.'" title="Administrar partidos"><i class="fa fa-pencil"></i></a>
+					<a class="btn btn-lg btn-danger btn-expand" style="background-color: #2A2A2A;"" title="eliminar partidos" href="javascript:void()" onclick="eliminarPartido('.$parti->IdPartidotennis.');"><i class="fa fa-archive"></i></a>
 
 				</center>
 				';
-	
+
 				$data[] = $row;
 			}
 			$output = array("data" => $data);

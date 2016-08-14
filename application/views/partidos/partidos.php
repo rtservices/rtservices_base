@@ -41,6 +41,31 @@
 					<div class="col-md-1"></div>
 					<div class="col-md-10">
 						<div class="row">
+						    <div class="col-md-6" style="text-align: center;">
+								<label><h4>Fecha</h4></label>
+								<br>
+								<span id="fecha"></span>
+							</div>
+							 <div class="col-md-6" style="text-align: center;">
+								<label><h4>Lugar</h4></label>
+								<br>
+								<span id="lugar"></span>
+							</div>
+							 <div class="col-md-6" style="text-align: center;">
+								<label><h4>Etapa</h4></label>
+								<br>
+								<span id="etapa"></span>
+							</div>
+							<div class="col-md-6" style="text-align: center;">
+								<label><h4>Cuadro</h4></label>
+								<br>
+								<span id="cuadro"></span>
+							</div>
+							<div class="col-md-6" style="text-align: center;">
+								<label><h4>Categoria</h4></label>
+								<br>
+								<span id="categoria"></span>
+							</div>
 							<div class="col-md-6" style="text-align: center;">
 								<label><h4>JUGADOR1</h4></label>
 								<br>
@@ -144,7 +169,7 @@
 				</select>
 			</div>  
 			 <div class="col-md-6 form-group">
-			 <label class="control-label">Jugador Dos</label>
+			 <label class="control-label">Jugador uno</label>
 					<select id="jugador2E" name="jugador2E" class="chosen-select mb-15" tabindex="-1" style="display: none;">
 						<option value="" disabled >Seleccione un jugador</option>';
 							<?php foreach ($this->mdl_partidos->listarPersona() as $juga) { ?>

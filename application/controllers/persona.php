@@ -104,24 +104,20 @@ class Persona extends CI_Controller {
 							{
 								$cuenta = '<a class="btn btn-inverse btn-expand" href="javascript:void()" disabled="true" title="No puedes gestionar cuentas de otros usuarios."><i class="fa fa-key" style="color: #01B1E1"></i></a>';
 								$responsable = '<a class="btn btn-danger btn-expand" disabled style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Ni administradores ni instructores pueden tener responsables." ><i class="fa fa-users"></i></a>';
-								$planclase = '<a class="btn btn-danger btn-expand" disabled style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Ni administradores ni instructores pueden tener un plan de clases asociado." ><i class="fa fa-credit-card"></i></a>';
 							}
 							else if (in_array(2, $arrol) == true) 
 							{
 								$cuenta = '<a class="btn btn-inverse btn-expand" href="javascript:void()" disabled="true" title="No puedes gestionar cuentas de otros usuarios."><i class="fa fa-key" style="color: #01B1E1"></i></a>';
 								$responsable = '<a class="btn btn-danger btn-expand" disabled style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Ni administradores ni instructores pueden tener responsables." ><i class="fa fa-users"></i></a>';
-								$planclase = '<a class="btn btn-danger btn-expand" disabled style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Ni administradores ni instructores pueden tener un plan de clases asociado." ><i class="fa fa-credit-card"></i></a>';
 							}
 							else if(in_array(1, $arrol) == true)
 							{
 								$cuenta = '<a class="btn btn-inverse btn-expand" href="javascript:void()" disabled="true" title="No puedes gestionar cuentas de otros usuarios."><i class="fa fa-key" style="color: #01B1E1"></i></a>';
 								$responsable = '<a class="btn btn-danger btn-expand" disabled style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Ni administradores ni instructores pueden tener responsables." ><i class="fa fa-users"></i></a>';
-								$planclase = '<a class="btn btn-danger btn-expand" disabled style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Ni administradores ni instructores pueden tener un plan de clases asociado." ><i class="fa fa-credit-card"></i></a>';
 							}
 							else if (in_array(3, $arrol) == true) 
 							{
 								$responsable = '<a class="btn btn-success btn-expand" style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Gestionar responsables de '.$persona->Nombre.' '.$persona->Apellidos.'." onclick="listarResponsables('.$persona->IdPersona.');"><i class="fa fa-users"></i></a>';
-								$planclase = '<a class="btn btn-info btn-expand" style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Gestionar plan clase de '.$persona->Nombre.' '.$persona->Apellidos.'." onclick="listarPlanclase('.$persona->IdPersona.');"><i class="fa fa-credit-card"></i></a>';
 							}
 							else
 							{
@@ -156,7 +152,6 @@ class Persona extends CI_Controller {
 
 				if ($persona->IdPersona == 1) 
 				{
-					$planclase = '<a class="btn btn-danger btn-expand" disabled style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Ni administradores ni instructores pueden tener un plan de clases asociado." ><i class="fa fa-credit-card"></i></a>';
 					$eliminar = '<a class="btn btn-danger btn-expand" disabled style="color: #F13A3A; background-color: #2A2A2A" href="javascript:void()" title="Este Administrador no se puede inhabilitar." ><i class="fa fa-exchange"></i></a>';					
 					$responsable = '<a class="btn btn-danger btn-expand" disabled style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Ni administradores ni instructores pueden tener responsables." ><i class="fa fa-users"></i></a>';
 					$estadoA = 'disabled';
@@ -171,7 +166,6 @@ class Persona extends CI_Controller {
 				}
 				else if ($persona->IdPersona == $this->session->userdata('usuario_id')) 
 				{
-					$planclase = '<a class="btn btn-danger btn-expand" disabled style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Ni administradores ni instructores pueden tener un plan de clases asociado." ><i class="fa fa-credit-card"></i></a>';
 					$eliminar = '<a class="btn btn-danger btn-expand" disabled style="color: #F13A3A; background-color: #2A2A2A" href="javascript:void()" title="Este Administrador no se puede inhabilitar." ><i class="fa fa-exchange"></i></a>';					
 					$responsable = '<a class="btn btn-danger btn-expand" disabled style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Ni administradores ni instructores pueden tener responsables." ><i class="fa fa-users"></i></a>';
 					$estadoA = 'disabled';
@@ -204,8 +198,7 @@ class Persona extends CI_Controller {
 
 				}
 				else
-				{	
-					$planclase = '<a class="btn btn-info btn-expand" style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Gestionar plan clase de '.$persona->Nombre.' '.$persona->Apellidos.'." onclick="listarPlanclase('.$persona->IdPersona.');"><i class="fa fa-credit-card"></i></a>';	
+				{					
 					$eliminar = '<a class="btn btn-'.$estilo.' btn-expand" style="'.$color.'" href="javascript:void()" title="'.$accion.'" onclick="variarEstadoPersona('.$persona->IdPersona.');"><i class="fa fa-exchange"></i></a>';
 
 					if ($this->session->userdata('ssRol') == 'Administrador') //Sirve para validar que sea instructor o administrador
