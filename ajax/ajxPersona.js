@@ -91,8 +91,10 @@ function listarInformacion(id)
 {
 	NProgress.start();
 	$('#modalInformacion').modal('show');
-	$('#loadingIJ').show();
 	$('#listoIJ').hide();
+	$('#btnsEditar').hide();
+	$('#loadingIJ').show();
+	
 
 	$.ajax({
 		url: 'persona/listarPersona',
@@ -131,6 +133,7 @@ function listarInformacion(id)
 			setTimeout(function() {
 				$('#loadingIJ').hide();
 				$('#listoIJ').show();
+				$('#btnsEditar').show();
 			}, 2000);
 			
 			NProgress.done();
@@ -276,8 +279,9 @@ function variarEstadoPersona(id)
 function administrarCuenta(id,tipo)
 {
 	NProgress.start();
-	$('#formUsuario')[0].reset();
-	$('#formClave')[0].reset();
+	$('#modalCuenta').modal('show');
+	$('#loadingCU').show();
+	$('#listoCU').hide();
 	$.ajax({
 		url: 'persona/listarCuenta',
 		type: 'POST',
@@ -285,6 +289,9 @@ function administrarCuenta(id,tipo)
 		data: {id: id, tipo: tipo},
 		success:function(res)
 		{
+			$('#formUsuario')[0].reset();
+			$('#formClave')[0].reset();
+
 			if (res == "no")
 			{
 				sweetAlert("Oops...", "Ocurrio un error generando la cuenta de usuario.", "error");
@@ -295,7 +302,12 @@ function administrarCuenta(id,tipo)
 				$('[id = "idusuarioU"]').val(res.IdLogin);
 				$('[id = "idusuarioC"]').val(res.IdLogin);
 				$('[id = "usuario"]').val(res.Usuario);
-				$('#modalCuenta').modal('show');
+
+				setTimeout(function() {
+					$('#loadingCU').hide();
+					$('#listoCU').show();
+				}, 2000);
+				
 				NProgress.done();
 			}
 		}

@@ -100,8 +100,7 @@
                                 </span>
                             </a>
                             <ul class="dropdown-menu animated flipInX">
-                                <li class="dropdown-header">Cuenta</li>
-                                <li><a href="perfil"><i class="fa fa-user"></i>Perfil</a></li>
+                                <li class="dropdown-header">Sistema</li>
                                 <li class="divider"></li>
                                 <li><a href="login/salir"><i class="fa fa-sign-out"></i>Salir</a></li>
                             </ul>
@@ -114,7 +113,7 @@
         <aside id="sidebar-left" class="sidebar-circle">
             <div id="tour-8" class="sidebar-content">
                 <div class="media">
-                    <a class="pull-left has-notif avatar" href="perfil">
+                    <a class="pull-left has-notif avatar" href="persona">
                         <img src="assets/img/<?= $val->NombreRol ?>.jpg" alt="Perfil">
                     </a>
                     <div class="media-body">
