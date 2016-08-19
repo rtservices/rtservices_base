@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Mdl_eps extends CI_Model {
 
-	var $tabla = 'RtsEps';
+	var $tabla = 'rtseps';
 
 	public function __construct()
 	{

@@ -88,16 +88,16 @@
 					<div class="clearfix"></div>
 				</div>
 				<div class="panel-body no-padding" style="margin: 20px; font-size: 15px">
-					<form id="gEtapa" name="gEtapa">
-						<input type="hidden" id="idetapa" name="idetapa" value="<?= $idetapa ?>">
+					<form id="gJugadorEtapa" name="gJugadorEtapa">
+						<input type="hidden" id="idetapaS" name="idetapaS" value="<?= $idetapa ?>">
 						<div class="row">
 							<div class="col-md-2"></div>
 							<div class="col-md-8">
 								<div class="col-md-12 form-group">
 									<center><label class="control-label">Documento - Nombre completo </label></center>
-									<select id="estadoEtapa" name="estadoEtapa" class="chosen-select mb-16" value="<?= $eEtapa ?>">
+									<select id="jugador" name="jugador" class="chosen-select mb-16" value="<?= $eEtapa ?>">
 										<?php foreach ($selJugador as $valJugador){ ?>
-										<option value="<?= $valJugador->IdPersona ?>"><?= $valJugador->Documento ?> - <?= $valJugador->Nombre.' '.$valJugador->Apellidos ?></option>
+										<option value="<?= $valJugador->IdPersonaRol ?>"><?= $valJugador->Documento ?> - <?= $valJugador->Nombre.' '.$valJugador->Apellidos ?></option>
 										<?php } ?>
 									</select>
 								</div>

@@ -51,11 +51,6 @@ var BlankonDemo = function () {
                 // Create variable name selector file css
                 var themename = $(this).find('.hide').text();
 
-                // Add effect sound
-                if($('.page-sound').length){
-                    ion.sound.play("camera_flashing_2");
-                }
-
                 // Add attribut href css theme
                 $('link#theme').attr('href', adminCssPath+'/themes/'+themename+'.theme.css');
 
@@ -72,10 +67,6 @@ var BlankonDemo = function () {
             $('.navbar-color .theme').on('click',function(){
                 // Create variable name selector file css
                 var classname = $(this).find('.hide').text();
-                // Add effect sound
-                if($('.page-sound').length){
-                    ion.sound.play("camera_flashing_2");
-                }
                 // Add class navbar-color
                 $('.navbar-toolbar').attr('class', 'navbar navbar-toolbar navbar-'+classname);
                 // Set cookie theme name value to variable classname
@@ -90,10 +81,6 @@ var BlankonDemo = function () {
             $('.sidebar-color .theme').on('click',function(){
                 // Create variable name selector file css
                 var classname = $(this).find('.hide').text();
-                // Add effect sound
-                if($('.page-sound').length){
-                    ion.sound.play("camera_flashing_2");
-                }
                 // Check variant sidebar class
                 if($('#sidebar-left').hasClass('sidebar-box')){
                     $('#sidebar-left').attr('class','sidebar-box sidebar-'+classname);

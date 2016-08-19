@@ -2,7 +2,7 @@
 
 class Mdl_persona extends CI_Model {
 
-	public $tabla = 'RtsPersona_deb';
+	public $tabla = 'rtspersona_deb';
 
 	public function __construct()
 	{
@@ -25,7 +25,7 @@ class Mdl_persona extends CI_Model {
 	public function cargarRoles($id)
 	{
 		$this->db->select('*');
-		$this->db->from('RtsPersonaRol_det');
+		$this->db->from('rtspersonarol_det');
 		$this->db->where('IdPersona_deb', $id);
 		$res = $this->db->get()->result();
 
@@ -37,7 +37,7 @@ class Mdl_persona extends CI_Model {
 	public function listarEps()
 	{
 		$this->db->select('*');
-		$this->db->from('RtsEps');
+		$this->db->from('rtseps');
 		$this->db->where('Estado', 1);
 		$res = $this->db->get()->result();
 
@@ -75,7 +75,7 @@ class Mdl_persona extends CI_Model {
 	public function listarAllRol($idpersona)
 	{
 		$this->db->select('*');
-		$this->db->from('RtsPersonaRol_det');
+		$this->db->from('rtspersonarol_det');
 		$this->db->where('IdPersona_deb', $idpersona);
 		$this->db->where('Estado', 1);
 		$res = $this->db->get()->result();
@@ -87,8 +87,8 @@ class Mdl_persona extends CI_Model {
 
 	public function listarRol($idpersona,$rol)
 	{
-		$this->db->select('RtsPersonaRol_det.*');
-		$this->db->from('RtsPersonaRol_det');
+		$this->db->select('rtspersonarol_det.*');
+		$this->db->from('rtspersonarol_det');
 		$this->db->where('IdPersona_deb', $idpersona);
 		$this->db->where('IdRol', $rol);
 		$res = $this->db->get()->result();
@@ -101,11 +101,11 @@ class Mdl_persona extends CI_Model {
 	public function listarCuenta($id,$tipo)
 	{
 		$this->db->select('*');
-		$this->db->from('RtsLogin_deb');
-		$this->db->join('RtsPersonaRol_det', 'RtsLogin_deb.IdPersonaRol_det = RtsPersonaRol_det.IdPersonaRol', 'INNER');
-		$this->db->join('RtsPersona_deb', 'RtsPersonaRol_det.IdPersona_deb = RtsPersona_deb.IdPersona', 'INNER');
-		$this->db->where('RtsPersona_deb.IdPersona', $id);
-		$this->db->where('RtsPersonaRol_det.IdRol', $tipo);
+		$this->db->from('rtslogin_deb');
+		$this->db->join('rtspersona_deb','rtslogin_deb.IdPersona = rtspersona_deb.IdPersona','INNER');
+		$this->db->join('rtspersonarol_det','rtspersona_deb.IdPersona = rtspersonarol_det.IdPersona_deb','INNER');
+		$this->db->where('rtspersona_deb.IdPersona', $id);
+		$this->db->where('rtspersonarol_det.IdRol', $tipo);
 		$res = $this->db->get()->row();
 
 		return $res;
@@ -115,7 +115,7 @@ class Mdl_persona extends CI_Model {
 
 	public function registrarRol($data)
 	{
-		$res = $this->db->insert('RtsPersonaRol_det', $data);
+		$res = $this->db->insert('rtspersonarol_det', $data);
 		return $res;
 	}
 
@@ -123,9 +123,9 @@ class Mdl_persona extends CI_Model {
 
 	public function listarPersona($id)
 	{
-		$this->db->select('RtsPersona_deb.*,RtsEps.NombreEps, RtsEps.Telefono as TelefonoEps');
+		$this->db->select('rtspersona_deb.*,rtseps.NombreEps, rtseps.Telefono as TelefonoEps');
 		$this->db->from($this->tabla);
-		$this->db->join('RtsEps', 'RtsPersona_deb.IdEps = RtsEps.IdEps', 'INNER');
+		$this->db->join('rtseps', 'rtspersona_deb.IdEps = rtseps.IdEps', 'INNER');
 		$this->db->where('IdPersona', $id);
 		$res = $this->db->get();
 
@@ -136,11 +136,11 @@ class Mdl_persona extends CI_Model {
 
 	public function cargarResponsable($id)
 	{
-		$this->db->select('RtsPersona_deb.IdPersona, RtsResponsableJugador_det.IdResponsableJugador, RtsPersona_deb.Documento, RtsPersona_deb.Nombre, RtsPersona_deb.Apellidos, RtsPersona_deb.Celular, RtsPersona_deb.Telefono, RtsResponsableJugador_det.Estado');
+		$this->db->select('rtspersona_deb.IdPersona, RtsResponsableJugador_det.IdResponsableJugador, rtspersona_deb.Documento, rtspersona_deb.Nombre, rtspersona_deb.Apellidos, rtspersona_deb.Celular, rtspersona_deb.Telefono, RtsResponsableJugador_det.Estado');
 		$this->db->from('RtsResponsableJugador_det');
-		$this->db->join('RtsPersonaRol_det', 'RtsResponsableJugador_det.IdPersonaRol_det = RtsPersonaRol_det.IdPersonaRol', 'inner');
-		$this->db->join('RtsPersona_deb', 'RtsResponsableJugador_det.IdPersona_deb = RtsPersona_deb.IdPersona', 'inner');
-		$this->db->where('RtsPersonaRol_det.IdPersonaRol', $id);
+		$this->db->join('rtspersonarol_det', 'RtsResponsableJugador_det.IdPersonaRol_det = rtspersonarol_det.IdPersonaRol', 'inner');
+		$this->db->join('rtspersona_deb', 'RtsResponsableJugador_det.IdPersona_deb = rtspersona_deb.IdPersona', 'inner');
+		$this->db->where('rtspersonarol_det.IdPersonaRol', $id);
 
 		$res = $this->db->get()->result();
 		return $res;
@@ -150,11 +150,11 @@ class Mdl_persona extends CI_Model {
 
 	public function listarResponsables($id)
 	{
-		$this->db->select('RtsPersona_deb.Nombre, RtsPersona_deb.Apellidos, RtsPersona_deb.Documento, RtsPersonaRol_det.IdPersonaRol');
+		$this->db->select('rtspersona_deb.Nombre, rtspersona_deb.Apellidos, rtspersona_deb.Documento, rtspersonarol_det.IdPersonaRol');
 		$this->db->from($this->tabla);
-		$this->db->join('RtsPersonaRol_det', 'RtsPersona_deb.IdPersona = RtsPersonaRol_det.IdPersona_deb', 'inner');
-		$this->db->where('RtsPersona_deb.IdPersona', $id);
-		$this->db->where('RtsPersonaRol_det.IdRol', 3);
+		$this->db->join('rtspersonarol_det', 'rtspersona_deb.IdPersona = rtspersonarol_det.IdPersona_deb', 'inner');
+		$this->db->where('rtspersona_deb.IdPersona', $id);
+		$this->db->where('rtspersonarol_det.IdRol', 3);
 		$res = $this->db->get()->row();
 
 		return $res;
@@ -165,8 +165,22 @@ class Mdl_persona extends CI_Model {
 	public function listarResponsableCombo()
 	{
 		$this->db->select('*');
-		$this->db->from('RtsPersona_deb');
+		$this->db->from('rtspersona_deb');
 		$this->db->where('Estado', 1);
+		$res = $this->db->get()->result();
+
+		return $res;
+	}
+
+	// Listar persona asociada a la tabla personarol
+
+	public function listarPersona_Rol($id)
+	{
+		$this->db->select('rtspersona_deb.*,rtseps.NombreEps, rtseps.Telefono as TelefonoEps, IdPersonaRol, IdRol');
+		$this->db->from($this->tabla);
+		$this->db->join('rtseps', 'rtspersona_deb.IdEps = rtseps.IdEps', 'INNER');
+		$this->db->join('rtspersonarol_det', 'rtspersona_deb.IdPersona = rtspersonarol_det.IdPersona_deb', 'INNER');
+		$this->db->where('IdPersona', $id);
 		$res = $this->db->get()->result();
 
 		return $res;
@@ -177,9 +191,9 @@ class Mdl_persona extends CI_Model {
 	public function listarIdJugador($id)
 	{
 		$this->db->select('*');
-		$this->db->from('RtsPersona_deb');
-		$this->db->join('RtsPersonaRol_det', 'RtsPersona_deb.IdPersona = RtsPersonaRol_det.IdPersona_deb', 'INNER');
-		$this->db->where('RtsPersonaRol_det.IdPersonaRol', $id);
+		$this->db->from('rtspersona_deb');
+		$this->db->join('rtspersonarol_det', 'rtspersona_deb.IdPersona = rtspersonarol_det.IdPersona_deb', 'INNER');
+		$this->db->where('rtspersonarol_det.IdPersonaRol', $id);
 		$res = $this->db->get();
 
 		return $res;
@@ -212,7 +226,7 @@ class Mdl_persona extends CI_Model {
 	public function actualizarRolInactivo($id,$data)
 	{
 		$this->db->where('IdPersona_deb', $id);
-		$res = $this->db->update('RtsPersonaRol_det', $data);
+		$res = $this->db->update('rtspersonarol_det', $data);
 
 		return $res;
 	}
@@ -222,7 +236,7 @@ class Mdl_persona extends CI_Model {
 	public function actualizarRol($id,$data)
 	{
 		$this->db->where('IdPersonaRol', $id);
-		$res = $this->db->update('RtsPersonaRol_det', $data);
+		$res = $this->db->update('rtspersonarol_det', $data);
 
 		return $res;
 	}
@@ -232,7 +246,7 @@ class Mdl_persona extends CI_Model {
 	public function actualizarUsuario($id,$data)
 	{
 		$this->db->where('IdLogin', $id);
-		$res = $this->db->update('RtsLogin_deb', $data);
+		$res = $this->db->update('rtslogin_deb', $data);
 
 		return $res;
 	}
@@ -241,7 +255,7 @@ class Mdl_persona extends CI_Model {
 
 	public function ultimoAdmin()
 	{
-		$this->db->from('RtsPersonaRol_det');
+		$this->db->from('rtspersonarol_det');
 		$res = $this->db->insert_id();
 
 		return $res;
@@ -249,8 +263,27 @@ class Mdl_persona extends CI_Model {
 
 	public function ultimoInst()
 	{
-		$this->db->from('RtsPersonaRol_det');
+		$this->db->from('rtspersonarol_det');
 		$res = $this->db->insert_id();
+
+		return $res;
+	}
+
+	// Registro de cuentas
+
+	public function registrarCuenta($data)
+	{
+		$res = $this->db->insert('rtslogin_deb', $data);
+
+		return $res;
+	}
+
+	// Actualizacion de cuentas
+
+	public function actualizarCuenta($data, $id)
+	{
+		$this->db->where('IdLogin', $id);
+		$res = $this->db->update('rtslogin_deb', $data);
 
 		return $res;
 	}
@@ -259,14 +292,14 @@ class Mdl_persona extends CI_Model {
 
 	public function registrarCuentaA($data)
 	{
-		$res = $this->db->insert('RtsLogin_deb', $data);
+		$res = $this->db->insert('rtslogin_deb', $data);
 
 		return $res;
 	}
 
 	public function registrarCuentaI($data)
 	{
-		$res = $this->db->insert('RtsLogin_deb', $data);
+		$res = $this->db->insert('rtslogin_deb', $data);
 		
 		return $res;
 	}
@@ -276,10 +309,10 @@ class Mdl_persona extends CI_Model {
 	public function getValidarIdPersonaRol($id, $tipo)
 	{
 		$this->db->select('IdPersonaRol');
-		$this->db->from('RtsPersona_deb');
-		$this->db->join('RtsPersonaRol_det', 'RtsPersona_deb.IdPersona = RtsPersonaRol_det.IdPersona_deb', 'INNER');
-		$this->db->where('RtsPersonaRol_det.IdPersona_deb', $id);
-		$this->db->where('RtsPersonaRol_det.IdRol', $tipo);
+		$this->db->from('rtspersona_deb');
+		$this->db->join('rtspersonarol_det', 'rtspersona_deb.IdPersona = rtspersonarol_det.IdPersona_deb', 'INNER');
+		$this->db->where('rtspersonarol_det.IdPersona_deb', $id);
+		$this->db->where('rtspersonarol_det.IdRol', $tipo);
 		$res = $this->db->get()->row();
 
 		return $res;
@@ -288,16 +321,50 @@ class Mdl_persona extends CI_Model {
 	public function getVerificarCuentas($id, $tipo)
 	{
 		$this->db->select('IdLogin');
-		$this->db->from('RtsPersona_deb');
-		$this->db->join('RtsPersonaRol_det', 'RtsPersona_deb.IdPersona = RtsPersonaRol_det.IdPersona_deb', 'INNER');
-		$this->db->join('RtsLogin_deb', 'RtsPersonaRol_det.IdPersonaRol = RtsLogin_deb.IdPersonaRol_det', 'INNER');
-		$this->db->where('RtsPersona_deb.IdPersona', $id);
-		$this->db->where('RtsPersonaRol_det.IdRol', $tipo);
+		$this->db->from('rtslogin_deb');
+		$this->db->join('rtspersona_deb', 'rtslogin_deb.IdPersona_deb = rtspersona_deb.IdPersona', 'INNER');
+		$this->db->join('rtspersonarol_det', 'rtspersona_deb.IdPersona = rtspersonarol_det.IdPersona_deb', 'INNER');
+		$this->db->where('rtspersona_deb.IdPersona', $id);
+		$this->db->where('rtspersonarol_det.IdRol', $tipo);
 		$res = $this->db->get()->result();
 
 		return $res;
 	}
 
+	// Retorna el correo de la persona
+	public function listarPersona_notificación($id)
+	{
+		$this->db->select('rtspersona_deb.*');
+		$this->db->from($this->tabla);
+		$this->db->join('rtslogin_deb', 'rtspersona_deb.IdPersona = rtslogin_deb.IdPersona', 'INNER');
+		$this->db->where('rtslogin_deb.IdLogin', $id);
+		$res = $this->db->get()->row();
+
+		return $res;
+	}
+
+	// Retorna información referente a los jugadores en los planes de clase
+	public function listarJugador_planclase($id)
+	{
+		$this->db->select("Documento, IdPersona, IdPersonaRol, Nombre, Apellidos");
+		$this->db->from('rtspersona_deb');
+		$this->db->join('rtspersonarol_det', 'rtspersona_deb.IdPersona = rtspersonarol_det.IdPersona_deb', 'INNER');
+		$this->db->where('IdRol', 3);
+		$this->db->where('IdPersona', $id);
+		$res = $this->db->get()->row();
+
+		return $res;
+	}
+
+	public function tablaJugador_planclase($id)
+	{
+		$this->db->select('IdPlanClase, FechaInicio, DiasRestantes, Estado');
+		$this->db->from('rtsplanclase_deb');
+		$this->db->where('IdPersonaRol_det', $id);
+		$res = $this->db->get()->result();
+
+		return $res;
+	}
 
 }
 

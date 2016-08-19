@@ -64,6 +64,7 @@ $(document).ready(function() {
 
 	$('#formsetpass').submit(function(event) {
 		event.preventDefault();
+
 		if ($('#formsetpass').validate().form() != false)
 		{
 			NProgress.start();
@@ -81,9 +82,11 @@ $(document).ready(function() {
 							type: "success",     
 							confirmButtonText: "Perfecto, ir al login",   
 							closeOnConfirm: false 
-						}, function(){   
+						}).then(function() { 
 							location.href = 'login';
 						});
+
+						NProgress.done();
 
 					}
 					else if(res == 'noIgual')

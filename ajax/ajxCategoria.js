@@ -31,7 +31,7 @@ function variarEstadoCategoria(id)
 		confirmButtonColor: "#DD6B55",
 		confirmButtonText: "Si, cámbialo!",
 		closeOnConfirm: false
-	}, function() {
+	}).then(function() {
 		NProgress.start();
 		$.ajax({
 			url: "categoria/variarEstadoCategoria",
@@ -113,6 +113,7 @@ $('#editar').submit(function(event) {
 			data: $('#editar').serialize(),
 			success:function(res){
 				actualizar();
+				$('#editarC').modal('hide');
 				if (res=='ok') 
 				{
 					NProgress.done();

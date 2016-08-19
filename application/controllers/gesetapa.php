@@ -76,7 +76,10 @@ class Gesetapa extends CI_Controller {
 				$row[]= ($infoEtapa->Genero == 'H') ? $infoEtapa->NombreCategoria.' masculina' : $infoEtapa->NombreCategoria.' femenina' ;
 				
 				
-				$row[] = '<center><a class="btn btn-lg btn-'.$estilo.' btn-expand" style="background-color: #2A2A2A;"" title="'.$titulo.'" href="javascript:void()" onclick="cambiarEstado('.$infoEtapa->IdEtapaJugador.')"><i class="fa fa-exchange"></i></a></center>';
+				$row[] = '<center>
+				<a class="btn btn-lg btn-'.$estilo.' btn-expand" style="background-color: #2A2A2A;"" title="'.$titulo.'" href="javascript:void()" onclick="cambiarEstado('.$infoEtapa->IdEtapaJugador.')"><i class="fa fa-exchange"></i></a>
+				<a class="btn btn-lg btn-danger btn-expand" style="background-color: #2A2A2A;"" title="'.$titulo.'" href="javascript:void()" onclick=" eliminarInscripcionJugador('.$infoEtapa->IdEtapaJugador.')"><i class="fa fa-archive"></i></a>
+				</center>';
 				$data[] = $row;
 			}
 
@@ -143,6 +146,49 @@ class Gesetapa extends CI_Controller {
 			else
 			{
 				echo "no";
+			}
+		}
+		else
+		{
+			redirect('error404');
+		}
+	}
+
+//Funcion inscripcion a la etapa al jugador
+    public function addJugadorTorneo()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$idJugadorEtapa = $this->input->post('jugador');
+			$idEtapa = $this->input->post('idetapaS');
+			$arrJugadores = array();
+			foreach ($this->mdl_torneo->listarInscritosEtapa($idEtapa) as $idJUG)
+			{
+				$arrJugadores[] = $idJUG->IdEtapaJugador;//Aqui no se que ponerle en la clase se llama el idplanclase aqui no se cual
+			}
+			
+			if (!in_array($idJugadorEtapa, $arrJugadores))
+			{
+				$data = array(	
+					'Estado' => 1,
+					'IdEtapa_deb' =>  $idEtapa,
+					'IdPersonaRol_det' => $idJugadorEtapa,
+					'IdCategoria' => 1
+					
+					);
+//No esta validando si hay un jugador ya registrado la verda no se como hacerlo
+				if ($this->mdl_torneo->inscribirPlanJugadorTorneo($data))//Aqui envio a una funcion que cree en el modelo
+				{
+					echo "ok";
+				}
+				else
+				{
+					echo "no";
+				}
+			}
+			else
+			{
+				echo "yaEsta";
 			}
 		}
 		else

@@ -12,13 +12,13 @@
 		</ol>
 	</div>
 </div>
-
+<!--Boton registrar-->
 <div class="body-content animated fadeIn">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="panel rounded shadow no-overflow">
 				<center>
-					<div class="panel-heading btn btn-success btn-push" style="margin: 20px" onclick="nuevaPersona()">
+					<div class="panel-heading btn btn-success btn-push" style="margin: 20px" onclick="nuevoTorneo()">
 						<h3 class="panel-title">Registrar nuevo torneo</h3>
 						<div class="clearfix"></div>
 					</div>
@@ -27,6 +27,7 @@
 		</div>
 	</div>
 
+<!--Tabla Torneo-->
 	<div class="row">
 		<div class="col-md-12">
 			<div class="panel rounded shadow no-overflow">
@@ -38,80 +39,63 @@
 						<button class="btn btn-sm" data-container="body" data-action="collapse" data-toggle="tooltip" data-placement="top" data-title="Collapse" data-original-title="" title=""><i class="fa fa-angle-up"></i></button>
 					</div>
 					<div class="clearfix"></div>
-				</div>
-				<div class="panel-body no-padding" style="margin: 20px; font-size: 15px" >
-					<div class="table-responsive">
-						<table id="tablaTorneo" class="table table-hover">
-							<thead>
-								<tr>
-									<td>-</td>
-									<td style="color: red;">Nombre del torneo</td>
-									<td>Fecha</td>
-									<td style="text-align: center;">Etapas</td>
-									<td style="text-align: center;">Acciones</td>
-								</tr>
-							</thead>
-							<tbody>
+			</div>
 
-							</tbody>
-						</table>
-					</div>
+			<div class="panel-body no-padding" style="margin: 20px; font-size: 15px" >
+				<div class="table-responsive">
+					<table id="tablaTorneo" class="table table-hover">
+						<thead>
+							<tr>
+								<td>-</td>
+								<td style="color: red;">Nombre del torneo</td>
+								<td>Fecha</td>
+								<td style="text-align: center;">Etapas</td>
+								<td style="text-align: center;">Acciones</td>
+							</tr>
+						</thead>
+						<tbody>
+
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+</div>
+
+
+<!--Registrar Torneo-->
 
 <div class="modal fade bs-example-modal-lg" id="modalRegistro" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
-			<form id="cuenta" name="cuenta">
+			<form id="registroR" name="registroR">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel"><center>Gestion de cuenta</center></h4>
+					<h4 class="modal-title" id="myModalLabel"><center>Gestion de torneo</center></h4>
 				</div>
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-md-1"></div>
 						<div class="col-md-10">
-							<form id="">
 								<div class="col-md-12 form-input">
-									<label class="control-label">Nombre de usuario</label>
-									<input class="form-control" id="usuario" name="usuario" type="text" style="center">
+									<center><label class="control-label">Nombre del torneo</label></center>
+									<input class="form-control" id="torneo" name="torneo" type="text">
 								</div>
-								<div class="divider"></div>
-								<div class="form-group">
-									<center>
-										<button type="reset" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-										<button type="button" class="btn btn-success" style="background-color: #81B71A">Registrar usuario</button>
-									</center>
-								</div>
-							</form>
-							<div class="col-md-6 form-input">
-								<label class="control-label">Contraseña</label>
-								<input class="form-control" name="documento" type="text" style="center">
-							</div>
-							<div class="col-md-6 form-input">
-								<label class="control-label">Confirme </label>
-								<input class="form-control" id="nombre" name="nombre" type="text">
-							</div>
-							
-							<div class="col-md-6 form-input">
-								<label class="control-label">Apellidos</label>
-								<input class="form-control" id="apellido" name="apellido" type="text">
-							</div>
-							<div class="col-md-6 form-input">
-								<label class="control-label"></label>
-								<input class="form-control" id="nombre" name="nombre" type="text">
-							</div>
+									<center><label class="control-label">Fecha inicio</label></center>
+										<input type="date" id="fechainicioR"  name="fechainicioR"  class="form-control">
+									<center><label class="control-label">Fecha final</label></center>	
+										<center><input type="date" id="fechafinalR" name="fechafinalR"  class="form-control"></center>
+		
 						</div>
 						<div class="col-md-1"></div>
 					</div>
 				</div>
 				<div class="modal-footer">
 					<center>
-						<button type="reset" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-						<button type="button" class="btn btn-success" style="background-color: #81B71A">Registrar usuario</button>
+						<button type="reset" class="btn btn-danger" data-dismiss="modal" style="color:white; background-color: #2A2A2A;">Cancelar</button>
+						<button type="submit" class="btn btn-success" style="color:white; background-color: #2A2A2A;">Registrar torneo</button>
 					</center>
 				</div>
 			</form>
@@ -119,6 +103,50 @@
 	</div>
 </div>
 
+
+<!--Editar-->
+<div class="modal fade bs-example-modal-lg" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<form id="editarT" name="editarT">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel"><center>Gestion de torneo</center></h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-1"></div>
+						<div class="col-md-10">
+						<div>
+							<input id="idtorneoE" name="idtorneoE" type="hidden">
+						</div>
+								<div class="col-md-12 form-input">
+									<center><label class="control-label">Nombre del torneo</label></center>
+									<input class="form-control" id="torneoE" name="torneoE" type="text">
+								</div>
+									<center><label class="control-label">Fecha inicio</label></center>
+										<input type="date" id="fechainicioE"  name="fechainicioE"  class="form-control">
+									<center><label class="control-label">Fecha final</label></center>	
+										<center><input type="date" id="fechafinalE" name="fechafinalE"  class="form-control"></center>
+						</div>
+						<div class="col-md-1"></div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<center>
+						<button type="reset" class="btn btn-danger" data-dismiss="modal" style="color:white; background-color: #2A2A2A;">Cancelar</button>
+						<button type="submit" class="btn btn-success" style="color:white; background-color: #2A2A2A;">Modificar torneo</button>
+					</center>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+
+
+<!--Registrar etapa-->
 <div class="modal fade bs-example-modal-lg" id="modalEtapa" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">

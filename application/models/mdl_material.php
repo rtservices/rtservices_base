@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Mdl_material extends CI_Model {
 
-public $tabla = 'RtsMaterial';
+public $tabla = 'rtsmaterial';
 	
 	public function __construct()
 	{

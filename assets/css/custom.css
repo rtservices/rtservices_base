@@ -57,3 +57,10 @@
 	line-height: 1.428571429;
 	border-radius: 15px;
 }
+
+/* Esto es para el loader */
+
+.precarga {
+    background:transparent url(../img/ajax-loader.gif) center no-repeat;
+    margin: 0 auto;
+ }

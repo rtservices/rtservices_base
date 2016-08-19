@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Mdl_categoria extends CI_Model {
 
-	public $tabla = 'RtsCategoria';
+	public $tabla = 'rtscategoria';
 	
 	public function __construct()
 	{

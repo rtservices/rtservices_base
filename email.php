@@ -15,6 +15,6 @@
 				<center><a href='http://localhost:91/rtservicesapp/recpass?idpl=".$idLogin."&token=".$tokengen."' target='_blank'><button class='btn btn-success'>Ir a arreglar mi cuenta.</button></a></center>
 			</div>
 		</div>
-
+dasda
 </body>
 </html>

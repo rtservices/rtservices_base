@@ -58,7 +58,7 @@ function eliminarInscripcionClase(id)
 		confirmButtonColor: "#DD6B55",
 		confirmButtonText: "Si, eliminalo!",
 		closeOnConfirm: false
-	}, function() {
+	}).then(function() {
 		$.ajax({
 			url: "clase/eliminarInscripcionClase/" + id,
 			type: "GET",

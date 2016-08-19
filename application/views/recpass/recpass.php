@@ -23,7 +23,7 @@
     <link href="assets/css/default.theme.css" rel="stylesheet" id="theme">
     <link href="assets/css/sign.css" rel="stylesheet">
     <link href="assets/css/custom.css" rel="stylesheet">
-    <link href="assets/swal/sweetalert.css" rel="stylesheet">
+    <link href="assets/swal/sweetalert2.min.css" rel="stylesheet">
     <link href="assets/nprogress/nprogress.css" rel="stylesheet">
 </head>
 <body>
@@ -59,11 +59,10 @@
     <script src="assets/js/jquery.cookie.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/jquery.easing.1.3.min.js"></script>
-    <script src="assets/ionsound/ion.sound.js"></script>
     <script src="assets/js/retina.min.js"></script>
     <script src="assets/js/jquery.validate.min.js"></script>
     <script src="assets/js/blankon.sign.js"></script>
-    <script src="assets/swal/sweetalert.min.js"></script>
+    <script src="assets/swal/sweetalert2.min.js"></script>
     <script src="ajax/ajxLogin.js"></script>
     <script src="assets/nprogress/nprogress.js"></script>
 </body>

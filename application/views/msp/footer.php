@@ -18,9 +18,8 @@
 <script src="assets/js/jquery.nicescroll.min.js"></script>
 <script src="assets/js/chosen.jquery.min.js"></script>
 <script src="assets/js/index.js"></script>
-<script src="assets/swal/sweetalert.min.js"></script>
+<script src="assets/swal/sweetalert2.min.js"></script>
 <script src="assets/js/jquery.easing.1.3.min.js"></script>
-<script src="assets/ionsound/ion.sound.js"></script>
 <script src="assets/js/bootbox.js"></script>
 <script src="assets/js/retina.min.js"></script>
 <script src="assets/js/apps.js"></script>

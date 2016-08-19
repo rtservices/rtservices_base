@@ -22,9 +22,41 @@ function nuevaPersona()
 	NProgress.done();
 }
 
+function listarPlanclase(id)
+{
+	NProgress.start();
+	$('#modalPlanclase').modal('show');
+	$('#listoPC').hide();
+	$('#loadingPC').show();
+
+	setTimeout(function() {
+		$.ajax({
+			url: 'persona/listarPlanclase',
+			type: 'POST',
+			dataType: 'JSON',
+			data: {id: id},
+			success:function(res)
+			{
+				$('[id = "idpersona"]').val(res.IdPersona);
+				$('[id = "idpersonarol"]').val(res.IdPersonaRol);
+				$('[name = "nombrejugador"]').text(' - ' + res.Nombre + ' ' + res.Apellidos);
+				$('[id = "infojugador"]').val(res.Documento + ' - ' + res.Nombre + ' ' + res.Apellidos);
+				$('#loadingPC').hide();
+				$('#listoPC').show();
+				$('#tablaPlanClase').DataTable({ "ajax": "persona/tablaPlanClase/" + res.IdPersonaRol, destroy: true });
+				NProgress.done();
+			}
+		});
+	}, 2000);
+}
+
 function listarPersona(id)
 {
 	NProgress.start();
+	$('#modalEditar').modal('show');
+	$('#loadingEP').show();
+	$('#listoEP').hide();
+
 	$('#editar')[0].reset();
 	$.ajax({
 		url: 'persona/listarPersona',
@@ -33,21 +65,24 @@ function listarPersona(id)
 		data: {id: id},
 		success:function(res)
 		{
-			$('#modalEditar').modal('show');
-			setTimeout(function(){
+			$('[id = "idpersona"]').val(res.IdPersona);
+			$('[id = "documentoM"]').val(res.Documento);
+			$('[id = "generoM"]').val(res.Genero);
+			$('[id = "nombreM"]').val(res.Nombre);
+			$('[id = "apellidosM"]').val(res.Apellidos);
+			$('[id = "correoM"]').val(res.Correo);
+			$('[id = "direccionM"]').val(res.DireccionResidencia);
+			$('[id = "telefonoM"]').val(res.Telefono);
+			$('[id = "celularM"]').val(res.Celular);
+			$('[id = "fnacimientoM"]').val(res.FechaNacimiento);
+			$('[id = "epsM"]').val(res.IdEps);
 
-				$('[id = "documentoM"]').val(res.Documento);
-				$('[id = "generoM"]').val(res.Genero);
-				$('[id = "nombreM"]').val(res.Nombre);
-				$('[id = "apellidosM"]').val(res.Apellidos);
-				$('[id = "correoM"]').val(res.Correo);
-				$('[id = "direccionM"]').val(res.DireccionResidencia);
-				$('[id = "telefonoM"]').val(res.Telefono);
-				$('[id = "celularM"]').val(res.Celular);
-				$('[id = "fnacimientoM"]').val(res.FechaNacimiento);
-				$('[id = "epsM"]').val(res.IdEps);
-				NProgress.done();
-			}, 500);
+			setTimeout(function() {
+				$('#loadingEP').hide();
+				$('#listoEP').show();
+			}, 2000);
+			
+			NProgress.done();
 		}
 	});	
 }
@@ -55,6 +90,12 @@ function listarPersona(id)
 function listarInformacion(id)
 {
 	NProgress.start();
+	$('#modalInformacion').modal('show');
+	$('#listoIJ').hide();
+	$('#btnsEditar').hide();
+	$('#loadingIJ').show();
+	
+
 	$.ajax({
 		url: 'persona/listarPersona',
 		type: 'POST',
@@ -88,8 +129,13 @@ function listarInformacion(id)
 			$('[id = "telefonoI"]').text(res.Telefono);
 			$('[id = "epsI"]').text(res.NombreEps + ' - Telefono: ' + res.TelefonoEps);
 			$('[id = "fechaI"]').text(res.FechaIngreso);
+
+			setTimeout(function() {
+				$('#loadingIJ').hide();
+				$('#listoIJ').show();
+				$('#btnsEditar').show();
+			}, 2000);
 			
-			$('#modalInformacion').modal('show');
 			NProgress.done();
 		}
 	});	
@@ -206,8 +252,7 @@ function variarEstadoPersona(id)
 		showCancelButton: true,
 		confirmButtonColor: "#DD6B55",
 		confirmButtonText: "Si, cámbialo!",
-		closeOnConfirm: false
-	}, function() {
+	}).then(function() {
 		NProgress.start();
 		$.ajax({
 			url: "persona/variarEstadoPersona",
@@ -228,14 +273,15 @@ function variarEstadoPersona(id)
 				}
 			}
 		});
-	});
+	})
 }
 
 function administrarCuenta(id,tipo)
 {
 	NProgress.start();
-	$('#formUsuario')[0].reset();
-	$('#formClave')[0].reset();
+	$('#modalCuenta').modal('show');
+	$('#loadingCU').show();
+	$('#listoCU').hide();
 	$.ajax({
 		url: 'persona/listarCuenta',
 		type: 'POST',
@@ -243,12 +289,27 @@ function administrarCuenta(id,tipo)
 		data: {id: id, tipo: tipo},
 		success:function(res)
 		{
-			// $('[id = "idusuarioU"]').val(res.IdLogin);
-			// $('[id = "idusuarioC"]').val(res.IdLogin);
-			// $('[id = "usuario"]').val(res.Usuario);
-			// $('#modalCuenta').modal('show');
-			alert(res);
-			NProgress.done();
+			$('#formUsuario')[0].reset();
+			$('#formClave')[0].reset();
+
+			if (res == "no")
+			{
+				sweetAlert("Oops...", "Ocurrio un error generando la cuenta de usuario.", "error");
+				NProgress.done();
+			}
+			else
+			{
+				$('[id = "idusuarioU"]').val(res.IdLogin);
+				$('[id = "idusuarioC"]').val(res.IdLogin);
+				$('[id = "usuario"]').val(res.Usuario);
+
+				setTimeout(function() {
+					$('#loadingCU').hide();
+					$('#listoCU').show();
+				}, 2000);
+				
+				NProgress.done();
+			}
 		}
 	});	
 }
@@ -351,7 +412,7 @@ $('#editar').submit(function(event) {
 			success:function(res)
 			{
 				actualizar();
-				$('#modalRegistro').modal('hide');
+				$('#modalEditar').modal('hide');
 				if (res == 'ok') 
 				{
 					NProgress.done();

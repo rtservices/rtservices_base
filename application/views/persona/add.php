@@ -21,7 +21,7 @@
 				},
 				apellidos:{
 					required:true,
-					minlength:5,
+					minlength:3,
 					maxlength:35
 				},
 				correo:{
@@ -92,7 +92,7 @@
 			rules:{
 				usuario:{
 					required: true,
-					minlength:5,
+					minlength:4,
 					maxlength:40
 				}
 			},

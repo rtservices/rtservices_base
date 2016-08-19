@@ -35,9 +35,6 @@
 			},
 			unhighlight: function(element) {
 				$(element).parents('.form-group').removeClass('has-error');
-			},
-			submitHandler: function() {
-				alert("submitted!");
 			}
 		});
 	}

@@ -8,10 +8,8 @@ var BlankonSign = function () {
         init: function () {
             BlankonSign.signBaseURL();
             BlankonSign.signIE();
-            BlankonSign.signSound();
             BlankonSign.signValidation();
             BlankonSign.signSettingHeight();
-            BlankonSign.signInputSound();
         },
 
         // =========================================================================
@@ -71,24 +69,6 @@ var BlankonSign = function () {
         },
 
         // =========================================================================
-        // SOUNDS
-        // =========================================================================
-        signSound: function () {
-            if($('.page-sound').length){
-                ion.sound({
-                    sounds: [
-                    {name: "light_bulb_breaking", volume: 0.6},
-                    {name: "tap", volume: 0.6},
-                    {name: "button_tiny", volume: 0.6},
-                    {name: "cd_tray", volume: 0.6}
-                    ],
-                    path: BlankonSign.signBaseURL()+'/assets/ionsound/sounds/',
-                    preload: true
-                });
-            }
-        },
-
-        // =========================================================================
         // FORM VALIDATION
         // =========================================================================
         signValidation: function () {
@@ -101,11 +81,6 @@ var BlankonSign = function () {
                                 // Add effect animation css
                                 $('#sign-wrapper').addClass('animated shake');
                                 setTimeout(function(){$('#sign-wrapper').removeClass('animated shake')}, 1500);
-
-                                // Add effect sound
-                                if($('.page-sound').length){
-                                    ion.sound.play("light_bulb_breaking");
-                                }
                             },
                             rules:{
                                 usuario: {
@@ -117,10 +92,10 @@ var BlankonSign = function () {
                             },
                             messages: {
                                 usuario: {
-                                    required: "Complete este campo."
+                                    required: "Ingrese un Usuario."
                                 },
                                 pass: {
-                                    required: "Ingrese un password."
+                                    required: "Ingrese una Contraseña."
                                 }
                             },
                             highlight:function(element) {
@@ -138,20 +113,7 @@ var BlankonSign = function () {
         // =========================================================================
         signSettingHeight: function () {
             $('#sign-wrapper').css('min-height',$(window).outerHeight());
-        },
-
-        // =========================================================================
-        // INPUT SOUNDS
-        // =========================================================================
-        signInputSound: function () {
-            // Add sounds
-            if($('.page-sound').length){
-                $('input[type=checkbox]').on('click', function(){
-                    ion.sound.play("button_tiny");
-                });
-            }
         }
-
     };
 
 }();

@@ -13,10 +13,11 @@ class Planclase extends CI_Controller {
 		{
 			redirect('login');
 		}
-		$idpc = ($this->input->get('idpc')) ? $this->input->get('idpc') : null;
-		if (is_null($idpc))
+
+		$iIdPC = $this->input->get('idPc');
+		if ($iIdPC == '')
 		{
-			$data['titulo'] = 'G. Planes de clase';
+			$data['titulo'] = 'Gestion de Planes de Clase';
 			$this->load->view('msp/cabecera', $data);
 			$this->load->view('planclase/planclase');
 			$this->load->view('msp/footer');
@@ -24,15 +25,28 @@ class Planclase extends CI_Controller {
 		}
 		else
 		{
-			$data['titulo'] = 'G. Plan de clase';
+			$jugador = 'Esneider Mejia';
+			$data['titulo'] = $jugador . ' - Planes de Clase';
 			$this->load->view('msp/cabecera', $data);
-			$this->load->view('planclase/planclaseG', $data);
+			$this->load->view('planclasejug/planclasejug');
 			$this->load->view('msp/footer');
-			$this->load->view('planclase/addG');
+			$this->load->view('planclasejug/add');
+		}
+	}
+
+	public function cargarTablaGeneral()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			# code...
+		}
+		else
+		{
+			redirect('error404');
 		}
 	}
 
 }
 
-/* End of file planclase.php */
-/* Location: ./application/controllers/planclase.php */
+/* End of file planclase */
+/* Location: ./application/controllers/planclase */
