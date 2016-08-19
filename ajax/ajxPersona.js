@@ -91,10 +91,15 @@ function listarInformacion(id)
 {
 	NProgress.start();
 	$('#modalInformacion').modal('show');
+<<<<<<< HEAD
 	$('#listoIJ').hide();
 	$('#btnsEditar').hide();
 	$('#loadingIJ').show();
 	
+=======
+	$('#loadingIJ').show();
+	$('#listoIJ').hide();
+>>>>>>> origin/master
 
 	$.ajax({
 		url: 'persona/listarPersona',
@@ -133,7 +138,10 @@ function listarInformacion(id)
 			setTimeout(function() {
 				$('#loadingIJ').hide();
 				$('#listoIJ').show();
+<<<<<<< HEAD
 				$('#btnsEditar').show();
+=======
+>>>>>>> origin/master
 			}, 2000);
 			
 			NProgress.done();
@@ -289,9 +297,12 @@ function administrarCuenta(id,tipo)
 		data: {id: id, tipo: tipo},
 		success:function(res)
 		{
+<<<<<<< HEAD
 			$('#formUsuario')[0].reset();
 			$('#formClave')[0].reset();
 
+=======
+>>>>>>> origin/master
 			if (res == "no")
 			{
 				sweetAlert("Oops...", "Ocurrio un error generando la cuenta de usuario.", "error");
@@ -302,12 +313,16 @@ function administrarCuenta(id,tipo)
 				$('[id = "idusuarioU"]').val(res.IdLogin);
 				$('[id = "idusuarioC"]').val(res.IdLogin);
 				$('[id = "usuario"]').val(res.Usuario);
+<<<<<<< HEAD
 
 				setTimeout(function() {
 					$('#loadingCU').hide();
 					$('#listoCU').show();
 				}, 2000);
 				
+=======
+				$('#modalCuenta').modal('show');
+>>>>>>> origin/master
 				NProgress.done();
 			}
 		}

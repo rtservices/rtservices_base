@@ -45,7 +45,11 @@ class Mdl_clase extends CI_Model {
 
 	public function listarInstructores()
 	{
+<<<<<<< HEAD
 		$this->db->select('Documento, Nombre, Apellidos, rtspersonarol_det.IdPersonaRol');
+=======
+		$this->db->select('Documento, Nombre, Apellidos, IdPersonarol');
+>>>>>>> origin/master
 		$this->db->from('rtspersonarol_det');
 		$this->db->join('rtspersona_deb', 'rtspersonarol_det.IdPersona_deb = rtspersona_deb.IdPersona', 'INNER');
 		$this->db->where('rtspersona_deb.Estado', 1);
@@ -58,7 +62,11 @@ class Mdl_clase extends CI_Model {
 
 	public function listarJugadores()
 	{
+<<<<<<< HEAD
 		$this->db->select('Documento, Nombre, Apellidos, IdPersonaRol');
+=======
+		$this->db->select('Documento, Nombre, Apellidos, IdPersonarol');
+>>>>>>> origin/master
 		$this->db->from('rtspersonarol_det');
 		$this->db->join('rtspersona_deb', 'rtspersonarol_det.IdPersona_deb = rtspersona_deb.IdPersona', 'INNER');
 		$this->db->where('rtspersona_deb.Estado', 1);

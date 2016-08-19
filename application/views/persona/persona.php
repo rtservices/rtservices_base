@@ -95,6 +95,7 @@
 											</center>
 										</div>
 									</div>
+<<<<<<< HEAD
 								</form>
 							</div>
 							<div class="divider"></div>
@@ -106,6 +107,25 @@
 										<div class="col-md-12">
 											<center>Por seguridad <strong>Ninguna clave</strong> se muestra, si el usuario la ha olvidado, puede cambiarla manualmente ingresando en la opcion 'Olvidaste tu contraseña?' en el apartado login.</center>
 										</div>
+=======
+								</div>
+							</form>
+						</div>
+						<div class="divider"></div>
+						<div class="row">
+							<h4 style="text-align: center;">Modificar contraseña</h4>
+							<form id="formClave">
+								<input type="hidden" id="idusuarioC" name="idusuarioC">
+								<div class="row">
+									<div class="col-md-12">
+										<center>Por seguridad <strong>Ninguna clave</strong> se muestra, si el usuario la ha olvidado, puede cambiarla manualmente ingresando en la opcion 'Olvidaste tu contraseña?' en el apartado login.</center>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 form-group">
+										<label class="control-label">Nueva contraseña</label>
+										<input class="form-control" id="clave" name="clave" type="password" style="center">
+>>>>>>> origin/master
 									</div>
 									<div class="row">
 										<div class="col-md-6 form-group">

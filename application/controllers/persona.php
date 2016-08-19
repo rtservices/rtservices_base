@@ -171,7 +171,10 @@ class Persona extends CI_Controller {
 				}
 				else if ($persona->IdPersona == $this->session->userdata('usuario_id')) 
 				{
+<<<<<<< HEAD
 					$planclase = '<a class="btn btn-danger btn-expand" disabled style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Ni administradores ni instructores pueden tener un plan de clases asociado." ><i class="fa fa-credit-card"></i></a>';
+=======
+>>>>>>> origin/master
 					$eliminar = '<a class="btn btn-danger btn-expand" disabled style="color: #F13A3A; background-color: #2A2A2A" href="javascript:void()" title="Este Administrador no se puede inhabilitar." ><i class="fa fa-exchange"></i></a>';					
 					$responsable = '<a class="btn btn-danger btn-expand" disabled style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Ni administradores ni instructores pueden tener responsables." ><i class="fa fa-users"></i></a>';
 					$estadoA = 'disabled';
