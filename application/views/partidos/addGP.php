@@ -1,3 +1,3 @@
-<script type="text/javascript" src="ajax/ajxgespartidos.js"></script>
+<script type="text/javascript" src="ajax/ajxPartidos.js"></script>
 </body>
 </html>

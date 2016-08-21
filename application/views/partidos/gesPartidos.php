@@ -66,20 +66,32 @@
 										<input id="jugador2" name="jugador2" class="form-control" type="text" style="text-align: center; border:1px solid black;" value="<?= $jugador2 ?>" disabled>
 									</div>
 									<div class="col-md-6 form-group">
-										<label class="control-label">Set1</label>
-										<input id="setprimero" name="setprimero" class="form-control" type="text" style="text-align: center; border:1px solid black;" value="<?= $setprimero ?>">
+										<label class="control-label">Set1 jugador 1</label>
+										<input id="set1juga1" name="set1juga1" class="form-control" type="text" style="text-align: center; border:1px solid black;" value="<?= $set1juga1 ?>">
 									</div>
 									<div class="col-md-6 form-group">
-										<label class="control-label">Set2</label>
-										<input id="setsegundo" name="setsegundo" class="form-control" type="text" style="text-align: center; border:1px solid black;" value="<?= $setsegundo ?>" >
+										<label class="control-label">Set1 jugador 2</label>
+										<input id="set1juga2" name="set1juga2" class="form-control" type="text" style="text-align: center; border:1px solid black;" value="<?= $set1juga2 ?>" >
+									</div>
+									<div class="col-md-6 form-group">
+										<label class="control-label">Set2 jugador 1</label>
+										<input id="set2juga1" name="set2juga1" class="form-control" type="text" style="text-align: center; border:1px solid black;" value="<?= $set2juga1 ?>">
+									</div>
+									<div class="col-md-6 form-group">
+										<label class="control-label">Set2 jugador 2</label>
+										<input id="set2juga2" name="set2juga2" class="form-control" type="text" style="text-align: center; border:1px solid black;" value="<?= $set2juga2 ?>" >
 									</div>
 									<div class="col-md-6 form-group">
 										<label class="control-label">Nombre etapa</label>
 										<input id="etapa" name="etapa" class="form-control" type="text" style="text-align: center; border:1px solid black;" value="<?= $etapa ?>" disabled>
 									</div>
 									<div class="col-md-6 form-group">
-										<label class="control-label">Tiebreak</label>
-										<input id="tiebreak" name="tiebreak" class="form-control" type="text" style="text-align: center; border:1px solid black;" value="<?= $tiebreak ?>">
+										<label class="control-label">Tiebreak jugador 1</label>
+										<input id="tiebreakjuga1" name="tiebreakjuga1" class="form-control" type="text" style="text-align: center; border:1px solid black;" value="<?= $tiebreakjuga1 ?>">
+									</div>
+									<div class="col-md-6 form-group">
+										<label class="control-label">Tiebreak jugador 2</label>
+										<input id="tiebreakjuga2" name="tiebreakjuga2" class="form-control" type="text" style="text-align: center; border:1px solid black;" value="<?= $tiebreakjuga2?>">
 									</div>
 									<div class="col-md-6 form-group">
 										<label class="control-label">Ganador</label>

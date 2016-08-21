@@ -18,7 +18,8 @@ function actualizarTabla()
 {
 	tabla.ajax.reload(null, false);
 }
-function actualizarTabla()
+
+function actualizarTablaRes()
 {
 	tablaRes.ajax.reload(null, false);
 }
@@ -95,26 +96,31 @@ function eliminarPartido(id)
     });
 }
 
-function cargarPartidos(id)
-{
+$('#gpartidos').submit(function(event) {
+	event.preventDefault();
+
 	NProgress.start();
-	 $.ajax({
-    	url: 'partidos/listarPartidos',
+	$.ajax({
+		url: 'partidos/editarPartidos',
 		type: 'POST',
-		dataType: 'JSON',
-		data: {id: id},
-    	success:function(res){
-    		$('[name = "idPartidoE"]').val(res.IdPartidotennis);
-    		$('[name = "fechaE"]').val(res.Horario);
-			$('[name = "lugarE"]').val(res.Lugar);
-			$('[name = "etapaE"]').val(res.NombreEtapa);
-			$('[name = "cuadroE"]').val(res.NombreCuadro);
-			$('[name = "categoriaE"]').val(res.NombreCategoria);
-			$('[name = "jugador1E"]').val(res.jugadoruno + ' ' + res.apeuno);
-			$('[name = "jugador2E"]').val(res.jugadordos + ' ' + res.apedos);
-			$('#modalEditar').modal('show');
-			 NProgress.done();
-    	}
-    });
-}
+		data:$('#gpartidos').serialize(),
+		success:function(res){
+			if(res == 'no')
+			{
+				NProgress.done();
+				sweetAlert("Oops...", "No se ha modificado la información de la clase.", "error");
+			} 
+			else
+			{
+				NProgress.done();
+				sweetAlert("Perfecto!", "Se ha modificado la información de la clase.", "success");
+			}
+		}
+
+	});
+
+});
+
+
+
 

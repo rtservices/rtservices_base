@@ -37,11 +37,14 @@ class Partidos extends CI_Controller {
 				$data['categoria'] = $parti->NombreCategoria;
 				$data['jugador1'] = $parti->jugadoruno.' '.$parti->apeuno;
 				$data['jugador2'] = $parti->jugadordos.' '.$parti->apedos;
-				$data['setprimero'] = $parti->Set1Jug1.'/'.$parti->Set1Jug2;
-				$data['setsegundo'] = $parti->Set2Jug1.'/'.$parti->Set2Jug2;
-				$data['tiebreak'] = $parti->TieBreakJug1.'/'.$parti->TieBreakJug2;
+				$data['set1juga1'] = $parti->Set1Jug1;
+				$data['set2juga1'] = $parti->Set2Jug1;
+				$data['set1juga2'] = $parti->Set1Jug2;
+				$data['set2juga2'] = $parti->Set2Jug2;
+				$data['tiebreakjuga1'] = $parti->TieBreakJug1;
+				$data['tiebreakjuga2'] = $parti->TieBreakJug2;
 				$data['IdPartidotennis'] = $parti->IdPartidotennis;
-				if ($parti->Set2Jug1+$parti->Set1Jug1 > $parti->Set1Jug2+$parti->Set2Jug2 || $parti->TieBreakJug1 > $parti->TieBreakJug2)
+				if ($parti->Set1Jug1 > $parti->Set2Jug1 > $parti->Set2Jug1 > $parti->Set2Jug2 || $parti->TieBreakJug1 > $parti->TieBreakJug2)
 				{
 					$data['ganador']= $parti->jugadoruno.' '.$parti->apeuno;
 				}
@@ -136,8 +139,12 @@ class Partidos extends CI_Controller {
 			$data = array(
 				'Horario' =>$this->input->post('horario'),
 				'Lugar' =>$this->input->post('lugar'),
-				'IdJugadorCuadro_detJug1' =>$this->input->post('jugador1'),
-				'IdJugadorCuadro_detJug2' =>$this->input->post('jugador2')
+				'Set1Jug1' =>$this->input->post('set1juga1'),
+				'Set2Jug1' =>$this->input->post('set2juga1'),
+				'Set1Jug2' =>$this->input->post('set1juga2'),
+				'Set2Jug2' =>$this->input->post('set2juga2'),
+			    'TieBreakJug1' =>$this->input->post('tiebreakjuga1'),
+			    'TieBreakJug2' =>$this->input->post('tiebreakjuga2'),
 				);
 
 			if ($this->mdl_partidos->actualizarPartidos($id, $data))
