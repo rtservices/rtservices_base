@@ -18,6 +18,26 @@ class Mdl_menu extends CI_Model {
 		return $res;
 	}
 
+	public function conteoPersonas()
+	{
+		$this->db->select('COUNT(*) AS total');
+		$this->db->from('rtspersona_deb');
+		$res = $this->db->get()->row();
+
+		return $res;
+	}
+
+	public function conteoPersonasRol($idrol)
+	{
+		$this->db->select('COUNT(*) AS total');
+		$this->db->from('rtspersonarol_det');
+		$this->db->where('IdRol', $idrol);
+		$this->db->where('Estado', 1);
+		$res = $this->db->get()->row();
+
+		return $res;
+	}
+
 }
 
 /* End of file mdl_menu.php */
