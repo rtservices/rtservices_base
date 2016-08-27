@@ -44,14 +44,14 @@ class Partidos extends CI_Controller {
 				$data['tiebreakjuga1'] = $parti->TieBreakJug1;
 				$data['tiebreakjuga2'] = $parti->TieBreakJug2;
 				$data['IdPartidotennis'] = $parti->IdPartidotennis;
-				if ($parti->Set1Jug1 > $parti->Set2Jug1 > $parti->Set2Jug1 > $parti->Set2Jug2 || $parti->TieBreakJug1 > $parti->TieBreakJug2)
-				{
-					$data['ganador']= $parti->jugadoruno.' '.$parti->apeuno;
-				}
-				else 
-				{
+				// if ($parti->Set1Jug1 > $parti->Set2Jug1 > $parti->Set2Jug1 > $parti->Set2Jug2 || $parti->TieBreakJug1 > $parti->TieBreakJug2)
+				// {
+				// 	$data['ganador']= $parti->jugadoruno.' '.$parti->apeuno;
+				// }
+				// else 
+				// {
                     $data['ganador']= $parti->jugadordos.' '.$parti->apedos;
-				}
+				// }
 				break;
 			}
 			$this->load->view('msp/cabecera', $data);

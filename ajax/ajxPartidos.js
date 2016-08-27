@@ -121,6 +121,28 @@ $('#gpartidos').submit(function(event) {
 
 });
 
+function cargarPartidos(id)
+{
+	NProgress.start();
+	 $.ajax({
+    	url: 'partidos/listarPartidos',
+		type: 'POST',
+		dataType: 'JSON',
+		data: {id: id},
+    	success:function(res){
+    		$('[name = "idPartidoE"]').val(res.IdPartidotennis);
+    		$('[name = "fechaE"]').val(res.Horario);
+			$('[name = "lugarE"]').val(res.Lugar);
+			$('[name = "etapaE"]').val(res.NombreEtapa);
+			$('[name = "cuadroE"]').val(res.NombreCuadro);
+			$('[name = "categoriaE"]').val(res.NombreCategoria);
+			$('[name = "jugador1E"]').val(res.jugadoruno + ' ' + res.apeuno);
+			$('[name = "jugador2E"]').val(res.jugadordos + ' ' + res.apedos);
+			$('#modalEditar').modal('show');
+			 NProgress.done();
+    	}
+    });
+}
 
 
 
