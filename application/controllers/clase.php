@@ -75,15 +75,15 @@ class Clase extends CI_Controller {
 					$edit = '<a class="btn btn-primary btn-expand" style="color:white; background-color: #2A2A2A;" href="javascript:void()" title="Debes tener activa esta clase para poder administrarla." disabled="true"><i class="fa fa-pencil"></i></a>';
 				}
 
-				if ($clase->CantidadJugadores < 10)
+				if ($clase->cantidad_jugadores < 10)
 				{
 					$colorCJ = 'color: #31B404';
 				}
-				else if ($clase->CantidadJugadores >= 10 && $clase->CantidadJugadores < 14)
+				else if ($clase->cantidad_jugadores >= 10 && $clase->cantidad_jugadores < 14)
 				{
 					$colorCJ = 'color: #DBA901';
 				}
-				else if ($clase->CantidadJugadores >= 14)
+				else if ($clase->cantidad_jugadores >= 14)
 				{
 					$colorCJ = 'color: #FE2E2E';
 				}
@@ -93,7 +93,7 @@ class Clase extends CI_Controller {
 				$row[] = $estado;
 				$row[] = $clase->NombreClase;
 				$row[] = $clase->Dia.' - '.$clase->HoraInicio .' a '.$clase->HoraFinal;
-				$row[] = '<a style="'. $colorCJ .'">'.$clase->CantidadJugadores.'</a> inscritos.';
+				$row[] = '<a style="'. $colorCJ .'">'.$clase->cantidad_jugadores.'</a> inscritos.';
 
 				$row[] = '
 				<center>

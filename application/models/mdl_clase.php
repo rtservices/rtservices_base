@@ -12,8 +12,9 @@ class Mdl_clase extends CI_Model {
 
 	public function cargarTabla()
 	{
-		$this->db->select('*');
-		$this->db->from($this->tabla);
+		$this->db->select('COUNT(*) AS cantidad_jugadores, rc.*');
+		$this->db->from('rtsclase_deb AS rc');
+		$this->db->join('rtsclasejugador_det AS rcj','rc.IdClase = rcj.IdClase_deb','INNER');
 		$res = $this->db->get()->result();
 
 		return $res;

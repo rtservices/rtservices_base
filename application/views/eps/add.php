@@ -24,6 +24,31 @@
 			}
 		});
 	}
+
+		if ($('#editarE').length) 
+	{
+		$('#editarE').validate({
+			rules:{
+				nombreeps:{
+					required:true,
+					minlength: 3,
+					maxlength: 40
+				},
+				telefonoeps:{
+					required:true,
+					number:true,
+					minlength: 7,
+					maxlength: 15
+				}
+			},
+			highlight:function(element) {
+				$(element).parents('.form-group').addClass('has-error has-feedback');
+			},
+			unhighlight: function(element) {
+				$(element).parents('.form-group').removeClass('has-error');
+			}
+		});
+	}
 </script>
 
 </body>

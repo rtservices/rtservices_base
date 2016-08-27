@@ -34,31 +34,33 @@
       <div class="panel rounded shadow no-overflow">
         <div class="panel-heading">
           <div class="pull-left">
-            <h3 class="panel-title">Eps inscritas en el sistema</h3>
+            <h3 class="panel-title">Materiales inscritos en el sistema</h3>
           </div>
           <div class="pull-right">
             <button class="btn btn-sm" data-container="body" data-action="collapse" data-toggle="tooltip" data-placement="top" data-title="Collapse" data-original-title="" title=""><i class="fa fa-angle-up"></i></button>
           </div>
           <div class="clearfix"></div>
         </div>
-        <div class="panel-body no-padding" style="margin: 20px; font-size: 16px" >
+        <div class="panel-body no-padding" style="margin: 20px; font-size: 15px" >
           <div class="table-responsive">
-           <table id="tablaEps" name="tablaEps" class="responsive-table display" cellspacing="0">
-            <thead>
-              <th style="color: red">Nombre eps</th>
-              <th>Telefono</th>
-              <th>Estado</th>
-              <th style="text-align: center">Acciones</th>
-            </thead>
-            <tbody>
+            <table id="tablaEps" class="table table-hover">
+              <thead>
+                <tr>
+                  <td style="color: red">Nombre eps</td>
+                  <td>Telefono</td>
+                  <td>Estado</td>
+                  <td style="text-align: center">Acciones</td>
+                </tr>
+              </thead>
+              <tbody>
 
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </div>
 
 
@@ -78,7 +80,7 @@
             </div>
             <div class="col-md-6 form-group">
               <label class="control-label">Número de teléfono</label>
-              <input class="form-control" name="telefonoepsR" id="telefonoepsR" type="text">
+              <inputgroup name="telefonoepsR" id="telefonoepsR" type="text">
             </div>
             <div class="clearfix"></div>
           </div>
@@ -104,12 +106,12 @@
         </div>
         <div class="modal-body">
           <div class="row">
-            <div class="col-md-6 form-input">
+            <div class="col-md-6 form-group">
               <input id="ideps" name="ideps" type="hidden">
               <label class="control-label">Nombre eps</label>
               <input class="form-control" name="nombreeps" id="nombreeps" type="text">
             </div>
-            <div class="col-md-6 form-input">
+            <div class="col-md-6 form-group">
               <label class="control-label">Número de teléfono</label>
               <input class="form-control" name="telefonoeps" id="telefonoeps" type="text">
             </div>

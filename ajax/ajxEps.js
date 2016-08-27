@@ -75,7 +75,8 @@ function listarEps(id)
 
 $('#editarE').submit(function(event) {
 	event.preventDefault();
-
+if ($('#editarE').validate().form() == true) 
+	{
 	NProgress.start();
 	$.ajax({
 		url: 'eps/actualizarEps',
@@ -99,7 +100,7 @@ $('#editarE').submit(function(event) {
 			}
 		}
 	});
-
+}
 });
 
 $('#registro').submit(function(event){

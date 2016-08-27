@@ -102,7 +102,7 @@
 					<div class="row">
 						<div class="col-md-2"></div>
 						<input class="form-control" id="idmaterial" name="idmaterial" type="hidden">
-						<div class="col-md-8 form-input">
+						<div class="col-md-8 form-group">
 							<center><label class="control-label">Descripcion del material</label></center>
 							<input class="form-control" id="material" name="material" type="text">
 						</div>

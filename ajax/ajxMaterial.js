@@ -25,7 +25,7 @@ function variarEstadoMaterial(id)
 {
 	swal({
 		title: "¿Estas seguro?",
-		text: "¿Realmente deseas cambiar el estado de este Material?",
+		text: "¿Realmente deseas cambiar el estado del material?",
 		type: "warning",
 		showCancelButton: true,
 		confirmButtonColor: "#DD6B55",
