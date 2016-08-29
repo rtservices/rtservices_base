@@ -80,7 +80,7 @@
             </div>
             <div class="col-md-6 form-group">
               <label class="control-label">Número de teléfono</label>
-              <inputgroup name="telefonoepsR" id="telefonoepsR" type="text">
+              <input class="form-control" name="telefonoepsR" id="telefonoepsR" type="text">
             </div>
             <div class="clearfix"></div>
           </div>
