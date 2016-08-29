@@ -4,12 +4,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Clase extends CI_Controller {
 
 	private $idClaseActual_principal;
-
+    private $registro;
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('mdl_clase');
 		$this->idClaseActual_principal = ($this->input->get('clase')) ? $this->input->get('clase') : null;
+		$this->registro = ($this->input->get('clase')) ? $this->input->get('clase') : "n";
 	}
 
 	public function index()
@@ -26,6 +27,15 @@ class Clase extends CI_Controller {
 			$this->load->view('clase/clase');
 			$this->load->view('msp/footer');
 			$this->load->view('clase/add');
+		}
+		else if ($this->registro == "n")
+		{
+			$data['cpersona'] = $this->mdl_login->cargarUsuario();
+			$data['titulo'] = 'Gestión de Clases';
+			$this->load->view('msp/cabecera', $data);
+			$this->load->view('clase/regClase');
+			$this->load->view('msp/footer');
+			$this->load->view('clase/addGC');
 		}
 		else
 		{
