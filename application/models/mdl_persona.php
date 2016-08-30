@@ -212,14 +212,6 @@ class Mdl_persona extends CI_Model {
 		return $res;
 	}
 
-	//Asocia el jugador con el responsable y asocia un parentesco.
-
-	public function asignarResponsable($data)
-	{
-		$res = $this->db->insert('RtsResponsableJugador_det', $data);
-		return $res;
-	}
-
     // Permite inhabilitar (cambia el estado a 0) de todos los registros que en su IdPersona_deb tengan el id del registro
     // a inhabilitar (esta asociado con el inhabilitar o habilitar persona).
 

@@ -2,7 +2,7 @@ var tabla;
 
 $(document).ready(function() {
 	NProgress.start();
-	tabla = $('#tablaJugadorResponsable').DataTable({ "ajax": "responsables/cargarTabla/" + $('#idJugador').val() });
+	tabla = $('#tablaJugadorResponsable').DataTable({ "ajax": "responsables/cargarTabla/" + $('#idPersona').val() });
 });
 
 $(window).load(function() {
@@ -28,14 +28,15 @@ $('#gResponsablesJugador').submit(function(event) {
 		data: $(this).serialize(),
 		success:function(res)
 		{
-			if (res == 'ok')
-			{
-				sweetAlert("Completado!", "Se ha cambiado el modificado la información de esta etapa.", "success");
-			} 
-			else
-			{
-				sweetAlert("Oops...", "No se ha cambiado el modificado la información de esta etapa.", "error");
-			}
+			console.log(res);
+			// if (res == 'ok')
+			// {
+			// 	sweetAlert("Completado!", "Se ha cambiado el modificado la información de esta etapa.", "success");
+			// } 
+			// else
+			// {
+			// 	sweetAlert("Oops...", "No se ha cambiado el modificado la información de esta etapa.", "error");
+			// }
 		}
 	});
 	

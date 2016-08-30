@@ -32,6 +32,7 @@
 		</div>
 		<div class="col-md-12">
 			<div class="panel rounded shadow no-overflow">
+			<input type="hidden" name="idPersona" id="idPersona" value="<?= $idPersona ?>">
 				<div class="panel-heading">
 					<div class="pull-left">
 						<h3 class="panel-title">Inscripción de responsables</h3>
@@ -53,7 +54,7 @@
 								</div>
 									<div class="col-md-6 form-group">
 										<center><label class="control-label">Documento - Nombre completo </label></center>
-										<select id="selPlanJugador" name="selPlanJugador" class="chosen-select mb-16" placeholder="Seleccione una opción" value="">
+										<select id="idResponsable" name="idResponsable" class="chosen-select mb-16" placeholder="Seleccione una opción" value="">
 										<option value="" disabled="true" selected="true">Seleccione una persona responsable</option>
 											<?php foreach ($this->mdl_persona->selPersonas() as $valResponsable) { if (intval(substr((intval(str_replace('-', '', date('Y-m-d'))) - intval(str_replace('-', '', $valResponsable->FechaNacimiento))), 0,2)) > 18) { ?>
 												<option value="<?= $valResponsable->IdPersona ?>"><?= $valResponsable->Documento ?> - <?= $valResponsable->Nombre.' '.$valResponsable->Apellidos ?></option>
@@ -62,7 +63,7 @@
 									</div>
 									<div class="col-md-6 form-group">
 										<center><label class="control-label">Parentesco </label></center>
-										<select data-placeholder="Seleccione un parentesco" name="responsableRol"  id="responsableRol" class="chosen-select mb-15" tabindex="-1" style="display: none;">
+										<select name="sResponsableParentesco"  id="sResponsableParentesco" class="chosen-select mb-15" tabindex="-1" style="display: none;">
 											<option value="" selected="true" disabled="true">Seleccione un parentesco</option>
 											<option value="Padre">Padre</option>
 											<option value="Madre">Madre</option>

@@ -20,11 +20,12 @@ class Responsables extends CI_Controller {
 			redirect('login');
 		}
 
-		$oJugador = $this->mdl_persona->listarPersona($iIdJugador)->row();
+		$oJugador = $this->mdl_persona->listarJugador($iIdJugador);
 		if ($oJugador)
 		{
 			$data['titulo'] = 'Gestion de responsables';
-			$data['idJugador'] = $iIdJugador;
+			$data['idJugador'] = $oJugador->IdPersonaRol;
+			$data['idPersona'] = $iIdJugador;
 			$data['nomJugador'] = $oJugador->Nombre . ' ' . $oJugador->Apellidos;
 			$data['cDia'] = 'Lunes';
 			$this->load->view('msp/cabecera', $data);
@@ -82,6 +83,38 @@ class Responsables extends CI_Controller {
 			echo json_encode($output);
 		}
 		else 
+		{
+			redirect('error404');
+		}
+	}
+
+	public function asignarResponsable()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$iIdJugador = $this->input->post('idJugador');
+			$iIdResponsable = $this->input->post('idResponsable');
+			$sResponsableParentesco = $this->input->post('sResponsableParentesco');
+
+			echo $iIdJugador;
+
+			$aData = array(
+				'IdPersona_deb' => $iIdResponsable, 
+				'Parentesco' => $sResponsableParentesco, 
+				'IdPersonaRol_det' => $iIdJugador,
+				'Estado' => 1
+				);
+
+			if ($this->mdl_persona->asignarResponsable($aData))
+			{
+				echo "ok";
+			}
+			else
+			{
+				echo "no";
+			}
+		}
+		else
 		{
 			redirect('error404');
 		}
