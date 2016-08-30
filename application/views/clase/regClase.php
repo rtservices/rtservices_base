@@ -42,7 +42,7 @@
 				</div>
 				<div class="panel-body no-padding" style="margin: 20px; font-size: 15px">
 					<form id="gClaseR" name="gClaseR">
-						<input type="hidden" name="idClaseActual" id="idClaseActual">
+						<input type="hidden" name="idClaseActualR" id="idClaseActualR">
 						<div class="row">
 							<div class="col-md-2"></div>
 							<div class="col-md-8">
@@ -100,7 +100,7 @@
 						</div>
 						<br>
 						<div class="row">
-							<center><button type="submit" class="btn btn-warning btn-expand" style="background-color: #2A2A2A;">Modificar clase</button></center>
+							<center><button type="submit" class="btn btn-warning btn-expand" style="background-color: #2A2A2A;">Registrar clase</button></center>
 						</div>
 					</form>
 				</div>

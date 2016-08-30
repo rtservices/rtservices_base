@@ -84,7 +84,7 @@ function eliminarInscripcionClase(id)
 $('#gClaseR').submit(function(event) {
 	event.preventDefault();
 	if ($('#gClaseR').validate().form()) 
-	{gClaseR
+	{
 		NProgress.start();
 		$.ajax({
 			url: 'clase/registrarClases',
@@ -100,10 +100,33 @@ $('#gClaseR').submit(function(event) {
 				else
 				{
 					NProgress.done();
-					sweetAlert("Oops...", "No se ha registradola clase.", "error");
+					sweetAlert("Oops...", "No se ha registrado la clase.", "error");
 				}
 			}
 
 		});
 	}
+});
+
+
+$('#gClaseE').submit(function(event) {
+	event.preventDefault();
+	NProgress.start();
+	$.ajax({
+		url: 'clase/modificarClase',
+		type: 'POST',
+		data:$('#gClaseE').serialize(),
+		success:function(res){
+			if(res == 'no')
+			{
+				NProgress.done();
+				sweetAlert("Oops...", "No se ha modificado la información de la clase.", "error");
+			} 
+			else
+			{
+				NProgress.done();
+				sweetAlert("Perfecto!", "Se ha modificado la información de la clase.", "success");
+			}
+		}
+	});
 });

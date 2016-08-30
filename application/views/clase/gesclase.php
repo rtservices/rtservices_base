@@ -42,7 +42,7 @@
 					<div class="clearfix"></div>
 				</div>
 				<div class="panel-body no-padding" style="margin: 20px; font-size: 15px">
-					<form id="gClase" name="gClase">
+					<form id="gClaseE" name="gClaseE">
 						<input type="hidden" name="idClaseActual" id="idClaseActual" value="<?= $idClase ?>">
 						<div class="row">
 							<div class="col-md-2"></div>
@@ -151,7 +151,7 @@
 						</div>
 						<br>
 						<div class="row">
-							<center><button type="submit" class="btn btn-success btn-expand" style="background-color: #2A2A2A;">Asignar jugador a esta clase</button></center>
+							<center><button type="submit"  class="btn btn-success btn-expand" style="background-color: #2A2A2A;">Asignar jugador a esta clase</button></center>
 						</div>
 					</form>
 				</div>
