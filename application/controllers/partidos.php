@@ -50,7 +50,7 @@ class Partidos extends CI_Controller {
 				// }
 				// else 
 				// {
-                    $data['ganador']= $parti->jugadordos.' '.$parti->apedos;
+                //  $data['ganador']= $parti->jugadordos.' '.$parti->apedos;
 				// }
 				break;
 			}

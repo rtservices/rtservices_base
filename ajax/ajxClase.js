@@ -118,5 +118,3 @@ $('#gClase').submit(function(event) {
 
 });
 
-
-

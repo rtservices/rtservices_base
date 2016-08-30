@@ -120,30 +120,7 @@ function listarInformacion(id)
 
 function listarResponsables(id)
 {
-	location.href = 'responsables?idjug=' + id;
-	// NProgress.start();
-	// $.ajax({
-	// 	url: 'persona/listarResponsable',
-	// 	type: 'POST',
-	// 	dataType: 'JSON',
-	// 	data: {id: id},
-	// 	success:function(res)
-	// 	{
-	// 		$('[id = "nombrejugador"]').text(res.Nombre + ' ' + res.Apellidos);
-	// 		$('[id = "nombre"]').text(res.Nombre + ' ' + res.Apellidos);
-	// 		$('[id = "NombreJug"]').text(res.Nombre + ' ' + res.Apellidos);
-	// 		$('[id = "idjugadorR"]').val(res.IdPersonaRol);
-	// 		$('[id = "infojugador"]').val(res.Documento + ' - ' + res.Nombre + ' ' + res.Apellidos);
-
-	// 		$('#modalResponsable').modal('show');
-	// 		$('#tablaResponsable').DataTable();
-	// 		setTimeout(function()
-	// 		{
-	// 			$('#tablaResponsable').DataTable({ "ajax": "persona/cargarResponsables/" + res.IdPersonaRol, destroy: true });
-	// 		}, 1000);
-	// 		NProgress.done();
-	// 	}
-	// });	
+	location.href = 'responsables?idjug=' + id;	
 }
 
 function variarAdministrador(id)
