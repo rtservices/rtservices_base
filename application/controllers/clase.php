@@ -341,6 +341,33 @@ class Clase extends CI_Controller {
 			redirect('error404');
 		}
 	}
+//Registrar del material
+	public function registrarClases()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$data = array(
+				"Estado" => 1,
+				'NombreClase' => $this->input->post('nombreClase'),
+				'HoraInicio' => $this->input->post('horaInicio'),
+				'HoraFinal' => $this->input->post('horaFin'),
+				'Dia' => $this->input->post('diaClase'),
+				'IdPersonaRol_det' => $this->input->post('instructorClase')
+				);
+			if($this->mdl_clase->registrarClase($data))
+			{
+				echo "ok";
+			} else
+			{
+				echo "error";
+			}
+		} 
+		else 
+		{
+			redirect('error404');
+		}
+
+	}
 }
 
 /* End of file clase.php */

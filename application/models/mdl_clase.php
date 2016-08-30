@@ -145,6 +145,8 @@ class Mdl_clase extends CI_Model {
 
 		return $res;
 	}
+
+	
 }
 
 /* End of file mdl_clase.php */

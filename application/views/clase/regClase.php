@@ -41,7 +41,7 @@
 					<div class="clearfix"></div>
 				</div>
 				<div class="panel-body no-padding" style="margin: 20px; font-size: 15px">
-					<form id="gClase" name="gClase">
+					<form id="gClaseR" name="gClaseR">
 						<input type="hidden" name="idClaseActual" id="idClaseActual">
 						<div class="row">
 							<div class="col-md-2"></div>
@@ -89,6 +89,9 @@
 										<label class="control-label">Instructor encargado</label>
 										<select id="instructorClase" name="instructorClase" data-placeholder="Instructor" class="chosen-select mb-15" tabindex="-1" style="display: none;">
 											<option value="" disabled>Seleccione un instructor</option>
+											<?php foreach ($this->mdl_clase->listarInstructores() as $ins) { ?>
+											<option value="<?= $ins->IdPersonaRol ?>"><?= $ins->Documento.'-'.$ins->Nombre.' '.$ins->Apellidos ?></option>';
+											<?php }?>
 										</select>
 									</div>
 								</div>

@@ -79,3 +79,31 @@ function eliminarInscripcionClase(id)
 		});
 	});
 }
+
+//Ajax de registrar
+$('#gClaseR').submit(function(event) {
+	event.preventDefault();
+	if ($('#gClaseR').validate().form()) 
+	{gClaseR
+		NProgress.start();
+		$.ajax({
+			url: 'clase/registrarClases',
+			type: 'POST',
+			data:$('#gClaseR').serialize(),
+			success:function(res){
+				actualizar();
+				if(res=='ok')
+				{
+					NProgress.done();
+					swal("Completado!", "Se ha registrado la clase.", "success");
+				} 
+				else
+				{
+					NProgress.done();
+					sweetAlert("Oops...", "No se ha registradola clase.", "error");
+				}
+			}
+
+		});
+	}
+});
