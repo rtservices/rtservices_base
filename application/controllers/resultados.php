@@ -20,7 +20,8 @@ class Resultados extends CI_Controller {
 		$this->load->view('msp/footer');
 		$this->load->view('resultados/add');
 	}
-    public function cargarTabla()
+	
+	public function cargarTabla()
 	{
 		$data = array();
 		if ($this->input->is_ajax_request())
@@ -40,9 +41,9 @@ class Resultados extends CI_Controller {
 				}
 				else 
 				{
-                    $row[]= $parti->jugadordos.' '.$parti->apedos;
+					$row[]= $parti->jugadordos.' '.$parti->apedos;
 				}
-	
+
 				$data[] = $row;
 			}
 			$output = array("data" => $data);
@@ -54,7 +55,7 @@ class Resultados extends CI_Controller {
 		}
 	}
 
-		public function listarPartidos()
+	public function listarPartidos()
 	{
 		if ($this->input->is_ajax_request())
 		{

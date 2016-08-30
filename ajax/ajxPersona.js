@@ -24,30 +24,7 @@ function nuevaPersona()
 
 function listarPlanclase(id)
 {
-	NProgress.start();
-	$('#modalPlanclase').modal('show');
-	$('#listoPC').hide();
-	$('#loadingPC').show();
-
-	setTimeout(function() {
-		$.ajax({
-			url: 'persona/listarPlanclase',
-			type: 'POST',
-			dataType: 'JSON',
-			data: {id: id},
-			success:function(res)
-			{
-				$('[id = "idpersona"]').val(res.IdPersona);
-				$('[id = "idpersonarol"]').val(res.IdPersonaRol);
-				$('[name = "nombrejugador"]').text(' - ' + res.Nombre + ' ' + res.Apellidos);
-				$('[id = "infojugador"]').val(res.Documento + ' - ' + res.Nombre + ' ' + res.Apellidos);
-				$('#loadingPC').hide();
-				$('#listoPC').show();
-				$('#tablaPlanClase').DataTable({ "ajax": "persona/tablaPlanClase/" + res.IdPersonaRol, destroy: true });
-				NProgress.done();
-			}
-		});
-	}, 2000);
+	location.href = 'planclase?idPc='+id;
 }
 
 function listarPersona(id)
@@ -143,29 +120,30 @@ function listarInformacion(id)
 
 function listarResponsables(id)
 {
-	NProgress.start();
-	$.ajax({
-		url: 'persona/listarResponsable',
-		type: 'POST',
-		dataType: 'JSON',
-		data: {id: id},
-		success:function(res)
-		{
-			$('[id = "nombrejugador"]').text(res.Nombre + ' ' + res.Apellidos);
-			$('[id = "nombre"]').text(res.Nombre + ' ' + res.Apellidos);
-			$('[id = "NombreJug"]').text(res.Nombre + ' ' + res.Apellidos);
-			$('[id = "idjugadorR"]').val(res.IdPersonaRol);
-			$('[id = "infojugador"]').val(res.Documento + ' - ' + res.Nombre + ' ' + res.Apellidos);
+	location.href = 'responsables?idjug=' + id;
+	// NProgress.start();
+	// $.ajax({
+	// 	url: 'persona/listarResponsable',
+	// 	type: 'POST',
+	// 	dataType: 'JSON',
+	// 	data: {id: id},
+	// 	success:function(res)
+	// 	{
+	// 		$('[id = "nombrejugador"]').text(res.Nombre + ' ' + res.Apellidos);
+	// 		$('[id = "nombre"]').text(res.Nombre + ' ' + res.Apellidos);
+	// 		$('[id = "NombreJug"]').text(res.Nombre + ' ' + res.Apellidos);
+	// 		$('[id = "idjugadorR"]').val(res.IdPersonaRol);
+	// 		$('[id = "infojugador"]').val(res.Documento + ' - ' + res.Nombre + ' ' + res.Apellidos);
 
-			$('#modalResponsable').modal('show');
-			$('#tablaResponsable').DataTable();
-			setTimeout(function()
-			{
-				$('#tablaResponsable').DataTable({ "ajax": "persona/cargarResponsables/" + res.IdPersonaRol, destroy: true });
-			}, 1000);
-			NProgress.done();
-		}
-	});	
+	// 		$('#modalResponsable').modal('show');
+	// 		$('#tablaResponsable').DataTable();
+	// 		setTimeout(function()
+	// 		{
+	// 			$('#tablaResponsable').DataTable({ "ajax": "persona/cargarResponsables/" + res.IdPersonaRol, destroy: true });
+	// 		}, 1000);
+	// 		NProgress.done();
+	// 	}
+	// });	
 }
 
 function variarAdministrador(id)

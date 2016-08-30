@@ -366,6 +366,33 @@ class Mdl_persona extends CI_Model {
 		return $res;
 	}
 
+	public function selPersonas()
+	{
+		$this->db->select('IdPersona, Documento, Nombre, Apellidos, FechaNacimiento');
+		$this->db->from($this->tabla);
+		$this->db->where('Estado', 1);
+		$res = $this->db->get()->result();
+
+		return $res;
+	}
+
+	public function cargarTablaResponsables($iIdJugador)
+	{
+		$this->db->select('rjd.IdResponsableJugador, rjd.Estado, rjd.Parentesco, j.Documento AS JDocumento, j.Nombre AS JNombre,j.Apellidos AS JApellidos, r.Documento AS RDocumento, r.Nombre AS RNombre, r.Apellidos AS RApellidos, r.Telefono, r.Celular');
+		$this->db->from('rtsresponsablejugador_det AS rjd');
+		// Se hace el primer join para cargar los datos del jugador
+		$this->db->join('rtspersonarol_det AS pr', 'rjd.IdPersonaRol_det = pr.IdPersonaRol', 'INNER');
+		$this->db->join('rtspersona_deb AS j', 'pr.IdPersona_deb = j.IdPersona', 'INNER');
+		// Se hace el segundo join para cargar los datos del responsable
+		$this->db->join('rtspersona_deb AS r', 'rjd.IdPersona_deb = r.IdPersona', 'INNER');
+
+		$this->db->where('j.IdPersona', $iIdJugador);
+		$this->db->where('pr.IdRol', 3);
+
+		$res = $this->db->get()->result();
+		return $res;
+	}
+
 }
 
 /* End of file mdl_persona.php */

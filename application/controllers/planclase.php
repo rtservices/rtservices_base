@@ -25,6 +25,8 @@ class Planclase extends CI_Controller {
 		}
 		else
 		{
+			$resJugador = $this->mdl_planclase->consultarJugador($iIdPC);
+			$resJugador = $this->mdl_planclase->consultarPlanJugador($iIdPC);
 			$jugador = 'Esneider Mejia';
 			$data['titulo'] = $jugador . ' - Planes de Clase';
 			$this->load->view('msp/cabecera', $data);
