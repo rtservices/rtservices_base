@@ -48,19 +48,22 @@
 							<div class="col-md-2"></div>
 							<div class="col-md-8">
 								<div class="row">
+								<div class="col-md-12">
+									<center><small><p>Aquí se listan las personas que se encuentran activas y son mayores de edad según su fecha de nacimiento. Parentesco con el jugador al que desea asociar el responsable, cabe aclarar que el parentesco es en forma general.</p></small></center>
+								</div>
 									<div class="col-md-6 form-group">
-										<center><small><p>Aquí se listan las personas que se encuentran activas y son mayores de edad según su fecha de nacimiento.</p></small></center>
 										<center><label class="control-label">Documento - Nombre completo </label></center>
 										<select id="selPlanJugador" name="selPlanJugador" class="chosen-select mb-16" placeholder="Seleccione una opción" value="">
+										<option value="" disabled="true" selected="true">Seleccione una persona responsable</option>
 											<?php foreach ($this->mdl_persona->selPersonas() as $valResponsable) { if (intval(substr((intval(str_replace('-', '', date('Y-m-d'))) - intval(str_replace('-', '', $valResponsable->FechaNacimiento))), 0,2)) > 18) { ?>
 												<option value="<?= $valResponsable->IdPersona ?>"><?= $valResponsable->Documento ?> - <?= $valResponsable->Nombre.' '.$valResponsable->Apellidos ?></option>
 											<?php }} ?>
 										</select>
 									</div>
 									<div class="col-md-6 form-group">
-										<center><small><p>Parentesco con el jugador al que desea asociar el responsable, cabe aclarar que el parentesco es en forma general.</p></small></center>
 										<center><label class="control-label">Parentesco </label></center>
 										<select data-placeholder="Seleccione un parentesco" name="responsableRol"  id="responsableRol" class="chosen-select mb-15" tabindex="-1" style="display: none;">
+											<option value="" selected="true" disabled="true">Seleccione un parentesco</option>
 											<option value="Padre">Padre</option>
 											<option value="Madre">Madre</option>
 											<option value="Hermano">Hermano</option>
