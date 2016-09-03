@@ -385,6 +385,31 @@ class Mdl_persona extends CI_Model {
 		return $res;
 	}
 
+	public function asignarResponsable($data)
+	{
+		$res = $this->db->insert('rtsresponsablejugador_det', $data);
+		return $res;
+	}
+
+	public function listResponsable($id)
+	{
+		$this->db->select('IdResponsableJugador, Documento, Nombre, Apellidos, Parentesco, rtsresponsablejugador_det.Estado');
+		$this->db->from($this->tabla);
+		$this->db->join('rtsresponsablejugador_det', 'rtspersona_deb.IdPersona = rtsresponsablejugador_det.IdPersona_deb', 'INNER');
+		$this->db->where('rtsresponsablejugador_det.IdResponsableJugador', $id);
+		$res = $this->db->get();
+
+		return $res;
+	}
+
+	public function actualizarResponsable($data, $iIdResponsableJugador)
+	{
+		$this->db->where('rtsresponsablejugador_det.IdResponsableJugador', $iIdResponsableJugador);
+		$res = $this->db->update('rtsresponsablejugador_det', $data);
+
+		return $res;
+	}
+
 }
 
 /* End of file mdl_persona.php */

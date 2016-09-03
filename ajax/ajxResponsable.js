@@ -9,18 +9,73 @@ $(window).load(function() {
 	NProgress.done();
 });
 
-function editarresJug(id)
+function recargar()
 {
-	alert(id);
+	tabla.ajax.reload(null,false);
 }
 
-function variarEstadoresJug(id)
+function editarresJug(id)
 {
-	alert(id);
+	$('#modalEditarResponsable').modal('show');
+	$('#loadingRJ').show();
+	$('#listoRJ').hide();
+
+	NProgress.start();
+	$.ajax({
+		url: 'responsables/listResponsable',
+		type: 'POST',
+		dataType: 'JSON',
+		data: {iIdResponsableJugador: id},
+		success:function(res)
+		{
+			$('[id = "eiIdResponsableJugador"]').val(res.IdResponsableJugador);
+			$('[id = "ePersona"]').val('DNI: ' + res.Documento + ' - ' + res.Nombre + ' ' + res.Apellidos);
+			$('[id = "eParentesco"]').val(res.Parentesco);
+
+			setTimeout(function() {
+				$('#loadingRJ').hide();
+				$('#listoRJ').show();
+			}, 2000);
+			NProgress.done();
+		}
+	});
+}
+
+function variarEstadoResponsable(id)
+{
+	swal({
+		title: "¿Estas seguro?",
+		text: "¿Realmente deseas cambiar el estado de este responsable?",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#DD6B55",
+		confirmButtonText: "Si, cámbialo!",
+	}).then(function() {
+		NProgress.start();
+		$.ajax({
+			url: "responsables/variarResponsable",
+			type: "POST",
+			data: { iIdResponsableJugador: id },
+			success: function(res) 
+			{
+				recargar();
+				if (res == 'ok') 
+				{
+					swal("Completado!", "Se ha cambiado el estado de dicho responsable.", "success");
+				} 
+				else
+				{
+					sweetAlert("Oops...", "No se ha cambiado el estado de dicho responsable.", "error");
+				}
+				NProgress.done();
+			}
+		});
+	});
 }
 
 $('#gResponsablesJugador').submit(function(event) {
 	event.preventDefault();
+	NProgress.start();
 
 	$.ajax({
 		url: 'responsables/asignarResponsable',
@@ -28,16 +83,43 @@ $('#gResponsablesJugador').submit(function(event) {
 		data: $(this).serialize(),
 		success:function(res)
 		{
-			console.log(res);
-			// if (res == 'ok')
-			// {
-			// 	sweetAlert("Completado!", "Se ha cambiado el modificado la información de esta etapa.", "success");
-			// } 
-			// else
-			// {
-			// 	sweetAlert("Oops...", "No se ha cambiado el modificado la información de esta etapa.", "error");
-			// }
+			if (res == 'ok')
+			{
+				sweetAlert("Completado!", "Se ha asignado el responsable.", "success");
+			} 
+			else
+			{
+				sweetAlert("Oops...", "No se ha asignado el responsable.", "error");
+			}
+			recargar();
+			NProgress.done();
 		}
 	});
 	
+});
+
+$('#formEditarResponsable').submit(function(event) {
+	event.preventDefault();
+
+	NProgress.start();
+
+	$.ajax({
+		url: 'responsables/editarResponsable',
+		type: 'POST',
+		data: $(this).serialize(),
+		success:function(res)
+		{
+			recargar();
+			$('#modalEditarResponsable').modal('hide');
+			if (res == 'ok')
+			{
+				sweetAlert("Completado!", "Se ha editado el responsable.", "success");
+			} 
+			else
+			{
+				sweetAlert("Oops...", "No se ha editado el responsable.", "error");
+			}
+			NProgress.done();
+		}
+	});
 });

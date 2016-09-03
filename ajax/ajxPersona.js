@@ -228,7 +228,7 @@ function variarEstadoPersona(id)
 				}
 			}
 		});
-	})
+	});
 }
 
 function administrarCuenta(id,tipo)

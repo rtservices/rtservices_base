@@ -20,7 +20,7 @@ class Responsables extends CI_Controller {
 			redirect('login');
 		}
 
-		$oJugador = $this->mdl_persona->listarJugador($iIdJugador);
+		$oJugador = $this->mdl_persona->listarJugador_planclase($iIdJugador);
 		if ($oJugador)
 		{
 			$data['titulo'] = 'Gestion de responsables';
@@ -73,7 +73,7 @@ class Responsables extends CI_Controller {
 				$row[] = '
 				<center>
 					'.$edit.'
-					<a class="btn btn-'.$clase.' btn-lg btn-expand" style="'.$color.'" href="javascript:void()" title="'.$accion.'" onclick="variarEstadoresJug('.$resJug->IdResponsableJugador.')"><i class="fa fa-exchange"></i></a>
+					<a class="btn btn-'.$clase.' btn-lg btn-expand" style="'.$color.'" href="javascript:void()" title="'.$accion.'" onclick="variarEstadoResponsable('.$resJug->IdResponsableJugador.')"><i class="fa fa-exchange"></i></a>
 				</center>';
 
 				$data[] = $row;
@@ -96,8 +96,6 @@ class Responsables extends CI_Controller {
 			$iIdResponsable = $this->input->post('idResponsable');
 			$sResponsableParentesco = $this->input->post('sResponsableParentesco');
 
-			echo $iIdJugador;
-
 			$aData = array(
 				'IdPersona_deb' => $iIdResponsable, 
 				'Parentesco' => $sResponsableParentesco, 
@@ -106,6 +104,79 @@ class Responsables extends CI_Controller {
 				);
 
 			if ($this->mdl_persona->asignarResponsable($aData))
+			{
+				echo "ok";
+			}
+			else
+			{
+				echo "no";
+			}
+		}
+		else
+		{
+			redirect('error404');
+		}
+	}
+
+	public function editarResponsable()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$iIdResponsableJugador = $this->input->post('eiIdResponsableJugador');
+			$sParentesco = $this->input->post('eParentesco');
+
+			$data = array('Parentesco' => $sParentesco);
+			if ($this->mdl_persona->actualizarResponsable($data, $iIdResponsableJugador))
+			{
+				echo "ok";
+			}
+			else
+			{
+				echo "no";
+			}
+		}
+		else
+		{
+			redirect('error404');
+		}
+	}
+
+	public function listResponsable()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$iIdResponsableJugador = $this->input->post('iIdResponsableJugador');
+			$data = $this->mdl_persona->listResponsable($iIdResponsableJugador)->row();
+
+			echo json_encode($data);
+		}
+		else
+		{
+			redirect('error404');
+		}
+	}
+
+	public function variarResponsable()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$iIdResponsableJugador = $this->input->post('iIdResponsableJugador');
+			$bEstado = 0;
+			foreach ($this->mdl_persona->listResponsable($iIdResponsableJugador)->result() as $aData)
+			{
+				if ($aData->Estado == 1)
+				{
+					$bEstado = 0;
+				}
+				else
+				{
+					$bEstado = 1;
+				}
+				break;
+			}
+
+			$data = array('Estado' => $bEstado);
+			if ($this->mdl_persona->actualizarResponsable($data, $iIdResponsableJugador))
 			{
 				echo "ok";
 			}

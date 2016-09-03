@@ -68,13 +68,13 @@
 <div class="modal fade bs-example-modal-lg" id="modalCuenta" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel"><center>Gestion de cuenta</center></h4>
-			</div>
-			<div class="modal-body">
-				<div style="width: 300px; height: 300px;" class="precarga" id="loadingCU"></div>
-				<div id="listoCU">
+			<div style="width: 300px; height: 300px;" class="precarga" id="loadingCU"></div>
+			<div id="listoCU">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel"><center>Gestion de cuenta</center></h4>
+				</div>
+				<div class="modal-body">
 					<div class="row">
 						<div class="col-md-1"></div>
 						<div class="col-md-10">
@@ -128,14 +128,14 @@
 							</div>
 						</div>
 						<div class="col-md-1"></div>
+						<div class="col-md-1"></div>
 					</div>
-					<div class="col-md-1"></div>
 				</div>
-			</div>
-			<div class="modal-footer">
-				<center>
-					<button type="reset" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-				</center>
+				<div class="modal-footer">
+					<center>
+						<button type="reset" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+					</center>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -233,14 +233,14 @@
 			<div class="modal-content">
 				<form id="editar" name="editar">
 					<input type="hidden" id="idpersona" name="idpersona">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="myModalLabel"><center>Modificar persona</center></h4>
-						<center><small>Campos con <span style="color: red;">*</span> son requeridos.</small></center>
-					</div>
-					<div class="modal-body">
-						<div style="width: 300px; height: 300px;" class="precarga" id="loadingEP"></div>
-						<div id="listoEP">
+					<div style="width: 300px; height: 300px;" class="precarga" id="loadingEP"></div>
+					<div id="listoEP">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModalLabel"><center>Modificar persona</center></h4>
+							<center><small>Campos con <span style="color: red;">*</span> son requeridos.</small></center>
+						</div>
+						<div class="modal-body">
 							<div class="row">
 								<div class="col-md-1"></div>
 								<div class="col-md-10">
@@ -305,11 +305,9 @@
 								<div class="col-md-1"></div>
 							</div>
 						</div>
-					</div>
-					<div class="modal-footer">
-						<div id="btnsEditar">
+						<div class="modal-footer">
 							<center>
-								<button type="reset" class="btn btn-danger btn-expand" style="background-color: #2A2A2A;"data-dismiss="modal">Cancelar</button>
+								<button type="reset" class="btn btn-danger btn-expand" style="background-color: #2A2A2A;" data-dismiss="modal">Cancelar</button>
 								<button type="submit" class="btn btn-info btn-expand" style="background-color: #2A2A2A;">Modificar persona</button>
 							</center>
 						</div>
@@ -322,13 +320,13 @@
 	<div class="modal fade bs-example-modal-lg" id="modalInformacion" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel"><center>Información de <span id="nombreCI"></span></center></h4>
-				</div>
-				<div class="modal-body">
-					<div style="width: 300px; height: 300px;" class="precarga" id="loadingIJ"></div>
-					<div id="listoIJ">
+				<div style="width: 300px; height: 300px;" class="precarga" id="loadingIJ"></div>
+				<div id="listoIJ">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel"><center>Información de <span id="nombreCI"></span></center></h4>
+					</div>
+					<div class="modal-body">
 						<div class="row">
 							<div class="col-md-1"></div>
 							<div class="col-md-10">
@@ -415,124 +413,12 @@
 						</div>
 					</div>
 				</div>
-				<div class="modal-footer">
-					<center>
-						<button type="button" class="btn btn-info btn-expand" style="background-color: #2A2A2A;"data-dismiss="modal">Cerrar</button>
-					</center>
-				</div>
+			</div>
+			<div class="modal-footer">
+				<center>
+					<button type="button" class="btn btn-info btn-expand" style="background-color: #2A2A2A;"data-dismiss="modal">Cerrar</button>
+				</center>
 			</div>
 		</div>
 	</div>
-
-	<div class="modal fade bs-example-modal-lg" id="modalPlanclase" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel"><center>Gestión de planes de clase<span name="nombrejugador"></span></center></h4>
-				</div>
-				<div class="modal-body">
-					<div style="width: 300px; height: 300px;" class="precarga" id="loadingPC"></div>
-					<div id="listoPC">
-						<div class="row">
-							<div class="col-md-1"></div>
-							<div class="col-md-10">
-								<div class="row">
-									<h4 style="text-align: center;">Información de planes de clase del jugador</h4>
-									<input type="hidden" id="idpersona" name="idpersona">
-									<input type="hidden" id="idpersonarol" name="idpersonarol">
-									<div class="row">
-										<div class="col-md-12 form-group">
-											<center><label class="control-label">Dni - Nombre completo</label></center>
-											<input class="form-control" readonly id="infojugador" name="infojugador" type="text" style="text-align: center;">
-										</div>
-										<div id="divNot"></div>
-									</div>
-								</div>
-								<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-									<div class="panel panel-default">
-										<div class="panel-heading" role="tab" id="headingOne">
-											<h4 class="panel-title">
-												<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-													Nuevo responsable
-												</a>
-											</h4>
-										</div>
-										<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-											<div class="panel-body">
-												<form id="formResponsable" name="formResponsable">
-													<input type="hidden" id="idjugadorR" name="idjugadorR">
-													<div class="row">
-														<div class="col-md-12 form-group">
-															<div class="col-md-6 form-group">
-
-																<select data-placeholder="Seleccione una cantidad de meses" name="idmeses"  id="idmeses" class="chosen-select mb-15" tabindex="-1" style="display: none;">
-																	<option value="1">1 Meses</option>
-																	<option value="2">2 Meses</option>
-																	<option value="3">3 Meses</option>
-																	<option value="4">4 Meses</option>
-																	<option value="5">5 Meses</option>
-																	<option value="6">6 Meses</option>
-																	<option value="7">7 Meses</option>
-																	<option value="8">8 Meses</option>
-																	<option value="9">9 Meses</option>
-																	<option value="10">10 Meses</option>
-																	<option value="11">11 Meses</option>
-																	<option value="12">12 Meses</option>
-																</select>
-															</div>
-														</div>
-														<div class="row">
-															<div class="form-group" style="margin-top: 10px;">
-																<center>
-																	<button type="submit" class="btn btn-warning btn-expand" style="background-color: #2A2A2A;">Asignar responsable a <span id="nombre"></span></button>
-																</center>
-															</div>
-														</div>
-													</form>
-												</div>
-											</div>
-										</div>
-										<div class="panel panel-default">
-											<div class="panel-heading" role="tab" id="headingTwo">
-												<h4 class="panel-title">
-													<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-														Historial de planes de clase<span name="nombrejugador"></span>
-													</a>
-												</h4>
-											</div>
-											<div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
-												<div class="panel-body">
-													<div class="row">
-														<table id="tablaPlanClase" class="table table-hover">
-															<thead>
-																<tr>
-																	<th>-</th>
-																	<th style="color: red;">Fecha de Inicio</th>
-																	<th>Dias Restantes</th>
-																	<th style="text-align: center;">Acciones</th>
-																</tr>
-															</thead>
-															<tbody>
-
-															</tbody>
-														</table>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-1"></div>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<center>
-							<button type="reset" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-						</center>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+</div>
