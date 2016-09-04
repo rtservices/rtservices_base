@@ -412,13 +412,12 @@
 							<div class="col-md-1"></div>
 						</div>
 					</div>
+					<div class="modal-footer">
+						<center>
+							<button type="button" class="btn btn-info btn-expand" style="background-color: #2A2A2A;"data-dismiss="modal">Cerrar</button>
+						</center>
+					</div>
 				</div>
-			</div>
-			<div class="modal-footer">
-				<center>
-					<button type="button" class="btn btn-info btn-expand" style="background-color: #2A2A2A;"data-dismiss="modal">Cerrar</button>
-				</center>
 			</div>
 		</div>
 	</div>
-</div>
