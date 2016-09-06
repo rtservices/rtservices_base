@@ -9,18 +9,18 @@ class Mdl_planclase extends CI_Model {
 		parent::__construct();
 	}
 
-	public function consultarJugador()
+	public function consultarJugador($idPersona)
 	{
 		$this->db->select('*');
-		$this->db->from($tabla);
-		$this->db->where('Field / comparison', $Value);
+		$this->db->from($this->tabla);
+		// $this->db->where('Field / comparison', $Value);
 	}
 
 	public function consultarPlanJugador()
 	{
 		$this->db->select('*');
-		$this->db->from($tabla);
-		$this->db->where('Field / comparison', $Value);
+		$this->db->from($this->tabla);
+		// $this->db->where('Field / comparison', $Value);
 	}
 
 }

@@ -163,20 +163,6 @@
                         <span class="text">Gestión de materiales</span>
                     </a>
                 </li>
-                <li class="sidebar-category">
-                    <span>Torneo</span>
-                    <span class="pull-right"><i class="fa fa-trophy"></i></span>
-                </li>
-                <li class="submenu">
-                    <a href="torneo">
-                        <span class="icon"><i class="fa fa-trophy"></i></span>
-                        <span class="text">Gestion de torneos</span>
-                    </a>
-                    <a href="categoria">
-                        <span class="icon"><i class="fa fa-cubes"></i></span>
-                        <span class="text">Gestión de categorias</span>
-                    </a>
-                </li>
             </ul>
             <div id="tour-10" class="sidebar-footer hidden-xs hidden-sm hidden-md">
                 <a class="pull-left" data-toggle="tooltip" data-placement="top"><i class="fa fa-circle-o"></i></a>

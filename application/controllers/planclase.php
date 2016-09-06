@@ -5,6 +5,7 @@ class Planclase extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model('mdl_planclase');
 	}
 
 	public function index()
@@ -14,7 +15,7 @@ class Planclase extends CI_Controller {
 			redirect('login');
 		}
 
-		$iIdPC = $this->input->get('idPc');
+		$iIdPC = $this->input->get('idP');
 		if ($iIdPC == '')
 		{
 			$data['titulo'] = 'Gestion de Planes de Clase';
@@ -26,7 +27,7 @@ class Planclase extends CI_Controller {
 		else
 		{
 			$resJugador = $this->mdl_planclase->consultarJugador($iIdPC);
-			$resJugador = $this->mdl_planclase->consultarPlanJugador($iIdPC);
+			// $resJugador = $this->mdl_planclase->consultarPlanJugador($iIdPC);
 			$jugador = 'Esneider Mejia';
 			$data['titulo'] = $jugador . ' - Planes de Clase';
 			$this->load->view('msp/cabecera', $data);
