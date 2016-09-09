@@ -15,10 +15,13 @@ class Planclase extends CI_Controller {
 			redirect('login');
 		}
 
-		$iIdPC = $this->input->get('idP');
-		if ($iIdPC == '')
+		$iIdPC = $this->input->get('idPc');
+		if ($iIdPC)
 		{
-			$data['titulo'] = 'Gestion de Planes de Clase';
+			$resJugador = $this->mdl_planclase->consultarJugador($iIdPC);
+			// $jugador = 'DNI ' . $resJugador->Documento . ' | ' . $resJugador->Nombre . ' ' . $resJugador->Apellidos;
+			$data['nomJugador'] = $resJugador->Nombre . ' ' . $resJugador->Apellidos;
+			$data['titulo'] = 'Planes de Clase';
 			$this->load->view('msp/cabecera', $data);
 			$this->load->view('planclase/planclase');
 			$this->load->view('msp/footer');
@@ -26,14 +29,7 @@ class Planclase extends CI_Controller {
 		}
 		else
 		{
-			$resJugador = $this->mdl_planclase->consultarJugador($iIdPC);
-			// $resJugador = $this->mdl_planclase->consultarPlanJugador($iIdPC);
-			$jugador = 'Esneider Mejia';
-			$data['titulo'] = $jugador . ' - Planes de Clase';
-			$this->load->view('msp/cabecera', $data);
-			$this->load->view('planclasejug/planclasejug');
-			$this->load->view('msp/footer');
-			$this->load->view('planclasejug/add');
+			redirect('persona');
 		}
 	}
 
