@@ -80,16 +80,17 @@ function eliminarInscripcionClase(id)
 	});
 }
 
-//Ajax de registrar
-$('#gClaseR').submit(function(event) {
+
+
+$('#registroJugadorC').submit(function(event) {
 	event.preventDefault();
-	if ($('#gClaseR').validate().form()) 
+	if ($('#registroJugadorC').validate().form()) 
 	{
 		NProgress.start();
 		$.ajax({
-			url: 'clase/registrarClases',
+			url: 'clase/addJugadorClase',
 			type: 'POST',
-			data:$('#gClaseR').serialize(),
+			data:$('#registroJugadorC').serialize(),
 			success:function(res){
 				actualizar();
 				if(res=='ok')

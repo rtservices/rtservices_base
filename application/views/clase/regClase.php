@@ -119,7 +119,7 @@
 					<div class="clearfix"></div>
 				</div>
 				<div class="panel-body no-padding" style="margin: 20px; font-size: 15px">
-					<form id="gJugadorClase" name="gJugadorClase">
+					<form id="registroJugadorC" name="registroJugadorC">
 						<input type="hidden" name="idClaseActual" id="idClaseActual" >
 						<div class="row">
 							<div class="col-md-2"></div>
@@ -133,6 +133,14 @@
 									<div class="col-md-12 form-group">
 										<center><label class="control-label">Documento - Nombre completo </label></center>
 										<select id="selPlanJugador" name="selPlanJugador" class="chosen-select mb-16" placeholder="Seleccione una opción">
+											<?php 
+											foreach ($this->mdl_clase->selJugadorPlan() as $valJugador)
+											{ 
+												?>
+												<option value="<?= $valJugador->IdPlanClase ?>"><?= $valJugador->Documento ?> - <?= $valJugador->Nombre.' '.$valJugador->Apellidos ?></option>
+												<?php 
+											} 
+											?>
 										</select>
 									</div>
 								</div>

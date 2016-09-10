@@ -16,7 +16,7 @@ function actualizar()
 
 function nuevaC()
 {
-	$('#registro')[0].reset();
+	$('#registroC')[0].reset();
 	$('#modalRegistro').modal('show');
 }
 
@@ -116,5 +116,33 @@ $('#gClase').submit(function(event) {
 
 	});
 
+});
+
+//Ajax de registrar
+$('#registroC').submit(function(event) {
+	event.preventDefault();
+	if ($('#registroC').validate().form()) 
+	{
+		NProgress.start();
+		$.ajax({
+			url: 'clase/registrarClases',
+			type: 'POST',
+			data:$('#registroC').serialize(),
+			success:function(res){
+				actualizar();
+				if(res=='ok')
+				{
+					NProgress.done();
+					swal("Completado!", "Se ha registrado la clase.", "success");
+				} 
+				else
+				{
+					NProgress.done();
+					sweetAlert("Oops...", "No se ha registrado la clase.", "error");
+				}
+			}
+
+		});
+	}
 });
 

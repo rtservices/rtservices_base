@@ -10,7 +10,7 @@ class Clase extends CI_Controller {
 		parent::__construct();
 		$this->load->model('mdl_clase');
 		$this->idClaseActual_principal = ($this->input->get('clase')) ? $this->input->get('clase') : null;
-		$this->registro = ($this->input->get('clase')) ? $this->input->get('clase') : "n";
+	
 	}
 
 	public function index()
@@ -28,15 +28,7 @@ class Clase extends CI_Controller {
 			$this->load->view('msp/footer');
 			$this->load->view('clase/add');
 		}
-		else if ($this->registro == "n")
-		{
-			$data['cpersona'] = $this->mdl_login->cargarUsuario();
-			$data['titulo'] = 'Gestión de Clases';
-			$this->load->view('msp/cabecera', $data);
-			$this->load->view('clase/regClase');
-			$this->load->view('msp/footer');
-			$this->load->view('clase/addGC');
-		}
+		
 		else
 		{
 			$data['idClase'] = $this->idClaseActual_principal;
@@ -85,7 +77,7 @@ class Clase extends CI_Controller {
 					$edit = '<a class="btn btn-primary btn-expand" style="color:white; background-color: #2A2A2A;" href="javascript:void()" title="Debes tener activa esta clase para poder administrarla." disabled="true"><i class="fa fa-pencil"></i></a>';
 				}
 
-				if ($clase->cantidad_jugadores < 10)
+				/*if ($clase->cantidad_jugadores < 10)
 				{
 					$colorCJ = 'color: #31B404';
 				}
@@ -96,14 +88,15 @@ class Clase extends CI_Controller {
 				else if ($clase->cantidad_jugadores >= 14)
 				{
 					$colorCJ = 'color: #FE2E2E';
-				}
+				}*/
 				
 				
 				$row = array();
 				$row[] = $estado;
 				$row[] = $clase->NombreClase;
 				$row[] = $clase->Dia.' - '.$clase->HoraInicio .' a '.$clase->HoraFinal;
-				$row[] = '<a style="'. $colorCJ .'">'.$clase->cantidad_jugadores.'</a> inscritos.';
+				//$row[] = '<a style="'. $colorCJ .'">'.$clase->cantidad_jugadores.'</a> inscritos.';
+				$row[] = $clase->Nombre.' '.$clase->Apellidos;
 
 				$row[] = '
 				<center>
@@ -341,21 +334,23 @@ class Clase extends CI_Controller {
 			redirect('error404');
 		}
 	}
-//Registrar del material
+//Registrar de la clase
 	public function registrarClases()
 	{
 		if ($this->input->is_ajax_request())
 		{
 			$data = array(
 				"Estado" => 1,
-				'NombreClase' => $this->input->post('nombreClase'),
-				'HoraInicio' => $this->input->post('horaInicio'),
-				'HoraFinal' => $this->input->post('horaFin'),
-				'Dia' => $this->input->post('diaClase'),
-				'IdPersonaRol_det' => $this->input->post('instructorClase')
+				'NombreClase' => $this->input->post('nombreClaseR'),
+				'HoraInicio' => $this->input->post('horaInicioR'),
+				'HoraFinal' => $this->input->post('horaFinR'),
+				'Dia' => $this->input->post('diaClaseR'),
+				'IdPersonaRol_det' => $this->input->post('instructorClaseR')
 				);
+                
 			if($this->mdl_clase->registrarClase($data))
 			{
+
 				echo "ok";
 			} else
 			{
