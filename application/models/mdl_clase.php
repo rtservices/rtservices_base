@@ -44,6 +44,11 @@ class Mdl_clase extends CI_Model {
 	public function registrarClase($data)
 	{
 		$res = $this->db->insert($this->tabla, $data);
+		if ($res) 
+		{
+			$res = $this->db->insert_id();
+		}
+		
 		return $res;
 	}
 
@@ -134,9 +139,9 @@ class Mdl_clase extends CI_Model {
 
 		return $res;
 	}
-    
-    
-    
+
+
+
 	public function inscribirPlanJugadorClase($data)
 	{
 		$res = $this->db->insert('rtsclasejugador_det', $data);

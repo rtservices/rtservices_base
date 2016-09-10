@@ -64,21 +64,23 @@ function variarEstadoClase(id)
 	});
 }
 
-$('#registro').submit(function(event) {
+$('#registroC').submit(function(event) {
 	event.preventDefault();
 
 	NProgress.start();
 	$.ajax({
 		url: 'clase/registrarClase',
 		type: 'POST',
-		data: $('#registro').serialize(),
+		data: $('#registroC').serialize(),
 		success:function(res)
 		{
-			if (res != "no")
+
+			if (res != "no" )
 			{
 				NProgress.done();
-				$("#DivAccionRegistrar").html(res);
-			}
+				location.href = 'clase?clase='+res;
+				console.log(res);	
+			}		
 			else
 			{
 				NProgress.done();
@@ -87,8 +89,6 @@ $('#registro').submit(function(event) {
 		},
 
 	});
-	
-
 });
 
 
@@ -117,32 +117,3 @@ $('#gClase').submit(function(event) {
 	});
 
 });
-
-//Ajax de registrar
-$('#registroC').submit(function(event) {
-	event.preventDefault();
-	if ($('#registroC').validate().form()) 
-	{
-		NProgress.start();
-		$.ajax({
-			url: 'clase/registrarClases',
-			type: 'POST',
-			data:$('#registroC').serialize(),
-			success:function(res){
-				actualizar();
-				if(res=='ok')
-				{
-					NProgress.done();
-					swal("Completado!", "Se ha registrado la clase.", "success");
-				} 
-				else
-				{
-					NProgress.done();
-					sweetAlert("Oops...", "No se ha registrado la clase.", "error");
-				}
-			}
-
-		});
-	}
-});
-

@@ -4,13 +4,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Clase extends CI_Controller {
 
 	private $idClaseActual_principal;
-    private $registro;
+	private $registro;
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('mdl_clase');
 		$this->idClaseActual_principal = ($this->input->get('clase')) ? $this->input->get('clase') : null;
-	
+
 	}
 
 	public function index()
@@ -100,9 +100,9 @@ class Clase extends CI_Controller {
 
 				$row[] = '
 				<center>
-					<a class="btn btn-info btn-expand" style="color:white; background-color: #2A2A2A;" href="javascript:void()" title="Más información" onclick="verClase('.$clase->IdClase.')"><i class="fa fa-info-circle"></i></a>
-					'.$edit.'
-					<a class="btn btn-'.$estilo.' btn-expand" style="'.$color.'" href="javascript:void()" title="'.$accion.'" onclick="variarEstadoClase('.$clase->IdClase.')"><i class="fa fa-exchange"></i></a>
+				<a class="btn btn-info btn-expand" style="color:white; background-color: #2A2A2A;" href="javascript:void()" title="Más información" onclick="verClase('.$clase->IdClase.')"><i class="fa fa-info-circle"></i></a>
+				'.$edit.'
+				<a class="btn btn-'.$estilo.' btn-expand" style="'.$color.'" href="javascript:void()" title="'.$accion.'" onclick="variarEstadoClase('.$clase->IdClase.')"><i class="fa fa-exchange"></i></a>
 				</center>';
 
 				$data[] = $row;
@@ -128,7 +128,7 @@ class Clase extends CI_Controller {
 				$row[] = $clase->Nombre.' '.$clase->Apellidos;
 				$row[] = '
 				<center>
-					<a class="btn btn-danger btn-expand" style="color: #F13A3A; background-color: #2A2A2A;" href="javascript:void()" title="Eliminar inscripción de '. $clase->Nombre.' '.$clase->Apellidos .' de esta clase." onclick="eliminarInscripcionClase('.$clase->IdClasejugador.')"><i class="fa fa-close"></i></a>
+				<a class="btn btn-danger btn-expand" style="color: #F13A3A; background-color: #2A2A2A;" href="javascript:void()" title="Eliminar inscripción de '. $clase->Nombre.' '.$clase->Apellidos .' de esta clase." onclick="eliminarInscripcionClase('.$clase->IdClasejugador.')"><i class="fa fa-close"></i></a>
 				</center>';
 
 				$data[] = $row;
@@ -221,32 +221,6 @@ class Clase extends CI_Controller {
 			redirect('error404');
 		}
 	}
-	public function registrarClase()
-	{
-		if ($this->input->is_ajax_request())
-		{
-			$data = array(
-				"Estado" => 1,
-				'NombreClase' => $this->input->post('claseR'),
-				'HoraInicio' => $this->input->post('HorainicioR'),
-				'HoraFinal' => $this->input->post('HorafinalR'),
-				'Dia' => $this->input->post('DiaR')
-				);
-
-			$instructorArr = "";
-			foreach ($this->mdl_clase->listarInstructores() as $instructor)
-			{
-				$instructorArr .= '<option value="'.$instructor->IdPersonaRol.'"> DNI: '.$instructor->Documento.' - '.$instructor->Nombre.' '.$instructor->Apellidos.'</option>';
-			}
-
-			//PENDIENTE  **
-		} 
-		else 
-		{
-			redirect('error404');
-		}
-
-	}
 
 	public function modificarClase()
 	{
@@ -335,7 +309,7 @@ class Clase extends CI_Controller {
 		}
 	}
 //Registrar de la clase
-	public function registrarClases()
+	public function registrarClase()
 	{
 		if ($this->input->is_ajax_request())
 		{
@@ -347,15 +321,8 @@ class Clase extends CI_Controller {
 				'Dia' => $this->input->post('diaClaseR'),
 				'IdPersonaRol_det' => $this->input->post('instructorClaseR')
 				);
-                
-			if($this->mdl_clase->registrarClase($data))
-			{
 
-				echo "ok";
-			} else
-			{
-				echo "error";
-			}
+			echo $this->mdl_clase->registrarClase($data);
 		} 
 		else 
 		{
