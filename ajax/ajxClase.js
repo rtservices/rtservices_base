@@ -117,3 +117,24 @@ $('#gClase').submit(function(event) {
 	});
 
 });
+
+function listarPartidos(id)
+{
+	NProgress.start();
+    $.ajax({
+    	url: 'partidos/listarPartidos',
+		type: 'POST',
+		dataType: 'JSON',
+		data: {id: id},
+    	success:function(res){
+    		$('[id = "nombre"]').text(res.NombreClase);
+    		$('[id = "dia"]').text(res.Dia);
+    		$('[id = "horainicio"]').text(res.HoraInicio);
+    		$('[id = "horafinal"]').text(res.horaFFinal);
+    		$('[id = "instructor"]').text(res.NombreCategoria);
+    		$('#modalInfo').modal('show');
+	        NProgress.done();
+    	}
+    });
+	
+}
