@@ -11,13 +11,23 @@ class Mdl_planclase extends CI_Model {
 
 	public function consultarJugador($idPersona)
 	{
-		$this->db->select('rtspersona_deb.Nombre, rtspersona_deb.Apellidos, rtspersona_deb.Documento');
-		$this->db->from($this->tabla);
-		$this->db->join('rtspersonarol_det', 'rtspersonarol_det.IdPersonaRol = rtsplanclase_deb.IdPersonaRol_det', 'LEFT');
-		$this->db->join('rtspersona_deb', 'rtspersona_deb.IdPersona = rtspersonarol_det.IdPersona_deb', 'LEFT');
+		$this->db->select('rtspersonarol_det.IdPersonaRol, rtspersona_deb.Nombre, rtspersona_deb.Apellidos, rtspersona_deb.Documento');
+		$this->db->from('rtspersona_deb');
+		$this->db->join('rtspersonarol_det', 'rtspersonarol_det.IdPersona_deb = rtspersona_deb.IdPersona', 'LEFT');
+		$this->db->join('rtsplanclase_deb', 'rtsplanclase_deb.IdPersonaRol_det = rtspersonarol_det.IdPersonaRol', 'LEFT');
 		$this->db->where('rtspersonarol_det.IdRol', 3);
 		$this->db->where('rtspersona_deb.IdPersona', $idPersona);
 		$res = $this->db->get()->row();
+
+		return $res;
+	}
+
+	public function cargarTablaPC($Id)
+	{
+		$this->db->select('IdPlanClase, FechaInicio, Estado');
+		$this->db->from($this->tabla);
+		$this->db->where('IdPersonaRol_det', $Id);
+		$res = $this->db->get()->result();
 
 		return $res;
 	}
