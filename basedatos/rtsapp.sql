@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.10.12
+-- version 4.2.7.1
 -- http://www.phpmyadmin.net
 --
--- Servidor: 127.7.173.2:3306
--- Tiempo de generación: 23-07-2016 a las 19:32:11
--- Versión del servidor: 5.5.45
--- Versión de PHP: 5.3.3
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 13-09-2016 a las 16:15:02
+-- Versión del servidor: 5.6.20
+-- Versión de PHP: 5.5.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,35 +17,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de datos: `rtservicesv`
+-- Base de datos: `rtsapp`
 --
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `rtscategoria`
---
-
-CREATE TABLE IF NOT EXISTS `rtscategoria` (
-  `IdCategoria` int(11) NOT NULL AUTO_INCREMENT,
-  `NombreCategoria` varchar(45) COLLATE utf8_bin NOT NULL,
-  `Estado` tinyint(2) NOT NULL,
-  PRIMARY KEY (`IdCategoria`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=9 ;
-
---
--- Volcado de datos para la tabla `rtscategoria`
---
-
-INSERT INTO `rtscategoria` (`IdCategoria`, `NombreCategoria`, `Estado`) VALUES
-(1, 'Cuarta', 1),
-(2, 'Quinta', 1),
-(3, 'Tercera', 1),
-(4, 'Segunda', 1),
-(5, 'Primera', 1),
-(6, 'Menos 12', 1),
-(7, 'Categoría B', 1),
-(8, 'Categoría A', 1);
 
 -- --------------------------------------------------------
 
@@ -54,13 +27,10 @@ INSERT INTO `rtscategoria` (`IdCategoria`, `NombreCategoria`, `Estado`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `rtsclasejugador_det` (
-  `IdClasejugador` int(11) NOT NULL AUTO_INCREMENT,
+`IdClasejugador` int(11) NOT NULL,
   `Estado` tinyint(2) NOT NULL,
   `IdClase_deb` int(11) DEFAULT NULL,
-  `IdPlanClase_deb` int(11) DEFAULT NULL,
-  PRIMARY KEY (`IdClasejugador`),
-  KEY `fkcl` (`IdClase_deb`),
-  KEY `fkplacla` (`IdPlanClase_deb`)
+  `IdPlanClase_deb` int(11) DEFAULT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=6 ;
 
 --
@@ -78,16 +48,14 @@ INSERT INTO `rtsclasejugador_det` (`IdClasejugador`, `Estado`, `IdClase_deb`, `I
 --
 
 CREATE TABLE IF NOT EXISTS `rtsclase_deb` (
-  `IdClase` int(11) NOT NULL AUTO_INCREMENT,
+`IdClase` int(11) NOT NULL,
   `NombreClase` varchar(50) COLLATE utf8_bin NOT NULL,
   `HoraInicio` varchar(20) COLLATE utf8_bin NOT NULL,
   `HoraFinal` varchar(20) COLLATE utf8_bin NOT NULL,
   `Dia` varchar(20) COLLATE utf8_bin NOT NULL,
   `CantidadJugadores` int(2) NOT NULL,
   `Estado` tinyint(2) NOT NULL,
-  `IdPersonaRol_det` int(11) DEFAULT NULL,
-  PRIMARY KEY (`IdClase`),
-  KEY `fkins` (`IdPersonaRol_det`)
+  `IdPersonaRol_det` int(11) DEFAULT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=9 ;
 
 --
@@ -107,32 +75,14 @@ INSERT INTO `rtsclase_deb` (`IdClase`, `NombreClase`, `HoraInicio`, `HoraFinal`,
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `rtscuadro_deb`
---
-
-CREATE TABLE IF NOT EXISTS `rtscuadro_deb` (
-  `IdCuadro` int(11) NOT NULL AUTO_INCREMENT,
-  `NombreCuadro` varchar(25) COLLATE utf8_bin NOT NULL,
-  `FechaCreacion` date NOT NULL,
-  `Nivel` varchar(45) COLLATE utf8_bin NOT NULL,
-  `Estado` tinyint(2) NOT NULL,
-  `IdEtapa_deb` int(11) DEFAULT NULL,
-  PRIMARY KEY (`IdCuadro`),
-  KEY `fketp` (`IdEtapa_deb`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `rtseps`
 --
 
 CREATE TABLE IF NOT EXISTS `rtseps` (
-  `IdEps` int(11) NOT NULL AUTO_INCREMENT,
+`IdEps` int(11) NOT NULL,
   `NombreEps` varchar(40) COLLATE utf8_bin NOT NULL,
   `Telefono` varchar(15) COLLATE utf8_bin NOT NULL,
-  `Estado` tinyint(2) NOT NULL,
-  PRIMARY KEY (`IdEps`)
+  `Estado` tinyint(2) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=4 ;
 
 --
@@ -147,109 +97,16 @@ INSERT INTO `rtseps` (`IdEps`, `NombreEps`, `Telefono`, `Estado`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `rtsetapajugador_det`
---
-
-CREATE TABLE IF NOT EXISTS `rtsetapajugador_det` (
-  `IdEtapaJugador` int(11) NOT NULL AUTO_INCREMENT,
-  `Estado` tinyint(2) NOT NULL,
-  `IdEtapa_deb` int(11) DEFAULT NULL,
-  `IdPersonaRol_det` int(11) DEFAULT NULL,
-  `IdCategoria` int(11) DEFAULT NULL,
-  PRIMARY KEY (`IdEtapaJugador`),
-  KEY `fkEta` (`IdEtapa_deb`),
-  KEY `fkj` (`IdPersonaRol_det`),
-  KEY `fkcate` (`IdCategoria`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=7 ;
-
---
--- Volcado de datos para la tabla `rtsetapajugador_det`
---
-
-INSERT INTO `rtsetapajugador_det` (`IdEtapaJugador`, `Estado`, `IdEtapa_deb`, `IdPersonaRol_det`, `IdCategoria`) VALUES
-(1, 1, 1, 3, 2),
-(2, 0, 1, 6, 2),
-(3, 0, 1, 9, 2),
-(6, 1, 31, 9, 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `rtsetapa_deb`
---
-
-CREATE TABLE IF NOT EXISTS `rtsetapa_deb` (
-  `IdEtapa` int(11) NOT NULL AUTO_INCREMENT,
-  `NombreEtapa` varchar(55) COLLATE utf8_bin NOT NULL,
-  `FechaInicio` date NOT NULL,
-  `FechaFin` date NOT NULL,
-  `Estado` tinyint(2) NOT NULL,
-  `IdTorneo` int(11) DEFAULT NULL,
-  PRIMARY KEY (`IdEtapa`),
-  KEY `fktor` (`IdTorneo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=37 ;
-
---
--- Volcado de datos para la tabla `rtsetapa_deb`
---
-
-INSERT INTO `rtsetapa_deb` (`IdEtapa`, `NombreEtapa`, `FechaInicio`, `FechaFin`, `Estado`, `IdTorneo`) VALUES
-(1, 'Etapa 1', '2016-02-10', '2016-02-29', 0, 1),
-(2, 'Etapa 2', '0000-00-00', '2016-04-28', 1, 1),
-(3, 'Etapa 3', '2016-06-13', '2016-07-01', 1, 1),
-(4, 'Etapa 10', '2016-03-13', '2016-03-13', 0, 1),
-(5, 'Etapa 5', '2016-05-03', '2016-03-25', 1, 1),
-(6, 'Etapa 6', '2016-03-08', '2016-03-18', 1, 1),
-(7, 'Etapa 1', '2016-03-03', '2016-03-08', 0, 2),
-(8, 'Etapa 2', '2016-03-01', '2016-03-10', 1, 2),
-(9, 'Etapa 3', '2016-03-03', '2016-03-04', 1, 2),
-(10, 'Etapa 4', '2016-03-11', '2016-03-18', 1, 2),
-(11, 'Etapa 5', '2016-03-16', '2016-03-09', 1, 2),
-(12, 'Etapa 6', '2016-03-15', '2016-03-16', 1, 2),
-(25, 'Etapa 1', '2016-06-30', '2016-06-30', 0, 6),
-(26, 'Etapa 2', '2016-06-30', '2016-06-30', 0, 6),
-(27, 'Etapa 3', '2016-06-30', '2016-06-30', 0, 6),
-(28, 'Etapa 4', '2016-06-30', '2016-06-30', 0, 6),
-(29, 'Etapa 5', '2016-06-30', '2016-06-30', 0, 6),
-(30, 'Etapa 6', '2016-06-30', '2016-06-30', 0, 6),
-(31, 'Etapa1', '2016-07-14', '2016-07-23', 1, 7),
-(32, 'Etapa2', '0000-00-00', '0000-00-00', 0, 7),
-(33, 'Etapa3', '0000-00-00', '0000-00-00', 0, 7),
-(34, 'Etapa4', '0000-00-00', '0000-00-00', 0, 7),
-(35, 'Etapa5', '0000-00-00', '0000-00-00', 0, 7),
-(36, 'Etapa6', '0000-00-00', '0000-00-00', 0, 7);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `rtsjugadorcuadro_det`
---
-
-CREATE TABLE IF NOT EXISTS `rtsjugadorcuadro_det` (
-  `IdJugadorCuadro` int(11) NOT NULL AUTO_INCREMENT,
-  `Estado` tinyint(2) NOT NULL,
-  `IdEtapaJugador_det` int(11) DEFAULT NULL,
-  `IdCuadro_deb` int(11) DEFAULT NULL,
-  PRIMARY KEY (`IdJugadorCuadro`),
-  KEY `fketapa` (`IdEtapaJugador_det`),
-  KEY `fkcuadro` (`IdCuadro_deb`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `rtslogin_deb`
 --
 
 CREATE TABLE IF NOT EXISTS `rtslogin_deb` (
-  `IdLogin` int(11) NOT NULL AUTO_INCREMENT,
+`IdLogin` int(11) NOT NULL,
   `Usuario` varchar(50) COLLATE utf8_bin NOT NULL,
   `Clave` varchar(255) COLLATE utf8_bin NOT NULL,
   `Estado` tinyint(2) NOT NULL,
   `IdPersonaRol` varchar(10) COLLATE utf8_bin DEFAULT NULL,
-  `IdPersona` int(11) NOT NULL,
-  PRIMARY KEY (`IdLogin`),
-  KEY `fkpersorol` (`IdPersonaRol`)
+  `IdPersona` int(11) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=5 ;
 
 --
@@ -267,10 +124,9 @@ INSERT INTO `rtslogin_deb` (`IdLogin`, `Usuario`, `Clave`, `Estado`, `IdPersonaR
 --
 
 CREATE TABLE IF NOT EXISTS `rtsmaterial` (
-  `IdMaterial` int(11) NOT NULL AUTO_INCREMENT,
+`IdMaterial` int(11) NOT NULL,
   `DescripcionMaterial` varchar(45) COLLATE utf8_bin NOT NULL,
-  `Estado` tinyint(2) NOT NULL,
-  PRIMARY KEY (`IdMaterial`)
+  `Estado` tinyint(2) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=6 ;
 
 --
@@ -291,38 +147,11 @@ INSERT INTO `rtsmaterial` (`IdMaterial`, `DescripcionMaterial`, `Estado`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `rtsmaterialclase_det` (
-  `IdMaterialClase` int(11) NOT NULL AUTO_INCREMENT,
+`IdMaterialClase` int(11) NOT NULL,
   `Cantidad` varchar(5) COLLATE utf8_bin NOT NULL,
   `Estado` tinyint(2) NOT NULL,
   `IdClase_deb` int(11) DEFAULT NULL,
-  `IdMaterial` int(11) DEFAULT NULL,
-  PRIMARY KEY (`IdMaterialClase`),
-  KEY `fkcla` (`IdClase_deb`),
-  KEY `fkmaterial` (`IdMaterial`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `rtspartidotennis_deb`
---
-
-CREATE TABLE IF NOT EXISTS `rtspartidotennis_deb` (
-  `IdPartidotennis` int(11) NOT NULL AUTO_INCREMENT,
-  `Set1Jug1` int(2) NOT NULL,
-  `Set1Jug2` int(2) NOT NULL,
-  `Set2Jug1` int(2) NOT NULL,
-  `Set2Jug2` int(2) NOT NULL,
-  `TieBreakJug1` int(2) NOT NULL,
-  `TieBreakJug2` int(2) NOT NULL,
-  `Horario` datetime NOT NULL,
-  `Lugar` varchar(50) COLLATE utf8_bin NOT NULL,
-  `Estado` tinyint(2) NOT NULL,
-  `IdJugadorCuadro_detJug1` int(11) NOT NULL,
-  `IdJugadorCuadro_detJug2` int(11) NOT NULL,
-  PRIMARY KEY (`IdPartidotennis`),
-  KEY `IdJugadorCuadro_detJug1` (`IdJugadorCuadro_detJug1`),
-  KEY `IdJugadorCuadro_detJug2` (`IdJugadorCuadro_detJug2`)
+  `IdMaterial` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -332,13 +161,10 @@ CREATE TABLE IF NOT EXISTS `rtspartidotennis_deb` (
 --
 
 CREATE TABLE IF NOT EXISTS `rtspersonarol_det` (
-  `IdPersonaRol` int(11) NOT NULL AUTO_INCREMENT,
+`IdPersonaRol` int(11) NOT NULL,
   `Estado` tinyint(2) NOT NULL,
   `IdPersona_deb` int(11) DEFAULT NULL,
-  `IdRol` int(11) DEFAULT NULL,
-  PRIMARY KEY (`IdPersonaRol`),
-  KEY `fkPer` (`IdPersona_deb`),
-  KEY `fkrol` (`IdRol`)
+  `IdRol` int(11) DEFAULT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=37 ;
 
 --
@@ -390,7 +216,7 @@ INSERT INTO `rtspersonarol_det` (`IdPersonaRol`, `Estado`, `IdPersona_deb`, `IdR
 --
 
 CREATE TABLE IF NOT EXISTS `rtspersona_deb` (
-  `IdPersona` int(11) NOT NULL AUTO_INCREMENT,
+`IdPersona` int(11) NOT NULL,
   `Documento` bigint(15) NOT NULL,
   `Nombre` varchar(40) COLLATE utf8_bin NOT NULL,
   `Apellidos` varchar(40) COLLATE utf8_bin NOT NULL,
@@ -402,11 +228,7 @@ CREATE TABLE IF NOT EXISTS `rtspersona_deb` (
   `FechaNacimiento` date NOT NULL,
   `FechaIngreso` date NOT NULL,
   `Estado` tinyint(2) NOT NULL,
-  `IdEps` int(11) DEFAULT NULL,
-  PRIMARY KEY (`IdPersona`),
-  UNIQUE KEY `Documento` (`Documento`),
-  UNIQUE KEY `Correo` (`Correo`),
-  KEY `fkEps` (`IdEps`)
+  `IdEps` int(11) DEFAULT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=13 ;
 
 --
@@ -434,13 +256,11 @@ INSERT INTO `rtspersona_deb` (`IdPersona`, `Documento`, `Nombre`, `Apellidos`, `
 --
 
 CREATE TABLE IF NOT EXISTS `rtsplanclase_deb` (
-  `IdPlanClase` int(11) NOT NULL AUTO_INCREMENT,
+`IdPlanClase` int(11) NOT NULL,
   `FechaInicio` date NOT NULL,
   `DiasRestantes` int(11) NOT NULL,
   `Estado` tinyint(2) NOT NULL,
-  `IdPersonaRol_det` int(11) DEFAULT NULL,
-  PRIMARY KEY (`IdPlanClase`),
-  KEY `fkJug` (`IdPersonaRol_det`)
+  `IdPersonaRol_det` int(11) DEFAULT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=3 ;
 
 --
@@ -458,14 +278,11 @@ INSERT INTO `rtsplanclase_deb` (`IdPlanClase`, `FechaInicio`, `DiasRestantes`, `
 --
 
 CREATE TABLE IF NOT EXISTS `rtsresponsablejugador_det` (
-  `IdResponsableJugador` int(11) NOT NULL AUTO_INCREMENT,
+`IdResponsableJugador` int(11) NOT NULL,
   `Parentesco` varchar(20) NOT NULL,
   `Estado` tinyint(2) NOT NULL,
   `IdPersonaRol_det` int(11) DEFAULT NULL,
-  `IdPersona_deb` int(11) NOT NULL,
-  PRIMARY KEY (`IdResponsableJugador`),
-  KEY `fkpersona` (`IdPersonaRol_det`),
-  KEY `IdPersona_deb` (`IdPersona_deb`)
+  `IdPersona_deb` int(11) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
@@ -485,14 +302,11 @@ INSERT INTO `rtsresponsablejugador_det` (`IdResponsableJugador`, `Parentesco`, `
 --
 
 CREATE TABLE IF NOT EXISTS `rtsresset_deb` (
-  `IdResset` int(11) NOT NULL AUTO_INCREMENT,
+`IdResset` int(11) NOT NULL,
   `Token` varchar(255) COLLATE utf8_bin NOT NULL,
   `FechaGenerada` date NOT NULL,
   `Estado` tinyint(2) NOT NULL,
-  `IdLogin_deb` int(11) DEFAULT NULL,
-  PRIMARY KEY (`IdResset`),
-  UNIQUE KEY `Token` (`Token`),
-  KEY `fklo` (`IdLogin_deb`)
+  `IdLogin_deb` int(11) DEFAULT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=4 ;
 
 --
@@ -509,10 +323,9 @@ INSERT INTO `rtsresset_deb` (`IdResset`, `Token`, `FechaGenerada`, `Estado`, `Id
 --
 
 CREATE TABLE IF NOT EXISTS `rtsrol` (
-  `IdRol` int(11) NOT NULL AUTO_INCREMENT,
+`IdRol` int(11) NOT NULL,
   `NombreRol` varchar(25) COLLATE utf8_bin NOT NULL,
-  `Estado` tinyint(2) NOT NULL,
-  PRIMARY KEY (`IdRol`)
+  `Estado` tinyint(2) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=4 ;
 
 --
@@ -524,31 +337,146 @@ INSERT INTO `rtsrol` (`IdRol`, `NombreRol`, `Estado`) VALUES
 (2, 'Instructor', 1),
 (3, 'Jugador', 1);
 
--- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `rtstorneo`
+-- Índices para tablas volcadas
 --
 
-CREATE TABLE IF NOT EXISTS `rtstorneo` (
-  `IdTorneo` int(11) NOT NULL AUTO_INCREMENT,
-  `FechaInicio` date NOT NULL,
-  `FechaFinal` date NOT NULL,
-  `NombreTorneo` varchar(45) COLLATE utf8_bin NOT NULL,
-  `Estado` tinyint(2) NOT NULL,
-  PRIMARY KEY (`IdTorneo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=8 ;
+--
+-- Indices de la tabla `rtsclasejugador_det`
+--
+ALTER TABLE `rtsclasejugador_det`
+ ADD PRIMARY KEY (`IdClasejugador`), ADD KEY `fkcl` (`IdClase_deb`), ADD KEY `fkplacla` (`IdPlanClase_deb`);
 
 --
--- Volcado de datos para la tabla `rtstorneo`
+-- Indices de la tabla `rtsclase_deb`
+--
+ALTER TABLE `rtsclase_deb`
+ ADD PRIMARY KEY (`IdClase`), ADD KEY `fkins` (`IdPersonaRol_det`);
+
+--
+-- Indices de la tabla `rtseps`
+--
+ALTER TABLE `rtseps`
+ ADD PRIMARY KEY (`IdEps`);
+
+--
+-- Indices de la tabla `rtslogin_deb`
+--
+ALTER TABLE `rtslogin_deb`
+ ADD PRIMARY KEY (`IdLogin`), ADD KEY `fkpersorol` (`IdPersonaRol`);
+
+--
+-- Indices de la tabla `rtsmaterial`
+--
+ALTER TABLE `rtsmaterial`
+ ADD PRIMARY KEY (`IdMaterial`);
+
+--
+-- Indices de la tabla `rtsmaterialclase_det`
+--
+ALTER TABLE `rtsmaterialclase_det`
+ ADD PRIMARY KEY (`IdMaterialClase`), ADD KEY `fkcla` (`IdClase_deb`), ADD KEY `fkmaterial` (`IdMaterial`);
+
+--
+-- Indices de la tabla `rtspersonarol_det`
+--
+ALTER TABLE `rtspersonarol_det`
+ ADD PRIMARY KEY (`IdPersonaRol`), ADD KEY `fkPer` (`IdPersona_deb`), ADD KEY `fkrol` (`IdRol`);
+
+--
+-- Indices de la tabla `rtspersona_deb`
+--
+ALTER TABLE `rtspersona_deb`
+ ADD PRIMARY KEY (`IdPersona`), ADD UNIQUE KEY `Documento` (`Documento`), ADD UNIQUE KEY `Correo` (`Correo`), ADD KEY `fkEps` (`IdEps`);
+
+--
+-- Indices de la tabla `rtsplanclase_deb`
+--
+ALTER TABLE `rtsplanclase_deb`
+ ADD PRIMARY KEY (`IdPlanClase`), ADD KEY `fkJug` (`IdPersonaRol_det`);
+
+--
+-- Indices de la tabla `rtsresponsablejugador_det`
+--
+ALTER TABLE `rtsresponsablejugador_det`
+ ADD PRIMARY KEY (`IdResponsableJugador`), ADD KEY `fkpersona` (`IdPersonaRol_det`), ADD KEY `IdPersona_deb` (`IdPersona_deb`);
+
+--
+-- Indices de la tabla `rtsresset_deb`
+--
+ALTER TABLE `rtsresset_deb`
+ ADD PRIMARY KEY (`IdResset`), ADD UNIQUE KEY `Token` (`Token`), ADD KEY `fklo` (`IdLogin_deb`);
+
+--
+-- Indices de la tabla `rtsrol`
+--
+ALTER TABLE `rtsrol`
+ ADD PRIMARY KEY (`IdRol`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
-INSERT INTO `rtstorneo` (`IdTorneo`, `FechaInicio`, `FechaFinal`, `NombreTorneo`, `Estado`) VALUES
-(1, '2016-01-01', '2016-12-01', 'Torneo 2016', 1),
-(2, '2017-01-01', '2017-12-31', 'Torneo 2017', 1),
-(6, '2018-01-01', '2016-12-31', 'Torneo 201', 0),
-(7, '2016-07-04', '2016-07-22', 'torneo 2016', 1);
-
+--
+-- AUTO_INCREMENT de la tabla `rtsclasejugador_det`
+--
+ALTER TABLE `rtsclasejugador_det`
+MODIFY `IdClasejugador` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT de la tabla `rtsclase_deb`
+--
+ALTER TABLE `rtsclase_deb`
+MODIFY `IdClase` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT de la tabla `rtseps`
+--
+ALTER TABLE `rtseps`
+MODIFY `IdEps` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT de la tabla `rtslogin_deb`
+--
+ALTER TABLE `rtslogin_deb`
+MODIFY `IdLogin` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT de la tabla `rtsmaterial`
+--
+ALTER TABLE `rtsmaterial`
+MODIFY `IdMaterial` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT de la tabla `rtsmaterialclase_det`
+--
+ALTER TABLE `rtsmaterialclase_det`
+MODIFY `IdMaterialClase` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `rtspersonarol_det`
+--
+ALTER TABLE `rtspersonarol_det`
+MODIFY `IdPersonaRol` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=37;
+--
+-- AUTO_INCREMENT de la tabla `rtspersona_deb`
+--
+ALTER TABLE `rtspersona_deb`
+MODIFY `IdPersona` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT de la tabla `rtsplanclase_deb`
+--
+ALTER TABLE `rtsplanclase_deb`
+MODIFY `IdPlanClase` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT de la tabla `rtsresponsablejugador_det`
+--
+ALTER TABLE `rtsresponsablejugador_det`
+MODIFY `IdResponsableJugador` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT de la tabla `rtsresset_deb`
+--
+ALTER TABLE `rtsresset_deb`
+MODIFY `IdResset` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT de la tabla `rtsrol`
+--
+ALTER TABLE `rtsrol`
+MODIFY `IdRol` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- Restricciones para tablas volcadas
 --
@@ -557,87 +485,53 @@ INSERT INTO `rtstorneo` (`IdTorneo`, `FechaInicio`, `FechaFinal`, `NombreTorneo`
 -- Filtros para la tabla `rtsclasejugador_det`
 --
 ALTER TABLE `rtsclasejugador_det`
-  ADD CONSTRAINT `fkcl` FOREIGN KEY (`IdClase_deb`) REFERENCES `rtsclase_deb` (`IdClase`),
-  ADD CONSTRAINT `fkplacla` FOREIGN KEY (`IdPlanClase_deb`) REFERENCES `rtsplanclase_deb` (`IdPlanClase`);
+ADD CONSTRAINT `fkcl` FOREIGN KEY (`IdClase_deb`) REFERENCES `rtsclase_deb` (`IdClase`),
+ADD CONSTRAINT `fkplacla` FOREIGN KEY (`IdPlanClase_deb`) REFERENCES `rtsplanclase_deb` (`IdPlanClase`);
 
 --
 -- Filtros para la tabla `rtsclase_deb`
 --
 ALTER TABLE `rtsclase_deb`
-  ADD CONSTRAINT `fkins` FOREIGN KEY (`IdPersonaRol_det`) REFERENCES `rtspersonarol_det` (`IdPersonaRol`);
-
---
--- Filtros para la tabla `rtscuadro_deb`
---
-ALTER TABLE `rtscuadro_deb`
-  ADD CONSTRAINT `fketp` FOREIGN KEY (`IdEtapa_deb`) REFERENCES `rtsetapa_deb` (`IdEtapa`);
-
---
--- Filtros para la tabla `rtsetapajugador_det`
---
-ALTER TABLE `rtsetapajugador_det`
-  ADD CONSTRAINT `fkcate` FOREIGN KEY (`IdCategoria`) REFERENCES `rtscategoria` (`IdCategoria`),
-  ADD CONSTRAINT `fkEta` FOREIGN KEY (`IdEtapa_deb`) REFERENCES `rtsetapa_deb` (`IdEtapa`),
-  ADD CONSTRAINT `fkj` FOREIGN KEY (`IdPersonaRol_det`) REFERENCES `rtspersonarol_det` (`IdPersonaRol`);
-
---
--- Filtros para la tabla `rtsetapa_deb`
---
-ALTER TABLE `rtsetapa_deb`
-  ADD CONSTRAINT `fktor` FOREIGN KEY (`IdTorneo`) REFERENCES `rtstorneo` (`IdTorneo`);
-
---
--- Filtros para la tabla `rtsjugadorcuadro_det`
---
-ALTER TABLE `rtsjugadorcuadro_det`
-  ADD CONSTRAINT `fkcuadro` FOREIGN KEY (`IdCuadro_deb`) REFERENCES `rtscuadro_deb` (`IdCuadro`),
-  ADD CONSTRAINT `fketapa` FOREIGN KEY (`IdEtapaJugador_det`) REFERENCES `rtsetapajugador_det` (`IdEtapaJugador`);
+ADD CONSTRAINT `fkins` FOREIGN KEY (`IdPersonaRol_det`) REFERENCES `rtspersonarol_det` (`IdPersonaRol`);
 
 --
 -- Filtros para la tabla `rtsmaterialclase_det`
 --
 ALTER TABLE `rtsmaterialclase_det`
-  ADD CONSTRAINT `fkcla` FOREIGN KEY (`IdClase_deb`) REFERENCES `rtsclase_deb` (`IdClase`),
-  ADD CONSTRAINT `fkmaterial` FOREIGN KEY (`IdMaterial`) REFERENCES `rtsmaterial` (`IdMaterial`);
-
---
--- Filtros para la tabla `rtspartidotennis_deb`
---
-ALTER TABLE `rtspartidotennis_deb`
-  ADD CONSTRAINT `rtspartidotennis_deb_ibfk_1` FOREIGN KEY (`IdJugadorCuadro_detJug1`) REFERENCES `rtsjugadorcuadro_det` (`IdJugadorCuadro`),
-  ADD CONSTRAINT `rtspartidotennis_deb_ibfk_2` FOREIGN KEY (`IdJugadorCuadro_detJug2`) REFERENCES `rtsjugadorcuadro_det` (`IdJugadorCuadro`);
+ADD CONSTRAINT `fkcla` FOREIGN KEY (`IdClase_deb`) REFERENCES `rtsclase_deb` (`IdClase`),
+ADD CONSTRAINT `fkmaterial` FOREIGN KEY (`IdMaterial`) REFERENCES `rtsmaterial` (`IdMaterial`);
 
 --
 -- Filtros para la tabla `rtspersonarol_det`
 --
 ALTER TABLE `rtspersonarol_det`
-  ADD CONSTRAINT `fkPer` FOREIGN KEY (`IdPersona_deb`) REFERENCES `rtspersona_deb` (`IdPersona`),
-  ADD CONSTRAINT `fkrol` FOREIGN KEY (`IdRol`) REFERENCES `rtsrol` (`IdRol`);
+ADD CONSTRAINT `fkPer` FOREIGN KEY (`IdPersona_deb`) REFERENCES `rtspersona_deb` (`IdPersona`),
+ADD CONSTRAINT `fkrol` FOREIGN KEY (`IdRol`) REFERENCES `rtsrol` (`IdRol`);
 
 --
 -- Filtros para la tabla `rtspersona_deb`
 --
 ALTER TABLE `rtspersona_deb`
-  ADD CONSTRAINT `fkEps` FOREIGN KEY (`IdEps`) REFERENCES `rtseps` (`IdEps`);
+ADD CONSTRAINT `fkEps` FOREIGN KEY (`IdEps`) REFERENCES `rtseps` (`IdEps`);
 
 --
 -- Filtros para la tabla `rtsplanclase_deb`
 --
 ALTER TABLE `rtsplanclase_deb`
-  ADD CONSTRAINT `fkJug` FOREIGN KEY (`IdPersonaRol_det`) REFERENCES `rtspersonarol_det` (`IdPersonaRol`);
+ADD CONSTRAINT `fkJug` FOREIGN KEY (`IdPersonaRol_det`) REFERENCES `rtspersonarol_det` (`IdPersonaRol`);
 
 --
 -- Filtros para la tabla `rtsresponsablejugador_det`
 --
 ALTER TABLE `rtsresponsablejugador_det`
-  ADD CONSTRAINT `fkpersona` FOREIGN KEY (`IdPersonaRol_det`) REFERENCES `rtspersonarol_det` (`IdPersonaRol`),
-  ADD CONSTRAINT `rtsresponsablejugador_det_ibfk_1` FOREIGN KEY (`IdPersona_deb`) REFERENCES `rtspersona_deb` (`IdPersona`);
+ADD CONSTRAINT `fkpersona` FOREIGN KEY (`IdPersonaRol_det`) REFERENCES `rtspersonarol_det` (`IdPersonaRol`),
+ADD CONSTRAINT `rtsresponsablejugador_det_ibfk_1` FOREIGN KEY (`IdPersona_deb`) REFERENCES `rtspersona_deb` (`IdPersona`);
 
 --
 -- Filtros para la tabla `rtsresset_deb`
 --
 ALTER TABLE `rtsresset_deb`
-  ADD CONSTRAINT `fklo` FOREIGN KEY (`IdLogin_deb`) REFERENCES `rtslogin_deb` (`IdLogin`);
+ADD CONSTRAINT `fklo` FOREIGN KEY (`IdLogin_deb`) REFERENCES `rtslogin_deb` (`IdLogin`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
