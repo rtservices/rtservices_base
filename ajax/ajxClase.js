@@ -19,7 +19,7 @@ function nuevaC()
 	$('#registroC')[0].reset();
 	$('#modalRegistro').modal('show');
 }
-
+/*
 function verClase(id)
 {
 	NProgress.start();
@@ -29,7 +29,7 @@ function verClase(id)
 		NProgress.done();
 	}, 1000);
 }
-
+*/
 function variarEstadoClase(id)
 {
 	swal({
@@ -118,20 +118,18 @@ $('#gClase').submit(function(event) {
 
 });
 
-function listarPartidos(id)
+function listarClases(id)
 {
 	NProgress.start();
     $.ajax({
-    	url: 'partidos/listarPartidos',
+    	url: 'clase/listarClase',
 		type: 'POST',
 		dataType: 'JSON',
 		data: {id: id},
     	success:function(res){
-    		$('[id = "nombre"]').text(res.NombreClase);
-    		$('[id = "dia"]').text(res.Dia);
-    		$('[id = "horainicio"]').text(res.HoraInicio);
-    		$('[id = "horafinal"]').text(res.horaFFinal);
-    		$('[id = "instructor"]').text(res.NombreCategoria);
+    		$('[id = "nombreClaseI"]').text(res.NombreClase);
+    		$('[id = "horarioI"]').text(res.Dia+' '+res.HoraInicio+'-'+res.HoraFinal);
+    		$('[id = "instrutorI"]').text(res.Documento+'-'+res.Nombre+''+res.Apellidos);
     		$('#modalInfo').modal('show');
 	        NProgress.done();
     	}

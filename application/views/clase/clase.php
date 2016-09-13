@@ -64,12 +64,32 @@
 </div>
 
 
+
+		<!--<div class="modal fade bs-example-modal-lg" id="modalInfo" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" >
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel"><center>Información de la clase</center></h4>
+					</div>
+					<div class="modal-body">
+||||||| .r109
+		<div class="modal fade bs-example-modal-lg" id="modalInfo" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" >
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel"><center>Información de la clase</center></h4>
+					</div>
+					<div class="modal-body">
+=======
 <div class="modal fade bs-example-modal-lg" id="modalInfo" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content" style="border:3px solid black">
 			<div class="row">
 					<div class="col-md-1"></div>
 					<div class="col-md-10">
+
 						<div class="row">
 						    <div class="col-md-6" style="text-align: center;">
 								<label><h4>NOMBRE</h4></label>
@@ -81,10 +101,70 @@
 								<br>
 								<span id="dia"></span>
 							</div>
+
+						</div>
+						<div class="row">
+							<div class="col-md-6 form-group">
+								<label class="control-label">Instructor <span style="color: red;">*</span></label>
+								<select id="instructorR" name="instructorR" data-placeholder="Instructor" class="chosen-select mb-15" tabindex="-1" style="display: none;" disabled>
+								<?php foreach ($this->mdl_clase->listarInstructores() as $instructor) { ?>
+										<option value="<?= $instructor->IdPersonaRol ?>"><?= 'DNI: '.$instructor->Documento.' - '.$instructor->Nombre.' '.$instructor->Apellidos ?></option>';
+										<?php }?>
+									</select>
+								</div>
+								<div class="col-md-3 form-group">
+									<label class="control-label">Hora final</label>
+									<div class="input-group">
+										<input type="text" id="horainicioR" readonly name="horainicioR"  class="form-control" disabled>
+										<span class="input-group-addon" style="color: green">
+											<span class="glyphicon glyphicon-time"></span>
+										</span>
+									</div>
+								</div>
+								<div class="col-md-3 form-group">
+									<label class="control-label">Hora final</label>
+									<div class="input-group">
+										<input type="text" id="horafinalR" readonly name="horafinalR"  class="form-control" disabled>
+										<span class="input-group-addon">
+											<span class="glyphicon glyphicon-time" style="color: red"></span>
+										</span>
+									</div>
+								</div>						
+
+						</div>
+						<div class="row">
+							<div class="col-md-6 form-group">
+								<label class="control-label">Instructor <span style="color: red;">*</span></label>
+								<select id="instructorR" name="instructorR" data-placeholder="Instructor" class="chosen-select mb-15" tabindex="-1" style="display: none;" disabled>
+									<?php foreach ($this->mdl_clase->listarInstructores() as $instructor) { ?>
+										<option value="<?= $instructor->IdPersonaRol ?>"><?= 'DNI: '.$instructor->Documento.' - '.$instructor->Nombre.' '.$instructor->Apellidos ?></option>';
+										<?php }?>
+									</select>
+								</div>
+								<div class="col-md-3 form-group">
+									<label class="control-label">Hora final</label>
+									<div class="input-group">
+										<input type="text" id="horainicioR" readonly name="horainicioR"  class="form-control" disabled>
+										<span class="input-group-addon" style="color: green">
+											<span class="glyphicon glyphicon-time"></span>
+										</span>
+									</div>
+								</div>
+								<div class="col-md-3 form-group">
+									<label class="control-label">Hora final</label>
+									<div class="input-group">
+										<input type="text" id="horafinalR" readonly name="horafinalR"  class="form-control" disabled>
+										<span class="input-group-addon">
+											<span class="glyphicon glyphicon-time" style="color: red"></span>
+										</span>
+									</div>
+								</div>						
+
 							 <div class="col-md-6" style="text-align: center;">
 								<label><h4>HORA INICIO</h4></label>
 								<br>
 								<span id="horainicio"></span>
+
 							</div>
 							<div class="col-md-6" style="text-align: center;">
 								<label><h4>HORA FINAL</h4></label>
@@ -109,15 +189,44 @@
 					<div class="col-md-1"></div>
 				
 				</div>
+<<<<<<< .mine
+			</div>-->
+
+			
+<div class="modal fade bs-example-modal-lg" id="modalInfo" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="row">
+					<div class="col-md-1"></div>
+					<div class="col-md-10">
+						<div class="row">
+						    <div class="col-md-4" style="text-align: center;">
+								<label><h4>Nombre clase</h4></label>
+								<br>
+								<span id="nombreClaseI"></span>
+							</div>
+							 <div class="col-md-4" style="text-align: center;">
+								<label><h4>Horario</h4></label>
+								<br>
+								<span id="horarioI"></span>
+							</div>
+							 <div class="col-md-4" style="text-align: center;">
+								<label><h4>Instructor</h4></label>
+								<br>
+								<span id="instrutorI"></span>
+							</div>
+					</div>
+					<div class="col-md-1"></div>
+				</div>
 					<div class="modal-footer">
 						<center>
 							<button type="button" style="" class="btn btn-info btn-expand" style="background-color: #2A2A2A;"data-dismiss="modal">Cerrar</button>
 						</center>
 					</div>
-		</div>
-	</div>
+		    </div>
+	    </div>
+    </div>	
 </div>
-
 
 
 <div class="modal fade bs-example-modal-lg" id="modalRegistro" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" >

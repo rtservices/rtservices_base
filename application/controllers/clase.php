@@ -96,11 +96,11 @@ class Clase extends CI_Controller {
 				$row[] = $clase->NombreClase;
 				$row[] = $clase->Dia.' - '.$clase->HoraInicio .' a '.$clase->HoraFinal;
 				//$row[] = '<a style="'. $colorCJ .'">'.$clase->cantidad_jugadores.'</a> inscritos.';
-				$row[] = $clase->Nombre.' '.$clase->Apellidos;
+				$row[] = $clase->Documento.'-'.$clase->Nombre.' '.$clase->Apellidos;
 
 				$row[] = '
 				<center>
-				<a class="btn btn-info btn-expand" style="color:white; background-color: #2A2A2A;" href="javascript:void()" title="Más información" onclick="verClase('.$clase->IdClase.')"><i class="fa fa-info-circle"></i></a>
+				<a class="btn btn-info btn-expand" style="color:white; background-color: #2A2A2A;" href="javascript:void()" title="Más información" onclick="listarClases('.$clase->IdClase.')"><i class="fa fa-info-circle"></i></a>
 				'.$edit.'
 				<a class="btn btn-'.$estilo.' btn-expand" style="'.$color.'" href="javascript:void()" title="'.$accion.'" onclick="variarEstadoClase('.$clase->IdClase.')"><i class="fa fa-exchange"></i></a>
 				</center>';
@@ -329,6 +329,20 @@ class Clase extends CI_Controller {
 			redirect('error404');
 		}
 
+	}
+//
+	public function listarClase()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$id = $this->input->post('id');
+			$data = $this->mdl_clase->listarClases($id);
+			echo json_encode($data->row());
+		}
+		else
+		{
+			redirect('error404');
+		}
 	}
 }
 
