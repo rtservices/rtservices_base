@@ -5,7 +5,7 @@
 		<ol class="breadcrumb">
 			<li class="active">
 				<i class="fa fa-home"></i>
-				<a href="dashboard.html">Menú principal</a>
+				<a href="#">Menú principal</a>
 			</li>
 		</ol>
 	</div>
@@ -28,7 +28,7 @@
 					<span class="mini-stat-icon"><img src="assets/img/Jugador.jpg" class="img-circle" alt="Jugadores" style="height: 50px;" /></span>
 					<div class="mini-stat-info">
 						<span class="counter"><?= $iTotalJugadores ?></span>
-						Jugadores registrados
+						Jugadores definidos
 					</div>
 				</div>
 			</div>
@@ -37,7 +37,7 @@
 					<span class="mini-stat-icon"><img src="assets/img/Instructor.jpg" class="img-circle" alt="Instructores" style="height: 50px;" /></span>
 					<div class="mini-stat-info">
 						<span class="counter"><?= $iTotalInstructores ?></span>
-						Instructores registrados
+						Instructores definidos
 					</div>
 				</div>
 			</div>
@@ -46,7 +46,7 @@
 					<span class="mini-stat-icon"><img src="assets/img/Administrador.jpg" class="img-circle" alt="Administradores" style="height: 50px;" /></span>
 					<div class="mini-stat-info">
 						<span class="counter"><?= $iTotalAdministradores ?></span>
-						Administradores registrados
+						Administradores definidos
 					</div>
 				</div>
 			</div>
@@ -55,7 +55,7 @@
 			<div class="panel rounded shadow no-overflow">
 				<div class="panel-heading">
 					<div class="pull-left">
-						<h3 class="panel-title">Personas inscritas en el sistema</h3>
+						<h3 class="panel-title"><strong><span>Bienvenido a la aplicación administrativa de tenis de campo RTSERVICES</span></strong></h3>
 					</div>
 					<div class="pull-right">
 						<button class="btn btn-sm" data-container="body" data-action="collapse" data-toggle="tooltip" data-placement="top" data-title="Collapse" data-original-title="" title=""><i class="fa fa-angle-up"></i></button>
@@ -63,8 +63,8 @@
 					<div class="clearfix"></div>
 				</div>
 				<div class="panel-body no-padding" style="margin: 20px; font-size: 16px" >
-					<center><strong><span>Bienvenido a la aplicación administrativa de tenis de campo RTSERVICES.</span></strong></center>
 					<span>Para conocer nuestra funcionalidad, desplacece por el menu que se encuentra a su izquierda.</span>
+					<br>
 					<br>
 				</div>
 			</div>
