@@ -129,6 +129,7 @@ function listarClases(id)
     	success:function(res){
     		$('[id = "nombreClaseI"]').text(res.NombreClase);
     		$('[id = "horarioI"]').text(res.Dia+' '+res.HoraInicio+'-'+res.HoraFinal);
+    		$('[id = "canJugI"]').text(res.cantidad_jugadores);
     		$('[id = "instrutorI"]').text(res.Documento+'-'+res.Nombre+''+res.Apellidos);
     		$('#modalInfo').modal('show');
 	        NProgress.done();

@@ -48,6 +48,7 @@
 									<td>-</td>
 									<td style="color: red;">Nombre clase</td>
 									<td>Horario</td>
+									<td>Cantidad jugadores</td>
 									<td>Instructor</td>
 									<td style="text-align: center;">Acciones</td>
 								</tr>
@@ -211,6 +212,11 @@
 								<span id="horarioI"></span>
 							</div>
 							 <div class="col-md-4" style="text-align: center;">
+								<label><h4>Cantidad jugadores</h4></label>
+								<br>
+								<span id="canJugI"></span>
+							</div>
+							<div class="col-md-4" style="text-align: center;">
 								<label><h4>Instructor</h4></label>
 								<br>
 								<span id="instrutorI"></span>

@@ -12,7 +12,7 @@ class Mdl_clase extends CI_Model {
 
 	public function cargarTabla()
 	{
-		$this->db->select('rp.Documento, rp.Nombre, rp.Apellidos,rc.*');
+		$this->db->select('rp.Documento, rp.Nombre, rp.Apellidos,rc.*,(SELECT COUNT(*) FROM rtsclasejugador_det AS rcj WHERE rcj.IdClase_deb = rc.IdClase ) AS cantidad_jugadores');
 		$this->db->from('rtsclase_deb AS rc');
 		//$this->db->join('rtsclasejugador_det AS rcj','rc.IdClase = rcj.IdClase_deb','INNER');
 		$this->db->join('rtspersonarol_det AS rpr','rc.IdPersonaRol_det = rpr.IdPersonaRol','INNER');
@@ -158,7 +158,8 @@ class Mdl_clase extends CI_Model {
 //Lustar clases para informacion
 	public function listarClases($id)
 	{
-		$this->db->select('rp.Documento,rp.Nombre, rp.Apellidos,rc.*');
+		$this->db->select('rp.Documento, rp.Nombre, rp.Apellidos,rc.*,(SELECT COUNT(*) FROM rtsclasejugador_det AS 
+			rcj WHERE rcj.IdClase_deb = rc.IdClase ) AS cantidad_jugadores');
 		$this->db->from('rtsclase_deb AS rc');
 		//$this->db->join('rtsclasejugador_det AS rcj','rc.IdClase = rcj.IdClase_deb','INNER');
 		$this->db->join('rtspersonarol_det AS rpr','rc.IdPersonaRol_det = rpr.IdPersonaRol','INNER');
