@@ -387,23 +387,7 @@ class Persona extends CI_Controller {
 
 						if ($this->mdl_persona->registrarRol($dataJ))
 						{
-
-							if ($this->mdl_persona->registrarCuentaA($dataC))
-							{
-
-								if ($this->mdl_persona->registrarCuentaI($dataCI))
-								{
-									echo "ok";
-								}
-								else
-								{
-									echo "no";
-								}
-							}
-							else
-							{
-								echo "no";
-							}
+							echo "ok";
 						}
 						else
 						{
