@@ -1,5 +1,5 @@
 <div class="header-content">
-	<h2>Responsables de <?= (strlen($nomJugador) > 28 ) ? substr($nomJugador, 0, 27) . '...' : $nomJugador ?></h2>
+	<h2>Planes de clase de <?= (strlen($nomJugador) > 25 ) ? substr($nomJugador, 0, 24) . '...' : $nomJugador ?></h2>
 	<div class="breadcrumb-wrapper hidden-xs">
 		<span class="label">Estas en:</span>
 		<ol class="breadcrumb">
@@ -13,7 +13,7 @@
 				<i class="fa fa-angle-right"></i>
 			</li>
 			<li class="active">
-				<a href="#">Planes de clase de <?= (strlen($nomJugador) > 28 ) ? substr($nomJugador, 0, 27) . '...' : $nomJugador ?></a>
+				<a href="#">Planes de clase de <?= (strlen($nomJugador) > 25 ) ? substr($nomJugador, 0, 24) . '...' : $nomJugador ?></a>
 			</li>
 		</ol>
 	</div>
@@ -26,7 +26,7 @@
 			<div class="panel rounded shadow no-overflow">
 				<div class="panel-heading">
 					<center>
-						<a href="clase"><button type="button" class="btn btn-success btn-expand" style="background-color: #2A2A2A;">Terminar edición</button></a>
+						<a href="persona"><button type="button" class="btn btn-success btn-expand" style="background-color: #2A2A2A;">Terminar gestión de planes de clase</button></a>
 					</center>
 				</div>
 			</div>
@@ -35,7 +35,7 @@
 			<div class="panel rounded shadow no-overflow">
 				<div class="panel-heading">
 					<div class="pull-left">
-						<h3 class="panel-title">Información de la clase</h3>
+						<h3 class="panel-title">Creación de Planes de Clase</h3>
 					</div>
 					<div class="pull-right">
 						<button class="btn btn-sm" data-container="body" data-action="collapse" data-toggle="tooltip" data-placement="top" data-title="Collapse" data-original-title="" title=""><i class="fa fa-angle-up"></i></button>
@@ -44,7 +44,7 @@
 				</div>
 				<input type="hidden" name="idJugador" id="idJugador" value="<?= $IdJugador ?>">
 				<div class="panel-body no-padding" style="margin: 20px; font-size: 15px">
-					<form id="gClaseE" name="gClaseE">
+					<!-- <form id="gClaseE" name="gClaseE">
 						<div class="row">
 							<div class="col-md-2"></div>
 							<div class="col-md-8">
@@ -76,7 +76,7 @@
 						<div class="row">
 							<center><button type="submit" class="btn btn-warning btn-expand" style="background-color: #2A2A2A;">Modificar clase</button></center>
 						</div>
-					</form>
+					</form> -->
 				</div>
 				<br>
 			</div>
@@ -87,7 +87,7 @@
 			<div class="panel rounded shadow no-overflow">
 				<div class="panel-heading">
 					<div class="pull-left">
-						<h3 class="panel-title">Jugadores inscritos en esta clase</h3>
+						<h3 class="panel-title">Planes de Clase</h3>
 					</div>
 					<div class="pull-right">
 						<button class="btn btn-sm" data-container="body" data-action="collapse" data-toggle="tooltip" data-placement="top" data-title="Collapse" data-original-title="" title=""><i class="fa fa-angle-up"></i></button>
@@ -100,7 +100,7 @@
 							<thead>
 								<tr>
 									<td style="color: red;">Estado</td>
-									<td>Fecha de Inicio</td>
+									<td>Fecha de Creación</td>
 									<td>Dias restantes</td>
 									<td style="text-align: center;">Acciones</td>
 								</tr>

@@ -27,6 +27,7 @@ class Mdl_planclase extends CI_Model {
 		$this->db->select('IdPlanClase, FechaInicio, Estado');
 		$this->db->from($this->tabla);
 		$this->db->where('IdPersonaRol_det', $Id);
+		$this->db->order_by('FechaInicio', 'desc');
 		$res = $this->db->get()->result();
 
 		return $res;
