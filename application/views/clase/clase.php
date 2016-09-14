@@ -63,166 +63,39 @@
 		</div>
 	</div>
 </div>
-
-
-
-		<!--<div class="modal fade bs-example-modal-lg" id="modalInfo" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" >
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="myModalLabel"><center>Información de la clase</center></h4>
-					</div>
-					<div class="modal-body">
-||||||| .r109
-		<div class="modal fade bs-example-modal-lg" id="modalInfo" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" >
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="myModalLabel"><center>Información de la clase</center></h4>
-					</div>
-					<div class="modal-body">
-=======
-<div class="modal fade bs-example-modal-lg" id="modalInfo" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content" style="border:3px solid black">
-			<div class="row">
-					<div class="col-md-1"></div>
-					<div class="col-md-10">
-
-						<div class="row">
-						    <div class="col-md-6" style="text-align: center;">
-								<label><h4>NOMBRE</h4></label>
-								<br>
-								<span id="nombre"></span>
-							</div>
-							 <div class="col-md-6" style="text-align: center;">
-								<label><h4>DIA</h4></label>
-								<br>
-								<span id="dia"></span>
-							</div>
-
-						</div>
-						<div class="row">
-							<div class="col-md-6 form-group">
-								<label class="control-label">Instructor <span style="color: red;">*</span></label>
-								<select id="instructorR" name="instructorR" data-placeholder="Instructor" class="chosen-select mb-15" tabindex="-1" style="display: none;" disabled>
-								<?php foreach ($this->mdl_clase->listarInstructores() as $instructor) { ?>
-										<option value="<?= $instructor->IdPersonaRol ?>"><?= 'DNI: '.$instructor->Documento.' - '.$instructor->Nombre.' '.$instructor->Apellidos ?></option>';
-										<?php }?>
-									</select>
-								</div>
-								<div class="col-md-3 form-group">
-									<label class="control-label">Hora final</label>
-									<div class="input-group">
-										<input type="text" id="horainicioR" readonly name="horainicioR"  class="form-control" disabled>
-										<span class="input-group-addon" style="color: green">
-											<span class="glyphicon glyphicon-time"></span>
-										</span>
-									</div>
-								</div>
-								<div class="col-md-3 form-group">
-									<label class="control-label">Hora final</label>
-									<div class="input-group">
-										<input type="text" id="horafinalR" readonly name="horafinalR"  class="form-control" disabled>
-										<span class="input-group-addon">
-											<span class="glyphicon glyphicon-time" style="color: red"></span>
-										</span>
-									</div>
-								</div>						
-
-						</div>
-						<div class="row">
-							<div class="col-md-6 form-group">
-								<label class="control-label">Instructor <span style="color: red;">*</span></label>
-								<select id="instructorR" name="instructorR" data-placeholder="Instructor" class="chosen-select mb-15" tabindex="-1" style="display: none;" disabled>
-									<?php foreach ($this->mdl_clase->listarInstructores() as $instructor) { ?>
-										<option value="<?= $instructor->IdPersonaRol ?>"><?= 'DNI: '.$instructor->Documento.' - '.$instructor->Nombre.' '.$instructor->Apellidos ?></option>';
-										<?php }?>
-									</select>
-								</div>
-								<div class="col-md-3 form-group">
-									<label class="control-label">Hora final</label>
-									<div class="input-group">
-										<input type="text" id="horainicioR" readonly name="horainicioR"  class="form-control" disabled>
-										<span class="input-group-addon" style="color: green">
-											<span class="glyphicon glyphicon-time"></span>
-										</span>
-									</div>
-								</div>
-								<div class="col-md-3 form-group">
-									<label class="control-label">Hora final</label>
-									<div class="input-group">
-										<input type="text" id="horafinalR" readonly name="horafinalR"  class="form-control" disabled>
-										<span class="input-group-addon">
-											<span class="glyphicon glyphicon-time" style="color: red"></span>
-										</span>
-									</div>
-								</div>						
-
-							 <div class="col-md-6" style="text-align: center;">
-								<label><h4>HORA INICIO</h4></label>
-								<br>
-								<span id="horainicio"></span>
-
-							</div>
-							<div class="col-md-6" style="text-align: center;">
-								<label><h4>HORA FINAL</h4></label>
-								<br>
-								<span id="horafinal"></span>
-							</div>
-						</div>
-						<div class="divider" style="border:1px solid black"></div>
-						<div class="row">
-							<div class="col-md-3"></div>
-							<div class="col-md-6" style="text-align: center;">
-								<label><h4>INSTRUCTOR ENCARGADO</h4>
-								</label>
-								<br>
-								<span id="instructor"></span>
-							</div>	
-							<div class="col-md-3"></div>
-						</div>
-						<div class="divider" style="border:1px solid black"></div>
-						<br>
-					</div>
-					<div class="col-md-1"></div>
-				
-				</div>
-<<<<<<< .mine
-			</div>-->
-
 			
 <div class="modal fade bs-example-modal-lg" id="modalInfo" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
-			<div class="row">
-					<div class="col-md-1"></div>
-					<div class="col-md-10">
+			<div class="row" style="border:3px solid black;">
+					<!-- <div class="col-md-1"></div> -->
+					<div class="col-md-12">
 						<div class="row">
-						    <div class="col-md-4" style="text-align: center;">
+						    <div class="col-md-6" style="text-align: center;">
 								<label><h4>Nombre clase</h4></label>
 								<br>
 								<span id="nombreClaseI"></span>
 							</div>
-							 <div class="col-md-4" style="text-align: center;">
+							
+							 <div class="col-md-6" style="text-align: center;">
 								<label><h4>Horario</h4></label>
 								<br>
 								<span id="horarioI"></span>
 							</div>
-							 <div class="col-md-4" style="text-align: center;">
+							<div class="divider" style="border:1px solid black;"></div>
+							 <div class="col-md-6" style="text-align: center;">
 								<label><h4>Cantidad jugadores</h4></label>
 								<br>
 								<span id="canJugI"></span>
 							</div>
-							<div class="col-md-4" style="text-align: center;">
+							<div class="col-md-6" style="text-align: center;">
 								<label><h4>Instructor</h4></label>
 								<br>
 								<span id="instrutorI"></span>
 							</div>
+							<div class="divider" style="border:1px solid black; "></div>
 					</div>
-					<div class="col-md-1"></div>
+					<!-- <div class="col-md-1"></div> -->
 				</div>
 					<div class="modal-footer">
 						<center>
