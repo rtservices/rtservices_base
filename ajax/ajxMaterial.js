@@ -1,7 +1,14 @@
-var tabla;
+var tablaMc;
+var tabla
 $(document).ready(function() {
 	NProgress.start();
 	tabla = $('#tablaMaterial').DataTable({"ajax":"material/cargarTabla"});
+});
+
+$(document).ready(function() {
+	NProgress.start();
+	var idClase = $('#claseR').val();
+	tablaMc = $('#tablaMateriaClase').DataTable({"ajax":"materialclase/cargarTabla/" + idClase});
 });
 
 $(window).load(function() {
@@ -13,6 +20,10 @@ function actualizar()
 	tabla.ajax.reload(null,false);
 }
 
+function actualizarMc()
+{
+	tablaMc.ajax.reload(null,false);
+}
 function nuevaC()
 {
 	NProgress.start();
@@ -20,6 +31,16 @@ function nuevaC()
 	NProgress.done();
 	$('#registroC').modal('show');
 }
+
+function nuevaMc()
+{
+	NProgress.start();
+	$('#editarMc')[0].reset();
+	NProgress.done();
+	$('#modalMc').modal('show');
+}
+
+
 
 function variarEstadoMaterial(id)
 {
@@ -54,6 +75,40 @@ function variarEstadoMaterial(id)
 	});
 }
 
+function variarEstadoMaterialClase(id)
+{
+	swal({
+		title: "¿Estas seguro?",
+		text: "¿Realmente deseas cambiar el estado del material asigana a esta clase?",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#DD6B55",
+		confirmButtonText: "Si, cámbialo!",
+		closeOnConfirm: false
+	}).then(function() {
+		NProgress.start();
+		$.ajax({
+			url: "materialclase/variarEstadoMaterialClases",
+			type: "POST",
+			data: { id: id },
+			success: function(res) {
+				actualizarMc();
+				if (res == 'ok') 
+				{
+					NProgress.done();
+					swal("Completado!", "Se ha cambiado el estado de este material asignado as esta clase.", "success");
+				} 
+				else
+				{
+					NProgress.done();
+					sweetAlert("Oops...", "No se ha cambiado el estado de este material asignado as esta clase.", "error");
+				}
+			}
+		});
+	});
+}
+
+
 $('#registro').submit(function(event) {
 	event.preventDefault();
 	if ($('#registro').validate().form()) 
@@ -81,7 +136,34 @@ $('#registro').submit(function(event) {
 		});
 	}
 });
+// registro material clase
+$('#registroMc').submit(function(event) {
+	event.preventDefault();
+	if ($('#registroMc').validate().form()) 
+	{
+		NProgress.start();
+		$.ajax({
+			url: 'materialclase/registrarMaterialClase',
+			type: 'POST',
+			data:$('#registroMc').serialize(),
+			success:function(res){
+				actualizarMc()
+				$('#modalRegistroMc').modal('hide');
+				if(res=='ok')
+				{
+					NProgress.done();
+					swal("Completado!", "Se ha asignado el material a la clase.", "success");
+				} 
+				else
+				{
+					NProgress.done();
+					sweetAlert("Oops...", "No se ha asignado el material a la clase.", "error");
+				}
+			}
 
+		});
+	}
+});
 function editarMaterial(id)
 {
 	NProgress.start();
@@ -99,6 +181,27 @@ function editarMaterial(id)
 		}
 	});
 }
+
+function editarMaterialClase(id)
+{
+	NProgress.start();
+	$('#editarMc')[0].reset();
+	$.ajax({
+		url: "materialclase/listarMaterialClase/" + id,
+		type: "GET",
+		dataType: "JSON",
+		success:function(res){
+			actualizar();
+			$('[name = "idMaterialClase"]').val(res.IdMaterialClase);
+			$('[name = "cantidadE"]').val(res.Cantidad);
+			$('[name = "materialE"]').val(res.IdMaterial);
+			NProgress.done();
+			$('#modalMc').modal('show');
+		}
+	});
+}
+
+
 
 $('#editar').submit(function(event) {
 	event.preventDefault();
@@ -121,6 +224,33 @@ $('#editar').submit(function(event) {
 				{
 					NProgress.done();
 					sweetAlert("Oops...", "No se ha modificado el material.", "error");
+				}
+			}
+		});
+	}
+});
+
+$('#editarMc').submit(function(event) {
+	event.preventDefault();
+	if ($('#editarMc').validate().form()) 
+	{
+		NProgress.done();
+		$.ajax({
+			url: 'materialclase/modificarMaterialClase/',
+			type: 'POST',
+			data: $('#editarMc').serialize(),
+			success:function(res){
+				actualizarMc();
+				$('#modalMc').modal('hide');
+				if (res=='ok')
+				{
+					NProgress.done();
+					swal("Completado!", "Se ha modificado el material asignado a esta clase.", "success");
+				} 
+				else
+				{
+					NProgress.done();
+					sweetAlert("Oops...", "No se ha modificado el material asignado a esta clase .", "error");
 				}
 			}
 		});

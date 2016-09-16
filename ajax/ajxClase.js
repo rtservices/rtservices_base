@@ -30,6 +30,8 @@ function verClase(id)
 	}, 1000);
 }
 */
+
+
 function variarEstadoClase(id)
 {
 	swal({
@@ -136,4 +138,9 @@ function listarClases(id)
     	}
     });
 	
+}
+
+function materialclase(id)
+{
+	location.href = 'materialclase?idclase=' + id;
 }

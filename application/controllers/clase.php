@@ -5,12 +5,12 @@ class Clase extends CI_Controller {
 
 	private $idClaseActual_principal;
 	private $registro;
+
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('mdl_clase');
 		$this->idClaseActual_principal = ($this->input->get('clase')) ? $this->input->get('clase') : null;
-
 	}
 
 	public function index()
@@ -19,6 +19,8 @@ class Clase extends CI_Controller {
 		{
 			redirect('login');
 		}
+
+	
 		if (is_null($this->idClaseActual_principal))
 		{
 			$data['cpersona'] = $this->mdl_login->cargarUsuario();
@@ -28,7 +30,7 @@ class Clase extends CI_Controller {
 			$this->load->view('msp/footer');
 			$this->load->view('clase/add');
 		}
-		
+	
 		else
 		{
 			$data['idClase'] = $this->idClaseActual_principal;
@@ -51,6 +53,8 @@ class Clase extends CI_Controller {
 			$this->load->view('msp/footer');
 			$this->load->view('clase/addGC');
 		}
+
+
 	}
 
 	public function cargarTabla()
@@ -67,7 +71,9 @@ class Clase extends CI_Controller {
 					$estilo = 'danger';
 					$estado = '<a style="color: #31B404">Activo</a>';
 					$edit = '<a class="btn btn-primary btn-expand" style="color:white; background-color: #2A2A2A;" href="clase?clase='.$clase->IdClase.'" title="Administrar clase"><i class="fa fa-pencil"></i></a>';
+					$mateclas = '<a class="btn btn-success btn-expand" style="color:white; background-color: #2A2A2A;" href="javascript:void()" title="Registrar materiales a la clase" onclick="materialclase('.$clase->IdClase.')"><i class="fa fa-book"></i></a>';
 				}
+
 				else
 				{
 					$accion = 'Habilitar clase';
@@ -75,6 +81,7 @@ class Clase extends CI_Controller {
 					$estilo = 'success';
 					$estado = '<a style="color: #8A0808">Inactivo</a>';
 					$edit = '<a class="btn btn-primary btn-expand" style="color:white; background-color: #2A2A2A;" href="javascript:void()" title="Debes tener activa esta clase para poder administrarla." disabled="true"><i class="fa fa-pencil"></i></a>';
+				    $mateclas = '<a class="btn btn-success btn-expand" style="color:white; background-color: #2A2A2A;" href="javascript:void()" title="Debes tener activa esta clase para poder administrarla." disabled="true"><i class="fa fa-book"></i></a>';
 				}
 
 				if ($clase->cantidad_jugadores < 10)
@@ -102,6 +109,7 @@ class Clase extends CI_Controller {
 				<center>
 				<a class="btn btn-info btn-expand" style="color:white; background-color: #2A2A2A;" href="javascript:void()" title="Más información" onclick="listarClases('.$clase->IdClase.')"><i class="fa fa-info-circle"></i></a>
 				'.$edit.'
+				'.$mateclas.'
 				<a class="btn btn-'.$estilo.' btn-expand" style="'.$color.'" href="javascript:void()" title="'.$accion.'" onclick="variarEstadoClase('.$clase->IdClase.')"><i class="fa fa-exchange"></i></a>
 				</center>';
 
