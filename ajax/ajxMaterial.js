@@ -149,21 +149,28 @@ $('#registroMc').submit(function(event) {
 			success:function(res){
 				actualizarMc()
 				$('#modalRegistroMc').modal('hide');
-				if(res=='ok')
-				{
-					NProgress.done();
-					swal("Completado!", "Se ha asignado el material a la clase.", "success");
-				} 
-				else
+				if(res=='error')
 				{
 					NProgress.done();
 					sweetAlert("Oops...", "No se ha asignado el material a la clase.", "error");
+				} 
+				else if (res == 'yaEsta')
+				{
+					NProgress.done();
+					sweetAlert("Oops...", "Este material ya esta asignado a esta clase.", "error");
+				}
+
+				else
+				{
+					NProgress.done();
+					swal("Completado!", "Se ha asignado el material a la clase.", "success");
 				}
 			}
 
 		});
 	}
 });
+
 function editarMaterial(id)
 {
 	NProgress.start();
@@ -256,4 +263,39 @@ $('#editarMc').submit(function(event) {
 		});
 	}
 });
+
+function eliminarMaterialClase(id)
+{
+	swal({
+		title: "¿Estas seguro?",
+		text: "¿Realmente deseas eliminar este material asinado a esta clase?",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#DD6B55",
+		confirmButtonText: "Si, cámbialo!",
+		closeOnConfirm: false
+	}).then(function() {
+	NProgress.start();
+	    $.ajax({
+		    url: 'materialclase/eliminarMaterialClase',
+		    type: 'POST',
+		    data: {id: id},
+		    success:function(res)
+		    {
+
+		    	if (res == 'ok') 
+		    	{
+		    		NProgress.done();
+		    		swal("Completado!", "Se ha quitado es material de esta clase.", "success");
+		    	} 
+		    	else
+		    	{
+		    		NProgress.done();
+		    		sweetAlert("Oops...", "No se ha quitado es material de esta clase.", "error");
+		    	}
+		    	actualizarMc();
+		    }
+	    });	
+    });
+}
 

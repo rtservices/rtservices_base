@@ -43,26 +43,14 @@ class Materialclase extends CI_Controller {
 			$data = array();
 			foreach ($this->mdl_material->cargarTablaMc($idClase) as $mate)
 			{
-				if ($mate->Estado == 1) 
-				{
 					$accion = 'Inhabilitar clase';
 					$color = ' color: #F13A3A; background-color: #2A2A2A;';
 					$estilo = 'danger';
 					$estado = '<a style="color: #31B404">Activo</a>';
 					$edit = '<a class="btn btn-primary btn-expand" style="color:white; background-color: #2A2A2A;"  href="javascript:void()"  title="Administrar clase" onclick="editarMaterialClase('.$mate->IdMaterialClase.')"><i class="fa fa-pencil"></i></a>';
-				}
-				else
-				{
-					$accion = 'Habilitar clase';
-					$color = 'color:#81B71A; background-color: #2A2A2A;';
-					$estilo = 'success';
-					$estado = '<a style="color: #8A0808">Inactivo</a>';
-					$edit = '<a class="btn btn-primary btn-expand" style="color:white; background-color: #2A2A2A;" href="javascript:void()" title="Debes tener activa esta clase para poder administrarla." disabled="true"><i class="fa fa-pencil"></i></a>';
-				}
-
+				
 				$row = array();
-				$row[] = $estado;
-				$row[] = $mate->NombreClase;
+				$row[] = $estado;	
 				$row[] = $mate->DescripcionMaterial;
 				$row[] = $mate->Cantidad;
 				$row[] = 
@@ -70,7 +58,7 @@ class Materialclase extends CI_Controller {
 				$row[] = '
 				<center>
 				'.$edit.'
-				<a class="btn btn-'.$estilo.' btn-expand" style="'.$color.'" href="javascript:void()" title="'.$accion.'" onclick="variarEstadoMaterialClase('.$mate->IdMaterialClase.')"><i class="fa fa-exchange"></i></a>
+				<a class="btn btn-'.$estilo.' btn-expand" style="'.$color.'" href="javascript:void()" title="Eliminar material asignados" onclick="eliminarMaterialClase('.$mate->IdMaterialClase.')"><i class="fa fa-archive"></i></a>
 				</center>';
 
 				$data[] = $row;
@@ -88,17 +76,40 @@ class Materialclase extends CI_Controller {
 	{
 		if ($this->input->is_ajax_request())
 		{
-			$data = array(
+			$idMaterial = $this->input->post('materialR');
+			$idMaterialClase = $this->input->post('claseR');
+			$arrMaterial = array();
+			foreach ($this->mdl_material->materialesInscriptos($idMaterialClase) as $idMate)
+			{
+				$arrMaterial[] = $idMate->IdMaterial;
+			}
+			
+			
+		   if (!in_array($idMaterial, $arrMaterial))
+			{
+				$data = array(
 				'Estado'=>1,
 				'Cantidad'=>$this->input->post('cantidadR'),
 				'IdMaterial'=>$this->input->post('materialR'),
 			    'IdClase_deb'=>$this->input->post('claseR'));
-			if ($this->mdl_material->registrarMaterialClase($data)) {
-				echo "ok";
-			} else{
-				echo "error";
+			     if ($this->mdl_material->registrarMaterialClase($data))
+			     {
+				     echo "ok";
+			     } 
+			     else
+			     {
+				     echo "error";
+			     }
 			}
-		} else {
+
+			else
+			{
+				echo "yaEsta";
+			}
+
+		} 
+		else 
+		{
 			redirect('error404');
 		}
 
@@ -167,6 +178,27 @@ class Materialclase extends CI_Controller {
 				echo "error";
 			}
 		} else
+		{
+			redirect('error404');
+		}
+	}
+
+	//Eliminar material clase
+    public function eliminarMaterialClase()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$id = $this->input->post('id');
+			if ($this->mdl_material->eliminarMaterialClases($id))
+			{
+				echo "ok";
+			}
+			else
+			{
+				echo "no";
+			}
+		}
+		else
 		{
 			redirect('error404');
 		}

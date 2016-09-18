@@ -19,7 +19,7 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-6">
+	<div class="col-md-12">
 			<div class="panel rounded shadow no-overflow">
 				<div class="panel-heading">
 					<div class="pull-left">
@@ -68,7 +68,7 @@
 			</div>
 		</div>
 </div>
-<!-- comienzo de boton de material clase-->
+<!-- tabla-->
 <div class="body-content animated fadeIn">
 	<div class="row">
 		<div class="col-md-12">
@@ -88,8 +88,7 @@
 							<thead>
 								<tr>
 									<td>-</td>
-									<td style="color: red;">Nombre clase</td>
-									<td>Nombre material</td>
+									<td style="color: red;">Nombre material</td>
 									<td>Cantidad </td>
 									<td style="text-align: center;">Acciones</td>
 								</tr>
@@ -115,23 +114,31 @@
 				</div>
 				<div class="modal-body">
 					<div class="row">
-						<div class="col-md-2"></div>
-						<input class="form-control" id="idMaterialClase" name="idMaterialClase" type="hidden">
-						<div class="col-md-6 form-group">
-							<center><label class="control-label">Cantidad</label></center>
-							<input class="form-control" id="cantidadE" name="cantidadE" type="text">
+							<div class="col-md-2"></div>
+							<div class="col-md-8">
+							 <input class="form-control" id="idMaterialClase" name="idMaterialClase" type="hidden">
+								<div class="row">
+									<div class="col-md-6 form-group">
+										<label class="control-label">Nombre de la clase</label>
+										<input id="nombreClaseE" name="nombreClaseE" class="form-control" type="text" disabled style="text-align: center;" value="<?= $nClase ?>">
+									</div>
+								    <div class="col-md-6 form-group">
+										<label class="control-label">Cantidad</label>
+										<input id="cantidade" name="cantidadE" class="form-control" type="text" style="text-align: center;">
+									</div>
+								   <div class="col-md-12 form-group">
+									   <label class="control-label">Material </label>
+									   <select id="materialE" name="materialE" data-placeholder="Seleccione un material" class="chosen-select mb-15" tabindex="-1" sstyle="text-align: center;" >
+										   <option value="" disabled selected>Seleccione un material</option>';
+										    <?php foreach ($this->mdl_material->listarMateriales() as $mate) { ?>
+											<option value="<?= $mate->IdMaterial ?>"><?= $mate->DescripcionMaterial ?></option>';
+											<?php }?>
+										</select>
+									</div>
+								</div>
+ 							<div class="col-md-2"></div>
+ 							</div>
 						</div>
-						<div class="col-md-6 form-group">
-							<label class="control-label">Material</span></label>
-							<select class="form-control" id="materialE" name="materialE">
-								<option value="" disabled>Seleccione un material</option>
-								<?php foreach ($this->mdl_material->listarMateriales() as $mate) { ?> 
-								<option value="<?= $mate->IdMaterial ?>"><?= $mate->DescripcionMaterial ?></option>'; <?php }?>
-							</select>
-						</div>
-						<div class="col-md-2"></div>
-						<div class="clearfix"></div>
-					</div>
 				</div>
 				<div class="modal-footer">
 					<center>
@@ -144,4 +151,4 @@
 	</div>
 </div>
 
-  
+   	

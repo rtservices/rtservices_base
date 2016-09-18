@@ -91,6 +91,18 @@ public $tabla = 'rtsmaterial';
 		return $res;
 	}
 
+	public function materialesInscriptos($id)
+	{
+		$this->db->select('rm.IdMaterial');
+		$this->db->from('rtsmaterial AS rm');
+		$this->db->join('rtsmaterialclase_det AS rmc','rm.IdMaterial = rmc.IdMaterial','INNER');
+		$this->db->where('rmc.IdClase_deb', $id);
+		$this->db->where('rm.Estado',1 );	
+		$res = $this->db->get()->result();
+
+		return $res;
+	}
+
 	public function listarClases()
 	{
 		$this->db->select('*');
@@ -108,6 +120,13 @@ public $tabla = 'rtsmaterial';
 		$this->db->where('IdClase', $id);
 		$res = $this->db->get()->result();
 
+		return $res;
+	}
+	//Eliminar material clase
+	public function eliminarMaterialClases($id)
+	{
+		$this->db->where('IdMaterialClase', $id);
+		$res = $this->db->delete('rtsmaterialclase_det');
 		return $res;
 	}
 }

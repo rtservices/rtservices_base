@@ -284,7 +284,7 @@ class Clase extends CI_Controller {
 				}
 				else
 				{
-					echo "no";
+					echo "error";
 				}
 			}
 			else

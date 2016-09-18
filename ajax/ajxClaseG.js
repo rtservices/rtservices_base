@@ -109,15 +109,17 @@ $('#registroJugadorC').submit(function(event) {
 	}
 });
 
-
 $('#gClaseE').submit(function(event) {
 	event.preventDefault();
-	NProgress.start();
-	$.ajax({
-		url: 'clase/modificarClase',
-		type: 'POST',
-		data:$('#gClaseE').serialize(),
-		success:function(res){
+	if ($('#gClaseE').validate().form()) 
+	{
+		NProgress.done();
+		$.ajax({
+			url: 'clase/modificarClase',
+			type: 'POST',
+			data:$('#gClaseE').serialize(),
+			success:function(res){
+				actualizarMc();
 			if(res == 'no')
 			{
 				NProgress.done();
@@ -128,6 +130,7 @@ $('#gClaseE').submit(function(event) {
 				NProgress.done();
 				sweetAlert("Perfecto!", "Se ha modificado la información de la clase.", "success");
 			}
-		}
-	});
+			}
+		});
+	}
 });

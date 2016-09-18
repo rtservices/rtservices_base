@@ -75,7 +75,7 @@ function listarEps(id)
 
 $('#editarE').submit(function(event) {
 	event.preventDefault();
-if ($('#editarE').validate().form() == true) 
+if ($('#editarE').validate().form()) 
 	{
 	NProgress.start();
 	$.ajax({
