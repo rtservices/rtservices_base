@@ -155,19 +155,28 @@ class Mdl_clase extends CI_Model {
 
 		return $res;
 	}
-//Lustar clases para informacion
+
+	//Listar clases para informacion
 	public function listarClases($id)
 	{
-		$this->db->select('rp.Documento, rp.Nombre, rp.Apellidos,rc.*,(SELECT COUNT(*) FROM rtsclasejugador_det AS 
-			rcj WHERE rcj.IdClase_deb = rc.IdClase ) AS cantidad_jugadores');
+		$this->db->select('rp.Documento, rp.Nombre, rp.Apellidos,rc.*,(SELECT COUNT(*) FROM rtsclasejugador_det AS rcj WHERE rcj.IdClase_deb = rc.IdClase ) AS cantidad_jugadores');
 		$this->db->from('rtsclase_deb AS rc');
-		//$this->db->join('rtsclasejugador_det AS rcj','rc.IdClase = rcj.IdClase_deb','INNER');
 		$this->db->join('rtspersonarol_det AS rpr','rc.IdPersonaRol_det = rpr.IdPersonaRol','INNER');
 		$this->db->join('rtspersona_deb AS rp','rpr.IdPersona_deb = rp.IdPersona','INNER');
 		$this->db->where('rpr.IdRol',2);
 		$this->db->where('rc.IdClase',$id);
 		$res = $this->db->get();
 
+		return $res;
+	}
+
+	function tablaClase()
+	{
+		//$this->db->select('NombreClase, Dia, CONCAT('de'  ,  HoraInicio, '  a  ', HoraFinal) As Horario , CantidadJugadores');
+		$this->db->select('NombreClase, Dia,  HoraInicio, HoraFinal, CantidadJugadores');
+		$this->db->from($this->tabla);
+		$this->db->where('Estado',1); 
+		$res = $this->db->get()->result();
 		return $res;
 	}
 

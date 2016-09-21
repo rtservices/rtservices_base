@@ -25,6 +25,14 @@
     <link href="assets/css/custom.css" rel="stylesheet">
     <link href="assets/swal/sweetalert2.min.css" rel="stylesheet">
     <link href="assets/nprogress/nprogress.css" rel="stylesheet">
+    <style type="text/css">
+        .flotante {
+            display:scroll;
+            position:fixed;
+            bottom:320px;
+            right:0px;
+        }
+    </style>
 </head>
 <body class="page-sound">
     <div id="sign-wrapper">
@@ -66,6 +74,7 @@
                 </div>
             </div>
         </form>
+        <a href="inicio" class="flotante" style=" text-decoration: none;"><button type="submit" class="btn btn-theme btn-lg btn-block no-margin rounded" id="login-btn" style="background-color: #636E7B;">Regresar</button></a>
     </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/jquery.cookie.js"></script>

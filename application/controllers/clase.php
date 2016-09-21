@@ -20,7 +20,7 @@ class Clase extends CI_Controller {
 			redirect('login');
 		}
 
-	
+
 		if (is_null($this->idClaseActual_principal))
 		{
 			$data['cpersona'] = $this->mdl_login->cargarUsuario();
@@ -30,7 +30,7 @@ class Clase extends CI_Controller {
 			$this->load->view('msp/footer');
 			$this->load->view('clase/add');
 		}
-	
+
 		else
 		{
 			$data['idClase'] = $this->idClaseActual_principal;
@@ -81,7 +81,7 @@ class Clase extends CI_Controller {
 					$estilo = 'success';
 					$estado = '<a style="color: #8A0808">Inactivo</a>';
 					$edit = '<a class="btn btn-primary btn-expand" style="color:white; background-color: #2A2A2A;" href="javascript:void()" title="Debes tener activa esta clase para poder administrarla." disabled="true"><i class="fa fa-pencil"></i></a>';
-				    $mateclas = '<a class="btn btn-success btn-expand" style="color:white; background-color: #2A2A2A;" href="javascript:void()" title="Debes tener activa esta clase para poder administrarla." disabled="true"><i class="fa fa-book"></i></a>';
+					$mateclas = '<a class="btn btn-success btn-expand" style="color:white; background-color: #2A2A2A;" href="javascript:void()" title="Debes tener activa esta clase para poder administrarla." disabled="true"><i class="fa fa-book"></i></a>';
 				}
 
 				if ($clase->cantidad_jugadores < 10)
@@ -107,10 +107,10 @@ class Clase extends CI_Controller {
 
 				$row[] = '
 				<center>
-				<a class="btn btn-info btn-expand" style="color:white; background-color: #2A2A2A;" href="javascript:void()" title="Más información" onclick="listarClases('.$clase->IdClase.')"><i class="fa fa-info-circle"></i></a>
-				'.$edit.'
-				'.$mateclas.'
-				<a class="btn btn-'.$estilo.' btn-expand" style="'.$color.'" href="javascript:void()" title="'.$accion.'" onclick="variarEstadoClase('.$clase->IdClase.')"><i class="fa fa-exchange"></i></a>
+					<a class="btn btn-info btn-expand" style="color:white; background-color: #2A2A2A;" href="javascript:void()" title="Más información" onclick="listarClases('.$clase->IdClase.')"><i class="fa fa-info-circle"></i></a>
+					'.$edit.'
+					'.$mateclas.'
+					<a class="btn btn-'.$estilo.' btn-expand" style="'.$color.'" href="javascript:void()" title="'.$accion.'" onclick="variarEstadoClase('.$clase->IdClase.')"><i class="fa fa-exchange"></i></a>
 				</center>';
 
 				$data[] = $row;
@@ -136,7 +136,7 @@ class Clase extends CI_Controller {
 				$row[] = $clase->Nombre.' '.$clase->Apellidos;
 				$row[] = '
 				<center>
-				<a class="btn btn-danger btn-expand" style="color: #F13A3A; background-color: #2A2A2A;" href="javascript:void()" title="Eliminar inscripción de '. $clase->Nombre.' '.$clase->Apellidos .' de esta clase." onclick="eliminarInscripcionClase('.$clase->IdClasejugador.')"><i class="fa fa-close"></i></a>
+					<a class="btn btn-danger btn-expand" style="color: #F13A3A; background-color: #2A2A2A;" href="javascript:void()" title="Eliminar inscripción de '. $clase->Nombre.' '.$clase->Apellidos .' de esta clase." onclick="eliminarInscripcionClase('.$clase->IdClasejugador.')"><i class="fa fa-close"></i></a>
 				</center>';
 
 				$data[] = $row;
@@ -351,6 +351,50 @@ class Clase extends CI_Controller {
 		{
 			redirect('error404');
 		}
+	}
+
+	public function cargarClaseInfo()
+	{
+		if ($this->input->is_ajax_request()) 
+		{
+			foreach ($this->mdl_clase->tablaClase() as $ClInfo) {
+
+				if($ClInfo->CantidadJugadores == 15)
+				{
+					$ClInfo->CantidadJugadores = 15 - $ClInfo->CantidadJugadores;
+					$rojo= 'style="color:#FF0000"';
+				}
+				elseif ($ClInfo->CantidadJugadores >= 10 && $ClInfo->CantidadJugadores <= 14)
+				{
+					$rojo= 'style="color:#D65809"';
+					$ClInfo->CantidadJugadores = 15 - $ClInfo->CantidadJugadores;
+				}
+				elseif ($ClInfo->CantidadJugadores >= 5 && $ClInfo->CantidadJugadores < 10)
+				{
+					$rojo= 'style="color:#4800FF"';
+					$ClInfo->CantidadJugadores = 15 - $ClInfo->CantidadJugadores;
+				}
+				elseif ($ClInfo->CantidadJugadores < 5 && $ClInfo->CantidadJugadores >= 0)
+				{
+					$rojo= 'style="color:#09D617"';
+					$ClInfo->CantidadJugadores = 15 - $ClInfo->CantidadJugadores;
+				}
+				
+				$row = array();
+				$row[]= strtoupper($ClInfo->NombreClase . ' - ' . $ClInfo->Dia);
+				$row[]= '  DE  '.$ClInfo->HoraInicio.'  A  '.$ClInfo->HoraFinal;
+				$row[]= '<b><div '.$rojo.'>'.$ClInfo->CantidadJugadores.'</div></b>';
+				$data[] = $row;
+
+			}
+
+			$output = array( "data" => $data );
+			echo json_encode($output);
+		}
+		else
+		{
+			redirect('inicio');
+		}		
 	}
 }
 

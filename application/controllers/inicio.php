@@ -5,13 +5,12 @@ class Inicio extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model('mdl_login');
 	}
 
 	public function index()
 	{
-		$this->load->view('menuprincipal/msp/cabecera');
-		// $this->load->view('View File', $data, FALSE);
-		$this->load->view('menuprincipal/msp/pie');
+		$this->load->view('inicio/inicio');
 	}
 
 }

@@ -11,19 +11,16 @@ class Asistencia extends CI_Controller {
 
 	public function index()
 	{
-		$data['titulo'] = 'Gestión de Asistencia';
 		if (!$this->session->userdata('usuario_id')) 
 		{
 			redirect('login');
 		}
-	
-		else
-		{
-			$this->load->view('msp/cabecera', $data);
-			$this->load->view('asistencia/asistencia', $data);
-			$this->load->view('msp/footer');
-			$this->load->view('asistencia/add');
-		}
+
+		$data['titulo'] = 'Gestión de Asistencia';
+		$this->load->view('msp/cabecera', $data);
+		$this->load->view('asistencia/asistencia', $data);
+		$this->load->view('msp/footer');
+		$this->load->view('asistencia/add');
 
 
 	}
