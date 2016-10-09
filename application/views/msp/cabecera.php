@@ -14,7 +14,7 @@
     <link href="assets/css/cssotro.css" rel="stylesheet">
 
     <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
     <link href="assets/timepicki/clockpicker.css" rel="stylesheet">
     <link href="assets/css/animate.min.css" rel="stylesheet">
     <link href="assets/css/reset.css" rel="stylesheet">
@@ -153,6 +153,10 @@
                     <a href="clase">
                         <span class="icon"><i class="fa fa-gamepad"></i></span>
                         <span class="text">Gestión de clases</span>
+                    </a>
+                    <a href="asistencia">
+                        <span class="icon"><i class="fa fa-list"></i></span>
+                        <span class="text">Gestión de asistencias</span>
                     </a>
                     <a href="material">
                         <span class="icon"><i class="fa fa-hashtag"></i></span>

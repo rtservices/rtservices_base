@@ -18,7 +18,7 @@
 		<div class="col-md-12">
 			<div class="panel rounded shadow no-overflow">
 				<center>
-					<div class="panel-heading btn btn-success btn-push" style="margin: 20px" onclick="nuevaC()">
+					<div class="panel-heading btn btn-success btn-push" style="margin: 20px" onclick="nuevaAsistencia()">
 						<a style="text-decoration:none; color:white;"><h3 class="panel-title">Registrar Asistencia </h3></a>
 						<div class="clearfix"></div>
 					</div>
@@ -33,7 +33,7 @@
 			<div class="panel rounded shadow no-overflow">
 				<div class="panel-heading">
 					<div class="pull-left">
-						<h3 class="panel-title">Asistencias en el sistema</h3>
+						<h3 class="panel-title">Asistencias en clases</h3>
 					</div>
 					<div class="pull-right">
 						<button class="btn btn-sm" data-container="body" data-action="collapse" data-toggle="tooltip" data-placement="top" data-title="Collapse" data-original-title="" title=""><i class="fa fa-angle-up"></i></button>
@@ -62,4 +62,48 @@
 		</div>
 	</div>
 </div>
-			
+
+<div class="modal fade bs-example-modal-lg" id="modalAsistencia" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel"><center>Registro de asistencias</center></h4>
+			</div>
+			<form id="formAsistencia">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-1"></div>
+						<div class="col-md-10">
+							<div class="row">
+								<div class="col-md-6 form-group">
+									<label class="control-label">Seleccione una clase <span style="color: red;">*</span></label>
+									<select id="clase" name="clase" data-placeholder="Seleccione una eps" class="chosen-select mb-15" tabindex="-1" style="display: none;">
+										<option value="" disabled selected>Seleccione una clase</option>';
+										<?php foreach ($this->mdl_clase->listarClasesSelect() as $clases) { ?>
+										<option value="<?= $clases->IdClase ?>"><?= $clases->NombreClase . ' - ' . $clases->Dia . ' | ' . $clases->HoraInicio . ' a ' . $clases->HoraFinal ?></option>';
+										<?php }?>
+									</select>
+								</div>
+								<div class="col-md-6 form-group">
+									<label class="control-label">Fecha de ejecución <span style="color: red;">*</span></label>
+									<input type="date" class="form-control" name="fecharegistro" id="fecharegistro" value="<?= date('Y-m-d') ?>">
+								</div>
+							</div>
+							<div class="divider"></div>
+						</div>
+						<div class="col-md-1"></div>
+						<div class="col-md-1"></div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<center>
+						<button type="reset" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+						<button type="submit" class="btn btn-info btn-expand" style="background-color: #2A2A2A;">Registrar asistencias</button>
+					</center>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+

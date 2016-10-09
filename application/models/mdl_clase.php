@@ -180,7 +180,15 @@ class Mdl_clase extends CI_Model {
 		return $res;
 	}
 
+	public function listarClasesSelect()
+	{
+		$this->db->select('IdClase, NombreClase, Dia, HoraInicio, HoraFinal');
+		$this->db->from($this->tabla);
+		$this->db->where('Estado', 1);
+		$res = $this->db->get()->result();
 
+		return $res;
+	}
 	
 }
 

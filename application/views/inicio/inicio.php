@@ -352,7 +352,6 @@
               <script src="assets/js/bootstrap.min.js"></script>
               <script src="assets/js/jquery.singlePageNav.min.js"></script>
               <script src="assets/js/unslider.min.js"></script>
-              <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
               <script src="assets/js/templatemo_script.js"></script>
               <script src="assets/datatable/js/datatables.min.js"></script>
               <script src="assets/nprogress/nprogress.js"></script>

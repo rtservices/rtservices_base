@@ -357,6 +357,7 @@ class Clase extends CI_Controller {
 	{
 		if ($this->input->is_ajax_request()) 
 		{
+			$data = array();
 			foreach ($this->mdl_clase->tablaClase() as $ClInfo) {
 
 				if($ClInfo->CantidadJugadores == 15)

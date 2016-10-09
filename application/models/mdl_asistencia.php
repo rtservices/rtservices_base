@@ -3,7 +3,7 @@ defined('BASEPATH') Or exit('No direct script access allowed');
 
 class Mdl_asistencia extends CI_Model {
 
-	public $tabla = 'rtsclase_deb';
+	public $tabla = 'rtsasistencia_deb';
 
 	public function __construct()
 	{
@@ -18,6 +18,17 @@ class Mdl_asistencia extends CI_Model {
 		$this->db->join('rtspersonarol_det AS rpr','rc.IdPersonaRol_det = rpr.IdPersonaRol','INNER');
 		$this->db->join('rtspersona_deb AS rp','rpr.IdPersona_deb = rp.IdPersona','INNER');
 		$res = $this->db->get()->result();
+
+		return $res;
+	}
+
+	public function registrarAsistencia($data)
+	{
+		$res = $this->db->insert($this->tabla, $data);
+		if ($res) 
+		{
+			$res = $this->db->insert_id();
+		}
 
 		return $res;
 	}

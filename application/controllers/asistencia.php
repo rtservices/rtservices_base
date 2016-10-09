@@ -7,6 +7,7 @@ class Asistencia extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('mdl_asistencia');
+		$this->load->model('mdl_clase');
 	}
 
 	public function index()
@@ -73,9 +74,9 @@ class Asistencia extends CI_Controller {
 
 				$row[] = '
 				<center>
-				<a class="btn btn-info btn-expand" style="color:white; background-color: #2A2A2A;" href="javascript:void()" title="Más información" onclick="listarClases('.$asistencia->IdClase.')"><i class="fa fa-info-circle"></i></a>
-				'.$edit.'
-				<a class="btn btn-'.$estilo.' btn-expand" style="'.$color.'" href="javascript:void()" title="'.$accion.'" onclick="variarEstadoClase('.$asistencia->IdClase.')"><i class="fa fa-exchange"></i></a>
+					<a class="btn btn-info btn-expand" style="color:white; background-color: #2A2A2A;" href="javascript:void()" title="Más información" onclick="listarClases('.$asistencia->IdClase.')"><i class="fa fa-info-circle"></i></a>
+					'.$edit.'
+					<a class="btn btn-'.$estilo.' btn-expand" style="'.$color.'" href="javascript:void()" title="'.$accion.'" onclick="variarEstadoClase('.$asistencia->IdClase.')"><i class="fa fa-exchange"></i></a>
 				</center>';
 
 				$data[] = $row;
@@ -83,7 +84,35 @@ class Asistencia extends CI_Controller {
 			$output = array("data" => $data);
 
 			echo json_encode($output);
-		} else 
+		}
+		else 
+		{
+			redirect('error404');
+		}
+	}
+
+	public function regitrarasistencia()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$data = array(
+				'IdClase_deb' => $this->input->post('clase'),
+				'FechaRegistro' => $this->input->post('fecharegistro'),
+				'FechaSistema' => date('Y-m-d')
+				);
+
+			$res = $this->mdl_asistencia->registrarAsistencia($data);
+
+			if ($res)
+			{
+				echo $res;
+			}
+			else
+			{
+				echo "no";
+			}
+		}
+		else
 		{
 			redirect('error404');
 		}

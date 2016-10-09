@@ -35,7 +35,7 @@
 			<div class="panel rounded shadow no-overflow">
 				<div class="panel-heading">
 					<div class="pull-left">
-						<h3 class="panel-title">Creación de Planes de Clase</h3>
+						<h3 class="panel-title">Activar de Planes de Clase a Jugador <?= $nomJugador ?></h3>
 					</div>
 					<div class="pull-right">
 						<button class="btn btn-sm" data-container="body" data-action="collapse" data-toggle="tooltip" data-placement="top" data-title="Collapse" data-original-title="" title=""><i class="fa fa-angle-up"></i></button>
@@ -44,28 +44,22 @@
 				</div>
 				<input type="hidden" name="idJugador" id="idJugador" value="<?= $IdJugador ?>">
 				<div class="panel-body no-padding" style="margin: 20px; font-size: 15px">
-					<!-- <form id="gClaseE" name="gClaseE">
+					<form id="gPClase" name="gPClase">
 						<div class="row">
 							<div class="col-md-2"></div>
 							<div class="col-md-8">
 								<div class="row">
-									<div class="col-md-6 form-group">
-										<label class="control-label">Nombre de la clase</label>
-										<input id="nombreClase" name="nombreClase" class="form-control" type="text" style="text-align: center;" value="">
-									</div>
-									<div class="col-md-6 form-group">
-										<label class="control-label">Día </label>
-										<select id="diaClase" name="diaClase" class="form-control" value="">
-											
-										</select>
-									</div>
-								</div>
-								<div class="row">
 									<div class="col-md-12 form-group">
-										<label class="control-label">Instructor encargado</label>
-										<select id="instructorClase" name="instructorClase" data-placeholder="Instructor" class="chosen-select mb-15" tabindex="-1" style="display: none;">
-											<option value="" disabled>Seleccione un instructor</option>
-											
+										<center>
+											<p class="btn btn-warning">Al activar un plan de clases estas asignando a una persona una cantidad de clases dependiendo del monto que la persona pago para recibir clases.</p>
+										</center>
+										<label class="control-label">Plan de clases</label>
+										<select id="tipoPlan" name="tipoPlan" class="form-control" tabindex="-1">
+											<option value="no" selected>Seleccione un tipo de plan de clases</option>
+											<option value="3">3 meses para un total de 24 clases de 45 minutos</option>
+											<option value="6">6 meses para un total de 48 clases de 45 minutos</option>
+											<option value="9">9 meses para 72 clases de 45 minutos</option>
+											<option value="12">1 año (12 meses) para 96 clases de 45 minutos</option>
 										</select>
 									</div>
 								</div>
@@ -74,9 +68,9 @@
 						</div>
 						<br>
 						<div class="row">
-							<center><button type="submit" class="btn btn-warning btn-expand" style="background-color: #2A2A2A;">Modificar clase</button></center>
+							<center><button type="submit" class="btn btn-warning btn-expand" style="background-color: #2A2A2A;">Asignar plan de clase</button></center>
 						</div>
-					</form> -->
+					</form>
 				</div>
 				<br>
 			</div>
