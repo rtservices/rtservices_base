@@ -10,7 +10,7 @@
 </script>
 
 <script>
-/*
+
 	if($('#registroC').length)
 	{
 		$('#registroC').validate({
@@ -40,7 +40,7 @@
 				$(element).parents('.form-group').removeClass('has-error');
 			},
 		});
-	}*/
+	}
 </script>
 </body>
 </html>

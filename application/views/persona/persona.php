@@ -190,7 +190,7 @@
 							</div>
 							<div class="row">
 								<div class="col-md-6 form-group">
-									<label class="control-label">Teléfono fijo <span style="color: red;">*</span></label>
+									<label class="control-label">Teléfono fijo</label>
 									<input class="form-control" id="telefono" name="telefono" type="text">
 								</div>
 								<div class="col-md-6 form-group">
@@ -201,7 +201,7 @@
 							<div class="row">
 								<div class="col-md-6 form-group">
 									<label class="control-label">Eps <span style="color: red;">*</span></label>
-									<select id="eps" name="eps" data-placeholder="Seleccione una eps" class="chosen-select mb-15" tabindex="-1" style="display: none;">
+									<select id="eps" name="eps" class="form-control">
 										<option value="" disabled selected>Seleccione una eps</option>';
 										<?php foreach ($this->mdl_persona->listarEps() as $eps) { ?>
 											<option value="<?= $eps->IdEps ?>"><?= $eps->NombreEps ?></option>';
@@ -210,7 +210,7 @@
 									</div>
 									<div class="col-md-6 form-group">
 										<label class="control-label">Fecha de nacimiento <span style="color: red;">*</span></label>
-										<input class="form-control" id="fnacimiento" name="fnacimiento" type="date" min="1930-01-01" value="2000-01-01" max="<?= date("Y")-5 ?>-12-31">
+										<input class="form-control" id="fnacimiento" name="fnacimiento" type="date" min="1930-01-01" max="<?= date("Y")-5 ?>-12-31">
 									</div>
 								</div>
 							</div>
@@ -280,7 +280,7 @@
 									</div>
 									<div class="row">
 										<div class="col-md-6 form-group">
-											<label class="control-label">Teléfono fijo <span style="color: red;">*</span></label>
+											<label class="control-label">Teléfono fijo</label>
 											<input class="form-control" id="telefonoM" name="telefonoM" type="text">
 										</div>
 										<div class="col-md-6 form-group">

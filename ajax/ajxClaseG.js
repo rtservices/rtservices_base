@@ -18,8 +18,8 @@ function actualizar()
 
 $('#gJugadorClase').submit(function(event) {
 	event.preventDefault();
-
 	NProgress.start();
+
 	$.ajax({
 		url: 'clase/addJugadorClase',
 		type: 'POST',
@@ -30,6 +30,11 @@ $('#gJugadorClase').submit(function(event) {
 			{
 				NProgress.done();
 				sweetAlert("Oops...", "No se ha asignado el jugador a la clase.", "error");
+			}
+			else if(res == 'cvacio')
+			{
+				NProgress.done();
+				sweetAlert("Oops...", "Debes seleccionar el plan de clase de un jugador para poder asignarlo a una clase.", "error");
 			} 
 			else if (res == 'yaEsta')
 			{

@@ -24,7 +24,7 @@ class Mdl_planclase extends CI_Model {
 
 	public function cargarTablaPC($Id)
 	{
-		$this->db->select('IdPlanClase, FechaInicio, Estado');
+		$this->db->select('IdPlanClase, FechaInicio,DiasRestantes, Estado');
 		$this->db->from($this->tabla);
 		$this->db->where('IdPersonaRol_det', $Id);
 		$this->db->order_by('FechaInicio', 'desc');
@@ -40,6 +40,31 @@ class Mdl_planclase extends CI_Model {
 		// $this->db->where('Field / comparison', $Value);
 	}
 
+	public function addPlanClaseJugador($data)
+	{
+		$res = $this->db->insert($this->tabla, $data);
+		return $res;
+	}
+
+	public function pcActivos($iIdJugador)
+	{
+		$this->db->select('COUNT(*) AS conteo');
+		$this->db->from($this->tabla);
+		$this->db->where('IdPersonaRol_det', $iIdJugador);
+		$this->db->where('Estado', 1);
+		$this->db->or_where('Estado', 2);
+		$res = $this->db->get()->row();
+
+		return $res->conteo;
+	}
+
+	public function eliminarPC($idpc)
+	{
+		$this->db->where('IdPlanClase', $idpc);
+		$res = $this->db->delete($this->tabla);
+
+		return $res;
+	}
 }
 
 /* End of file mdl_planclase.php */

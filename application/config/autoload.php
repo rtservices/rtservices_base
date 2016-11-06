@@ -10,7 +10,7 @@ $autoload['config'] = array();
 
 $autoload['language'] = array();
 
-$autoload['model'] = array('mdl_login');
+$autoload['model'] = array('mdl_login', 'mdl_notificacion');
 
 /* End of file autoload.php */
 /* Location: ./application/config/autoload.php */

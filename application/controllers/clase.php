@@ -264,32 +264,39 @@ class Clase extends CI_Controller {
 		{
 			$idPlanJugador = $this->input->post('selPlanJugador');
 			$idClase = $this->input->post('idClaseActual');
-			$arrJugadores = array();
-			foreach ($this->mdl_clase->jugadoresInscritos($idClase) as $idJUG)
+			if (!empty($idPlanJugador))
 			{
-				$arrJugadores[] = $idJUG->IdPlanClase;
-			}
-			
-			if (!in_array($idPlanJugador, $arrJugadores))
-			{
-				$data = array(
-					'Estado' => 1,
-					'IdClase_deb' =>  $idClase,
-					'IdPlanClase_deb' => $idPlanJugador
-					);
-
-				if ($this->mdl_clase->inscribirPlanJugadorClase($data))
+				$arrJugadores = array();
+				foreach ($this->mdl_clase->jugadoresInscritos($idClase) as $idJUG)
 				{
-					echo "ok";
+					$arrJugadores[] = $idJUG->IdPlanClase;
+				}
+				
+				if (!in_array($idPlanJugador, $arrJugadores))
+				{
+					$data = array(
+						'Estado' => 1,
+						'IdClase_deb' =>  $idClase,
+						'IdPlanClase_deb' => $idPlanJugador
+						);
+
+					if ($this->mdl_clase->inscribirPlanJugadorClase($data))
+					{
+						echo "ok";
+					}
+					else
+					{
+						echo "error";
+					}
 				}
 				else
 				{
-					echo "error";
+					echo "yaEsta";
 				}
 			}
 			else
 			{
-				echo "yaEsta";
+				echo "cvacio";
 			}
 		}
 		else

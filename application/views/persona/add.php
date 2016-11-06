@@ -38,7 +38,6 @@
 					date: true
 				},
 				telefono:{
-					required: true,
 					number: true,
 					minlength: 7,
 					maxlength: 10
@@ -49,6 +48,65 @@
 					maxlength: 12
 				},
 				eps:{
+					required: true
+				}
+			},
+			highlight:function(element) {
+				$(element).parents('.form-group').addClass('has-error has-feedback');
+			},
+			unhighlight: function(element) {
+				$(element).parents('.form-group').removeClass('has-error');
+			}
+		});
+	}
+
+	if($('#editar').length){
+
+		$('#editar').validate({
+			rules:{
+				documentoM:{
+					required:true,
+					number:true,
+					minlength:5,
+					maxlength:15
+				},
+				generoM:{
+					required:true
+				},
+				nombreM:{
+					required:true,
+					minlength:3,
+					maxlength:35
+				},
+				apellidosM:{
+					required:true,
+					minlength:3,
+					maxlength:35
+				},
+				correoM:{
+					required:true,
+					email: true
+				},
+				direccionM:{
+					required:true,
+					minlength:5,
+					maxlength:35
+				},
+				fnacimientoM:{
+					required: true,
+					date: true
+				},
+				telefonoM:{
+					number: true,
+					minlength: 7,
+					maxlength: 10
+				},
+				celularM:{
+					number: true,
+					minlength: 10,
+					maxlength: 12
+				},
+				epsM:{
 					required: true
 				}
 			},

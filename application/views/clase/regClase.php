@@ -67,7 +67,7 @@
 								<div class="row">
 									<div class="col-md-6 form-group">
 										<label class="control-label">Hora inicio</label>
-										<div id="holota" class="input-group clockpicker">
+										<div class="input-group clockpicker">
 											<input type="text" id="horaInicio" readonly name="horaInicio"  class="form-control">
 											<span class="input-group-addon" style="color: green">
 												<span class="glyphicon glyphicon-time"></span>
@@ -76,7 +76,7 @@
 									</div>
 									<div class="col-md-6 form-group">
 										<label class="control-label">Hora final</label>
-										<div id="holita" class="input-group clockpicker">
+										<div class="input-group clockpicker">
 											<input type="text" id="horaFin" readonly name="horaFin"  class="form-control">
 											<span class="input-group-addon">
 												<span class="glyphicon glyphicon-time" style="color: red"></span>

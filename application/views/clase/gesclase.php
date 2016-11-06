@@ -68,7 +68,7 @@
 								<div class="row">
 									<div class="col-md-6 form-group">
 										<label class="control-label">Hora inicio</label>
-										<div id="holota" class="input-group clockpicker">
+										<div class="input-group clockpicker">
 											<input type="text" id="horaInicio" readonly name="horaInicio"  class="form-control" value="<?= $hInicio ?>">
 											<span class="input-group-addon" style="color: green">
 												<span class="glyphicon glyphicon-time"></span>
@@ -77,7 +77,7 @@
 									</div>
 									<div class="col-md-6 form-group">
 										<label class="control-label">Hora final</label>
-										<div id="holita" class="input-group clockpicker">
+										<div class="input-group clockpicker">
 											<input type="text" id="horaFin" readonly name="horaFin"  class="form-control" value="<?= $hFin ?>">
 											<span class="input-group-addon">
 												<span class="glyphicon glyphicon-time" style="color: red"></span>
@@ -89,7 +89,7 @@
 									<div class="col-md-12 form-group">
 										<label class="control-label">Instructor encargado</label>
 										<select id="instructorClase" name="instructorClase" data-placeholder="Instructor" class="chosen-select mb-15" tabindex="-1" style="display: none;">
-											<option value="" disabled>Seleccione un instructor</option>
+											<option value="" selected disabled>Seleccione un instructor</option>
 											<?php foreach ($this->mdl_clase->listarInstructores() as $instructor) { ?>
 												<option <?= ($instructor->IdPersonaRol == $cInstructor) ? 'selected' : null ?> value="<?= $instructor->IdPersonaRol ?>"><?= 'C.C. '.$instructor->Documento.' - '.$instructor->Nombre.' '.$instructor->Apellidos ?></option>
 												<?php 
@@ -134,15 +134,14 @@
 								<div class="row">
 									<div class="col-md-12 form-group">
 										<center><label class="control-label">Documento - Nombre completo </label></center>
-										<select id="selPlanJugador" name="selPlanJugador" class="chosen-select mb-16" placeholder="Seleccione una opción" value="<?= $eEtapa ?>">
+										<select id="selPlanJugador" name="selPlanJugador" class="chosen-select mb-16" placeholder="Seleccione un jugador">
+										<option value="" selected disabled> - Seleccione un jugador - </option>
 											<?php 
 											foreach ($this->mdl_clase->selJugadorPlan() as $valJugador)
-											{ 
-												?>
+											{ ?>
 												<option value="<?= $valJugador->IdPlanClase ?>"><?= $valJugador->Documento ?> - <?= $valJugador->Nombre.' '.$valJugador->Apellidos ?></option>
 												<?php 
-											} 
-											?>
+											} ?>
 										</select>
 									</div>
 								</div>

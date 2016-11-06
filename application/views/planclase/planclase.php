@@ -42,20 +42,20 @@
 					</div>
 					<div class="clearfix"></div>
 				</div>
-				<input type="hidden" name="idJugador" id="idJugador" value="<?= $IdJugador ?>">
 				<div class="panel-body no-padding" style="margin: 20px; font-size: 15px">
 					<form id="gPClase" name="gPClase">
+						<input type="hidden" name="idJugador" id="idJugador" value="<?= $IdJugador ?>">
 						<div class="row">
 							<div class="col-md-2"></div>
 							<div class="col-md-8">
 								<div class="row">
 									<div class="col-md-12 form-group">
 										<center>
-											<p class="btn btn-warning">Al activar un plan de clases estas asignando a una persona una cantidad de clases dependiendo del monto que la persona pago para recibir clases.</p>
+											<p>Al activar un plan de clases estas asignando a una persona una cantidad de clases dependiendo del monto que la persona pago para recibir clases.</p>
 										</center>
 										<label class="control-label">Plan de clases</label>
 										<select id="tipoPlan" name="tipoPlan" class="form-control" tabindex="-1">
-											<option value="no" selected>Seleccione un tipo de plan de clases</option>
+											<option value="noselect" selected>Seleccione un tipo de plan de clases</option>
 											<option value="3">3 meses para un total de 24 clases de 45 minutos</option>
 											<option value="6">6 meses para un total de 48 clases de 45 minutos</option>
 											<option value="9">9 meses para 72 clases de 45 minutos</option>
@@ -95,7 +95,7 @@
 								<tr>
 									<td style="color: red;">Estado</td>
 									<td>Fecha de Creación</td>
-									<td>Dias restantes</td>
+									<td>Clases Restantes</td>
 									<td style="text-align: center;">Acciones</td>
 								</tr>
 							</thead>

@@ -410,6 +410,16 @@ class Mdl_persona extends CI_Model {
 		return $res;
 	}
 
+	public function listarPersonaporId($Id)
+	{
+		$this->db->select('Nombre + \' \' + Apellidos ');
+		$this->db->from('rtspersona_deb');
+		$this->db->where('IdPersona', $Id);
+		$res = $this->db->get()->row();
+
+		return $res;
+	}
+
 }
 
 /* End of file mdl_persona.php */

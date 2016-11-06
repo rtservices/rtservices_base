@@ -141,7 +141,7 @@
 								<div class="row">
 									<div class="col-md-6 form-group">
 										<label class="control-label">Hora inicio</label>
-										<div id="holota" class="input-group clockpicker">
+										<div class="input-group clockpicker">
 											<input type="text" id="horaInicioR" readonly name="horaInicioR"  class="form-control">
 											<span class="input-group-addon" style="color: green">
 												<span class="glyphicon glyphicon-time"></span>
@@ -150,7 +150,7 @@
 									</div>
 									<div class="col-md-6 form-group">
 										<label class="control-label">Hora final</label>
-										<div id="holita" class="input-group clockpicker">
+										<div class="input-group clockpicker">
 											<input type="text" id="horaFinR" readonly name="horaFinR"  class="form-control">
 											<span class="input-group-addon">
 												<span class="glyphicon glyphicon-time" style="color: red"></span>
