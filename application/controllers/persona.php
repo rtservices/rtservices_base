@@ -148,6 +148,15 @@ class Persona extends CI_Controller {
 					$edit = '<a class="btn btn-primary btn-expand" style="color: white; background-color: #2A2A2A;" title="No puedes modificar la información de '.$persona->Nombre.' por ser el usuario principal." disabled="true"><i class="fa fa-pencil"></i></a>';
 				}
 
+				if ($persona->IdPersona == $this->session->userdata('usuario_id'))
+				{
+					$edit = '<a class="btn btn-primary btn-expand" style="color: white; background-color: #2A2A2A; color: #81B71A;" href="javascript:void()" title="Editar a  '.$persona->Nombre.' '.$persona->Apellidos.'" onclick="listarPersona('.$persona->IdPersona.');"><i class="fa fa-pencil"></i></a>';
+				}
+				else
+				{
+					$edit = '<a class="btn btn-primary btn-expand" style="color: white; background-color: #2A2A2A;" title="No puedes modificar la información de '.$persona->Nombre.' por que tus privilegios no te lo permiten." disabled="true"><i class="fa fa-pencil"></i></a>';	
+				}
+
 				if ($persona->IdPersona == 1) 
 				{
 					$planclase = '<a class="btn btn-danger btn-expand" disabled style="color: white; background-color: #2A2A2A" href="javascript:void()" title="No puedes gestionar los planes de clase del usuario principal." ><i class="fa fa-credit-card"></i></a>';
