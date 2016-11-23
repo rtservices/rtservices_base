@@ -50,6 +50,7 @@
 									<td>Horario</td>
 									<td>Cantidad jugadores</td>
 									<td>Instructor</td>
+									<td>Asistencia</td>
 									<td style="text-align: center;">Acciones</td>
 								</tr>
 							</thead>

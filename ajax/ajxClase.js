@@ -19,18 +19,6 @@ function nuevaC()
 	$('#registroC')[0].reset();
 	$('#modalRegistro').modal('show');
 }
-/*
-function verClase(id)
-{
-	NProgress.start();
-	$('#modalInfo').modal('show');
-	setTimeout(function() {
-		$('#tablaJugadorV').DataTable({ "ajax":"clase/cargarJugadorClase/" + id });
-		NProgress.done();
-	}, 1000);
-}
-*/
-
 
 function variarEstadoClase(id)
 {
@@ -143,4 +131,9 @@ function listarClases(id)
 function materialclase(id)
 {
 	location.href = 'materialclase?idclase=' + id;
+}
+
+function asistenciaclase(id)
+{
+	location.href = 'asistencia?idclase=' + id;
 }

@@ -105,13 +105,13 @@ class Clase extends CI_Controller {
 				$row[] = $clase->Dia.' - '.$clase->HoraInicio .' a '.$clase->HoraFinal;
 				$row[] = '<a style="'. $colorCJ .'">'.$clase->cantidad_jugadores.'</a> inscritos.';
 				$row[] = $clase->Documento.'-'.$clase->Nombre.' '.$clase->Apellidos;
+				$row[] = $asisclas;
 
 				$row[] = '
 				<center>
 					<a class="btn btn-info btn-expand" style="color:white; background-color: #2A2A2A;" href="javascript:void()" title="Más información" onclick="listarClases('.$clase->IdClase.')"><i class="fa fa-info-circle"></i></a>
 					'.$edit.'
 					'.$mateclas.'
-					'.$asisclas.'
 					<a class="btn btn-'.$estilo.' btn-expand" style="'.$color.'" href="javascript:void()" title="'.$accion.'" onclick="variarEstadoClase('.$clase->IdClase.')"><i class="fa fa-exchange"></i></a>
 				</center>';
 
