@@ -154,10 +154,10 @@
                         <span class="icon"><i class="fa fa-gamepad"></i></span>
                         <span class="text">Gestión de clases</span>
                     </a>
-                    <a href="asistencia">
+                    <!-- <a href="asistencia">
                         <span class="icon"><i class="fa fa-list"></i></span>
                         <span class="text">Gestión de asistencias</span>
-                    </a>
+                    </a> -->
                     <a href="material">
                         <span class="icon"><i class="fa fa-hashtag"></i></span>
                         <span class="text">Gestión de materiales</span>

@@ -360,38 +360,60 @@ class Persona extends CI_Controller {
 	{
 		if ($this->input->is_ajax_request())
 		{
-			$data = array(
-				'Documento' => $this->input->post('documento'),
-				'Nombre' => $this->input->post('nombre'),
-				'Apellidos' => $this->input->post('apellidos'),
-				'Genero' => $this->input->post('genero'),
-				'Correo' => $this->input->post('correo'),
-				'DireccionResidencia' => $this->input->post('direccion'),
-				'Telefono' => $this->input->post('telefono'),
-				'Celular' => $this->input->post('celular'),
-				'FechaNacimiento' => $this->input->post('fnacimiento'),
-				'IdEps' => $this->input->post('eps'),
-				'FechaIngreso' => date("Y").'-'.date("m").'-'.date("d"),
-				'Estado' => 1
-				);
+			$bRegistro = true;
+			$mNotificacion = '';
 
-			$id = $this->mdl_persona->nuevaPersona($data);
-
-			if (!empty($id))
+			if ($this->mdl_persona->validarDocumento($this->input->post('documento')))
 			{
-				$dataA = array('IdPersona_deb' => $id, 'IdRol' => 1, 'Estado' => 0);
+				$bRegistro = false;
+				$mNotificacion = 'rdocumento';
+			}
 
-				if ($this->mdl_persona->registrarRol($dataA))
+			if ($this->mdl_persona->validarCorreo($this->input->post('correo')))
+			{
+				$bRegistro = false;
+				$mNotificacion = 'rcorreo';
+			}
+
+			if ($bRegistro)
+			{
+				$data = array(
+					'Documento' => $this->input->post('documento'),
+					'Nombre' => $this->input->post('nombre'),
+					'Apellidos' => $this->input->post('apellidos'),
+					'Genero' => $this->input->post('genero'),
+					'Correo' => $this->input->post('correo'),
+					'DireccionResidencia' => $this->input->post('direccion'),
+					'Telefono' => $this->input->post('telefono'),
+					'Celular' => $this->input->post('celular'),
+					'FechaNacimiento' => $this->input->post('fnacimiento'),
+					'IdEps' => $this->input->post('eps'),
+					'FechaIngreso' => date("Y").'-'.date("m").'-'.date("d"),
+					'Estado' => 1
+					);
+
+				$id = $this->mdl_persona->nuevaPersona($data);
+
+				if (!empty($id))
 				{
-					$dataI = array('IdPersona_deb' => $id, 'IdRol' => 2, 'Estado' => 0);
+					$dataA = array('IdPersona_deb' => $id, 'IdRol' => 1, 'Estado' => 0);
 
-					if ($this->mdl_persona->registrarRol($dataI))
+					if ($this->mdl_persona->registrarRol($dataA))
 					{
-						$dataJ = array('IdPersona_deb' => $id, 'IdRol' => 3, 'Estado' => 0);
+						$dataI = array('IdPersona_deb' => $id, 'IdRol' => 2, 'Estado' => 0);
 
-						if ($this->mdl_persona->registrarRol($dataJ))
+						if ($this->mdl_persona->registrarRol($dataI))
 						{
-							echo "ok";
+							$dataJ = array('IdPersona_deb' => $id, 'IdRol' => 3, 'Estado' => 0);
+
+							if ($this->mdl_persona->registrarRol($dataJ))
+							{
+								echo "ok";
+							}
+							else
+							{
+								echo "no";
+							}
 						}
 						else
 						{
@@ -410,9 +432,8 @@ class Persona extends CI_Controller {
 			}
 			else
 			{
-				echo "no";
+				echo $mNotificacion;
 			}
-
 		}
 		else
 		{
@@ -500,27 +521,49 @@ class Persona extends CI_Controller {
 	{
 		if ($this->input->is_ajax_request())
 		{
+			$bModificar = true;
+			$mNotificacion = '';
 			$id = $this->input->post('idpersona');
-			$data = array(
-				'Documento' => $this->input->post('documentoM'),
-				'Genero' => $this->input->post('generoM'),
-				'Nombre' => $this->input->post('nombreM'),
-				'Apellidos' => $this->input->post('apellidosM'),
-				'Correo' => $this->input->post('correoM'),
-				'DireccionResidencia' => $this->input->post('direccionM'),
-				'Telefono' => $this->input->post('telefonoM'),
-				'Celular' => $this->input->post('celularM'),
-				'IdEps' => $this->input->post('epsM'),
-				'FechaNacimiento' => $this->input->post('fnacimientoM')
-				);
 
-			if ($this->mdl_persona->actualizarPersona($id, $data))
+			if ($this->mdl_persona->validarDocumento($this->input->post('documentoM'),$id))
 			{
-				echo "ok";
+				$bModificar = false;
+				$mNotificacion = 'rdocumento';
+			}
+
+			if ($this->mdl_persona->validarCorreo($this->input->post('correoM'),$id))
+			{
+				$bModificar = false;
+				$mNotificacion = 'rcorreo';
+			}
+
+			if ($bModificar)
+			{
+				$data = array(
+					'Documento' => $this->input->post('documentoM'),
+					'Genero' => $this->input->post('generoM'),
+					'Nombre' => $this->input->post('nombreM'),
+					'Apellidos' => $this->input->post('apellidosM'),
+					'Correo' => $this->input->post('correoM'),
+					'DireccionResidencia' => $this->input->post('direccionM'),
+					'Telefono' => $this->input->post('telefonoM'),
+					'Celular' => $this->input->post('celularM'),
+					'IdEps' => $this->input->post('epsM'),
+					'FechaNacimiento' => $this->input->post('fnacimientoM')
+					);
+
+				if ($this->mdl_persona->actualizarPersona($id, $data))
+				{
+					echo "ok";
+				}
+				else
+				{
+					echo "no";
+				}
 			}
 			else
 			{
-				echo "no";
+				echo $mNotificacion;
 			}
 		}
 		else

@@ -20,53 +20,62 @@
 </div>
 <div class="row">
 	<div class="col-md-12">
-			<div class="panel rounded shadow no-overflow">
-				<div class="panel-heading">
-					<div class="pull-left">
-						<h3 class="panel-title">Información de la clase</h3>
-					</div>
-					<div class="pull-right">
-						<button class="btn btn-sm" data-container="body" data-action="collapse" data-toggle="tooltip" data-placement="top" data-title="Collapse" data-original-title="" title=""><i class="fa fa-angle-up"></i></button>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-				<div class="panel-body no-padding" style="margin: 20px; font-size: 15px">
-					<form id="registroMc" name="registroMc">
-						<input type="hidden" name="claseR" id="claseR" value="<?= $idClase ?>">
-						<div class="row">
-							<div class="col-md-2"></div>
-							<div class="col-md-8">
-								<div class="row">
-									<div class="col-md-6 form-group">
-										<label class="control-label">Nombre de la clase</label>
-										<input id="nombreClaseR" name="nombreClaseR" class="form-control" type="text" disabled style="text-align: center;" value="<?= $nClase ?>">
-									</div>
-								    <div class="col-md-6 form-group">
-										<label class="control-label">Cantidad</label>
-										<input id="cantidadR" name="cantidadR" class="form-control" type="text" style="text-align: center;">
-									</div>
-								   <div class="col-md-12 form-group">
-									   <label class="control-label">Material </label>
-									   <select id="materialR" name="materialR" data-placeholder="Seleccione un material" class="chosen-select mb-15" tabindex="-1" sstyle="text-align: center;" >
-										   <option value="" disabled selected>Seleccione un material</option>';
-										    <?php foreach ($this->mdl_material->listarMateriales() as $mate) { ?>
-											<option value="<?= $mate->IdMaterial ?>"><?= $mate->DescripcionMaterial ?></option>';
-											<?php }?>
-										</select>
-									</div>
-								</div>
- 							<div class="col-md-2"></div>
- 							</div>
-						</div>
-						<br>
-						<div class="row">
-							<center><button type="submit" class="btn btn-warning btn-expand" style="background-color: #2A2A2A;">Registrar clase</button></center>
-						</div>
-					</form>
-				</div>
-				<br>
+		<div class="panel rounded shadow no-overflow">
+			<div class="panel-heading">
+				<center>
+				<a href="clase"><button type="button" class="btn btn-success btn-expand" style="background-color: #2A2A2A;">Regresar a gestión de clases</button></a>
+				</center>
 			</div>
 		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="panel rounded shadow no-overflow">
+			<div class="panel-heading">
+				<div class="pull-left">
+					<h3 class="panel-title">Información de la clase</h3>
+				</div>
+				<div class="pull-right">
+					<button class="btn btn-sm" data-container="body" data-action="collapse" data-toggle="tooltip" data-placement="top" data-title="Collapse" data-original-title="" title=""><i class="fa fa-angle-up"></i></button>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="panel-body no-padding" style="margin: 20px; font-size: 15px">
+				<form id="registroMc" name="registroMc">
+					<input type="hidden" name="claseR" id="claseR" value="<?= $idClase ?>">
+					<div class="row">
+						<div class="col-md-2"></div>
+						<div class="col-md-8">
+							<div class="row">
+								<div class="col-md-6 form-group">
+									<label class="control-label">Nombre de la clase</label>
+									<input id="nombreClaseR" name="nombreClaseR" class="form-control" type="text" disabled style="text-align: center;" value="<?= $nClase ?>">
+								</div>
+								<div class="col-md-6 form-group">
+									<label class="control-label">Cantidad</label>
+									<input id="cantidadR" name="cantidadR" class="form-control" type="text" style="text-align: center;">
+								</div>
+								<div class="col-md-12 form-group">
+									<label class="control-label">Material </label>
+									<select id="materialR" name="materialR" data-placeholder="Seleccione un material" class="chosen-select mb-15" tabindex="-1" sstyle="text-align: center;" >
+										<option value="" disabled selected>Seleccione un material</option>';
+										<?php foreach ($this->mdl_material->listarMateriales() as $mate) { ?>
+										<option value="<?= $mate->IdMaterial ?>"><?= $mate->DescripcionMaterial ?></option>';
+										<?php }?>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-2"></div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<center><button type="submit" class="btn btn-warning btn-expand" style="background-color: #2A2A2A;">Registrar clase</button></center>
+					</div>
+				</form>
+			</div>
+			<br>
+		</div>
+	</div>
 </div>
 <!-- tabla-->
 <div class="body-content animated fadeIn">
@@ -114,31 +123,31 @@
 				</div>
 				<div class="modal-body">
 					<div class="row">
-							<div class="col-md-2"></div>
-							<div class="col-md-8">
-							 <input class="form-control" id="idMaterialClase" name="idMaterialClase" type="hidden">
-								<div class="row">
-									<div class="col-md-6 form-group">
-										<label class="control-label">Nombre de la clase</label>
-										<input id="nombreClaseE" name="nombreClaseE" class="form-control" type="text" disabled style="text-align: center;" value="<?= $nClase ?>">
-									</div>
-								    <div class="col-md-6 form-group">
-										<label class="control-label">Cantidad</label>
-										<input id="cantidade" name="cantidadE" class="form-control" type="text" style="text-align: center;">
-									</div>
-								   <div class="col-md-12 form-group">
-									   <label class="control-label">Material </label>
-									   <select id="materialE" name="materialE" data-placeholder="Seleccione un material" class="chosen-select mb-15" tabindex="-1" sstyle="text-align: center;" >
-										   <option value="" disabled selected>Seleccione un material</option>';
-										    <?php foreach ($this->mdl_material->listarMateriales() as $mate) { ?>
-											<option value="<?= $mate->IdMaterial ?>"><?= $mate->DescripcionMaterial ?></option>';
-											<?php }?>
-										</select>
-									</div>
+						<div class="col-md-2"></div>
+						<div class="col-md-8">
+							<input class="form-control" id="idMaterialClase" name="idMaterialClase" type="hidden">
+							<div class="row">
+								<div class="col-md-6 form-group">
+									<label class="control-label">Nombre de la clase</label>
+									<input id="nombreClaseE" name="nombreClaseE" class="form-control" type="text" disabled style="text-align: center;" value="<?= $nClase ?>">
 								</div>
- 							<div class="col-md-2"></div>
- 							</div>
+								<div class="col-md-6 form-group">
+									<label class="control-label">Cantidad</label>
+									<input id="cantidade" name="cantidadE" class="form-control" type="text" style="text-align: center;">
+								</div>
+								<div class="col-md-12 form-group">
+									<label class="control-label">Material </label>
+									<select id="materialE" name="materialE" data-placeholder="Seleccione un material" class="chosen-select mb-15" tabindex="-1" sstyle="text-align: center;" >
+										<option value="" disabled selected>Seleccione un material</option>';
+										<?php foreach ($this->mdl_material->listarMateriales() as $mate) { ?>
+										<option value="<?= $mate->IdMaterial ?>"><?= $mate->DescripcionMaterial ?></option>';
+										<?php }?>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-2"></div>
 						</div>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<center>
@@ -151,4 +160,3 @@
 	</div>
 </div>
 
-   	

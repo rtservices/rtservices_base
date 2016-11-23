@@ -420,6 +420,26 @@ class Mdl_persona extends CI_Model {
 		return $res;
 	}
 
+	public function validarCorreo($sCorreo)
+	{
+		$this->db->select('COUNT(*)');
+		$this->db->from($this->tabla);
+		$this->db->where('Correo', $sCorreo);
+		$res = $this->db->get()->row();
+
+		return $res;
+	}
+
+	public function validarDocumento($iDocumento)
+	{
+		$this->db->select('COUNT(*)');
+		$this->db->from($this->tabla);
+		$this->db->where('Documento', $iDocumento);
+		$res = $this->db->get()->row();
+
+		return $res;
+	}
+
 }
 
 /* End of file mdl_persona.php */

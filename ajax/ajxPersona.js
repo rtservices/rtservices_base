@@ -331,6 +331,7 @@ $('#registro').submit(function(event) {
 	if ($('#registro').validate().form())
 	{
 		NProgress.start();
+		$('#modalRegistro').modal('hide');
 		$.ajax({
 			url: 'persona/nuevaPersona',
 			type: 'POST',
@@ -338,12 +339,37 @@ $('#registro').submit(function(event) {
 			success:function(res)
 			{
 				actualizar();
-				$('#modalRegistro').modal('hide');
 				if (res == 'ok') 
 				{
 					NProgress.done();
 					swal("Completado!", "Se ha registrado la nueva persona.", "success");
 				} 
+				else if(res == 'rcorreo')
+				{
+					swal({
+						title: "Error al registrar!",
+						text: "No se ha registrado por que el correo ya existe.",
+						type: "error",
+						confirmButtonColor: "#DD6B55",
+						confirmButtonText: "Ok!",
+					}).then(function() {
+						NProgress.done();
+						$('#modalRegistro').modal('show');
+					});
+				}
+				else if(res == 'rdocumento')
+				{
+					swal({
+						title: "Error al registrar!",
+						text: "No se ha registrado por que el documento ya existe.",
+						type: "error",
+						confirmButtonColor: "#DD6B55",
+						confirmButtonText: "Ok!",
+					}).then(function() {
+						NProgress.done();
+						$('#modalRegistro').modal('show');
+					});					
+				}
 				else
 				{
 					NProgress.done();
@@ -360,6 +386,7 @@ $('#editar').submit(function(event) {
 	if ($('#editar').validate().form())
 	{
 		NProgress.start();
+		$('#modalEditar').modal('hide');
 		$.ajax({
 			url: 'persona/actualizarPersona',
 			type: 'POST',
@@ -367,16 +394,41 @@ $('#editar').submit(function(event) {
 			success:function(res)
 			{
 				actualizar();
-				$('#modalEditar').modal('hide');
 				if (res == 'ok') 
 				{
 					NProgress.done();
-					swal("Completado!", "Se ha modificado la persona.", "success");
+					swal("Completado!", "Se ha registrado la nueva persona.", "success");
 				} 
+				else if(res == 'rcorreo')
+				{
+					swal({
+						title: "Error al registrar!",
+						text: "No se ha registrado por que el correo ya existe.",
+						type: "error",
+						confirmButtonColor: "#DD6B55",
+						confirmButtonText: "Ok!",
+					}).then(function() {
+						NProgress.done();
+						$('#modalRegistro').modal('show');
+					});
+				}
+				else if(res == 'rdocumento')
+				{
+					swal({
+						title: "Error al registrar!",
+						text: "No se ha registrado por que el documento ya existe.",
+						type: "error",
+						confirmButtonColor: "#DD6B55",
+						confirmButtonText: "Ok!",
+					}).then(function() {
+						NProgress.done();
+						$('#modalRegistro').modal('show');
+					});					
+				}
 				else
 				{
 					NProgress.done();
-					sweetAlert("Oops...", "No se ha modificado la persona.", "error");
+					sweetAlert("Oops...", "No ha registrado la nueva persona.", "error");
 				}
 			}
 		});		
