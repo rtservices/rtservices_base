@@ -5,7 +5,7 @@
 		<ol class="breadcrumb">
 			<li>
 				<i class="fa fa-home"></i>
-				<a href="dashboard.html">Menú principal</a>
+				<a href="menu">Menú principal</a>
 				<i class="fa fa-angle-right"></i>
 			</li>
 			<li class="active">Gestión de asistencia</li>

@@ -9,7 +9,7 @@
 				<i class="fa fa-angle-right"></i>
 			</li>
 			<li>
-				<a href="clase">Gestión de personas</a> 
+				<a href="persona">Gestión de personas</a> 
 				<i class="fa fa-angle-right"></i>
 			</li>
 			<li class="active">

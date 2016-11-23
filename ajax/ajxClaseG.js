@@ -124,7 +124,7 @@ $('#gClaseE').submit(function(event) {
 			type: 'POST',
 			data:$('#gClaseE').serialize(),
 			success:function(res){
-				actualizarMc();
+				actualizar();
 				if(res == 'no')
 				{
 					NProgress.done();
