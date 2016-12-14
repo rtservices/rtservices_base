@@ -29,31 +29,31 @@ class Persona extends CI_Controller {
 			$data = array();
 			$arrol = array();
 
-			foreach ($this->mdl_persona->cargarTabla() as $persona)
+			if ($this->session->userdata('ssRol') == 'Administrador')
 			{
-
-				$colorA = '';
-				$tituloA = '';
-				$colorI = '';
-				$tituloI = '';
-				$colorJ = '';
-				$tituloJ = '';
-				$estadoA = '';
-				$estadoI = '';
-				$estadoJ = '';
-				$estiloR = '';
-				$colorR = '';
-
-				if ($persona->Estado == 1) 
+				foreach ($this->mdl_persona->cargarTabla() as $persona)
 				{
-					$accion = 'Inhabilitar a '.$persona->Nombre.' '.$persona->Apellidos.'';
-					$color = 'color: #F13A3A; background-color: #2A2A2A';
-					$estilo = 'danger';
-					$estado = 'Activo';
-					$edit = '<a class="btn btn-primary btn-expand" style="color: white; background-color: #2A2A2A; color: #81B71A;" href="javascript:void()" title="Editar a  '.$persona->Nombre.' '.$persona->Apellidos.'" onclick="listarPersona('.$persona->IdPersona.');"><i class="fa fa-pencil"></i></a>';
 
-					if ($this->session->userdata('ssRol') == 'Administrador') 
+					$colorA = '';
+					$tituloA = '';
+					$colorI = '';
+					$tituloI = '';
+					$colorJ = '';
+					$tituloJ = '';
+					$estadoA = '';
+					$estadoI = '';
+					$estadoJ = '';
+					$estiloR = '';
+					$colorR = '';
+
+					if ($persona->Estado == 1) 
 					{
+						$accion = 'Inhabilitar a '.$persona->Nombre.' '.$persona->Apellidos.'';
+						$color = 'color: #F13A3A; background-color: #2A2A2A';
+						$estilo = 'danger';
+						$estado = 'Activo';
+						$edit = '<a class="btn btn-primary btn-expand" style="color: white; background-color: #2A2A2A; color: #81B71A;" href="javascript:void()" title="Editar a  '.$persona->Nombre.' '.$persona->Apellidos.'" onclick="listarPersona('.$persona->IdPersona.');"><i class="fa fa-pencil"></i></a>';
+
 						foreach ($this->mdl_persona->listarAllRol($persona->IdPersona) as $roles) 
 						{ 
 							$arrol[] = $roles->IdRol; 
@@ -85,207 +85,49 @@ class Persona extends CI_Controller {
 						}
 
 						$arrol = array();
+
+						$planclase = '<a class="btn btn-info btn-expand" style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Gestionar plan clase de '.$persona->Nombre.' '.$persona->Apellidos.'." onclick="listarPlanclase('.$persona->IdPersona.');"><i class="fa fa-credit-card"></i></a>';
 					}
 					else
 					{
-						if ($persona->IdPersona != $this->session->userdata('usuario_id')) 
-						{
-
-							foreach ($this->mdl_persona->listarAllRol($persona->IdPersona) as $roles) 
-							{ 
-								$arrol[] = $roles->IdRol; 
-							}
-
-							if (in_array(2, $arrol) == true && in_array(1, $arrol) == true) 
-							{
-								$cuenta = '<a class="btn btn-inverse btn-expand" href="javascript:void()" disabled="true" title="No puedes gestionar cuentas de otros usuarios."><i class="fa fa-key" style="color: #01B1E1"></i></a>';
-								$responsable = '<a class="btn btn-danger btn-expand" disabled style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Ni administradores ni instructores pueden tener responsables." ><i class="fa fa-users"></i></a>';
-							}
-							else if (in_array(2, $arrol) == true) 
-							{
-								$cuenta = '<a class="btn btn-inverse btn-expand" href="javascript:void()" disabled="true" title="No puedes gestionar cuentas de otros usuarios."><i class="fa fa-key" style="color: #01B1E1"></i></a>';
-								$responsable = '<a class="btn btn-danger btn-expand" disabled style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Ni administradores ni instructores pueden tener responsables." ><i class="fa fa-users"></i></a>';
-							}
-							else if(in_array(1, $arrol) == true)
-							{
-								$cuenta = '<a class="btn btn-inverse btn-expand" href="javascript:void()" disabled="true" title="No puedes gestionar cuentas de otros usuarios."><i class="fa fa-key" style="color: #01B1E1"></i></a>';
-								$responsable = '<a class="btn btn-danger btn-expand" disabled style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Ni administradores ni instructores pueden tener responsables." ><i class="fa fa-users"></i></a>';
-							}
-							else if (in_array(3, $arrol) == true) 
-							{
-								$responsable = '<a class="btn btn-success btn-expand" style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Gestionar responsables de '.$persona->Nombre.' '.$persona->Apellidos.'." onclick="listarResponsables('.$persona->IdPersona.');"><i class="fa fa-users"></i></a>';
-							}
-							else
-							{
-								$cuenta = '<a class="btn btn-inverse btn-expand" disabled title="Debes tener activo un rol Administrador o Instructor a  '.$persona->Nombre.' '.$persona->Apellidos.' para poder gestionar su cuenta."><i class="fa fa-key" style="color: #01B1E1"></i></a>';
-							}							
-
-							$arrol = array();
-						}
-						else
-						{
-							$responsable = '<a class="btn btn-danger btn-expand" disabled style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Ni administradores ni instructores pueden tener responsables." ><i class="fa fa-users"></i></a>';
-						}
-					}
-					$planclase = '<a class="btn btn-info btn-expand" style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Gestionar plan clase de '.$persona->Nombre.' '.$persona->Apellidos.'." onclick="listarPlanclase('.$persona->IdPersona.');"><i class="fa fa-credit-card"></i></a>';
-				}
-				else
-				{
-					$accion = 'Habilitar a  '.$persona->Nombre.' '.$persona->Apellidos.'';
-					$color = 'background-color: #2A2A2A; color: #81B71A;';
-					$estado = 'Inactivo';
-					$estilo = 'success';
-					$edit = '<a class="btn btn-primary btn-expand" style="color: white; background-color: #2A2A2A;" title="Debes tener activo a '.$persona->Nombre.' para poder editarlo." disabled="true"><i class="fa fa-pencil"></i></a>';
-					$cuenta = '<a class="btn btn-inverse btn-expand" disabled title="Debes tener activo a  '.$persona->Nombre.' '.$persona->Apellidos.' para poder gestionar su cuenta."><i class="fa fa-key" style="color: #01B1E1"></i></a>';
-					$planclase = '<a class="btn btn-danger btn-expand" disabled style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Debes tener activo a  '.$persona->Nombre.' '.$persona->Apellidos.' para poder gestionar sus planes de clase." ><i class="fa fa-credit-card"></i></a>';
-					$estadoA = ' disabled ';
-					$estadoI = ' disabled ';
-					$estadoJ = ' disabled ';
-				}
-
-				if ($persona->IdPersona == 1 && $this->session->userdata('ssRol') != 'Administrador')
-				{
-					$edit = '<a class="btn btn-primary btn-expand" style="color: white; background-color: #2A2A2A;" title="No puedes modificar la información de '.$persona->Nombre.' por ser el usuario principal." disabled="true"><i class="fa fa-pencil"></i></a>';
-				}
-
-				if ($persona->IdPersona == $this->session->userdata('usuario_id'))
-				{
-					$edit = '<a class="btn btn-primary btn-expand" style="color: white; background-color: #2A2A2A; color: #81B71A;" href="javascript:void()" title="Editar a  '.$persona->Nombre.' '.$persona->Apellidos.'" onclick="listarPersona('.$persona->IdPersona.');"><i class="fa fa-pencil"></i></a>';
-				}
-				else
-				{
-					$edit = '<a class="btn btn-primary btn-expand" style="color: white; background-color: #2A2A2A;" title="No puedes modificar la información de '.$persona->Nombre.' por que tus privilegios no te lo permiten." disabled="true"><i class="fa fa-pencil"></i></a>';	
-				}
-
-				if ($persona->IdPersona == 1) 
-				{
-					$planclase = '<a class="btn btn-danger btn-expand" disabled style="color: white; background-color: #2A2A2A" href="javascript:void()" title="No puedes gestionar los planes de clase del usuario principal." ><i class="fa fa-credit-card"></i></a>';
-					$eliminar = '<a class="btn btn-danger btn-expand" disabled style="color: #F13A3A; background-color: #2A2A2A" href="javascript:void()" title="No puedes modificar el estado del usuario principal." ><i class="fa fa-exchange"></i></a>';					
-					$responsable = '<a class="btn btn-danger btn-expand" disabled style="color: white; background-color: #2A2A2A" href="javascript:void()" title="No puedes gestionar los responsables del usuario principal." ><i class="fa fa-users"></i></a>';
-					$estadoA = 'disabled';
-					$estadoI = 'disabled';
-					$estadoJ = 'disabled';
-					$colorA = '#e22020';
-					$colorI = '#e22020';
-					$colorJ = '#e22020';
-					$tituloA = 'No puedes gestionar los roles del usuario principal.';
-					$tituloI = 'No puedes gestionar los roles del usuario principal.';
-					$tituloJ = 'No puedes gestionar los roles del usuario principal.';
-				}
-				else if ($persona->IdPersona == $this->session->userdata('usuario_id')) 
-				{
-					$planclase = '<a class="btn btn-info btn-expand" style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Gestionar plan clase de '.$persona->Nombre.' '.$persona->Apellidos.'." onclick="listarPlanclase('.$persona->IdPersona.');"><i class="fa fa-credit-card"></i></a>';
-					$eliminar = '<a class="btn btn-danger btn-expand" disabled style="color: #F13A3A; background-color: #2A2A2A" href="javascript:void()" title="Este Administrador no se puede inhabilitar." ><i class="fa fa-exchange"></i></a>';					
-					$responsable = '<a class="btn btn-danger btn-expand" disabled style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Ni administradores ni instructores pueden tener responsables." ><i class="fa fa-users"></i></a>';
-					$estadoA = 'disabled';
-					$estadoI = 'disabled';
-					$colorA = '#e22020';
-					$colorI = '#e22020';
-					$tituloA = 'No puedes gestionar tus propios permisos como administrador.';
-					$tituloI = 'No puedes gestionar tus propios permisos como instructor.';
-
-					foreach ($this->mdl_persona->listarRol($persona->IdPersona,3) as $rol) 
-					{
-						if ($rol->IdRol == 3 && $rol->Estado == 1)
-						{
-							$colorJ = '#81B71A';
-							$tituloJ = 'Desactivar rol jugador a '.$persona->Nombre.' '.$persona->Apellidos.'';
-						}
-						else if ($rol->IdRol == 3 && $rol->Estado == 0)
-						{
-							$colorJ = '#FFFFFF';
-							$tituloJ = 'Activar rol jugador a '.$persona->Nombre.' '.$persona->Apellidos.'';
-						}
-						else
-						{
-							$colorJ = null;
-							$tituloJ = null;
-						}
+						$accion = 'Habilitar a  '.$persona->Nombre.' '.$persona->Apellidos.'';
+						$color = 'background-color: #2A2A2A; color: #81B71A;';
+						$estado = 'Inactivo';
+						$estilo = 'success';
+						$edit = '<a class="btn btn-primary btn-expand" style="color: white; background-color: #2A2A2A;" title="Debes tener activo a '.$persona->Nombre.' para poder editarlo." disabled="true"><i class="fa fa-pencil"></i></a>';
+						$cuenta = '<a class="btn btn-inverse btn-expand" disabled title="Debes tener activo a  '.$persona->Nombre.' '.$persona->Apellidos.' para poder gestionar su cuenta."><i class="fa fa-key" style="color: #01B1E1"></i></a>';
+						$planclase = '<a class="btn btn-danger btn-expand" disabled style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Debes tener activo a  '.$persona->Nombre.' '.$persona->Apellidos.' para poder gestionar sus planes de clase." ><i class="fa fa-credit-card"></i></a>';
+						$estadoA = ' disabled ';
+						$estadoI = ' disabled ';
+						$estadoJ = ' disabled ';
 					}
 
-					$estadoJ = 'onclick="variarJugador('.$persona->IdPersona.');"';
-
-				}
-				else
-				{
-					$eliminar = '<a class="btn btn-'.$estilo.' btn-expand" style="'.$color.'" href="javascript:void()" title="'.$accion.'" onclick="variarEstadoPersona('.$persona->IdPersona.');"><i class="fa fa-exchange"></i></a>';
-
-					if ($this->session->userdata('ssRol') == 'Administrador') //Sirve para validar que sea instructor o administrador
+					if ($persona->IdPersona == 1) 
 					{
-
-						foreach ($this->mdl_persona->listarRol($persona->IdPersona,1) as $rol)
-						{
-							if ($rol->IdRol == 1 && $rol->Estado == 1)
-							{
-								$colorA = '#81B71A';
-								$tituloA = 'Desactivar rol administrador a '.$persona->Nombre.' '.$persona->Apellidos.'.';
-							}
-							else if ($rol->IdRol == 1 && $rol->Estado == 0)
-							{
-								$colorA = '#FFFFFF';
-								$tituloA = 'Activar rol administrador a '.$persona->Nombre.' '.$persona->Apellidos.'.';
-							}
-							else
-							{
-								$colorA = null;
-								$tituloA = null;
-							}
-						}
-
-						foreach ($this->mdl_persona->listarRol($persona->IdPersona,2) as $rol) 
-						{
-							if ($rol->IdRol == 2 && $rol->Estado == 1)
-							{
-								$colorI = '#81B71A';
-								$tituloI = 'Desactivar rol instructor a '.$persona->Nombre.' '.$persona->Apellidos.'.';
-							}
-							else if ($rol->IdRol == 2 && $rol->Estado == 0)
-							{
-								$colorI = '#FFFFFF';
-								$tituloI = 'Activar rol instructor a '.$persona->Nombre.' '.$persona->Apellidos.'.';
-							}
-							else
-							{
-								$colorI = null;
-								$tituloI = null;
-							}
-						}
-
-						foreach ($this->mdl_persona->listarRol($persona->IdPersona,3) as $rol) 
-						{
-							if ($rol->IdRol == 3 && $rol->Estado == 1)
-							{
-								$colorJ = '#81B71A';
-								$tituloJ = 'Desactivar rol jugador a '.$persona->Nombre.' '.$persona->Apellidos.'';
-							}
-							else if ($rol->IdRol == 3 && $rol->Estado == 0)
-							{
-								$colorJ = '#FFFFFF';
-								$tituloJ = 'Activar rol jugador a '.$persona->Nombre.' '.$persona->Apellidos.'';
-								$responsable = '<a class="btn btn-danger btn-expand" disabled style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Debes tener asociado a '.$persona->Nombre.' '.$persona->Apellidos.' como un jugador para poder gestionar sus responsables." ><i class="fa fa-users"></i></a>';
-							}
-							else
-							{
-								$colorJ = null;
-								$tituloJ = null;
-							}
-						}
-
-						$estadoA = 'onclick="variarAdministrador('.$persona->IdPersona.');"';
-						$estadoI = 'onclick="variarInstructor('.$persona->IdPersona.');"';
-						$estadoJ = 'onclick="variarJugador('.$persona->IdPersona.');"';
-					}
-					else
-					{
-						$colorA = '#FFFFFF';
-						$tituloA = 'No puedes gestionar Administradores.';
+						$planclase = '<a class="btn btn-danger btn-expand" disabled style="color: white; background-color: #2A2A2A" href="javascript:void()" title="No puedes gestionar los planes de clase del usuario principal." ><i class="fa fa-credit-card"></i></a>';
+						$eliminar = '<a class="btn btn-danger btn-expand" disabled style="color: #F13A3A; background-color: #2A2A2A" href="javascript:void()" title="No puedes modificar el estado del usuario principal." ><i class="fa fa-exchange"></i></a>';					
+						$responsable = '<a class="btn btn-danger btn-expand" disabled style="color: white; background-color: #2A2A2A" href="javascript:void()" title="No puedes gestionar los responsables del usuario principal." ><i class="fa fa-users"></i></a>';
 						$estadoA = 'disabled';
-
-						$colorI = '#FFFFFF';
-						$tituloI = 'No puedes gestionar Instructores.';
 						$estadoI = 'disabled';
-
-						$estadoJ = 'onclick="variarJugador('.$persona->IdPersona.');"';
+						$estadoJ = 'disabled';
+						$colorA = '#e22020';
+						$colorI = '#e22020';
+						$colorJ = '#e22020';
+						$tituloA = 'No puedes gestionar los roles del usuario principal.';
+						$tituloI = 'No puedes gestionar los roles del usuario principal.';
+						$tituloJ = 'No puedes gestionar los roles del usuario principal.';
+					}
+					else if ($persona->IdPersona == $this->session->userdata('usuario_id')) 
+					{
+						$planclase = '<a class="btn btn-info btn-expand" style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Gestionar plan clase de '.$persona->Nombre.' '.$persona->Apellidos.'." onclick="listarPlanclase('.$persona->IdPersona.');"><i class="fa fa-credit-card"></i></a>';
+						$eliminar = '<a class="btn btn-danger btn-expand" disabled style="color: #F13A3A; background-color: #2A2A2A" href="javascript:void()" title="Este Administrador no se puede inhabilitar." ><i class="fa fa-exchange"></i></a>';					
+						$responsable = '<a class="btn btn-danger btn-expand" disabled style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Ni administradores ni instructores pueden tener responsables." ><i class="fa fa-users"></i></a>';
+						$estadoA = 'disabled';
+						$estadoI = 'disabled';
+						$colorA = '#e22020';
+						$colorI = '#e22020';
+						$tituloA = 'No puedes gestionar tus propios permisos como administrador.';
+						$tituloI = 'No puedes gestionar tus propios permisos como instructor.';
 
 						foreach ($this->mdl_persona->listarRol($persona->IdPersona,3) as $rol) 
 						{
@@ -298,7 +140,6 @@ class Persona extends CI_Controller {
 							{
 								$colorJ = '#FFFFFF';
 								$tituloJ = 'Activar rol jugador a '.$persona->Nombre.' '.$persona->Apellidos.'';
-								$responsable = '<a class="btn btn-danger btn-expand" disabled style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Debes tener asociado a '.$persona->Nombre.' '.$persona->Apellidos.' como un jugador para poder gestionar sus responsables." ><i class="fa fa-users"></i></a>';
 							}
 							else
 							{
@@ -306,42 +147,192 @@ class Persona extends CI_Controller {
 								$tituloJ = null;
 							}
 						}
+
+						$estadoJ = 'onclick="variarJugador('.$persona->IdPersona.');"';
+
 					}
-				}
+					else
+					{
+						$eliminar = '<a class="btn btn-'.$estilo.' btn-expand" style="'.$color.'" href="javascript:void()" title="'.$accion.'" onclick="variarEstadoPersona('.$persona->IdPersona.');"><i class="fa fa-exchange"></i></a>';
 
-				if ($persona->Estado == 0)
+						if ($this->session->userdata('ssRol') == 'Administrador') //Sirve para validar que sea instructor o administrador
+						{
+
+							foreach ($this->mdl_persona->listarRol($persona->IdPersona,1) as $rol)
+							{
+								if ($rol->IdRol == 1 && $rol->Estado == 1)
+								{
+									$colorA = '#81B71A';
+									$tituloA = 'Desactivar rol administrador a '.$persona->Nombre.' '.$persona->Apellidos.'.';
+								}
+								else if ($rol->IdRol == 1 && $rol->Estado == 0)
+								{
+									$colorA = '#FFFFFF';
+									$tituloA = 'Activar rol administrador a '.$persona->Nombre.' '.$persona->Apellidos.'.';
+								}
+								else
+								{
+									$colorA = null;
+									$tituloA = null;
+								}
+							}
+
+							foreach ($this->mdl_persona->listarRol($persona->IdPersona,2) as $rol) 
+							{
+								if ($rol->IdRol == 2 && $rol->Estado == 1)
+								{
+									$colorI = '#81B71A';
+									$tituloI = 'Desactivar rol instructor a '.$persona->Nombre.' '.$persona->Apellidos.'.';
+								}
+								else if ($rol->IdRol == 2 && $rol->Estado == 0)
+								{
+									$colorI = '#FFFFFF';
+									$tituloI = 'Activar rol instructor a '.$persona->Nombre.' '.$persona->Apellidos.'.';
+								}
+								else
+								{
+									$colorI = null;
+									$tituloI = null;
+								}
+							}
+
+							foreach ($this->mdl_persona->listarRol($persona->IdPersona,3) as $rol) 
+							{
+								if ($rol->IdRol == 3 && $rol->Estado == 1)
+								{
+									$colorJ = '#81B71A';
+									$tituloJ = 'Desactivar rol jugador a '.$persona->Nombre.' '.$persona->Apellidos.'';
+								}
+								else if ($rol->IdRol == 3 && $rol->Estado == 0)
+								{
+									$colorJ = '#FFFFFF';
+									$tituloJ = 'Activar rol jugador a '.$persona->Nombre.' '.$persona->Apellidos.'';
+									$responsable = '<a class="btn btn-danger btn-expand" disabled style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Debes tener asociado a '.$persona->Nombre.' '.$persona->Apellidos.' como un jugador para poder gestionar sus responsables." ><i class="fa fa-users"></i></a>';
+								}
+								else
+								{
+									$colorJ = null;
+									$tituloJ = null;
+								}
+							}
+
+							$estadoA = 'onclick="variarAdministrador('.$persona->IdPersona.');"';
+							$estadoI = 'onclick="variarInstructor('.$persona->IdPersona.');"';
+							$estadoJ = 'onclick="variarJugador('.$persona->IdPersona.');"';
+						}
+						else
+						{
+							$colorA = '#FFFFFF';
+							$tituloA = 'No puedes gestionar Administradores.';
+							$estadoA = 'disabled';
+
+							$colorI = '#FFFFFF';
+							$tituloI = 'No puedes gestionar Instructores.';
+							$estadoI = 'disabled';
+
+							$estadoJ = 'onclick="variarJugador('.$persona->IdPersona.');"';
+
+							foreach ($this->mdl_persona->listarRol($persona->IdPersona,3) as $rol) 
+							{
+								if ($rol->IdRol == 3 && $rol->Estado == 1)
+								{
+									$colorJ = '#81B71A';
+									$tituloJ = 'Desactivar rol jugador a '.$persona->Nombre.' '.$persona->Apellidos.'';
+								}
+								else if ($rol->IdRol == 3 && $rol->Estado == 0)
+								{
+									$colorJ = '#FFFFFF';
+									$tituloJ = 'Activar rol jugador a '.$persona->Nombre.' '.$persona->Apellidos.'';
+									$responsable = '<a class="btn btn-danger btn-expand" disabled style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Debes tener asociado a '.$persona->Nombre.' '.$persona->Apellidos.' como un jugador para poder gestionar sus responsables." ><i class="fa fa-users"></i></a>';
+								}
+								else
+								{
+									$colorJ = null;
+									$tituloJ = null;
+								}
+							}
+						}
+					}
+
+					if ($persona->Estado == 0)
+					{
+						$estadoA = ' disabled ';
+						$estadoI = ' disabled ';
+						$estadoJ = ' disabled ';
+					}
+
+					$row = array();
+					$row[] = $estado;
+					$row[] = $persona->Documento;
+					$row[] = $persona->Nombre.' '.$persona->Apellidos;
+					$row[] = '
+					<center>
+						<a class="btn btn-inverse btn-expand" href="javascript:void()" title="'.$tituloA.'" '.$estadoA.' ><i class="fa fa-user-secret" style="color: '.$colorA.'"></i></a>
+						<a class="btn btn-inverse btn-expand" href="javascript:void()" title="'.$tituloI.'" '.$estadoI.' ><i class="fa fa-graduation-cap" style="color: '.$colorI.'"></i></a>
+						<a class="btn btn-inverse btn-expand" href="javascript:void()" title="'.$tituloJ.'" '.$estadoJ.' ><i class="fa fa-gamepad" style="color: '.$colorJ.'"></i></a>
+					</center>';
+
+					$row[] = '
+					<center>
+						'.$responsable.'
+						'.$cuenta.'
+						'.$planclase.'
+					</center>';
+
+					$row[] = '
+					<center>
+						<a class="btn btn-info btn-expand" style="background-color: #2A2A2A; color: #81B71A;" href="javascript:void()" title="Mas información" onclick="listarInformacion('.$persona->IdPersona.');"><i class="fa fa-info"></i></a>
+						'.$edit.'
+						'.$eliminar.'
+					</center>';
+
+					$data[] = $row;
+				}
+			}
+			else
+			{
+				foreach ($this->mdl_persona->cargarTabla('instructor') as $persona)
 				{
-					$estadoA = ' disabled ';
-					$estadoI = ' disabled ';
-					$estadoJ = ' disabled ';
+					if ($persona->Estado == 1) 
+					{
+						$accion = 'Inhabilitar a '.$persona->Nombre.' '.$persona->Apellidos.'';
+						$color = 'color: #F13A3A; background-color: #2A2A2A';
+						$estilo = 'danger';
+						$estado = 'Activo';
+						$edit = '<a class="btn btn-primary btn-expand" style="color: white; background-color: #2A2A2A; color: #81B71A;" href="javascript:void()" title="Editar a  '.$persona->Nombre.' '.$persona->Apellidos.'" onclick="listarPersona('.$persona->IdPersona.');"><i class="fa fa-pencil"></i></a>';
+						$responsable = '<a class="btn btn-success btn-expand" style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Gestionar responsable de '.$persona->Nombre.' '.$persona->Apellidos.'." onclick="listarResponsables('.$persona->IdPersona.');"><i class="fa fa-users"></i></a>';
+						$planclase = '<a class="btn btn-info btn-expand" style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Gestionar plan clase de '.$persona->Nombre.' '.$persona->Apellidos.'." onclick="listarPlanclase('.$persona->IdPersona.');"><i class="fa fa-credit-card"></i></a>';
+						$eliminar = '<a class="btn btn-'.$estilo.' btn-expand" style="'.$color.'" href="javascript:void()" title="'.$accion.'" onclick="variarEstadoPersona('.$persona->IdPersona.');"><i class="fa fa-exchange"></i></a>';
+					}
+					else
+					{
+						$accion = 'Habilitar a  '.$persona->Nombre.' '.$persona->Apellidos.'';
+						$color = 'background-color: #2A2A2A; color: #81B71A;';
+						$estado = 'Inactivo';
+						$estilo = 'success';
+						$edit = '<a class="btn btn-primary btn-expand" style="color: white; background-color: #2A2A2A;" title="Debes tener activo a '.$persona->Nombre.' para poder editarlo." disabled="true"><i class="fa fa-pencil"></i></a>';
+						$planclase = '<a class="btn btn-danger btn-expand" disabled style="color: white; background-color: #2A2A2A" href="javascript:void()" title="Debes tener activo a  '.$persona->Nombre.' '.$persona->Apellidos.' para poder gestionar sus planes de clase." ><i class="fa fa-credit-card"></i></a>';
+						$eliminar = '<a class="btn btn-'.$estilo.' btn-expand" style="'.$color.'" href="javascript:void()" title="'.$accion.'" onclick="variarEstadoPersona('.$persona->IdPersona.');"><i class="fa fa-exchange"></i></a>';
+					}
+
+					$row = array();
+					$row[] = $estado;
+					$row[] = $persona->Documento;
+					$row[] = $persona->Nombre.' '.$persona->Apellidos;
+
+					$row[] = '
+					<center>
+						'.$responsable.'
+						'.$planclase.'
+					</center>';
+
+					$row[] = '
+					<center>
+						<a class="btn btn-info btn-expand" style="background-color: #2A2A2A; color: #81B71A;" href="javascript:void()" title="Mas información" onclick="listarInformacion('.$persona->IdPersona.');"><i class="fa fa-info"></i></a>
+						'.$edit.'
+						'.$eliminar.'
+					</center>';
 				}
-
-				$row = array();
-				$row[] = $estado;
-				$row[] = $persona->Documento;
-				$row[] = $persona->Nombre.' '.$persona->Apellidos;
-				$row[] = '
-				<center>
-					<a class="btn btn-inverse btn-expand" href="javascript:void()" title="'.$tituloA.'" '.$estadoA.' ><i class="fa fa-user-secret" style="color: '.$colorA.'"></i></a>
-					<a class="btn btn-inverse btn-expand" href="javascript:void()" title="'.$tituloI.'" '.$estadoI.' ><i class="fa fa-graduation-cap" style="color: '.$colorI.'"></i></a>
-					<a class="btn btn-inverse btn-expand" href="javascript:void()" title="'.$tituloJ.'" '.$estadoJ.' ><i class="fa fa-gamepad" style="color: '.$colorJ.'"></i></a>
-				</center>';
-
-				$row[] = '
-				<center>
-					'.$responsable.'
-					'.$cuenta.'
-					'.$planclase.'
-				</center>';
-
-				$row[] = '
-				<center>
-					<a class="btn btn-info btn-expand" style="background-color: #2A2A2A; color: #81B71A;" href="javascript:void()" title="Mas información" onclick="listarInformacion('.$persona->IdPersona.');"><i class="fa fa-info"></i></a>
-					'.$edit.'
-					'.$eliminar.'
-				</center>';
-
-				$data[] = $row;
 			}
 
 			$output = array(
@@ -363,13 +354,15 @@ class Persona extends CI_Controller {
 			$bRegistro = true;
 			$mNotificacion = '';
 
-			if ($this->mdl_persona->validarDocumento($this->input->post('documento')))
+			$bResultadoVDocumento = $this->mdl_persona->validarDocumento($this->input->post('documento'));
+			if (count($bResultadoVDocumento) > 0)
 			{
 				$bRegistro = false;
 				$mNotificacion = 'rdocumento';
 			}
 
-			if ($this->mdl_persona->validarCorreo($this->input->post('correo')))
+			$bResultadoVCorreo = $this->mdl_persona->validarCorreo($this->input->post('correo'));
+			if (count($bResultadoVCorreo) > 0)
 			{
 				$bRegistro = false;
 				$mNotificacion = 'rcorreo';
@@ -504,7 +497,7 @@ class Persona extends CI_Controller {
 
 				$data[] = $row;
 			}
-			
+
 			$output = array(
 				"data" => $data
 				);
@@ -525,13 +518,13 @@ class Persona extends CI_Controller {
 			$mNotificacion = '';
 			$id = $this->input->post('idpersona');
 
-			if ($this->mdl_persona->validarDocumento($this->input->post('documentoM'),$id))
+			if ($this->mdl_persona->validarDocumento($this->input->post('documentoM'),$id) > 0)
 			{
 				$bModificar = false;
 				$mNotificacion = 'rdocumento';
 			}
 
-			if ($this->mdl_persona->validarCorreo($this->input->post('correoM'),$id))
+			if ($this->mdl_persona->validarCorreo($this->input->post('correoM'),$id) > 0)
 			{
 				$bModificar = false;
 				$mNotificacion = 'rcorreo';
@@ -625,7 +618,7 @@ class Persona extends CI_Controller {
 
 				$data[] = $row;
 			}
-			
+
 			$output = array(
 				"data" => $data
 				);
@@ -775,20 +768,7 @@ class Persona extends CI_Controller {
 
 			if ($this->mdl_persona->actualizarUsuario($id,$data))
 			{
-				$aData = $this->mdl_persona->listarPersona_notificación($id);
-
-				$this->mdl_notificacion->setCorreo($aData->Correo);
-				$this->mdl_notificacion->setTipo('informacioncuenta');
-				$this->mdl_notificacion->setNotificar($this->input->post('nActiva'));
-
-				if ($this->mdl_notificacion->notificacion())
-				{
-					echo "ok";
-				}
-				else
-				{
-					echo $res;
-				}
+				echo "ok";
 			}
 			else
 			{
@@ -812,21 +792,7 @@ class Persona extends CI_Controller {
 
 			if ($this->mdl_persona->actualizarUsuario($id,$data))
 			{
-				$aData = $this->mdl_persona->listarPersona_notificación($id);
-				
-				$this->mdl_notificacion->setCorreo($aData->Correo);
-				$this->mdl_notificacion->setTipo('informacioncuenta');
-				$this->mdl_notificacion->setNotificar($this->input->post('nActiva'));
-
-				if ($this->mdl_notificacion->notificacion())
-				{
-					echo "ok";
-				}
-				else
-				{
-					echo $res;
-				}
-				
+				echo "ok";
 			}
 			else
 			{

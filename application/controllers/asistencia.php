@@ -3,6 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Asistencia extends CI_Controller {
 
+	private $idAsistencia_actual;
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -17,66 +19,59 @@ class Asistencia extends CI_Controller {
 			redirect('login');
 		}
 
-		$data['titulo'] = 'Gestión de Asistencia';
-		$this->load->view('msp/cabecera', $data);
-		$this->load->view('asistencia/asistencia', $data);
-		$this->load->view('msp/footer');
-		$this->load->view('asistencia/add');
-
+		if (!is_null($this->input->get('idclase')))
+		{
+			$data['titulo'] = 'Gestión de Asistencia';
+			$data['idclase'] = $this->input->get('idclase');
+			$this->load->view('msp/cabecera', $data);
+			$this->load->view('asistencia/asistencia', $data);
+			$this->load->view('msp/footer');
+			$this->load->view('asistencia/add');
+		}
+		else
+		{
+			redirect('clase');
+		}
 
 	}
 
-	public function cargarTabla()
+	public function cargarTabla($iIdClase)
 	{
 		if ($this->input->is_ajax_request())
 		{
 			$data = array();
-			foreach ($this->mdl_asistencia->cargarTabla() as $asistencia)
+			foreach ($this->mdl_asistencia->cargarTabla($iIdClase) as $asistencia)
 			{
 				if ($asistencia->Estado == 1) 
 				{
-					$accion = 'Inhabilitar clase';
+					$accion = 'Inhabilitar asistencia';
 					$color = ' color: #F13A3A; background-color: #2A2A2A;';
 					$estilo = 'danger';
 					$estado = '<a style="color: #31B404">Activo</a>';
-					$edit = '<a class="btn btn-primary btn-expand" style="color:white; background-color: #2A2A2A;" href="clase?clase='.$asistencia->IdClase.'" title="Administrar clase"><i class="fa fa-pencil"></i></a>';
+					$edit = '<a class="btn btn-primary btn-expand" style="color:white; background-color: #2A2A2A;" href="" title="Administrar asistencia"><i class="fa fa-pencil"></i></a>';
 					
 				}
 
 				else
 				{
-					$accion = 'Habilitar clase';
+					$accion = 'Habilitar asistencia';
 					$color = 'color:#81B71A; background-color: #2A2A2A;';
 					$estilo = 'success';
 					$estado = '<a style="color: #8A0808">Inactivo</a>';
-					$edit = '<a class="btn btn-primary btn-expand" style="color:white; background-color: #2A2A2A;" href="javascript:void()" title="Debes tener activa esta clase para poder administrarla." disabled="true"><i class="fa fa-pencil"></i></a>';
+					$edit = '<a class="btn btn-primary btn-expand" style="color:white; background-color: #2A2A2A;" href="javascript:void()" title="Debes tener activa esta asistencia para poder administrarla." disabled="true"><i class="fa fa-pencil"></i></a>';
 				}
-
-				if ($asistencia->cantidad_jugadores < 10)
-				{
-					$colorCJ = 'color: #31B404';
-				}
-				else if ($asistencia->cantidad_jugadores >= 10 && $asistencia->cantidad_jugadores < 14)
-				{
-					$colorCJ = 'color: #DBA901';
-				}
-				else if ($asistencia->cantidad_jugadores >= 14)
-				{
-					$colorCJ = 'color: #FE2E2E';
-				}
-				
 				
 				$row = array();
 				$row[] = $estado;
+				$row[] = $asistencia->FechaRegistro;
 				$row[] = $asistencia->NombreClase;
 				$row[] = $asistencia->Dia.' - '.$asistencia->HoraInicio .' a '.$asistencia->HoraFinal;
-				$row[] = '<a style="'. $colorCJ .'">'.$asistencia->cantidad_jugadores.'</a> inscritos.';
 
 				$row[] = '
 				<center>
-					<a class="btn btn-info btn-expand" style="color:white; background-color: #2A2A2A;" href="javascript:void()" title="Más información" onclick="listarClases('.$asistencia->IdClase.')"><i class="fa fa-info-circle"></i></a>
+					<a class="btn btn-info btn-expand" style="color:white; background-color: #2A2A2A;" href="javascript:void()" title="Más información" onclick="listarClases('.$asistencia->IdAsistencia.')"><i class="fa fa-info-circle"></i></a>
 					'.$edit.'
-					<a class="btn btn-'.$estilo.' btn-expand" style="'.$color.'" href="javascript:void()" title="'.$accion.'" onclick="variarEstadoClase('.$asistencia->IdClase.')"><i class="fa fa-exchange"></i></a>
+					<a class="btn btn-'.$estilo.' btn-expand" style="'.$color.'" href="javascript:void()" title="'.$accion.'" onclick="variarEstadoAsistencia('.$asistencia->IdAsistencia.')"><i class="fa fa-exchange"></i></a>
 				</center>';
 
 				$data[] = $row;
@@ -110,6 +105,35 @@ class Asistencia extends CI_Controller {
 			else
 			{
 				echo "no";
+			}
+		}
+		else
+		{
+			redirect('error404');
+		}
+	}
+
+	public function variarEstadoAsistencia()
+	{
+		if ($this->input->is_ajax_request())
+		{
+			$id = $this->input->post('id');
+			$estado = 0;
+			foreach ($this->mdl_asistencia->asistencia_byid($id) as $val) {
+				if($val->Estado == 1) { $estado = 0; } else { $estado = 1; }
+				break;
+			}
+			$data = array(
+				'Estado' => $estado
+				);
+
+			if ($this->mdl_asistencia->actualizarAsistencia($data, $id))
+			{
+				echo 'ok';
+			}
+			else
+			{
+				echo 'no';
 			}
 		}
 		else

@@ -42,6 +42,7 @@
 					</div>
 					<div class="panel-body no-padding" style="margin: 20px; font-size: 15px" >
 						<div class="table-responsive">
+							<?php if ($this->session->userdata('ssRol') == 'Administrador') { ?>
 							<table id="tablaPersona" class="table table-hover">
 								<thead>
 									<tr>
@@ -57,6 +58,22 @@
 
 								</tbody>
 							</table>
+							<?php } else { ?>
+							<table id="tablaPersona" class="table table-hover">
+								<thead>
+									<tr>
+										<td>-</td>
+										<td style="color: red;">Documento</td>
+										<td>Nombre completo</td>
+										<td style="text-align: center;">Cuenta</td>
+										<td style="text-align: center;">Acciones</td>
+									</tr>
+								</thead>
+								<tbody>
+
+								</tbody>
+							</table>
+							<?php } ?>
 						</div>
 					</div>
 					<br>
@@ -205,209 +222,102 @@
 									<select id="eps" name="eps" class="form-control">
 										<option value="" disabled selected>Seleccione una eps</option>';
 										<?php foreach ($this->mdl_persona->listarEps() as $eps) { ?>
-											<option value="<?= $eps->IdEps ?>"><?= $eps->NombreEps ?></option>';
-											<?php }?>
-										</select>
-									</div>
-									<div class="col-md-6 form-group">
-										<label class="control-label">Fecha de nacimiento <span style="color: red;">*</span></label>
-										<input class="form-control" id="fnacimiento" name="fnacimiento" type="date" min="1930-01-01" max="<?= date("Y")-5 ?>-12-31">
-									</div>
+										<option value="<?= $eps->IdEps ?>"><?= $eps->NombreEps ?></option>';
+										<?php }?>
+									</select>
+								</div>
+								<div class="col-md-6 form-group">
+									<label class="control-label">Fecha de nacimiento <span style="color: red;">*</span></label>
+									<input class="form-control" id="fnacimiento" name="fnacimiento" type="date" min="1930-01-01" max="<?= date("Y")-5 ?>-12-31">
 								</div>
 							</div>
-							<div class="col-md-1"></div>
 						</div>
+						<div class="col-md-1"></div>
 					</div>
-					<div class="modal-footer">
-						<center>
-							<button type="reset" class="btn btn-danger btn-expand" style="background-color: #2A2A2A;"data-dismiss="modal">Cancelar</button>
-							<button type="submit" class="btn btn-success btn-expand" style="background-color: #2A2A2A;">Registrar persona</button>
-						</center>
-					</div>
-				</form>
-			</div>
+				</div>
+				<div class="modal-footer">
+					<center>
+						<button type="reset" class="btn btn-danger btn-expand" style="background-color: #2A2A2A;"data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-success btn-expand" style="background-color: #2A2A2A;">Registrar persona</button>
+					</center>
+				</div>
+			</form>
 		</div>
 	</div>
+</div>
 
-	<div class="modal fade bs-example-modal-lg" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<form id="editar" name="editar">
-					<input type="hidden" id="idpersona" name="idpersona">
-					<div style="width: 300px; height: 300px;" class="precarga" id="loadingEP"></div>
-					<div id="listoEP">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title" id="myModalLabel"><center>Modificar persona</center></h4>
-							<center><small>Campos con <span style="color: red;">*</span> son requeridos.</small></center>
-						</div>
-						<div class="modal-body">
-							<div class="row">
-								<div class="col-md-1"></div>
-								<div class="col-md-10">
-									<div class="row">
-										<div class="col-md-6 form-group">
-											<label class="control-label">Numero de documento <span style="color: red;">*</span></label>
-											<input class="form-control" id="documentoM" name="documentoM" type="text">
-										</div>
-										<div class="col-md-6 form-group">
-											<label class="control-label">Genero <span style="color: red;">*</span></label>
-											<select class="form-control" id="generoM" name="generoM">
-												<option value="" selected disabled>Seleccione su genero</option>
-												<option value="H">Hombre</option>
-												<option value="M">Mujer</option>
-											</select>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-6 form-group">
-											<label class="control-label">Nombre(s) <span style="color: red;">*</span></label>
-											<input class="form-control" id="nombreM" name="nombreM" type="text">
-										</div>
-										<div class="col-md-6 form-group">
-											<label class="control-label">Apellidos <span style="color: red;">*</span></label>
-											<input class="form-control" id="apellidosM" name="apellidosM" type="text">
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-6 form-group">
-											<label class="control-label">Correo electrónico <span style="color: red;">*</span></label>
-											<input class="form-control" id="correoM" name="correoM" type="text">
-										</div>
-										<div class="col-md-6 form-group">
-											<label class="control-label">Dirección de residencia <span style="color: red;">*</span></label>
-											<input class="form-control" id="direccionM" name="direccionM" type="text">
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-6 form-group">
-											<label class="control-label">Teléfono fijo</label>
-											<input class="form-control" id="telefonoM" name="telefonoM" type="text">
-										</div>
-										<div class="col-md-6 form-group">
-											<label class="control-label">Teléfono celular</label>
-											<input class="form-control" id="celularM" name="celularM" type="text">
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-6 form-group">
-											<label class="control-label">Eps <span style="color: red;">*</span></label>
-											<select class="form-control" id="epsM" name="epsM">
-												<option value="" disabled>Seleccione una eps</option>
-												<?php foreach ($this->mdl_persona->listarEps() as $eps) { ?> <option value="<?= $eps->IdEps ?>"><?= $eps->NombreEps ?></option>'; <?php }?>
-											</select>
-										</div>
-										<div class="col-md-6 form-group">
-											<label class="control-label">Fecha de nacimiento <span style="color: red;">*</span></label>
-											<input class="form-control" id="fnacimientoM" name="fnacimientoM" type="date" min="1930-01-01" max="<?= date("Y")-5 ?>-12-31">
-										</div>
-									</div>
-								</div>
-								<div class="col-md-1"></div>
-							</div>
-						</div>
-						<div class="modal-footer">
-							<center>
-								<button type="reset" class="btn btn-danger btn-expand" style="background-color: #2A2A2A;" data-dismiss="modal">Cancelar</button>
-								<button type="submit" class="btn btn-info btn-expand" style="background-color: #2A2A2A;">Modificar persona</button>
-							</center>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-
-	<div class="modal fade bs-example-modal-lg" id="modalInformacion" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div style="width: 300px; height: 300px;" class="precarga" id="loadingIJ"></div>
-				<div id="listoIJ">
+<div class="modal fade bs-example-modal-lg" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<form id="editar" name="editar">
+				<input type="hidden" id="idpersona" name="idpersona">
+				<div style="width: 300px; height: 300px;" class="precarga" id="loadingEP"></div>
+				<div id="listoEP">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="myModalLabel"><center>Información de <span id="nombreCI"></span></center></h4>
+						<h4 class="modal-title" id="myModalLabel"><center>Modificar persona</center></h4>
+						<center><small>Campos con <span style="color: red;">*</span> son requeridos.</small></center>
 					</div>
 					<div class="modal-body">
 						<div class="row">
 							<div class="col-md-1"></div>
 							<div class="col-md-10">
 								<div class="row">
-									<div class="row">
-										<center>
-											<h5>Fecha de inscripción - <span id="fechaI"></span></h5>
-										</center>
+									<div class="col-md-6 form-group">
+										<label class="control-label">Numero de documento <span style="color: red;">*</span></label>
+										<input class="form-control" id="documentoM" name="documentoM" type="text">
 									</div>
-									<div class="divider"></div>
-									<div class="row">
-										<div class="col-md-3" style="text-align: center;">
-											<label title="Documento nacional de identificación">
-												<i class="fa fa-hashtag"></i> - Documento 
-											</label>
-											<br>
-											<span id="documentoI"></span>
-										</div>
-										<div class="col-md-5" style="text-align: center;">
-											<label title="Nombres y apellidos">Nombre(s) y Apellidos</label>
-											<br>
-											<span id="nombreI"></span>
-										</div>
-										<div class="col-md-2" style="text-align: center;">
-											<label title="Genero"><i class="fa fa-venus-mars"></i> - Genero</label>
-											<br>
-											<span id="generoI"></span>
-										</div>
-										<div class="col-md-2" style="text-align: center;">
-											<label title="Genero"><i class="fa fa-calendar"></i> - Nacimiento</label>
-											<br>
-											<span id="fnacimientoI"></span>
-										</div>
+									<div class="col-md-6 form-group">
+										<label class="control-label">Genero <span style="color: red;">*</span></label>
+										<select class="form-control" id="generoM" name="generoM">
+											<option value="" selected disabled>Seleccione su genero</option>
+											<option value="H">Hombre</option>
+											<option value="M">Mujer</option>
+										</select>
 									</div>
 								</div>
-								<div class="divider"></div>
 								<div class="row">
-									<div class="col-md-6" style="text-align: center;">
-										<label title="Correo electrónico">
-											<i class="fa fa-at"></i> - Correo electrónico
-										</label>
-										<br>
-										<span id="correoI"></span>
+									<div class="col-md-6 form-group">
+										<label class="control-label">Nombre(s) <span style="color: red;">*</span></label>
+										<input class="form-control" id="nombreM" name="nombreM" type="text">
 									</div>
-									<div class="col-md-6" style="text-align: center;">
-										<label title="Dirección de residencia"><i class="fa fa-home"></i> - Dirección de residencia</label>
-										<br>
-										<span id="direccionI"></span>
+									<div class="col-md-6 form-group">
+										<label class="control-label">Apellidos <span style="color: red;">*</span></label>
+										<input class="form-control" id="apellidosM" name="apellidosM" type="text">
 									</div>
 								</div>
-								<div class="divider"></div>
 								<div class="row">
-									<div class="col-md-2"></div>
-									<div class="col-md-4" style="text-align: center;">
-										<label title="Teléfono fijo">
-											<i class="fa fa-phone"></i> - Telefono fijo
-										</label>
-										<br>
-										<span id="telefonoI"></span>
+									<div class="col-md-6 form-group">
+										<label class="control-label">Correo electrónico <span style="color: red;">*</span></label>
+										<input class="form-control" id="correoM" name="correoM" type="text">
 									</div>
-									<div class="col-md-4" style="text-align: center;">
-										<label title="Teléfono celular">
-											<i class="fa fa-mobile"></i> - Celular
-										</label>
-										<br>
-										<span id="celularI"></span>
-									</div>	
-									<div class="col-md-2"></div>
+									<div class="col-md-6 form-group">
+										<label class="control-label">Dirección de residencia <span style="color: red;">*</span></label>
+										<input class="form-control" id="direccionM" name="direccionM" type="text">
+									</div>
 								</div>
-								<div class="divider"></div>
 								<div class="row">
-									<div class="col-md-3"></div>
-									<div class="col-md-6" style="text-align: center;">
-										<label title="Eps asociada">
-											<i class="fa fa-hospital-o"></i> - Eps
-										</label>
-										<br>
-										<span id="epsI"></span>
-									</div>	
-									<div class="col-md-3"></div>
+									<div class="col-md-6 form-group">
+										<label class="control-label">Teléfono fijo</label>
+										<input class="form-control" id="telefonoM" name="telefonoM" type="text">
+									</div>
+									<div class="col-md-6 form-group">
+										<label class="control-label">Teléfono celular</label>
+										<input class="form-control" id="celularM" name="celularM" type="text">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 form-group">
+										<label class="control-label">Eps <span style="color: red;">*</span></label>
+										<select class="form-control" id="epsM" name="epsM">
+											<option value="" disabled>Seleccione una eps</option>
+											<?php foreach ($this->mdl_persona->listarEps() as $eps) { ?> <option value="<?= $eps->IdEps ?>"><?= $eps->NombreEps ?></option>'; <?php }?>
+										</select>
+									</div>
+									<div class="col-md-6 form-group">
+										<label class="control-label">Fecha de nacimiento <span style="color: red;">*</span></label>
+										<input class="form-control" id="fnacimientoM" name="fnacimientoM" type="date" min="1930-01-01" max="<?= date("Y")-5 ?>-12-31">
+									</div>
 								</div>
 							</div>
 							<div class="col-md-1"></div>
@@ -415,10 +325,117 @@
 					</div>
 					<div class="modal-footer">
 						<center>
-							<button type="button" class="btn btn-info btn-expand" style="background-color: #2A2A2A;"data-dismiss="modal">Cerrar</button>
+							<button type="reset" class="btn btn-danger btn-expand" style="background-color: #2A2A2A;" data-dismiss="modal">Cancelar</button>
+							<button type="submit" class="btn btn-info btn-expand" style="background-color: #2A2A2A;">Modificar persona</button>
 						</center>
 					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade bs-example-modal-lg" id="modalInformacion" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div style="width: 300px; height: 300px;" class="precarga" id="loadingIJ"></div>
+			<div id="listoIJ">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel"><center>Información de <span id="nombreCI"></span></center></h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-1"></div>
+						<div class="col-md-10">
+							<div class="row">
+								<div class="row">
+									<center>
+										<h5>Fecha de inscripción - <span id="fechaI"></span></h5>
+									</center>
+								</div>
+								<div class="divider"></div>
+								<div class="row">
+									<div class="col-md-3" style="text-align: center;">
+										<label title="Documento nacional de identificación">
+											<i class="fa fa-hashtag"></i> - Documento 
+										</label>
+										<br>
+										<span id="documentoI"></span>
+									</div>
+									<div class="col-md-5" style="text-align: center;">
+										<label title="Nombres y apellidos">Nombre(s) y Apellidos</label>
+										<br>
+										<span id="nombreI"></span>
+									</div>
+									<div class="col-md-2" style="text-align: center;">
+										<label title="Genero"><i class="fa fa-venus-mars"></i> - Genero</label>
+										<br>
+										<span id="generoI"></span>
+									</div>
+									<div class="col-md-2" style="text-align: center;">
+										<label title="Genero"><i class="fa fa-calendar"></i> - Nacimiento</label>
+										<br>
+										<span id="fnacimientoI"></span>
+									</div>
+								</div>
+							</div>
+							<div class="divider"></div>
+							<div class="row">
+								<div class="col-md-6" style="text-align: center;">
+									<label title="Correo electrónico">
+										<i class="fa fa-at"></i> - Correo electrónico
+									</label>
+									<br>
+									<span id="correoI"></span>
+								</div>
+								<div class="col-md-6" style="text-align: center;">
+									<label title="Dirección de residencia"><i class="fa fa-home"></i> - Dirección de residencia</label>
+									<br>
+									<span id="direccionI"></span>
+								</div>
+							</div>
+							<div class="divider"></div>
+							<div class="row">
+								<div class="col-md-2"></div>
+								<div class="col-md-4" style="text-align: center;">
+									<label title="Teléfono fijo">
+										<i class="fa fa-phone"></i> - Telefono fijo
+									</label>
+									<br>
+									<span id="telefonoI"></span>
+								</div>
+								<div class="col-md-4" style="text-align: center;">
+									<label title="Teléfono celular">
+										<i class="fa fa-mobile"></i> - Celular
+									</label>
+									<br>
+									<span id="celularI"></span>
+								</div>	
+								<div class="col-md-2"></div>
+							</div>
+							<div class="divider"></div>
+							<div class="row">
+								<div class="col-md-3"></div>
+								<div class="col-md-6" style="text-align: center;">
+									<label title="Eps asociada">
+										<i class="fa fa-hospital-o"></i> - Eps
+									</label>
+									<br>
+									<span id="epsI"></span>
+								</div>	
+								<div class="col-md-3"></div>
+							</div>
+						</div>
+						<div class="col-md-1"></div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<center>
+						<button type="button" class="btn btn-info btn-expand" style="background-color: #2A2A2A;"data-dismiss="modal">Cerrar</button>
+					</center>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>

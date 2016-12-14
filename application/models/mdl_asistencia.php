@@ -10,13 +10,12 @@ class Mdl_asistencia extends CI_Model {
 		parent::__construct();
 	}
 
-	public function cargarTabla()
+	public function cargarTabla($iIdClase)
 	{
-		$this->db->select('rp.Documento, rp.Nombre, rp.Apellidos,rc.*,(SELECT COUNT(*) FROM rtsclasejugador_det AS rcj WHERE rcj.IdClase_deb = rc.IdClase ) AS cantidad_jugadores');
-		$this->db->from('rtsclase_deb AS rc');
-		//$this->db->join('rtsclasejugador_det AS rcj','rc.IdClase = rcj.IdClase_deb','INNER');
-		$this->db->join('rtspersonarol_det AS rpr','rc.IdPersonaRol_det = rpr.IdPersonaRol','INNER');
-		$this->db->join('rtspersona_deb AS rp','rpr.IdPersona_deb = rp.IdPersona','INNER');
+		$this->db->select('rtsasistencia_deb.IdAsistencia, rtsclase_deb.NombreClase, rtsasistencia_deb.FechaRegistro, rtsclase_deb.HoraInicio, rtsclase_deb.HoraFinal, rtsclase_deb.Dia, rtsasistencia_deb.Estado');
+		$this->db->from($this->tabla);
+		$this->db->join('rtsclase_deb','rtsasistencia_deb.IdClase_deb = rtsclase_deb.IdClase','INNER');
+		$this->db->where('rtsclase_deb.IdClase', $iIdClase);
 		$res = $this->db->get()->result();
 
 		return $res;
@@ -29,6 +28,24 @@ class Mdl_asistencia extends CI_Model {
 		{
 			$res = $this->db->insert_id();
 		}
+
+		return $res;
+	}
+
+	public function asistencia_byid($id)
+	{
+		$this->db->select('IdAsistencia, FechaRegistro, FechaSistema, Estado');
+		$this->db->from($this->tabla);
+		$this->db->where('IdAsistencia', $id);
+		$res = $this->db->get()->result();
+
+		return $res;
+	}
+
+	public function actualizarAsistencia($data, $id)
+	{
+		$this->db->where('IdAsistencia', $id);
+		$res = $this->db->update($this->tabla, $data);
 
 		return $res;
 	}

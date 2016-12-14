@@ -11,13 +11,28 @@ class Mdl_persona extends CI_Model {
 
     // Se carga la tabla principal
 
-	public function cargarTabla()
+	public function cargarTabla($res = null)
 	{
-		$this->db->select('*');
-		$this->db->from($this->tabla);
-		$res = $this->db->get()->result();
-
-		return $res;
+		// CREATE VIEW vistaJugadores AS 
+		// SELECT rtspd1.* FROM rtspersona_deb rtspd1
+		// INNER JOIN rtspersonarol_det rtsprd1 ON rtspd1.IdPersona = rtsprd1.IdPersona_deb
+		// WHERE rtsprd1.IdRol = 3 AND (SELECT rtsprd2.Estado AS est1 FROM rtspersona_deb rtspd2
+		// 	INNER JOIN rtspersonarol_det rtsprd2 ON rtspd2.IdPersona = rtsprd2.IdPersona_deb WHERE rtsprd2.IdRol = 2 AND rtspd2.IdPersona = rtspd1.IdPersona) = 0 
+		// AND (SELECT rtsprd3.Estado AS est2 FROM rtspersona_deb rtspd3
+		// 	INNER JOIN rtspersonarol_det rtsprd3 ON rtspd3.IdPersona = rtsprd3.IdPersona_deb WHERE rtsprd3.IdRol = 1 AND rtspd3.IdPersona = rtspd1.IdPersona) = 0;
+		
+		if (is_null($res))
+		{
+			$this->db->select('*');
+			$this->db->from($this->tabla);
+			return $this->db->get()->result();
+		}
+		else
+		{
+			$this->db->select('*');
+			$this->db->from('vistaJugadores');
+			return $this->db->get()->result();
+		}
 	}
 
     // Se listan los roles que tiene cada persona
@@ -422,20 +437,20 @@ class Mdl_persona extends CI_Model {
 
 	public function validarCorreo($sCorreo)
 	{
-		$this->db->select('COUNT(*)');
+		$this->db->select('*');
 		$this->db->from($this->tabla);
 		$this->db->where('Correo', $sCorreo);
-		$res = $this->db->get()->row();
+		$res = $this->db->get()->result();
 
 		return $res;
 	}
 
 	public function validarDocumento($iDocumento)
 	{
-		$this->db->select('COUNT(*)');
+		$this->db->select('*');
 		$this->db->from($this->tabla);
 		$this->db->where('Documento', $iDocumento);
-		$res = $this->db->get()->row();
+		$res = $this->db->get()->result();
 
 		return $res;
 	}

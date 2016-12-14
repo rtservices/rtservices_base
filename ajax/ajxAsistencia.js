@@ -1,7 +1,7 @@
 var tablaAsistencia;
 $(document).ready(function() {
 	NProgress.start();
-	tablaAsistencia = $('#tablaAsistencia').DataTable({ "ajax":"asistencia/cargarTabla" });
+	tablaAsistencia = $('#tablaAsistencia').DataTable({ "ajax":"asistencia/cargarTabla/" + $('#IdClase').val() });
 }); 
 
 $(window).load(function() {
@@ -40,3 +40,36 @@ $('#formAsistencia').submit(function(event) {
 	});
 	
 });
+
+function variarEstadoAsistencia(id)
+{
+	swal({
+		title: "¿Estas seguro?",
+		text: "¿Realmente deseas cambiar el estado de esta asistencia?",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#DD6B55",
+		confirmButtonText: "Si, cámbialo!",
+		closeOnConfirm: false
+	}).then(function() {
+		NProgress.start();
+		$.ajax({
+			url: "asistencia/variarEstadoAsistencia",
+			type: "POST",
+			data: { id: id },
+			success: function(res) {
+				actualizar();
+				if (res == 'ok') 
+				{
+					NProgress.done();
+					swal("Completado!", "Se ha cambiado el estado de dicha asistencia.", "success");
+				} 
+				else
+				{
+					NProgress.done();
+					sweetAlert("Oops...", "No se ha cambiado el estado de dicha asistencia.", "error");
+				}
+			}
+		});
+	});
+}

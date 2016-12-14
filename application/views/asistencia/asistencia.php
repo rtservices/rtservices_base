@@ -8,13 +8,28 @@
 				<a href="menu">Menú principal</a>
 				<i class="fa fa-angle-right"></i>
 			</li>
-			<li class="active">Gestión de asistencia</li>
+			<li>
+				<i class="fa fa-graduation-cap"></i>
+				<a href="clase">Clases</a>
+				<i class="fa fa-angle-right"></i>
+			</li>
+			<li class="active">Gestión de asistencias</li>
 		</ol>
 	</div>
 </div>
 
 <div class="body-content animated fadeIn">
 	<div class="row">
+		<div class="col-md-12">
+			<div class="panel rounded shadow no-overflow">
+				<div class="panel-heading">
+					<center>
+						<a href="clase"><button type="button" class="btn btn-success btn-expand" style="background-color: #2A2A2A;">Regresar a gestión de clases</button></a>
+					</center>
+				</div>
+			</div>
+		</div>
+		<input type="hidden" name="IdClase" id="IdClase" value="<?= $idclase ?>">
 		<div class="col-md-12">
 			<div class="panel rounded shadow no-overflow">
 				<center>
@@ -46,9 +61,9 @@
 							<thead>
 								<tr>
 									<td>-</td>
-									<td style="color: red;">Nombre clase</td>
+									<td style="color: red;">Fecha de asistencia</td>
+									<td>Nombre clase</td>
 									<td>Horario</td>
-									<td>Cantidad jugadores</td>
 									<td style="text-align: center;">Acciones</td>
 								</tr>
 							</thead>
