@@ -332,6 +332,8 @@ class Persona extends CI_Controller {
 						'.$edit.'
 						'.$eliminar.'
 					</center>';
+
+					$data[] = $row;
 				}
 			}
 
@@ -397,7 +399,15 @@ class Persona extends CI_Controller {
 
 						if ($this->mdl_persona->registrarRol($dataI))
 						{
-							$dataJ = array('IdPersona_deb' => $id, 'IdRol' => 3, 'Estado' => 0);
+							if ($this->session->userdata('ssRol') == 'Administrador')
+							{
+								$dataJ = array('IdPersona_deb' => $id, 'IdRol' => 3, 'Estado' => 0);
+							}
+							else
+							{
+								$dataJ = array('IdPersona_deb' => $id, 'IdRol' => 3, 'Estado' => 1);
+							}
+							
 
 							if ($this->mdl_persona->registrarRol($dataJ))
 							{
@@ -518,16 +528,26 @@ class Persona extends CI_Controller {
 			$mNotificacion = '';
 			$id = $this->input->post('idpersona');
 
-			if ($this->mdl_persona->validarDocumento($this->input->post('documentoM'),$id) > 0)
+			$aPersona = $this->mdl_persona->listarPersona($id)->row();
+
+			if ($aPersona->Documento != $this->input->post('documentoM'))
 			{
-				$bModificar = false;
-				$mNotificacion = 'rdocumento';
+				$bResultadoVDocumento = $this->mdl_persona->validarDocumento($this->input->post('documentoM'));
+				if (count($bResultadoVDocumento) > 0)
+				{
+					$bModificar = false;
+					$mNotificacion = 'rdocumento';
+				}
 			}
 
-			if ($this->mdl_persona->validarCorreo($this->input->post('correoM'),$id) > 0)
+			if ($aPersona->Correo != $this->input->post('correoM'))
 			{
-				$bModificar = false;
-				$mNotificacion = 'rcorreo';
+				$bResultadoVCorreo = $this->mdl_persona->validarCorreo($this->input->post('correoM'));
+				if (count($bResultadoVCorreo) > 0)
+				{
+					$bModificar = false;
+					$mNotificacion = 'rcorreo';
+				}
 			}
 
 			if ($bModificar)

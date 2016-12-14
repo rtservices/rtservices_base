@@ -19,7 +19,11 @@
 			<div class="panel rounded shadow no-overflow">
 				<center>
 					<div class="panel-heading btn btn-success btn-push" style="margin: 20px" onclick="nuevaPersona()">
+						<?php if ($this->session->userdata('ssRol') == 'Administrador') { ?>
 						<h3 class="panel-title">Registrar personas nuevas</h3>
+						<?php } else { ?>
+						<h3 class="panel-title">Registrar nuevo jugador</h3>
+						<?php } ?>
 						<div class="clearfix"></div>
 					</div>
 				</center>

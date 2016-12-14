@@ -13,25 +13,24 @@ class Mdl_persona extends CI_Model {
 
 	public function cargarTabla($res = null)
 	{
-		// CREATE VIEW vistaJugadores AS 
+
 		// SELECT rtspd1.* FROM rtspersona_deb rtspd1
 		// INNER JOIN rtspersonarol_det rtsprd1 ON rtspd1.IdPersona = rtsprd1.IdPersona_deb
 		// WHERE rtsprd1.IdRol = 3 AND (SELECT rtsprd2.Estado AS est1 FROM rtspersona_deb rtspd2
 		// 	INNER JOIN rtspersonarol_det rtsprd2 ON rtspd2.IdPersona = rtsprd2.IdPersona_deb WHERE rtsprd2.IdRol = 2 AND rtspd2.IdPersona = rtspd1.IdPersona) = 0 
 		// AND (SELECT rtsprd3.Estado AS est2 FROM rtspersona_deb rtspd3
 		// 	INNER JOIN rtspersonarol_det rtsprd3 ON rtspd3.IdPersona = rtsprd3.IdPersona_deb WHERE rtsprd3.IdRol = 1 AND rtspd3.IdPersona = rtspd1.IdPersona) = 0;
-		
+
 		if (is_null($res))
 		{
-			$this->db->select('*');
+			$this->db->select('IdPersona, Documento, Nombre, Apellidos, Genero, Correo, DireccionResidencia, Telefono, Celular, FechaNacimiento, FechaIngreso, Estado, IdEps');
 			$this->db->from($this->tabla);
 			return $this->db->get()->result();
 		}
 		else
 		{
-			$this->db->select('*');
-			$this->db->from('vistaJugadores');
-			return $this->db->get()->result();
+			$query = $this->db->query("SELECT vistaJugadores.* FROM vistaJugadores");
+			return $query->result();
 		}
 	}
 

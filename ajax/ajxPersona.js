@@ -397,38 +397,38 @@ $('#editar').submit(function(event) {
 				if (res == 'ok') 
 				{
 					NProgress.done();
-					swal("Completado!", "Se ha registrado la nueva persona.", "success");
+					swal("Completado!", "Se ha modificado la información de dicha persona.", "success");
 				} 
 				else if(res == 'rcorreo')
 				{
 					swal({
 						title: "Error al registrar!",
-						text: "No se ha registrado por que el correo ya existe.",
+						text: "No se ha modificado por que el correo ya esta en uso por otra persona.",
 						type: "error",
 						confirmButtonColor: "#DD6B55",
 						confirmButtonText: "Ok!",
 					}).then(function() {
 						NProgress.done();
-						$('#modalRegistro').modal('show');
+						$('#modalEditar').modal('show');
 					});
 				}
 				else if(res == 'rdocumento')
 				{
 					swal({
 						title: "Error al registrar!",
-						text: "No se ha registrado por que el documento ya existe.",
+						text: "No se ha modificado por que el documento ya esta en uso por otra persona.",
 						type: "error",
 						confirmButtonColor: "#DD6B55",
 						confirmButtonText: "Ok!",
 					}).then(function() {
 						NProgress.done();
-						$('#modalRegistro').modal('show');
+						$('#modalEditar').modal('show');
 					});					
 				}
 				else
 				{
 					NProgress.done();
-					sweetAlert("Oops...", "No ha registrado la nueva persona.", "error");
+					sweetAlert("Oops...", "No ha modificado dicha persona.", "error");
 				}
 			}
 		});		
